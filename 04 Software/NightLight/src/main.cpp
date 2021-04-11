@@ -20,6 +20,7 @@ ToDo:
 #include "light.h"
 #include "menu.h"
 #include "key.h"
+#include "clock.h"
 
 /**************************************************************************
 TYPES, CLASSES, ENUMS
@@ -38,9 +39,6 @@ TYPES, CLASSES, ENUMS
 
 const char* ssid     = "Starbux";
 const char* password = "ApplausjeVoorDeKok#";
-const char* ntpServer = "pool.ntp.org";
-const long  gmtOffset_sec = 3600;
-const int   daylightOffset_sec = 3600;
 
 /**************************************************************************
  GLOBAL VARIABLES
@@ -48,6 +46,7 @@ const int   daylightOffset_sec = 3600;
 // Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 Light light(LED_COUNT, LED_PIN, CHANNEL, TYPE_GRB);
+Clock myClock;
 
 Tree menuTree;
 
@@ -111,7 +110,6 @@ SETUP AND LOOP
 void setup() {
   Serial.begin(115200);
 
-  /*
   // Get the time
   WiFi.begin(ssid, password);
   int attempts=0;
@@ -122,12 +120,12 @@ void setup() {
   }
   Serial.println("\nWiFi connected.");
 
-  configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
+  //configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
 
   //disconnect WiFi as it's no longer needed
-  WiFi.disconnect(true);
-  WiFi.mode(WIFI_OFF);
-  */
+  //WiFi.disconnect(true);
+  //WiFi.mode(WIFI_OFF);
+
 
   Wire.begin(21, 22);
 
@@ -207,6 +205,7 @@ void loop() {
   leftButton .scan();
   rightButton.scan();
   topButton  .scan();
+  myClock    .scan();
 
   if (leftButton.pressed()) {
 
@@ -246,19 +245,19 @@ void loop() {
     display.drawBitmap(114, 16, right.data, right.width, right.height, 1);
   }
   else {
-    /*
-    char text[25];
-    struct tm timeinfo;
-    if(getLocalTime(&timeinfo)) {
-      sprintf(text, "%02d:%02d", timeinfo.tm_hour, timeinfo.tm_min);
-      display.setTextSize(2);
-      display.setTextWrap(false);
-      display.setTextColor(1); 
-      display.setCursor(32,16);
-      display.print(text);
-      delay(100);
+    if (myClock.reliable()) {
+      char text[25];
+      struct tm timeinfo;
+      if(getLocalTime(&timeinfo)) {
+        sprintf(text, "%02d:%02d", timeinfo.tm_hour, timeinfo.tm_min);
+        display.setTextSize(2);
+        display.setTextWrap(false);
+        display.setTextColor(1); 
+        display.setCursor(32,16);
+        display.print(text);
+        delay(100);
+      }
     }
-      */
   }
 
   display.display();
