@@ -64,6 +64,7 @@ void Clock::syncTime() {
   configTime(timeZoneOffset, timeDSToffset, ntpServer);
 
   // Clear the screen if we receive time
+  Serial.println(F("Clock synchronised"));
   clockSynched=true;
 }
 

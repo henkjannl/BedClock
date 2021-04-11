@@ -1,12 +1,20 @@
 {
 	"folders": [
 		{
-			"path": "..\\..\\..\\..\\..\\PlatformIO\\Projects\\201230-115240-mhetesp32minikit"
+			"path": "..\\..\\..\\..\\..\\..\\OneDrive - personal\\OneDrive\\03 HenkJan\\14 InternetOfThings\\03 ESP\\13 Nachtlampje\\04 Software\\NightLight RC"
+		},
+		{
+			"name": "NightLight V3",
+			"path": "..\\..\\..\\..\\..\\..\\OneDrive - personal\\OneDrive\\03 HenkJan\\14 InternetOfThings\\03 ESP\\13 Nachtlampje\\04 Software\\NightLight V3"
 		},
 		{
 			"name": "NightLight",
 			"path": ".."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"ctime": "cpp"
+		}
+	}
 }

@@ -21,6 +21,7 @@ ToDo:
 #include "menu.h"
 #include "key.h"
 #include "clock.h"
+#include "weather.h"
 
 /**************************************************************************
 TYPES, CLASSES, ENUMS
@@ -46,7 +47,8 @@ const char* password = "ApplausjeVoorDeKok#";
 // Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 Light light(LED_COUNT, LED_PIN, CHANNEL, TYPE_GRB);
-Clock myClock;
+Clock myClock; // Hmm, strange name but clock already exists
+Weather weather;
 
 Tree menuTree;
 
@@ -99,6 +101,7 @@ void timerHandler(actionID_t ID) {
 }
 
 void menuHandler(actionID_t ID) {
+  // Close menu
   light.showClock();
 }
 
@@ -206,6 +209,7 @@ void loop() {
   rightButton.scan();
   topButton  .scan();
   myClock    .scan();
+  weather    .scan();
 
   if (leftButton.pressed()) {
 
@@ -224,7 +228,10 @@ void loop() {
       menuTree.selection()->next();
       menuTree.selection()->selection()->triggerCallback();
     }
-    light.showMenu(); // Switch on every time since it updates the timer
+    if(menuTree.selection()->selection()->ID !=40) {
+      // Set menu timer unless close menu was called
+      light.showMenu(); // Switch on every time since it updates the timer
+    }
   }
 
   if (topButton.pressed()) {
@@ -235,6 +242,7 @@ void loop() {
   display.clearDisplay();
 
   if(light.menuSwitchedOn()) {
+    // Show the menu
     topRow->draw(  1);
     btmRow->draw( 17);
 
@@ -245,19 +253,37 @@ void loop() {
     display.drawBitmap(114, 16, right.data, right.width, right.height, 1);
   }
   else {
+    char text[20];
+    struct tm timeinfo;
+
     if (myClock.reliable()) {
-      char text[25];
-      struct tm timeinfo;
-      if(getLocalTime(&timeinfo)) {
+      getLocalTime(&timeinfo);
+      if(weather.reliable()) {
+        // Both clock and weather
+        sprintf(text, "%02d:%02d %.1fC", timeinfo.tm_hour, timeinfo.tm_min, weather.getTemperature());
+      }
+      else {
+        // Clock, but no weather
         sprintf(text, "%02d:%02d", timeinfo.tm_hour, timeinfo.tm_min);
-        display.setTextSize(2);
-        display.setTextWrap(false);
-        display.setTextColor(1); 
-        display.setCursor(32,16);
-        display.print(text);
-        delay(100);
       }
     }
+    else {
+      if(weather.reliable()) {
+        // Weather but no clock
+        sprintf(text, "%.1fC", weather.getTemperature());
+      }
+      else {
+        // No clock and no weather
+        sprintf(text, "--:--");
+      }
+    }
+
+    display.setTextSize(2);
+    display.setTextWrap(false);
+    display.setTextColor(1); 
+    display.setCursor(0,4);
+    display.print(text);
+    delay(100);
   }
 
   display.display();
