@@ -1,0 +1,27 @@
+
+var ftGUID_4450029="441534B68026B1";
+var ftConfID_4450029="19423414";
+var ftParams_4450029="ftx=&fty=&ftadz=&ftscw=&ft_custom=&ftOBA=1&ft_ifb=1&ft_domain=www.w3schools.com&ft_agentEnv=0&ft_referrer=https%3A%2F%2Fwww.w3schools.com%2Ftags%2Ftag_button.asp&cachebuster=348151.67661265464";
+var ftKeyword_4450029="";
+var ftCustom_4450029="";
+var ftSection_4450029="";
+var ftSegment_4450029="";
+var ftSegmentList_4450029=[];
+var ftRuleMatch_4450029="0";
+var ftTimestamp_4450029="1598468713";
+var ftImp4450029 = {};
+ftImp4450029.privacy = "x";
+ftImp4450029.guidAge = "206";
+ftImp4450029.impID = "D5CC49C6-A4EF-8DE9-B08D-DEB369AEF926";
+ftImp4450029.duid = "FT:441534B68026B1";
+
+ftImp4450029.ft_tpplid = "";
+ftImp4450029.ft_c = {};
+ftImp4450029.gdpr = "";
+ftImp4450029.gdpr_consent = "";
+ftImp4450029.gdpr_pd = "";
+ftImp4450029.oob_consent = "";
+ftImp4450029.gdprStoredConsent = "";
+ftImp4450029.us_privacy = "";
+
+document.write('<scr'+'ipt src="https://cdn.flashtalking.com/xre/445/4450029/2960695/js/j-4450029-2960695.js" id="ftscript_m4450029" name="ftscript_m4450029"></scr'+'ipt>');

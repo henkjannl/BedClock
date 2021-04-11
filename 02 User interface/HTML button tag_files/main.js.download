@@ -1,0 +1,60 @@
+myFT.on("instantads", function(){
+
+  var processDynamicVars = function(){
+    document.querySelector("#copy1").innerHTML = myFT.instantAds.copy1;
+    //document.querySelector("#copy1").style.transform = "translate("+myFT.instantAds.copy1Offset+")";
+    document.querySelector("#copy1").style.marginLeft = myFT.instantAds.copy1Offset.split(",")[0];
+    document.querySelector("#copy1").style.marginTop = myFT.instantAds.copy1Offset.split(",")[1];
+    document.querySelector("#copy2").innerHTML = myFT.instantAds.copy2;
+    document.querySelector("#copy2").style.marginLeft = myFT.instantAds.copy2Offset.split(",")[0];
+    document.querySelector("#copy2").style.marginTop = myFT.instantAds.copy2Offset.split(",")[1];
+    document.querySelector("#besteTest").style.marginLeft = myFT.instantAds.besteTestOffset.split(",")[0];
+    document.querySelector("#besteTest").style.marginTop = myFT.instantAds.besteTestOffset.split(",")[1];
+    document.querySelector("#cta").style.marginLeft = myFT.instantAds.ctaOffset.split(",")[0];
+    document.querySelector("#cta").style.marginTop = myFT.instantAds.ctaOffset.split(",")[1];
+    
+    document.querySelector("#ctaText").innerHTML = "<span class='text'>"+myFT.instantAds.ctaText+'</span>';
+    document.querySelector("#dynamicCSS").innerHTML = '#cta,#ctaGlow{background-color:#'+myFT.instantAds.ctaColor+';}'
+      +'body:hover #cta{background-color:#'+myFT.instantAds.ctaColorHover+';}'
+    document.querySelector("#besteTest").src =  (myFT.instantAds.besteTest == "true")? "besteTest.png" : "";
+  }();
+
+  var startTimeline = function(){
+    var ctaGlow = new TimelineMax({ paused: true, repeat:-1})
+      .from("#ctaGlow", 0.5, {backgroundColor:"#ffffff"},"startGlow")
+      .fromTo("#ctaGlow", 2, {opacity:1, scale:1}, {opacity:0, scale:1.5, ease:Power4.easeOut, immediateRender:false},"startGlow")
+      .to({}, 1.5,{})
+
+    var tl = new TimelineMax({ paused: false, repeat:0 })
+      .set("#copy1, #copy2, #ctaText", { rotation: 0.01 }, 0)
+      .set("#adwrapper", {opacity:1})
+      .from('.hue', 1, {opacity: 0, y:-10, ease:Power2.easeOut },"prod1")
+      .from('#copy1', 1, {opacity: 0, y:10, ease:Power2.easeOut },"prod1")
+      .from('#product1', 1, {opacity: 0, scale:1.03, ease:Power2.easeOut },"prod1+=0.7")
+      .to({}, 2,{})
+
+      .to('#copy1, #product1', 0.5, {opacity:0, scale:1.05, ease:Power2.easeOut })
+      .to({}, 0.5,{})
+
+      .from('#copy2', 1, {opacity: 0, y:10, ease:Power2.easeOut },"prod2")
+      .from('#product2', 1, {opacity: 0, scale:1.05, ease:Power2.easeOut }, "prod2+=0.7")
+      
+      
+      .from('#cta', 0.5, {opacity: 0, y:10, ease:Power2.easeOut },"cta")
+      .from('#logo', 0.5, {opacity: 0, y:10, ease:Power2.easeOut },"cta+=0.2")
+      .to({}, 1,{})
+
+      .from("#besteTest", 0.5, {opacity: 0, y:10, ease:Power2.easeOut})
+      .to({}, 1,{})
+      .call(function(){
+        ctaGlow.play();
+      })
+    
+  }();
+
+  document.body.addEventListener("click", function(){
+    myFT.clickTag(1,myFT.instantAds.url);
+  })
+
+});
+

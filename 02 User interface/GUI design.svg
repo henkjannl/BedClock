@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="100mm"
+   height="120mm"
+   viewBox="0 0 100 120"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0beta2 (2a72523, 2020-01-28)"
+   sodipodi:docname="GUI design.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#555555"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.1254902"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.4730499"
+     inkscape:cx="188.50394"
+     inkscape:cy="146.37796"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="986"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid841"
+       units="mm"
+       spacingx="2.5"
+       spacingy="2.5" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.46667px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583;"
+       x="49.828434"
+       y="15"
+       id="text845"><tspan
+         sodipodi:role="line"
+         id="tspan843"
+         x="49.828434"
+         y="15"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.46667px;font-family:Heebo;-inkscape-font-specification:'Heebo Bold';text-align:center;text-anchor:middle;stroke-width:0.264583;fill:#ffffff;">BEDLIGHT CONTROL</tspan></text>
+    <rect
+       style="fill:#dc0000;stroke:none;stroke-width:0.25;stroke-linejoin:round;stop-color:#000000"
+       id="rect847"
+       width="100"
+       height="5"
+       x="0"
+       y="0" />
+    <rect
+       style="fill:#000000;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0;stop-color:#000000;fill-opacity:0"
+       id="rect852"
+       width="25"
+       height="10"
+       x="0"
+       y="20" />
+    <rect
+       y="20"
+       x="25"
+       height="10"
+       width="25"
+       id="rect854"
+       style="fill:#000000;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-opacity:0;stop-color:#000000;stroke-miterlimit:4;stroke-dasharray:none;fill-opacity:0" />
+    <rect
+       style="fill:#000000;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-opacity:0;stop-color:#000000;stroke-miterlimit:4;stroke-dasharray:none;fill-opacity:0"
+       id="rect856"
+       width="25"
+       height="10"
+       x="50"
+       y="20" />
+    <text
+       id="text839"
+       y="23.195843"
+       x="2.2526197"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.264583"
+         y="23.195843"
+         x="2.2526197"
+         id="tspan837"
+         sodipodi:role="line">Switch the bedlight on and off</tspan></text>
+    <rect
+       y="25"
+       x="7.5"
+       height="10"
+       width="22.5"
+       id="rect841"
+       style="fill:#656565;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linejoin:round;stroke-opacity:1;stop-color:#000000;stroke-miterlimit:4;stroke-dasharray:none" />
+    <rect
+       style="fill:#494949;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+       id="rect848"
+       width="22.5"
+       height="10"
+       x="30"
+       y="25" />
+    <rect
+       y="25"
+       x="52.5"
+       height="10"
+       width="22.5"
+       id="rect855"
+       style="fill:#494949;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="63.769211"
+       y="31.398489"
+       id="text859"><tspan
+         sodipodi:role="line"
+         id="tspan857"
+         x="63.769211"
+         y="31.398489"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583">Timer</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="41.386391"
+       y="31.320688"
+       id="text846"><tspan
+         sodipodi:role="line"
+         id="tspan844"
+         x="41.386391"
+         y="31.320688"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583">On</tspan></text>
+    <text
+       id="text852"
+       y="31.47629"
+       x="18.652029"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583;"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583;fill-opacity:1;"
+         y="31.47629"
+         x="18.652029"
+         id="tspan850"
+         sodipodi:role="line">Off</tspan></text>
+    <rect
+       y="41.166668"
+       x="0"
+       height="10"
+       width="25"
+       id="rect861"
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0;stop-color:#000000" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0;stop-color:#000000"
+       id="rect863"
+       width="25"
+       height="10"
+       x="25"
+       y="41.166668" />
+    <rect
+       y="41.166668"
+       x="50"
+       height="10"
+       width="25"
+       id="rect865"
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0;stop-color:#000000" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="2.2526197"
+       y="44.362511"
+       id="text869"><tspan
+         sodipodi:role="line"
+         id="tspan867"
+         x="2.2526197"
+         y="44.362511"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.264583">Timer interval</tspan></text>
+    <rect
+       style="fill:#656565;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+       id="rect871"
+       width="17.726461"
+       height="10"
+       x="7.5"
+       y="46.166668" />
+    <rect
+       y="46.166668"
+       x="25.226461"
+       height="10"
+       width="17.726461"
+       id="rect873"
+       style="fill:#494949;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000" />
+    <rect
+       style="fill:#494949;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+       id="rect875"
+       width="17.726461"
+       height="10"
+       x="42.952923"
+       y="46.166668" />
+    <text
+       id="text879"
+       y="52.565159"
+       x="51.768127"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         y="52.565159"
+         x="51.768127"
+         id="tspan877"
+         sodipodi:role="line">10 min</tspan></text>
+    <text
+       id="text883"
+       y="52.487358"
+       x="34.083931"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         y="52.487358"
+         x="34.083931"
+         id="tspan881"
+         sodipodi:role="line">5 min</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="16.315207"
+       y="52.64296"
+       id="text887"><tspan
+         sodipodi:role="line"
+         id="tspan885"
+         x="16.315207"
+         y="52.64296"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.264583">1 min</tspan></text>
+    <rect
+       style="fill:#494949;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+       id="rect889"
+       width="17.726461"
+       height="10"
+       x="60.679382"
+       y="46.166668" />
+    <rect
+       y="46.166668"
+       x="78.405846"
+       height="10"
+       width="17.726461"
+       id="rect891"
+       style="fill:#494949;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="87.221054"
+       y="52.565159"
+       id="text895"><tspan
+         sodipodi:role="line"
+         id="tspan893"
+         x="87.221054"
+         y="52.565159"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583">60 min</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="69.53685"
+       y="52.487358"
+       id="text899"><tspan
+         sodipodi:role="line"
+         id="tspan897"
+         x="69.53685"
+         y="52.487358"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583">30 min</tspan></text>
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0;stop-color:#000000"
+       id="rect901"
+       width="25"
+       height="10"
+       x="0"
+       y="62.33334" />
+    <rect
+       y="62.33334"
+       x="25"
+       height="10"
+       width="25"
+       id="rect903"
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0;stop-color:#000000" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0;stop-color:#000000"
+       id="rect905"
+       width="25"
+       height="10"
+       x="50"
+       y="62.33334" />
+    <text
+       id="text909"
+       y="65.529182"
+       x="2.2526197"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.264583"
+         y="65.529182"
+         x="2.2526197"
+         id="tspan907"
+         sodipodi:role="line">Timer interval</tspan></text>
+    <rect
+       y="67.333336"
+       x="7.5"
+       height="10"
+       width="17.726461"
+       id="rect911"
+       style="fill:#494949;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000;font-variation-settings:normal;opacity:1;vector-effect:none;stroke-linecap:butt;stroke-dashoffset:0;stop-opacity:1" />
+    <rect
+       style="fill:#494949;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000;font-variation-settings:normal;opacity:1;vector-effect:none;stroke-linecap:butt;stroke-dashoffset:0;stop-opacity:1"
+       id="rect913"
+       width="17.726461"
+       height="10"
+       x="25.226461"
+       y="67.333336" />
+    <rect
+       y="67.333336"
+       x="42.952923"
+       height="10"
+       width="17.726461"
+       id="rect915"
+       style="fill:#656565;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000;font-variation-settings:normal;opacity:1;vector-effect:none;stroke-linecap:butt;stroke-dashoffset:0;stop-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583;"
+       x="51.768127"
+       y="73.731827"
+       id="text919"><tspan
+         sodipodi:role="line"
+         id="tspan917"
+         x="51.768127"
+         y="73.731827"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583;">orange</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583;"
+       x="34.083931"
+       y="73.654022"
+       id="text923"><tspan
+         sodipodi:role="line"
+         id="tspan921"
+         x="34.083931"
+         y="73.654022"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583;">red</tspan></text>
+    <text
+       id="text927"
+       y="73.809624"
+       x="16.315207"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583;"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.264583;"
+         y="73.809624"
+         x="16.315207"
+         id="tspan925"
+         sodipodi:role="line">white</tspan></text>
+    <rect
+       y="67.333336"
+       x="60.679382"
+       height="10"
+       width="17.726461"
+       id="rect929"
+       style="fill:#494949;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000;font-variation-settings:normal;opacity:1;vector-effect:none;stroke-linecap:butt;stroke-dashoffset:0;stop-opacity:1" />
+    <text
+       id="text939"
+       y="73.654022"
+       x="69.53685"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.93421px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         y="73.654022"
+         x="69.53685"
+         id="tspan937"
+         sodipodi:role="line">yellow</tspan></text>
+  </g>
+</svg>
