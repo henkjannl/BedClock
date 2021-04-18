@@ -293,7 +293,7 @@ void loop() {
   
   static unsigned long elapsed=millis()+1000;
   if(millis()>elapsed) {
-    //Serial.println(light.debug);
+    Serial.printf( "%s\n" , topButton.debug() );
     elapsed=millis()+1000;
   }
 }
