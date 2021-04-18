@@ -1,19 +1,19 @@
 #ifndef MENU_H
 #define MENU_H
 
-const byte mainIcons[]      = { 0, 1, 2, 3};    const byte mainCount      =4;
-const byte timerIcons[]     = { 4, 5, 6, 7};    const byte timerCount     =4;
-const byte intensityIcons[] = { 8, 9,10,11,12}; const byte intensityCount =5;
-const byte colorIcons[]     = {13,14,15,16};    const byte colorCount     =4;
-const byte exitIcons[]      = {17,18};          const byte exitCount      =2;
+const byte mainIcons[]      = { 0, 1, 2, 3};    const int mainCount      =4;
+const byte timerIcons[]     = { 4, 5, 6, 7};    const int timerCount     =4;
+const byte intensityIcons[] = { 8, 9,10,11,12}; const int intensityCount =5;
+const byte colorIcons[]     = {13,14,15,16};    const int colorCount     =4;
+const byte exitIcons[]      = {17,18};          const int exitCount      =2;
 const byte selectOffset=17;
 
 struct tMenu {
-  byte mainSelection;
-  byte intensitySelection;
-  byte timerSelection;
-  byte colorSelection;
-  byte exitSelection;
+  int mainSelection;
+  int intensitySelection;
+  int timerSelection;
+  int colorSelection;
+  int exitSelection;
 
   std::list<byte> main;
   std::list<byte> sub;
@@ -82,15 +82,16 @@ struct tMenu {
   
   void IncSub() {
     subOffset=icon_pitch;
+    
     switch(mainSelection) {
-      case 0: // Intensity is selected
-        intensitySelection=(intensitySelection+1) % intensityCount;
-        break;
-        
-      case 1: // Timer is selected
+      case 0: // Timer is selected
         timerSelection=(timerSelection+1)%timerCount;
         break;
 
+      case 1: // Intensity is selected
+        intensitySelection=(intensitySelection+1) % intensityCount;
+        break;
+        
       case 2: // Color is selected
         colorSelection=(colorSelection+1)%colorCount;
         break;

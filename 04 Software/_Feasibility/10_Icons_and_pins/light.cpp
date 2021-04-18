@@ -11,6 +11,10 @@ Light::Light(int count, int pin, int channel, LED_TYPE type) {
   strip.begin();
   strip.setBrightness(255);  
 
+  setTimer(td03);
+  setIntensity(li25);
+  setColor(lcWhite);
+
   on();
   showMenu();
 }

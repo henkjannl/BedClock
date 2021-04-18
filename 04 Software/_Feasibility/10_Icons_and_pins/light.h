@@ -9,7 +9,7 @@
 **************************************************************************/
 const int   TIME_INTERVAL      = 10;       // Update interval for light intensity
 const int   MENU_TIMEOUT       = 20*1000;  // Switch to the clock 
-const float PROGRESS_INCREMENT = 0.02;
+const float PROGRESS_INCREMENT = 0.1;
 const uint16_t MAX_INTENSITY   = 255;
 
 typedef struct { float R,G,B; } color_t;
@@ -63,6 +63,7 @@ class Light {
         void setColor(lightColor_t color);
 
         float getIntensity() { return intensity.getTarget(); };
+        bool getLightOn() { return (power.getTarget()!=0); };
 
     protected:
         Freenove_ESP32_WS2812 strip;
