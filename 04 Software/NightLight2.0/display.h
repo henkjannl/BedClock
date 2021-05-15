@@ -1,5 +1,89 @@
+#ifndef DISPLAY_H
+#define DISPLAY_H
 
-#include "display.h"
+#include "data.h"
+#include "gui.h"
+#include <U8g2lib.h>
+#include <list>
+
+using namespace std;
+
+enum tMainMenu       { mmBrightness, mmColor, mmTimer, mmBack};
+enum tBrightnessMenu { bm25, bm35, bm50, bm70, bm100, bmBack};
+enum tColorMenu      { cmWhite, cmYellow, cmOrange, cmRed, cmBack};
+enum tTimerMenu      { tm3, tm5, tm10, tm20, tmOff, tmBack};
+
+class tDisplay {
+
+  public:
+    // Main canvas
+    tGroup  grpMain; 
+    tLabel  lblTime; 
+  
+    // Top row with first row of buttons
+    tGroup  rowMain;     
+    tButton btnBrightness;  
+    tButton btnColor;
+    tButton btnTimer;
+    tButton btnBack;
+  
+    // Second row on brightness
+    tGroup  rowBrightness;
+    tButton btnBrightness25;
+    tButton btnBrightness35;
+    tButton btnBrightness50;
+    tButton btnBrightness70;
+    tButton btnBrightness100;
+    tButton btnBrightnessBack;
+    
+    // Second row on color
+    tGroup  rowColor;
+    tButton btnColorWhite;
+    tButton btnColorYellow;
+    tButton btnColorOrange;
+    tButton btnColorRed;
+    tButton btnColorBack;
+
+    // Second row on timer  
+    tGroup rowTimer;
+    tButton btnTimer03;
+    tButton btnTimer05;
+    tButton btnTimer10;
+    tButton btnTimer20;
+    tButton btnTimerOff;
+    tButton btnTimerBack;
+
+    // Sequencing the movements
+    bool ready() { return grpMain.ready(); };
+
+    // Current selection in the menu
+    tMainMenu       mainMenu;
+    tBrightnessMenu brightnessMenu;
+    tColorMenu      colorMenu;
+    tTimerMenu      timerMenu;
+
+    // Currently selected row
+    int selectedRow;
+
+    // Input from buttons
+    void nextButton();
+    void selectButton(tData &data);
+  
+    tDisplay(U8G2 &u8g2);
+    void step();
+    void display(U8G2 &u8g2) { grpMain.draw(u8g2); };
+    void showMain();
+    void showTopRow();
+    void showSecondRow();
+
+  protected:
+    void addToRow(U8G2 &u8g2, tGroup* row, tButton* button, tButton* prevButton, string label);
+    void selectNextItem(tGroup* row, tButton* btnCurrent, tButton* btnNew, tButton* btnRight);
+};
+
+/* ===============================================================================//
+// SINCE ARDUINO DOES NOT SEEM TO LIKE SEPARATE .H AND .CPP FILES, .CPP GOES HERE //
+// ===============================================================================*/
 
 tDisplay::tDisplay(U8G2 &u8g2) {
   // Clock
@@ -20,7 +104,7 @@ tDisplay::tDisplay(U8G2 &u8g2) {
   rowBrightness.setY(32);
   grpMain.addChild(rowBrightness);
 
-  addToRow(u8g2, &rowBrightness, &btnBrightness25,   NULL,             "25%" );
+  addToRow(u8g2, &rowBrightness, &btnBrightness25,   NULL,              "25%" );
   addToRow(u8g2, &rowBrightness, &btnBrightness35,   &btnBrightness25,  "35%" );
   addToRow(u8g2, &rowBrightness, &btnBrightness50,   &btnBrightness35,  "50%" );
   addToRow(u8g2, &rowBrightness, &btnBrightness70,   &btnBrightness50,  "70%" );
@@ -111,9 +195,11 @@ void tDisplay::selectNextItem(tGroup* row, tButton* btnCurrent, tButton* btnNew,
 };
 
 void tDisplay::nextButton() {
-
   
-  if(selectedRow<0) showMain();
+  if(selectedRow<0) {
+    selectedRow=0;
+    showTopRow();
+  }
   else if(selectedRow==0) {
     if     (mainMenu==mmBrightness) { selectNextItem(&rowMain, &btnBrightness, &btnColor,      &btnTimer); mainMenu=mmColor;      }
     else if(mainMenu==mmColor     ) { selectNextItem(&rowMain, &btnColor,      &btnTimer,      &btnBack ); mainMenu=mmTimer;      }
@@ -155,7 +241,8 @@ void tDisplay::nextButton() {
   }; // selectedRow!=0
 };
 
-void tDisplay::selectButton() {
+void tDisplay::selectButton(tData &data) {
+  
   if(selectedRow==-1) {
     selectedRow=0;
     showTopRow();
@@ -173,40 +260,45 @@ void tDisplay::selectButton() {
   } // selectedRow==0
   
   else { // selectedRow==1
+
+    portENTER_CRITICAL(&dataAccessMux);
+
     switch(mainMenu) {
       
       case mmBrightness:
 
-        if      (brightnessMenu==bm25  ) Serial.println("Brightness 25%");  
-        else if (brightnessMenu==bm35  ) Serial.println("Brightness 35%");  
-        else if (brightnessMenu==bm50  ) Serial.println("Brightness 50%");  
-        else if (brightnessMenu==bm70  ) Serial.println("Brightness 70%");  
-        else if (brightnessMenu==bm100 ) Serial.println("Brightness 100%");
+        if      (brightnessMenu==bm25  ) data.lightIntensity=li25;
+        else if (brightnessMenu==bm35  ) data.lightIntensity=li35;
+        else if (brightnessMenu==bm50  ) data.lightIntensity=li50;
+        else if (brightnessMenu==bm70  ) data.lightIntensity=li70;
+        else if (brightnessMenu==bm100 ) data.lightIntensity=li100;
    
         break;
         
       case mmColor: 
 
-        if      (colorMenu==cmWhite  ) Serial.println("White" );  
-        else if (colorMenu==cmYellow ) Serial.println("Yellow");  
-        else if (colorMenu==cmOrange ) Serial.println("Orange");  
-        else if (colorMenu==cmRed    ) Serial.println("Red"   );
+        if      (colorMenu==cmWhite  ) data.lightColor = lcWhite;
+        else if (colorMenu==cmYellow ) data.lightColor = lcYellow;
+        else if (colorMenu==cmOrange ) data.lightColor = lcOrange;
+        else if (colorMenu==cmRed    ) data.lightColor = lcRed;
         
         break;
         
       case mmTimer: 
 
-        if      (timerMenu==tm3  ) Serial.println("3 min");  
-        else if (timerMenu==tm5  ) Serial.println("5 min");  
-        else if (timerMenu==tm10 ) Serial.println("10 min");  
-        else if (timerMenu==tm20 ) Serial.println("20 min");  
-        else if (timerMenu==tmOff) Serial.println("Off");
+        if      (timerMenu==tm3  ) data.timerDuration = td03;
+        else if (timerMenu==tm5  ) data.timerDuration = td05;
+        else if (timerMenu==tm10 ) data.timerDuration = td10; 
+        else if (timerMenu==tm20 ) data.timerDuration = td20; 
+        else if (timerMenu==tmOff) data.timerDuration = tdOff;
                 
         break;
         
       // mmBack is not a likely case. We could not have entered the second row
                       
     }; // switch mainMenu
+
+    portEXIT_CRITICAL(&dataAccessMux);
 
     // Whatever we selected, we can go back to the top row now
     selectedRow=0; 
@@ -215,3 +307,5 @@ void tDisplay::selectButton() {
   }; // selectedRow>0
 
 };
+
+#endif // DISPLAY_H

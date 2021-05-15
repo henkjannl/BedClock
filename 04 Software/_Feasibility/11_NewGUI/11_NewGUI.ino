@@ -3,6 +3,7 @@
 #include <Wire.h>
 #include <list>
 #include <string>
+#include <stdlib.h>     
 
 #include "gui.h"
 #include "display.h"
@@ -21,13 +22,17 @@ void setup(void) {
 
 void loop(void) {
 
-  if(display.wnMain.ready()) {
-    if     (display.sequence==tsMainWindow)    { display.mainWindow();    display.sequence=tsGotoTopRow;    Serial.println("tsGotoTopRow"); }
-    else if(display.sequence==tsGotoTopRow)    { display.showTopRow();    display.sequence=tsGotoSecondRow; Serial.println("tsGotoSecondRow"); }
-    else if(display.sequence==tsGotoSecondRow) { display.showSecondRow(); display.sequence=tsMainWindow;    Serial.println("tsMainWindow"); };
-    delay(800);
-  } // wnMain ready
+  if(display.grpMain.ready()) {
 
+    if(rand() % 10<7)
+      display.nextButton();
+    else
+      display.selectButton();
+
+    delay(800);
+  } // grpMain ready
+
+  u8g2.setDrawColor(0);
   u8g2.clearBuffer();  
   display.display(u8g2);
   u8g2.sendBuffer();

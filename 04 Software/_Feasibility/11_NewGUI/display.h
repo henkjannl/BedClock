@@ -7,49 +7,77 @@
 
 using namespace std;
 
-enum tSequence {tsMainWindow, tsGotoTopRow, tsGotoSecondRow};
+enum tMainMenu       { mmBrightness, mmColor, mmTimer, mmBack};
+enum tBrightnessMenu { bm25, bm35, bm50, bm70, bm100, bmBack};
+enum tColorMenu      { cmWhite, cmYellow, cmOrange, cmRed, cmBack};
+enum tTimerMenu      { tm3, tm5, tm10, tm20, tmOff, tmBack};
 
 class tDisplay {
 
   public:
     // Main canvas
-    tGroup  wnMain; 
-    tLabel  lbTime; 
+    tGroup  grpMain; 
+    tLabel  lblTime; 
   
     // Top row with first row of buttons
-    tGroup  rwMain;     
-    tButton btBrightness;  
-    tButton btColor;
-    tButton btTimer;
-    tButton btBack;
+    tGroup  rowMain;     
+    tButton btnBrightness;  
+    tButton btnColor;
+    tButton btnTimer;
+    tButton btnBack;
   
     // Second row on brightness
-    tGroup rwBrightness;
-    tButton btBrightness25;
-    tButton btBrightness35;
-    tButton btBrightness50;
-    tButton btBrightness70;
-    tButton btBrightness100;
+    tGroup  rowBrightness;
+    tButton btnBrightness25;
+    tButton btnBrightness35;
+    tButton btnBrightness50;
+    tButton btnBrightness70;
+    tButton btnBrightness100;
+    tButton btnBrightnessBack;
     
     // Second row on color
-    tGroup  rwColor;
-    tButton btColorRed;
-    tButton btColorOrange;
-    tButton btColorYellow;
-    tButton btColorWhite;
-  
+    tGroup  rowColor;
+    tButton btnColorWhite;
+    tButton btnColorYellow;
+    tButton btnColorOrange;
+    tButton btnColorRed;
+    tButton btnColorBack;
+
+    // Second row on timer  
+    tGroup rowTimer;
+    tButton btnTimer03;
+    tButton btnTimer05;
+    tButton btnTimer10;
+    tButton btnTimer20;
+    tButton btnTimerOff;
+    tButton btnTimerBack;
+
     // Sequencing the movements
-    tSequence sequence;
-    bool ready;
-    int selectedMain, selectedBrightness, selectedColor, selectedTimer;
+    bool ready() { return grpMain.ready(); };
+
+    // Current selection in the menu
+    tMainMenu       mainMenu;
+    tBrightnessMenu brightnessMenu;
+    tColorMenu      colorMenu;
+    tTimerMenu      timerMenu;
+
+    // Currently selected row
+    int selectedRow;
+
+    // Input from buttons
+    void nextButton();
+    void selectButton();
   
     tDisplay(U8G2 &u8g2);
     void step();
-    void display(U8G2 &u8g2) { wnMain.draw(u8g2); };
-    void mainWindow();
+    void display(U8G2 &u8g2) { grpMain.draw(u8g2); };
+    void showMain();
     void showTopRow();
     void showSecondRow();
-    
+
+  protected:
+    void addToRow(U8G2 &u8g2, tGroup* row, tButton* button, tButton* prevButton, string label);
+    void selectNextItem(tGroup* row, tButton* btnCurrent, tButton* btnNew, tButton* btnRight);
 };
 
 #endif // DISPLAY_H
