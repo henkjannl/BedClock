@@ -71,7 +71,7 @@ class tDisplay {
   
     tDisplay(U8G2 &u8g2);
     void step();
-    void display(U8G2 &u8g2) { grpMain.draw(u8g2); };
+    void display(U8G2 &u8g2);
     void showMain();
     void showTopRow();
     void showSecondRow();
@@ -88,7 +88,7 @@ class tDisplay {
 tDisplay::tDisplay(U8G2 &u8g2) {
   // Clock
   lblTime.setFont(u8g2_font_crox5hb_tr);  
-  lblTime.setText(u8g2, "12:34");
+  lblTime.setText(u8g2, "--:--");
   grpMain.addChild(lblTime);
 
   // Main row
@@ -144,6 +144,17 @@ tDisplay::tDisplay(U8G2 &u8g2) {
 
 void tDisplay::step() {
   grpMain.step();
+};
+
+void tDisplay::display(U8G2 &u8g2) { 
+  struct tm timeinfo;
+  if(getLocalTime(&timeinfo)){
+    char currentTime[6];
+    strftime(currentTime,sizeof(currentTime),"%H:%M",&(timeinfo)); // Hour 00-23 + Minute 00-59
+    lblTime.setText(u8g2, currentTime);
+  }
+  
+  grpMain.draw(u8g2); 
 };
 
 void tDisplay::showMain() {
@@ -261,6 +272,11 @@ void tDisplay::selectButton(tData &data) {
   
   else { // selectedRow==1
 
+    if     (data.timerDuration==td03) powerTimer=3*60;
+    else if(data.timerDuration==td05) powerTimer=5*60;
+    else if(data.timerDuration==td10) powerTimer=10*60;
+    else if(data.timerDuration==td20) powerTimer=20*60;
+
     portENTER_CRITICAL(&dataAccessMux);
 
     switch(mainMenu) {
@@ -288,8 +304,8 @@ void tDisplay::selectButton(tData &data) {
 
         if      (timerMenu==tm3  ) data.timerDuration = td03;
         else if (timerMenu==tm5  ) data.timerDuration = td05;
-        else if (timerMenu==tm10 ) data.timerDuration = td10; 
-        else if (timerMenu==tm20 ) data.timerDuration = td20; 
+        else if (timerMenu==tm10 ) data.timerDuration = td10;
+        else if (timerMenu==tm20 ) data.timerDuration = td20;
         else if (timerMenu==tmOff) data.timerDuration = tdOff;
                 
         break;

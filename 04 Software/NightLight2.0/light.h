@@ -13,9 +13,10 @@
 using namespace std;
 
 // ======== CONSTANTS ============= 
-const float LIGHT_INC[] = {0.27, 0.20, 0.15, 0.11, 0.09, 0.07, 0.05, 0.04, 0.02}; // Increments a value in 9 steps, sum of values is 1
+const float LIGHT_INC[] = { 0.0008, 0.0056, 0.0148, 0.0274, 0.0422, 0.0578, 0.0726, 0.0852, 0.0944, 0.0992, 0.0992, 
+  0.0944, 0.0852, 0.0726, 0.0578, 0.0422, 0.0274, 0.0148, 0.0056, 0.0008};
 
-const int MAX_INC = 8;
+const int MAX_INC = 19;
 
 typedef struct { float R,G,B; } color_t;
 
@@ -124,6 +125,10 @@ void taskLight(void * parameter ){
       B.setTarget(MAX_INTENSITY*COLORS[data.lightColor].B*INTENSITIES[data.lightIntensity]);
     }
 
+    /* Keep a watch on how much memory is used by the measurement thread */
+    data.lightHighWaterMark= uxTaskGetStackHighWaterMark(NULL);
+    data.lightAlive++;
+
     portEXIT_CRITICAL(&dataAccessMux);
     
     // Get the integer component
@@ -154,13 +159,12 @@ void taskLight(void * parameter ){
     }
 
     strip.show();    
-    Serial.println();
 
     R.step();
     G.step();
     B.step();
     
-    vTaskDelay(500);
+    vTaskDelay(100);
   };
 };
 

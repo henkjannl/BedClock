@@ -9,7 +9,6 @@
 
 using namespace std;
 
-
 // ======== GLOBAL VARIABLES ============= 
 U8G2_SSD1306_128X32_UNIVISION_F_SW_I2C u8g2(U8G2_R2, 22, 21, U8X8_PIN_NONE);  
 tDisplay display(u8g2);
@@ -38,24 +37,44 @@ void taskScreen(void * parameter ){
 
   while(true) {
 
-      if(data.switchButtonPressed) {
+      if(keyboardTimeout==0) {
+        display.selectedRow=-1;
+        display.showMain();
+      };
+
+      if( (powerTimer==0) && (data.timerDuration!=tdOff) ) data.powerState = psOff;
+      
+      if(keyboard.switchButtonPressed) {
+        portENTER_CRITICAL(&keyboardMux);
+        
+        keyboard.switchButtonPressed=false;
+        
+        if     (data.timerDuration==td03) powerTimer=3*60;
+        else if(data.timerDuration==td05) powerTimer=5*60;
+        else if(data.timerDuration==td10) powerTimer=10*60;
+        else if(data.timerDuration==td20) powerTimer=20*60;
+        
+        portEXIT_CRITICAL(&keyboardMux);
+
         portENTER_CRITICAL(&dataAccessMux);
-        data.switchButtonPressed=false;
         data.powerState = (data.powerState==psTimer) ? psOff : psTimer;
         portEXIT_CRITICAL(&dataAccessMux);
       };
       
-      if(data.nextButtonPressed) {
-        portENTER_CRITICAL(&dataAccessMux);
-        data.nextButtonPressed=false;
-        portEXIT_CRITICAL(&dataAccessMux);
+      if(keyboard.nextButtonPressed) {
+
+        portENTER_CRITICAL(&keyboardMux);
+        keyboard.nextButtonPressed=false;
+        portEXIT_CRITICAL(&keyboardMux);
+        
         display.nextButton();
       };
       
-      if(data.selectButtonPressed) {
-        portENTER_CRITICAL(&dataAccessMux);
-        data.selectButtonPressed=false;
-        portEXIT_CRITICAL(&dataAccessMux);
+      if(keyboard.selectButtonPressed) {
+        portENTER_CRITICAL(&keyboardMux);
+        keyboard.selectButtonPressed=false;
+        portEXIT_CRITICAL(&keyboardMux);
+
         display.selectButton(data);
       };
 
@@ -66,7 +85,13 @@ void taskScreen(void * parameter ){
 
     display.step();
 
-    vTaskDelay(20);
+    portENTER_CRITICAL(&dataAccessMux);
+    /* Keep a watch on how much memory is used by this thread */
+    data.screenHighWaterMark= uxTaskGetStackHighWaterMark(NULL);
+    data.screenAlive++;
+    portEXIT_CRITICAL(&dataAccessMux);
+    
+    vTaskDelay(100);
   };
 };
 
