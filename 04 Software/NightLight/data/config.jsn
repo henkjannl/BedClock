@@ -1,0 +1,9 @@
+{
+    "AccessPoints": [
+        { "SSID": "Starbux", "password": "RodePleinMoskou2019", "timezone" : "Europe/Amsterdam" }
+    ],
+    "LogFile": "log001.csv",
+    "BotToken": "..",
+    "ChatID" : ".."
+}
+
