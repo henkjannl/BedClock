@@ -40,6 +40,12 @@ void taskScreen(void * parameter ) {
   BaseType_t success;
   tMenuItem command;
 
+  // Send default settings to Light task
+  command=brightness25; xQueueSendToBack(lightQueue, &command, 0 );    
+  command=colorWhite;   xQueueSendToBack(lightQueue, &command, 0 );    
+  command=timer03;      xQueueSendToBack(lightQueue, &command, 0 );    
+  command=mainPowerOn;  xQueueSendToBack(lightQueue, &command, 0 );    
+
   while(true) {
     buttonRead=xQueueReceive(keyboardQueue, (void *) &keystroke, 0); 
     if (buttonRead) {

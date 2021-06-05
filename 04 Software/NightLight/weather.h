@@ -1,8 +1,8 @@
-#ifndef B_WEATHER
+#ifndef WEATHER_H
 
-#define B_WEATHER
+#define WEATHER_H
 
-#include "BondTypes.h"
+#include "data.h"
 #include <ArduinoJson.h>
 
 void requestWeather(tInternalData& internalData) {
@@ -16,7 +16,7 @@ void requestWeather(tInternalData& internalData) {
 
   char buff[200];
   snprintf(buff, sizeof(buff), "https://api.openweathermap.org/data/2.5/onecall?lat=%.8f&lon=%.8f&exclude=hourly,daily,alerts&appid=%s", 
-    internalData.lat, internalData.lon, internalData.OpenWeatherMapApiKey);
+    data.lat, data.lon, config.OpenWeatherMapApiKey);
   
   Serial.println(buff);
 
@@ -57,7 +57,7 @@ void requestWeather(tInternalData& internalData) {
     //long current_dt = current["dt"]; // 1617992165
     //long current_sunrise = current["sunrise"]; // 1617943698
     //long current_sunset = current["sunset"]; // 1617992353
-    internalData.outsideTemp = current["temp"]; // 282.57
+    data.outsideTemp = current["temp"]; // 282.57
     data.outsideTemp-=273.15;
     //int current_feels_like = current["feels_like"]; // 281
     //int current_pressure = current["pressure"]; // 1008
@@ -88,7 +88,6 @@ void requestWeather(tInternalData& internalData) {
       internalData.precipitation.push_back(p);
     }
 
-    internalData.weather.quality=dqFresh;
     data.weather.age=0;
     data.weather.modified=true;
 
@@ -167,4 +166,4 @@ void displayWeather(tInternalData& internalData, TFT_eSPI& tft) {
 }
 
 
-#endif B_WEATHER
+#endif WEATHER_H

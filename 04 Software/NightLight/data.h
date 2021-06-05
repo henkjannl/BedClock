@@ -17,7 +17,7 @@ const char *CONFIG_FILE = "/config.jsn";
 // ======== TYPES ================
 
 // All commands displayed on screen and sent to light
-enum tMenuItem { mainClock, mainTogglePower, mainTimerExpired, 
+enum tMenuItem { mainClock, mainPowerOn, mainTogglePower, mainTimerExpired, 
                  mainBrightness, mainColor, mainTimer, mainBack,
                  brightness25, brightness35, brightness50, brightness70, brightness100, brightnessBack,
                  colorWhite, colorYellow, colorOrange, colorRed, colorBack,
@@ -36,7 +36,13 @@ class tData {
     string timezone;
     int timeZoneOffset;
     int timeDSToffset;
+    float lat, lon;
 
+    // Weather info
+    float outsideTemp;
+    list<tPrecipitation> precipitation;
+    char weatherIcon[12];
+  
     // System info
     UBaseType_t lightHighWaterMark;  // Unused stack for the measurement thread
     UBaseType_t screenHighWaterMark;  // Unused stack for the display thread
@@ -50,6 +56,8 @@ class tData {
       timezone="Europe/Amsterdam";
       timeZoneOffset=3600;
       timeDSToffset=0;
+      lat=52.25319;
+      lon=6.78546;
 
       lightAlive=0;
       screenAlive=0;
@@ -62,6 +70,7 @@ struct tAccessPoint {
   char ssid[64];
   char password[64];
   char timezone[64];
+  float lat, lon;
 }; // tAccesspoint
 
 class tConfig {
@@ -69,6 +78,7 @@ class tConfig {
     list<tAccessPoint> AccessPoints;  
     char botToken[64];
     char chatID[64];
+    char openweathermapAPIkey[64];
   
     void load() {    
       StaticJsonDocument<1024> doc;
@@ -85,12 +95,15 @@ class tConfig {
         tAccessPoint AccessPoint;
         strlcpy(AccessPoint.ssid     ,elem["SSID"],    sizeof(AccessPoint.ssid    ));
         strlcpy(AccessPoint.password ,elem["password"],sizeof(AccessPoint.password));
-        strlcpy(AccessPoint.timezone ,elem["timezone"],sizeof(AccessPoint.timezone));          
+        strlcpy(AccessPoint.timezone ,elem["timezone"],sizeof(AccessPoint.timezone));         
+        AccessPoint.lat = elem["lat"]; // 52.25319, 56.25319
+        AccessPoint.lon = elem["lon"]; // 6.78546, 6.78546
         AccessPoints.push_back(AccessPoint);    
       }
 
       strlcpy(botToken,doc["BotToken"],sizeof(botToken)); // "xxxxxxxxxx:yyyyyyyyyyyy-zzzzzzzzzzzzzz_qqqqqqq"
       strlcpy(chatID  ,doc["ChatID"]  ,sizeof(chatID  )); // "-xxxxxxxxxx"
+      strlcpy(openweathermapAPIkey,doc["openweathermapAPIkey"]  ,sizeof(openweathermapAPIkey)); 
     }
 
     void Save() {
