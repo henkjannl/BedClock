@@ -1,8 +1,8 @@
 {
     "AccessPoints": [
-        { "SSID": "Starbux", "password": "RodePleinMoskou2019", "timezone" : "Europe/Amsterdam", "lat" : 52.25319, "lon" : 6.78546 },
-        { "SSID": "Demcon-Guests", "password": "Welkom@Demcon",       "timezone" : "Europe/Amsterdam", "lat": "52.23852421929482", "lon": "6.8467683083413595" },
-        { "SSID": "motorola one vision", "password": "MeMyMoto8#",          "timezone" : "Europe/Amsterdam", "lat": "52.25325217357761", "lon": "6.7857690567391250" }    ],
+        { "SSID": "Starbux",             "password": "RodePleinMoskou2019", "timezone" : "Europe/Amsterdam", "lat": 52.25319, "lon": 6.78546 },
+        { "SSID": "Demcon-Guests",       "password": "Welkom@Demcon",       "timezone" : "Europe/Amsterdam", "lat": 52.23852, "lon": 6.84676 },
+        { "SSID": "motorola one vision", "password": "MeMyMoto8#",          "timezone" : "Europe/Amsterdam", "lat": 52.25325, "lon": 6.78576 } ],
     "LogFile": "log001.csv",
     "BotToken": "..",
     "ChatID" : "..",
