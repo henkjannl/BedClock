@@ -1,5 +1,5 @@
 # Config files containing passwords etc.
-config.*
+config.jsn
 
 # Prerequisites
 *.d
