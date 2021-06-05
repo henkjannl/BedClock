@@ -143,6 +143,15 @@ void taskLight(void * parameter ){
     if(commandReceived) {
       switch(command) {
         case mainClock:
+          // command can be ignored
+        break;
+
+        case mainPowerOn:
+          Serial.println("Power on");
+          powerState=true;
+          if(powerState) {
+            xTimerReset( timerTimeoutTimer, 0 ); 
+          }
         break;
         
         case mainTogglePower:

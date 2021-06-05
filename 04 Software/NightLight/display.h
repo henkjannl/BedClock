@@ -85,7 +85,8 @@ tDisplay::tDisplay(U8G2 &u8g2) {
   timerMenu=timer03;
 
   // Clock
-  lblTime.setFont(u8g2_font_crox5hb_tr);  
+  //lblTime.setFont(u8g2_font_crox5hb_tr);  
+  lblTime.setFont(u8g2_font_fur17_tr);
   lblTime.setText(u8g2, "--:--");
   grpMain.addChild(lblTime);
 

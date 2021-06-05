@@ -22,6 +22,7 @@
 #include "keyboard.h"
 #include "light.h"
 #include "screen.h"
+#include "weather.h"
 
 using namespace std;
 
@@ -73,7 +74,7 @@ void loop(void) {
   // sync time
   if(data.connected & !data.syncTime ) syncTime();  
 
-  vTaskDelay(2500);
+  vTaskDelay(5000);
   
 } // loop
 
@@ -106,6 +107,8 @@ void connectToWiFi() {
               
               portENTER_CRITICAL(&dataAccessMux);
               data.timezone=accessPoint.timezone;
+              data.lat=accessPoint.lat;
+              data.lon=accessPoint.lon;
               portEXIT_CRITICAL(&dataAccessMux);  
               connected = true;
 
