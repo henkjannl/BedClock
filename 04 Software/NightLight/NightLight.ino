@@ -22,7 +22,7 @@
 #include "keyboard.h"
 #include "light.h"
 #include "screen.h"
-#include "weather.h"
+//#include "weather.h"
 
 using namespace std;
 

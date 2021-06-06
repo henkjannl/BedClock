@@ -5,10 +5,10 @@
 #include "data.h"
 #include <ArduinoJson.h>
 
-void requestWeather(tInternalData& internalData) {
+void requestWeather(tData& data) {
   // If the weather was recently retrieved, go back
-  if (internalData.weather.quality==dqFresh) return;
-  if(!internalData.locationKnown) return;
+  if (data.weather.quality==dqFresh) return;
+  if(!data.locationKnown) return;
 
   Serial.println(F("Retrieving the weather"));
     

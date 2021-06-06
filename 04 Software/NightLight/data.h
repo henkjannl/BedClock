@@ -24,7 +24,12 @@ enum tMenuItem { mainClock, mainPowerOn, mainTogglePower, mainTimerExpired,
                  timer03, timer05, timer10, timer20, timerOff, timerBack };
 
 enum tButtonClick { btnNext, btnSelect, btnPower, keyboardTimeout };
-                 
+
+struct tPrecipitation {
+  long t;
+  float prec;
+};
+
 class tData {
   public:
 
