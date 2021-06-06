@@ -17,7 +17,8 @@ const char *CONFIG_FILE = "/config.jsn";
 // ======== TYPES ================
 
 // All commands displayed on screen and sent to light
-enum tMenuItem { mainClock, mainPowerOn, mainTogglePower, mainTimerExpired, 
+enum tMenuItem { mainScreen, mainFull, mainNight, mainEmpty, 
+                 mainPowerOn, mainTogglePower, mainTimerExpired, 
                  mainBrightness, mainColor, mainTimer, mainBack,
                  brightness25, brightness35, brightness50, brightness70, brightness100, brightnessBack,
                  colorWhite, colorYellow, colorOrange, colorRed, colorBack,

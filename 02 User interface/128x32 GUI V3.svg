@@ -23,11 +23,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="7.4687496"
-     inkscape:cx="53.921617"
-     inkscape:cy="20.247949"
+     inkscape:zoom="4.24768"
+     inkscape:cx="234.49849"
+     inkscape:cy="42.65207"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer3"
      inkscape:document-rotation="0"
      showgrid="false"
      units="px">
@@ -80,7 +80,8 @@
   <g
      inkscape:label="Content"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     style="display:inline">
     <text
        xml:space="preserve"
        style="font-weight:bold;font-size:4.04378px;line-height:1.25;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';word-spacing:0px;stroke-width:0.264583"
@@ -94,7 +95,7 @@
          style="stroke-width:0.264583">12:34</tspan></text>
     <g
        id="g1220"
-       transform="translate(0,3.4395815)">
+       transform="translate(0,4.4979149)">
       <rect
          style="fill:#000000;fill-opacity:0.805714;stroke:#000000;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
          id="rect1126"
@@ -173,7 +174,7 @@
     </g>
     <g
        id="g1180"
-       transform="translate(5.8208334,12.170834)">
+       transform="translate(5.8208334,13.229168)">
       <rect
          style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:none;fill-opacity:0.805714;stroke:#000000;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000;stop-opacity:1"
          id="rect1150"
@@ -267,7 +268,7 @@
     </g>
     <g
        id="g1206"
-       transform="translate(0,3.704168)">
+       transform="translate(0,4.7625014)">
       <rect
          style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:none;fill-opacity:0.805714;stroke:#000000;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000;stop-opacity:1"
          id="rect1182"
@@ -343,7 +344,7 @@
     </g>
     <g
        id="g206"
-       transform="translate(0,14.287501)">
+       transform="translate(0,15.345835)">
       <rect
          style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:none;fill-opacity:0.805714;stroke:#000000;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000;stop-opacity:1"
          id="rect182"
@@ -635,18 +636,131 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:2.24148px;line-height:0.9;font-family:Calibri;-inkscape-font-specification:'Calibri Light';word-spacing:0px;stroke-width:0.264583"
-       x="0.24856651"
+       x="0.56001103"
        y="5.4966393"
        id="text1107"><tspan
          sodipodi:role="line"
-         id="tspan1105"
-         x="0.24856651"
+         x="0.56001103"
          y="5.4966393"
-         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:2.24148px;font-family:Calibri;-inkscape-font-specification:'Calibri Light';stroke-width:0.264583">If you can't explain it simply, </tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:2.24148px;font-family:Calibri;-inkscape-font-specification:'Calibri Light';stroke-width:0.264583"
+         id="tspan1109">If you can't explain it simply, you </tspan><tspan
          sodipodi:role="line"
-         x="0.24856651"
+         x="0.56001103"
          y="7.5139713"
          style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:2.24148px;font-family:Calibri;-inkscape-font-specification:'Calibri Light';stroke-width:0.264583"
-         id="tspan1109">you don't understand it well enough.</tspan></text>
+         id="tspan1143">don't understand it well enough.</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Screen names">
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#ff1919;stroke-width:0.264582;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+       id="rect1145"
+       width="102.79064"
+       height="29.765627"
+       x="-0.52916676"
+       y="-0.52916664" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.175px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Light';word-spacing:0px;fill:#ff1919;stroke-width:0.264583"
+       x="-23.964235"
+       y="1.4306417"
+       id="text1149"><tspan
+         sodipodi:role="line"
+         id="tspan1147"
+         x="-23.964235"
+         y="1.4306417"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Heebo;-inkscape-font-specification:'Heebo Light';fill:#ff1919;stroke-width:0.264583">tGroup  grpMain</tspan></text>
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#ff8519;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+       id="rect1151"
+       width="101.60001"
+       height="8.4666662"
+       x="-9.2628476e-08"
+       y="5.0986097e-07" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.175px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Light';text-align:end;word-spacing:0px;text-anchor:end;fill:#ff8519;stroke-width:0.264583"
+       x="101.8372"
+       y="11.500555"
+       id="text1155"><tspan
+         sodipodi:role="line"
+         id="tspan1153"
+         x="101.8372"
+         y="11.500555"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Heebo;-inkscape-font-specification:'Heebo Light';text-align:end;text-anchor:end;fill:#ff8519;stroke-width:0.264583">tGroup  grpMainScreen</tspan></text>
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#194fff;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+       id="rect1170"
+       width="32.808334"
+       height="3.1750004"
+       x="0.1322915"
+       y="9.6572886" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.175px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Light';word-spacing:0px;fill:#194fff;stroke-width:0.264583"
+       x="33.79998"
+       y="12.15184"
+       id="text1174"><tspan
+         sodipodi:role="line"
+         id="tspan1172"
+         x="33.79998"
+         y="12.15184"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Heebo;-inkscape-font-specification:'Heebo Light';fill:#194fff;stroke-width:0.264583">tGroup  rowMain</tspan></text>
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#194fff;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+       id="rect1176"
+       width="30.516926"
+       height="3.175"
+       x="0.1322915"
+       y="14.948959" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.175px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Light';word-spacing:0px;fill:#194fff;stroke-width:0.264583"
+       x="33.79998"
+       y="17.44351"
+       id="text1180"><tspan
+         sodipodi:role="line"
+         id="tspan1178"
+         x="33.79998"
+         y="17.44351"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Heebo;-inkscape-font-specification:'Heebo Light';fill:#194fff;stroke-width:0.264583">tGroup  rowMain</tspan></text>
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#194fff;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+       id="rect1183"
+       width="31.485416"
+       height="3.175004"
+       x="0.1322915"
+       y="20.240622" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.175px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Light';word-spacing:0px;fill:#194fff;stroke-width:0.264583"
+       x="33.79998"
+       y="22.735172"
+       id="text1187"><tspan
+         sodipodi:role="line"
+         id="tspan1185"
+         x="33.79998"
+         y="22.735172"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Heebo;-inkscape-font-specification:'Heebo Light';fill:#194fff;stroke-width:0.264583">tGroup  rowMain</tspan></text>
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#194fff;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+       id="rect1189"
+       width="30.516926"
+       height="3.1750014"
+       x="0.1322915"
+       y="25.532291" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.175px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Light';word-spacing:0px;fill:#194fff;stroke-width:0.264583"
+       x="33.79998"
+       y="28.026842"
+       id="text1193"><tspan
+         sodipodi:role="line"
+         id="tspan1191"
+         x="33.79998"
+         y="28.026842"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Heebo;-inkscape-font-specification:'Heebo Light';fill:#194fff;stroke-width:0.264583">tGroup  rowMain</tspan></text>
   </g>
 </svg>

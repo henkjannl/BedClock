@@ -142,7 +142,20 @@ void taskLight(void * parameter ){
 
     if(commandReceived) {
       switch(command) {
-        case mainClock:
+
+        case mainScreen:
+          // command can be ignored
+        break;
+
+        case mainFull:
+          // command can be ignored
+        break;
+
+        case mainNight:
+          // command can be ignored
+        break;
+
+        case mainEmpty:
           // command can be ignored
         break;
 
