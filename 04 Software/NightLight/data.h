@@ -26,10 +26,13 @@ enum tMenuItem { mainScreen, mainFull, mainNight, mainEmpty,
 
 enum tButtonClick { btnNext, btnSelect, btnPower, keyboardTimeout };
 
+enum tDataQuality { dqUnavailable, dqRefreshed, dqDisplayed };
+
 struct tPrecipitation {
   long t;
   float prec;
 };
+
 
 class tData {
   public:
@@ -45,16 +48,21 @@ class tData {
     float lat, lon;
 
     // Weather info
+    bool requestWeather;
+    tDataQuality weatherAvailable;
     float outsideTemp;
     list<tPrecipitation> precipitation;
     char weatherIcon[12];
   
     // System info
-    UBaseType_t lightHighWaterMark;  // Unused stack for the measurement thread
+    UBaseType_t lightHighWaterMark;   // Unused stack for the measurement thread
     UBaseType_t screenHighWaterMark;  // Unused stack for the display thread
+    UBaseType_t weatherHighWaterMark; // Unused stack for the weather thread
+    
     uint32_t lightAlive;
     uint32_t screenAlive;
     uint32_t keyboardAlive;
+    uint32_t weatherAlive;
     uint32_t screenRedrawMillis;
     
     tData() {
@@ -65,9 +73,12 @@ class tData {
       lat=52.25319;
       lon=6.78546;
 
+      weatherAvailable=dqUnavailable;
+
       lightAlive=0;
       screenAlive=0;
       keyboardAlive=0;
+      weatherAlive=0;
     };
 
 }; // tData

@@ -22,7 +22,7 @@
 #include "keyboard.h"
 #include "light.h"
 #include "screen.h"
-//#include "weather.h"
+#include "weather.h"
 
 using namespace std;
 
@@ -40,6 +40,9 @@ void setup(void) {
   }
   Serial.println("SPIFFS loaded");  
   config.load();
+
+  connectToWiFi();
+  syncTime();
   
   setupKeyboard();
   Serial.println("Keyboard setup finished");  
@@ -50,19 +53,33 @@ void setup(void) {
   setupScreen();
   Serial.println("Display setup finished");  
 
+  setupWeather();
+  Serial.println("Weather setup finished");  
+
 } // setup
 
 void loop(void) {
   
-  Serial.printf("Connected: %s Timesync: %s Light %d bytes %d updates Screen %d bytes %d updates %d ms redraw time Keyboard: %d updates\n", 
+  Serial.printf("      Connected: %s Timesync: %s Weather: %s\n", 
      data.connected ? "Y" : "N", 
      data.syncTime ? "Y" : "N", 
+     data.weatherAvailable!=dqUnavailable ? "Y" : "N");
+
+  Serial.printf("      Light %d bytes %d updates\n", 
      data.lightHighWaterMark, 
-     data.lightAlive,
+     data.lightAlive);
+
+  Serial.printf("      Screen %d bytes %d updates %d ms redraw time\n", 
      data.screenHighWaterMark,
      data.screenAlive, 
-     data.screenRedrawMillis,
-     data.keyboardAlive);
+     data.screenRedrawMillis);
+
+  Serial.printf("      Keyboard: %d updates Weather: %d updates %d bytes\n", 
+     data.keyboardAlive,
+     data.weatherAlive,
+     data.weatherHighWaterMark);
+
+  Serial.println();
 
   //portENTER_CRITICAL(&dataAccessMux);
   data.connected = (WiFi.status() == WL_CONNECTED);
@@ -71,8 +88,11 @@ void loop(void) {
   //connect to WiFi
   if(!data.connected) connectToWiFi();
 
-  // sync time
+  // Sync time
   if(data.connected & !data.syncTime ) syncTime();  
+
+  // Retrieve weather
+  if(data.connected & (data.weatherAvailable==dqUnavailable)) getWeather();
 
   vTaskDelay(5000);
   

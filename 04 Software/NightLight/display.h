@@ -19,6 +19,7 @@ class tDisplay {
 
     // First section of main screen, to be complemented with weather and quote
     tLabel  lblTime; 
+    tLabel  lblTemperature; 
 
     // Second section of main screen
     tLabel  lblTimeThin; 
@@ -105,15 +106,20 @@ tDisplay::tDisplay(U8G2 &u8g2) {
   grpMain.addChild(grpMainScreen);
 
   grpMainScreen.addChild(lblTime);
-  lblTime.setFont(u8g2_font_crox5hb_tr);  
+  lblTime.setFont(u8g2_font_crox2c_tf);  
   lblTime.setText(u8g2, "--:--");
+
+  grpMainScreen.addChild(lblTemperature);
+  lblTemperature.setX(80);
+  lblTemperature.setFont(u8g2_font_crox2c_tf);  
+  lblTemperature.setText(u8g2, "");
 
   grpMainScreen.addChild(lblTimeThin);
   lblTimeThin.setFont(u8g2_font_crox2c_tf);
   lblTimeThin.setText(u8g2, "--:--");
   uint8_t  w = lblTimeThin.getWidth(u8g2, "--:--");
   lblTimeThin.setX(128+60-0.5*w);
-  lblTimeThin.setY(11);
+  lblTimeThin.setY(7);
 
   
   // Main row
@@ -163,17 +169,42 @@ void tDisplay::step() {
 }; // tDisplay::step
 
 void tDisplay::display(U8G2 &u8g2) { 
+  uint8_t  w;
+  static char outsideTemp[16];
+  
   struct tm timeinfo;
   if(getLocalTime(&timeinfo)){
     char currentTime[6];
     strftime(currentTime,sizeof(currentTime),"%H:%M",&(timeinfo)); // Hour 00-23 + Minute 00-59
     lblTime    .setText(u8g2, currentTime);
     lblTimeThin.setText(u8g2, currentTime);
-    uint8_t  w = lblTimeThin.getWidth(u8g2, currentTime);
+    w=lblTimeThin.getWidth(u8g2, currentTime);
     lblTimeThin.moveX(128+60-0.5*w);
   }
-  
+
+  if(data.weatherAvailable==dqRefreshed) {
+    snprintf (outsideTemp, sizeof(outsideTemp), "%0.1fC", data.outsideTemp);
+    Serial.printf("Outside temperature %.1f is displayed as %s\n", data.outsideTemp, outsideTemp);
+    lblTemperature.setText(u8g2, outsideTemp);
+    w=lblTemperature.getWidth(u8g2, outsideTemp);
+    lblTemperature.setX(127-w);
+    data.weatherAvailable=dqDisplayed; 
+  }
+
   grpMain.draw(u8g2); 
+
+  // Display bar graph with precipitation
+  int16_t x=0;
+  int16_t y=grpMain.globalY();
+
+  for (tPrecipitation & p : data.precipitation) {
+    // int h=18.0*log(p.prec+1); // Curve through (0,0) (0.25,3) (3,25)
+    // int h=36.0*log(p.prec+1); // Curve through (0,0) (0.25,8) (3,50)
+    int h=(int) 12.0*log(p.prec+1); // Curve through (0,0) (0.25,2.6) (3,20)
+    if(h>20) h=20;
+    u8g2.drawVLine(x++, y+31-h, h);
+    u8g2.drawVLine(x++, y+31-h, h);
+  }
 }; // tDisplay::display
 
 void tDisplay::showMain() {
@@ -188,12 +219,12 @@ void tDisplay::showMain() {
 void tDisplay::showTopRow() {
   selectedRow=0;
 
-  int16_t row0y = lblTime.getHeight()-2;
-  int16_t row1y = lblTime.getHeight()-2+  rowMain.getHeight()-1;
-  int16_t row2y = lblTime.getHeight()-2+2*rowMain.getHeight()-1;
+  int16_t row0y = 32;
+  int16_t row1y = 32+  rowMain.getHeight()-1;
+  int16_t row2y = 32+2*rowMain.getHeight()-1;
 
   rowMain.moveY(row0y);
-  grpMain.moveY(31-(row0y+rowMain.getHeight()));
+  grpMain.moveY(-rowMain.getHeight()-1);
 
   rowBrightness.moveY(row2y);
   rowColor     .moveY(row2y);
@@ -203,9 +234,9 @@ void tDisplay::showTopRow() {
 void tDisplay::showSecondRow() {
   selectedRow=1;
   
-  int16_t row0y = lblTime.getHeight()-2;
-  int16_t row1y = lblTime.getHeight()-2+  rowMain.getHeight()-1;
-  int16_t row2y = lblTime.getHeight()-2+2*rowMain.getHeight()-1;
+  int16_t row0y = 32;
+  int16_t row1y = 32+  rowMain.getHeight()-1;
+  int16_t row2y = 32+2*rowMain.getHeight()-1;
 
   rowMain.moveY(row0y);
   
@@ -213,7 +244,7 @@ void tDisplay::showSecondRow() {
   rowColor     .moveY( (mainMenu==mainColor     ) ? row1y : row2y);
   rowTimer     .moveY( (mainMenu==mainTimer     ) ? row1y : row2y);
   
-  grpMain.moveY(31-(row1y+rowBrightness.getHeight()));
+  grpMain.moveY(-2*rowMain.getHeight());
 }; // tDisplay::showSecondRow
 
 void tDisplay::addToRow(U8G2 &u8g2, tGroup* row, tButton* button, tButton* prevButton, string label, uint32_t ID) {

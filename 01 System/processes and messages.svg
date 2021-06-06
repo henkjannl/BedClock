@@ -23,9 +23,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.904537"
-     inkscape:cx="330.70866"
-     inkscape:cy="151.1811"
+     inkscape:zoom="2.2090845"
+     inkscape:cx="346.72785"
+     inkscape:cy="219.68504"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -54,37 +54,11 @@
      inkscape:label="Connectors">
     <rect
        style="fill:#d5d5d5;stroke:none;stroke-width:0.6;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-       id="rect894"
-       width="6.25"
-       height="2.5"
-       x="21.25"
-       y="-88.75"
-       transform="rotate(90)" />
-    <path
-       sodipodi:type="star"
-       style="fill:#d5d5d5;stroke:none;stroke-width:0.483557;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-       id="path896"
-       sodipodi:sides="3"
-       sodipodi:cx="30"
-       sodipodi:cy="21.25"
-       sodipodi:r1="2.5"
-       sodipodi:r2="1.25"
-       sodipodi:arg1="0"
-       sodipodi:arg2="1.0471976"
-       inkscape:flatsided="false"
-       inkscape:rounded="0"
-       inkscape:randomized="0"
-       d="m 32.5,21.25 -1.875,1.082532 -1.875,1.082532 V 21.25 19.084936 l 1.875,1.082532 z"
-       transform="matrix(0,1.3333333,-1.1547,0,112.03737,-10.833333)"
-       inkscape:transform-center-y="0.83333235"
-       inkscape:transform-center-x="5.8993898e-06" />
-    <rect
-       style="fill:#d5d5d5;stroke:none;stroke-width:0.6;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
        id="rect60"
-       width="6.25"
+       width="22.5"
        height="2.5"
-       x="63.75"
-       y="38.75" />
+       x="61.25"
+       y="67.5" />
     <path
        sodipodi:type="star"
        style="fill:#d5d5d5;stroke:none;stroke-width:0.483557;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
@@ -100,42 +74,16 @@
        inkscape:rounded="0"
        inkscape:randomized="0"
        d="m 32.5,21.25 -1.875,1.082532 -1.875,1.082532 V 21.25 19.084936 l 1.875,1.082532 z"
-       transform="matrix(1.3333333,0,0,1.1547,31.666668,15.462625)"
+       transform="matrix(1.3333333,0,0,1.1547,44.166668,44.212625)"
        inkscape:transform-center-y="5.9375e-06"
        inkscape:transform-center-x="-0.83333241" />
     <rect
        style="fill:#d5d5d5;stroke:none;stroke-width:0.6;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-       id="rect66"
-       width="6.25"
-       height="2.5"
-       x="47.5"
-       y="-88.75"
-       transform="rotate(90)" />
-    <path
-       sodipodi:type="star"
-       style="fill:#d5d5d5;stroke:none;stroke-width:0.483557;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-       id="path68"
-       sodipodi:sides="3"
-       sodipodi:cx="30"
-       sodipodi:cy="21.25"
-       sodipodi:r1="2.5"
-       sodipodi:r2="1.25"
-       sodipodi:arg1="0"
-       sodipodi:arg2="1.0471976"
-       inkscape:flatsided="false"
-       inkscape:rounded="0"
-       inkscape:randomized="0"
-       d="m 32.5,21.25 -1.875,1.082532 -1.875,1.082532 V 21.25 19.084936 l 1.875,1.082532 z"
-       transform="matrix(0,1.3333333,-1.1547,0,112.03737,15.416667)"
-       inkscape:transform-center-y="0.83333235"
-       inkscape:transform-center-x="5.8993898e-06" />
-    <rect
-       style="fill:#d5d5d5;stroke:none;stroke-width:0.6;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
        id="rect72"
-       width="6.25"
+       width="17.5"
        height="2.5"
-       x="100"
-       y="38.75" />
+       x="116.25"
+       y="67.5" />
     <path
        sodipodi:type="star"
        style="fill:#d5d5d5;stroke:none;stroke-width:0.483557;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
@@ -151,9 +99,50 @@
        inkscape:rounded="0"
        inkscape:randomized="0"
        d="m 32.5,21.25 -1.875,1.082532 -1.875,1.082532 V 21.25 19.084936 l 1.875,1.082532 z"
-       transform="matrix(1.3333333,0,0,1.1547,67.916668,15.462625)"
+       transform="matrix(1.3333333,0,0,1.1547,94.16667,44.212625)"
        inkscape:transform-center-y="5.9375e-06"
        inkscape:transform-center-x="-0.83333241" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 97.5,76.25 v 8.750001"
+       id="path61" />
+    <path
+       style="fill:#000000;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 96.66667,85.000002 97.5,87.5 98.33334,85.000002 Z"
+       id="path63" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 107.5,87.5 V 78.75"
+       id="path73" />
+    <path
+       style="fill:#000000;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 108.33333,78.749994 107.5,76.25 l -0.83335,2.499994 z"
+       id="path75" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 100,76.25 v 8.750001"
+       id="path83" />
+    <path
+       style="fill:#000000;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 99.16667,85.000002 100,87.5 l 0.83334,-2.499998 z"
+       id="path85" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 61.25,47.5 H 102.5 V 58.750001"
+       id="path93"
+       sodipodi:nodetypes="ccc" />
+    <path
+       style="fill:#000000;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 101.66666,58.750002 102.5,61.25 l 0.83334,-2.499998 z"
+       id="path95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 36.25,28.75 v 8.750001"
+       id="path109" />
+    <path
+       style="fill:#000000;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 35.416665,37.500002 36.249995,40 l 0.83334,-2.499998 z"
+       id="path111" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -161,39 +150,46 @@
      inkscape:label="Blocks">
     <rect
        style="fill:#91abff;stroke:none;stroke-width:0.6;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-       id="rect886"
-       width="25"
-       height="15"
-       x="75"
-       y="6.25" />
-    <rect
-       style="fill:#91abff;stroke:none;stroke-width:0.6;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-       id="rect58"
-       width="25"
-       height="15"
-       x="75"
-       y="32.5" />
-    <rect
-       style="fill:#91abff;stroke:none;stroke-width:0.6;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
        id="rect64"
-       width="25"
+       width="50"
        height="15"
-       x="38.75"
-       y="32.5" />
+       x="11.25"
+       y="61.25" />
     <rect
        style="fill:#91abff;stroke:none;stroke-width:0.6;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
        id="rect70"
        width="25"
        height="15"
-       x="75"
-       y="58.75" />
+       x="90"
+       y="87.5" />
     <rect
        style="fill:#91abff;stroke:none;stroke-width:0.6;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
        id="rect76"
        width="25"
        height="15"
-       x="111.25"
-       y="32.5" />
+       x="137.5"
+       y="61.25" />
+    <rect
+       style="fill:#91abff;stroke:none;stroke-width:0.6;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+       id="rect43"
+       width="28.75"
+       height="15"
+       x="87.5"
+       y="61.25" />
+    <rect
+       style="fill:#91abff;stroke:none;stroke-width:0.6;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+       id="rect87"
+       width="50"
+       height="15"
+       x="11.25"
+       y="40" />
+    <rect
+       style="fill:#91abff;stroke:none;stroke-width:0.6;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+       id="rect103"
+       width="50"
+       height="15"
+       x="11.25"
+       y="13.75" />
   </g>
   <g
      inkscape:label="Text"
@@ -202,111 +198,158 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;word-spacing:0px;text-anchor:middle;stroke-width:0.264582"
-       x="51.231396"
-       y="41.135845"
+       x="36.031395"
+       y="69.885849"
        id="text839"><tspan
          sodipodi:role="line"
          id="tspan837"
-         x="51.231396"
-         y="41.135845"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.23333px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;stroke-width:0.264582">Keyboard</tspan></text>
+         x="36.031395"
+         y="69.885849"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.23333px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;stroke-width:0.264582">keyboardTimerCallback</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.52778px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo weight=250';text-align:center;word-spacing:0px;text-anchor:middle;stroke-width:0.264582"
-       x="69.347443"
-       y="36.155144"
+       x="74.255768"
+       y="64.905144"
        id="text847"><tspan
          sodipodi:role="line"
          id="tspan845"
-         x="69.347443"
-         y="36.155144"
-         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.52778px;font-family:Heebo;-inkscape-font-specification:'Heebo weight=250';text-align:center;text-anchor:middle;stroke-width:0.264582">queue</tspan></text>
+         x="74.255768"
+         y="64.905144"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.52778px;font-family:Heebo;-inkscape-font-specification:'Heebo weight=250';text-align:center;text-anchor:middle;stroke-width:0.264582">keyboardQueue</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;word-spacing:0px;text-anchor:middle;stroke-width:0.264582"
-       x="87.401817"
-       y="38.439373"
-       id="text856"><tspan
-         sodipodi:role="line"
-         id="tspan854"
-         x="87.401817"
-         y="38.439373"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.23333px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;stroke-width:0.264582">State</tspan><tspan
-         sodipodi:role="line"
-         x="87.401817"
-         y="43.731037"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.23333px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;stroke-width:0.264582"
-         id="tspan40">manager</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;word-spacing:0px;text-anchor:middle;stroke-width:0.264582"
-       x="87.361504"
-       y="67.385849"
+       x="102.3615"
+       y="96.135849"
        id="text862"><tspan
          sodipodi:role="line"
          id="tspan860"
-         x="87.361504"
-         y="67.385849"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.23333px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;stroke-width:0.264582">Display</tspan></text>
+         x="102.3615"
+         y="96.135849"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.23333px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;stroke-width:0.264582">display</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.52778px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo weight=250';text-align:center;word-spacing:0px;text-anchor:middle;stroke-width:0.264582"
-       x="95.21125"
-       y="53.715836"
-       id="text870"><tspan
-         sodipodi:role="line"
-         id="tspan868"
-         x="95.21125"
-         y="53.715836"
-         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.52778px;font-family:Heebo;-inkscape-font-specification:'Heebo weight=250';text-align:center;text-anchor:middle;stroke-width:0.264582">queue</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.52778px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo weight=250';text-align:center;word-spacing:0px;text-anchor:middle;stroke-width:0.264582"
-       x="105.59743"
-       y="36.20047"
+       x="127.1391"
+       y="64.95047"
        id="text878"><tspan
          sodipodi:role="line"
          id="tspan876"
-         x="105.59743"
-         y="36.20047"
-         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.52778px;font-family:Heebo;-inkscape-font-specification:'Heebo weight=250';text-align:center;text-anchor:middle;stroke-width:0.264582">queue</tspan></text>
+         x="127.1391"
+         y="64.95047"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.52778px;font-family:Heebo;-inkscape-font-specification:'Heebo weight=250';text-align:center;text-anchor:middle;stroke-width:0.264582">lightQueue</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;word-spacing:0px;text-anchor:middle;stroke-width:0.264582"
-       x="123.65285"
-       y="41.147217"
+       x="149.90285"
+       y="69.897217"
        id="text884"><tspan
          sodipodi:role="line"
          id="tspan882"
-         x="123.65285"
-         y="41.147217"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.23333px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;stroke-width:0.264582">Light</tspan></text>
+         x="149.90285"
+         y="69.897217"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.23333px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;stroke-width:0.264582">taskLight</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;word-spacing:0px;text-anchor:middle;stroke-width:0.264582"
-       x="87.458656"
-       y="12.608985"
-       id="text890"><tspan
+       x="101.98869"
+       y="69.885849"
+       id="text47"><tspan
          sodipodi:role="line"
-         id="tspan888"
-         x="87.458656"
-         y="12.608985"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.23333px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;stroke-width:0.264582">OneSec</tspan><tspan
-         sodipodi:role="line"
-         x="87.458656"
-         y="17.900646"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.23333px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;stroke-width:0.264582"
-         id="tspan892">Timer</tspan></text>
+         id="tspan45"
+         x="101.98869"
+         y="69.885849"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.23333px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;stroke-width:0.264582">taskScreen</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.52778px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo weight=250';text-align:center;word-spacing:0px;text-anchor:middle;stroke-width:0.264582"
-       x="95.21125"
-       y="27.465834"
-       id="text900"><tspan
+       x="148.30579"
+       y="91.408813"
+       id="text51"><tspan
          sodipodi:role="line"
-         id="tspan898"
-         x="95.21125"
-         y="27.465834"
-         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.52778px;font-family:Heebo;-inkscape-font-specification:'Heebo weight=250';text-align:center;text-anchor:middle;stroke-width:0.264582">queue</tspan></text>
+         x="148.30579"
+         y="91.408813"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.52778px;font-family:Heebo;-inkscape-font-specification:'Heebo weight=250';text-align:center;text-anchor:middle;stroke-width:0.264582"
+         id="tspan53">Freenove_ESP32_WS2812 strip</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 150,76.25 v 8.750001"
+       id="path57" />
+    <path
+       style="fill:#000000;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 149.16667,85.000002 150,87.5 l 0.83334,-2.499998 z"
+       id="path59" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.52778px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo weight=250';text-align:end;word-spacing:0px;text-anchor:end;stroke-width:0.264582"
+       x="96.206032"
+       y="79.720032"
+       id="text71"><tspan
+         sodipodi:role="line"
+         id="tspan69"
+         x="96.206032"
+         y="79.720032"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.52778px;font-family:Heebo;-inkscape-font-specification:'Heebo weight=250';text-align:end;text-anchor:end;stroke-width:0.264582">nextButton</tspan><tspan
+         sodipodi:role="line"
+         x="96.206032"
+         y="84.129753"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.52778px;font-family:Heebo;-inkscape-font-specification:'Heebo weight=250';text-align:end;text-anchor:end;stroke-width:0.264582"
+         id="tspan81">selectButton</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.52778px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo weight=250';text-align:start;word-spacing:0px;text-anchor:start;stroke-width:0.264582"
+       x="108.62132"
+       y="82.36586"
+       id="text79"><tspan
+         sodipodi:role="line"
+         id="tspan77"
+         x="108.62132"
+         y="82.36586"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.52778px;font-family:Heebo;-inkscape-font-specification:'Heebo weight=250';text-align:start;text-anchor:start;stroke-width:0.264582">command</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;word-spacing:0px;text-anchor:middle;stroke-width:0.264582"
+       x="36.031395"
+       y="48.635845"
+       id="text91"><tspan
+         sodipodi:role="line"
+         id="tspan89"
+         x="36.031395"
+         y="48.635845"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.23333px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;stroke-width:0.264582">taskWeather</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.52778px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo weight=250';text-align:center;word-spacing:0px;text-anchor:middle;stroke-width:0.264582"
+       x="66.31826"
+       y="45.855148"
+       id="text101"><tspan
+         sodipodi:role="line"
+         id="tspan99"
+         x="66.31826"
+         y="45.855148"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.52778px;font-family:Heebo;-inkscape-font-specification:'Heebo weight=250';text-align:center;text-anchor:middle;stroke-width:0.264582">data</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;word-spacing:0px;text-anchor:middle;stroke-width:0.264582"
+       x="36.031395"
+       y="22.385845"
+       id="text107"><tspan
+         sodipodi:role="line"
+         id="tspan105"
+         x="36.031395"
+         y="22.385845"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.23333px;font-family:Heebo;-inkscape-font-specification:'Heebo Medium';text-align:center;text-anchor:middle;stroke-width:0.264582">timerWeatherCallback</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.52778px;line-height:1.25;font-family:Heebo;-inkscape-font-specification:'Heebo weight=250';text-align:start;word-spacing:0px;text-anchor:start;stroke-width:0.264582"
+       x="37.370319"
+       y="34.853943"
+       id="text115"><tspan
+         sodipodi:role="line"
+         id="tspan113"
+         x="37.370319"
+         y="34.853943"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:3.52778px;font-family:Heebo;-inkscape-font-specification:'Heebo weight=250';text-align:start;text-anchor:start;stroke-width:0.264582">data.requestWeather</tspan></text>
   </g>
 </svg>
