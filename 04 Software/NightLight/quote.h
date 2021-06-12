@@ -15,7 +15,7 @@ void taskQuote(void * parameter );
 
 void setupQuote() {
 
-  requestQuote=true;
+  data.requestQuote=true;
 
   xTaskCreatePinnedToCore(
     taskQuote,              // The function containing the task
@@ -44,7 +44,7 @@ static void timerQuoteCallback( TimerHandle_t xTimer ) {
    *  the weatherQueue
    */
    
-  requestQuote=true;
+  data.requestQuote=true;
   Serial.println("New quote requested");
 }
 
@@ -52,7 +52,7 @@ void taskQuote(void * parameter ) {
 
   while(true) {
 
-    if(requestQuote & data.connected) {        
+    if(data.requestQuote & data.connected) {        
       HTTPClient http;
       
       http.begin(F("https://api.adviceslip.com/advice"));
@@ -74,6 +74,7 @@ void taskQuote(void * parameter ) {
           //int slip_id = doc["slip"]["id"]; // 19
           string quote = doc["slip"]["advice"]; // "If you cannot unscrew the lid of a jar, try placing ...
 
+          portENTER_CRITICAL(&dataAccessMux);
           data.quote1=quote;
           data.quote2="";
           uint8_t lengthDiff=data.quote1.length();
@@ -100,14 +101,13 @@ void taskQuote(void * parameter ) {
             } // whitespace
 
           } // for i
-          Serial.println(data.quote1);
-          Serial.println(data.quote2);
+          Serial.println(data.quote1.c_str());
+          Serial.println(data.quote2.c_str());
           
           data.quoteAvailable=dqRefreshed;
-          requestQuote=false;
-
-          Serial.println(quote.c_str());
+          data.requestQuote=false;
           data.quoteAlive++;
+          portEXIT_CRITICAL(&dataAccessMux);
         }
       }
     } // requestQuote

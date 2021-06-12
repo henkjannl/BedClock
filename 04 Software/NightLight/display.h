@@ -223,13 +223,13 @@ void tDisplay::display(U8G2 &u8g2) {
   }
 
   if(data.quoteAvailable==dqRefreshed) {
-    uint8_t w1=lblQuote1.getWidth(u8g2, data.quote1);
-    if(w1>128) requestQuote=true;
+    uint16_t w1=lblQuote1.getWidth(u8g2, data.quote1);
+    if(w1>128) data.requestQuote=true;
 
-    uint8_t w2=lblQuote2.getWidth(u8g2, data.quote2);
-    if(w2>128) requestQuote=true;
+    uint16_t w2=lblQuote2.getWidth(u8g2, data.quote2);
+    if(w2>128) data.requestQuote=true;
 
-    if(!requestQuote) {
+    if(!data.requestQuote) {
       lblQuote1.setText(u8g2, data.quote1);
       lblQuote1.moveX(128+60-0.5*w1);
       lblQuote2.setText(u8g2, data.quote2);

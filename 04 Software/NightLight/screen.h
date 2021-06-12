@@ -77,7 +77,8 @@ void taskScreen(void * parameter ) {
   tMenuItem command;
 
   static bool autoScreenContrast = true;
-
+  triggerScreenContrastAdjustment = true;
+  
   // Send default settings to light task
   command=brightness25; xQueueSendToBack(lightQueue, &command, 0 );    
   command=colorWhite;   xQueueSendToBack(lightQueue, &command, 0 );    
@@ -196,7 +197,7 @@ void taskScreen(void * parameter ) {
     data.screenAlive++;
     data.screenRedrawMillis=redrawReady-redrawBegin;
     
-    vTaskDelay(100);
+    vTaskDelay(50);
   }; // while true
 }; // taskscreen
 

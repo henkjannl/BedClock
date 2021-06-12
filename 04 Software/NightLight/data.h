@@ -67,6 +67,7 @@ class tData {
     time_t sunset;
 
     // Quote
+    bool requestQuote;
     tDataQuality quoteAvailable;
     string quote1;
     string quote2;
@@ -96,6 +97,7 @@ class tData {
       weatherAvailable=dqUnavailable;
 
       quoteAvailable=dqUnavailable;
+      requestQuote=false;
 
       lightAlive=0;
       screenAlive=0;
@@ -154,8 +156,6 @@ class tConfig {
 // ======== GLOBAL VARIABLES ============= 
 tConfig config; // Configuration data, to be stored as JSON file in SPIFFS
 tData data;
-
-bool requestQuote;
 
 portMUX_TYPE dataAccessMux = portMUX_INITIALIZER_UNLOCKED;
 
