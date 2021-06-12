@@ -86,8 +86,8 @@ void taskWeather(void * parameter ) {
         
         JsonObject current = doc["current"];
         //long current_dt = current["dt"]; // 1617992165
-        //long current_sunrise = current["sunrise"]; // 1617943698
-        //long current_sunset = current["sunset"]; // 1617992353
+        data.sunrise = current["sunrise"]; // 1617943698
+        data.sunset  = current["sunset"]; // 1617992353
         data.outsideTemp = current["temp"]; // 282.57
         data.outsideTemp-=273.15;
         //int current_feels_like = current["feels_like"]; // 281
@@ -126,6 +126,9 @@ void taskWeather(void * parameter ) {
         data.weatherAlive++;
         data.requestWeather=false;
         portEXIT_CRITICAL(&dataAccessMux);
+
+        // Trigger screen contrast adjustment
+        triggerScreenContrastAdjustment=true;
         
        } // httpCode == HTTP_CODE_OK
       } // httpCode > 0

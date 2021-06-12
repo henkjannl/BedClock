@@ -32,6 +32,7 @@ class tDisplay {
     tButton btnBrightness;  
     tButton btnColor;
     tButton btnTimer;
+    tButton btnScreenContrast;
     tButton btnBack;
   
     // Second row on brightness
@@ -60,16 +61,25 @@ class tDisplay {
     tButton btnTimerOff;
     tButton btnTimerBack;
 
+    // Second row on screen contrast
+    tGroup  rowScreenContrast;
+    tButton btnScreenContrastAuto;
+    tButton btnScreenContrast10;
+    tButton btnScreenContrast35;
+    tButton btnScreenContrast100;
+    tButton btnScreenContrastBack;
+
     // Sequencing the movements
     bool ready() { return grpMain.ready(); };
 
     // Current selection in the menu
     int8_t selectedRow;
-    tMenuItem mainScreen;      // Which main screen is selected
-    tMenuItem mainMenu;        // Which option in the first row is selected
-    tMenuItem brightnessMenu;  // Which option in the brightness row is selected
-    tMenuItem colorMenu;       // Which option in the color row is selected
-    tMenuItem timerMenu;       // Which option in the timer row is selected
+    tMenuItem mainScreen;         // Which main screen is selected
+    tMenuItem mainMenu;           // Which option in the first row is selected
+    tMenuItem brightnessMenu;     // Which option in the brightness row is selected
+    tMenuItem colorMenu;          // Which option in the color row is selected
+    tMenuItem timerMenu;          // Which option in the timer row is selected
+    tMenuItem screenContrastMenu; // Which option in the screen constrast row is selected
 
     // Input from buttons
     void nextButton();
@@ -101,6 +111,7 @@ tDisplay::tDisplay(U8G2 &u8g2) {
   brightnessMenu=brightness25;
   colorMenu=colorWhite;
   timerMenu=timer03;
+  screenContrastMenu=screenContrastAuto;
 
   // Main screen
   grpMain.addChild(grpMainScreen);
@@ -126,10 +137,11 @@ tDisplay::tDisplay(U8G2 &u8g2) {
   rowMain.setY(33);
   grpMain.addChild(rowMain);
                  
-  addToRow(u8g2, &rowMain, &btnBrightness, NULL,           "BRIGHTNESS", mainBrightness);
-  addToRow(u8g2, &rowMain, &btnColor,      &btnBrightness, "COLOR"     , mainColor     );
-  addToRow(u8g2, &rowMain, &btnTimer,      &btnColor,      "TIMER"     , mainTimer     );
-  addToRow(u8g2, &rowMain, &btnBack,       &btnTimer,      "BACK"      , mainBack      );
+  addToRow(u8g2, &rowMain, &btnBrightness,     NULL,               "BRIGHTNESS", mainBrightness    );
+  addToRow(u8g2, &rowMain, &btnColor,          &btnBrightness,     "COLOR",      mainColor         );
+  addToRow(u8g2, &rowMain, &btnTimer,          &btnColor,          "TIMER",      mainTimer         );
+  addToRow(u8g2, &rowMain, &btnScreenContrast, &btnTimer,          "SCREEN",     mainScreenContrast);
+  addToRow(u8g2, &rowMain, &btnBack,           &btnScreenContrast, "BACK",       mainBack          );
 
   // Row with brightness values  
   rowBrightness.setY(33);
@@ -162,6 +174,17 @@ tDisplay::tDisplay(U8G2 &u8g2) {
   addToRow(u8g2, &rowTimer, &btnTimer20,   &btnTimer10,  "20 min", timer20  );
   addToRow(u8g2, &rowTimer, &btnTimerOff,  &btnTimer20,  "OFF"   , timerOff );
   addToRow(u8g2, &rowTimer, &btnTimerBack, &btnTimerOff, "BACK"  , timerBack);
+
+  // Row with screen contrast
+  rowScreenContrast.setY(33);
+  grpMain.addChild(rowScreenContrast);
+
+  addToRow(u8g2, &rowScreenContrast, &btnScreenContrastAuto, NULL,                   "AUTO", screenContrastAuto);
+  addToRow(u8g2, &rowScreenContrast, &btnScreenContrast10,   &btnScreenContrastAuto, "10%",  screenContrast10  );
+  addToRow(u8g2, &rowScreenContrast, &btnScreenContrast35,   &btnScreenContrast10,   "35%",  screenContrast35  );
+  addToRow(u8g2, &rowScreenContrast, &btnScreenContrast100,  &btnScreenContrast35,   "100%", screenContrast100 );
+  addToRow(u8g2, &rowScreenContrast, &btnScreenContrastBack, &btnScreenContrast100,  "BACK", screenContrastBack);
+  
 }; // tDisplay::tDisplay
 
 void tDisplay::step() {
@@ -226,9 +249,10 @@ void tDisplay::showTopRow() {
   rowMain.moveY(row0y);
   grpMain.moveY(-rowMain.getHeight()-1);
 
-  rowBrightness.moveY(row2y);
-  rowColor     .moveY(row2y);
-  rowTimer     .moveY(row2y);
+  rowBrightness     .moveY(row2y);
+  rowColor         .moveY(row2y);
+  rowTimer         .moveY(row2y);
+  rowScreenContrast.moveY(row2y);
 }; // tDisplay::showTopRow
 
 void tDisplay::showSecondRow() {
@@ -240,9 +264,10 @@ void tDisplay::showSecondRow() {
 
   rowMain.moveY(row0y);
   
-  rowBrightness.moveY( (mainMenu==mainBrightness) ? row1y : row2y);
-  rowColor     .moveY( (mainMenu==mainColor     ) ? row1y : row2y);
-  rowTimer     .moveY( (mainMenu==mainTimer     ) ? row1y : row2y);
+  rowBrightness    .moveY( (mainMenu==mainBrightness    ) ? row1y : row2y);
+  rowColor         .moveY( (mainMenu==mainColor         ) ? row1y : row2y);
+  rowTimer         .moveY( (mainMenu==mainTimer         ) ? row1y : row2y);
+  rowScreenContrast.moveY( (mainMenu==mainScreenContrast) ? row1y : row2y);
   
   grpMain.moveY(-2*rowMain.getHeight());
 }; // tDisplay::showSecondRow
@@ -276,6 +301,7 @@ void tDisplay::selectNextItem(tGroup* row, tButton* btnCurrent, tButton* btnNew,
 void tDisplay::nextButton() {
   
   if(selectedRow<0) {
+    // No rows are displayed, just the main screen
     switch(mainScreen) {
       case mainFull:
         mainScreen=mainNight;
@@ -295,10 +321,14 @@ void tDisplay::nextButton() {
     }
   }
   else if(selectedRow==0) {
-    if     (mainMenu==mainBrightness) { selectNextItem(&rowMain, &btnBrightness, &btnColor,      &btnTimer); mainMenu=mainColor;      }
-    else if(mainMenu==mainColor     ) { selectNextItem(&rowMain, &btnColor,      &btnTimer,      &btnBack ); mainMenu=mainTimer;      }
-    else if(mainMenu==mainTimer     ) { selectNextItem(&rowMain, &btnTimer,      &btnBack,       NULL     ); mainMenu=mainBack;       }
-    else if(mainMenu==mainBack      ) { selectNextItem(&rowMain, &btnBack,       &btnBrightness, &btnColor); mainMenu=mainBrightness; };
+    // A single rows is displayed
+    //                                                     which     button to be        button to           button that must     selected item
+    //                                                     row       deselected          be selected         be fully displayed   in the top row
+    if     (mainMenu==mainBrightness    ) { selectNextItem(&rowMain, &btnBrightness,     &btnColor,          &btnTimer         ); mainMenu=mainColor;          }
+    else if(mainMenu==mainColor         ) { selectNextItem(&rowMain, &btnColor,          &btnTimer,          &btnScreenContrast); mainMenu=mainTimer;          }
+    else if(mainMenu==mainTimer         ) { selectNextItem(&rowMain, &btnTimer,          &btnScreenContrast, &btnBack          ); mainMenu=mainScreenContrast; }
+    else if(mainMenu==mainScreenContrast) { selectNextItem(&rowMain, &btnScreenContrast, &btnBack,           NULL              ); mainMenu=mainBack;           }
+    else if(mainMenu==mainBack          ) { selectNextItem(&rowMain, &btnBack,           &btnBrightness,     &btnColor         ); mainMenu=mainBrightness;     };
     showTopRow();
   } // selectedRow==0
   else { // selectedRow>0
@@ -327,6 +357,14 @@ void tDisplay::nextButton() {
         else if (timerMenu==timer20  ) { selectNextItem(&rowTimer, &btnTimer20  , &btnTimerOff,  &btnTimerBack); timerMenu=timerOff;  }
         else if (timerMenu==timerOff ) { selectNextItem(&rowTimer, &btnTimerOff , &btnTimerBack, NULL);          timerMenu=timerBack; }
         else if (timerMenu==timerBack) { selectNextItem(&rowTimer, &btnTimerBack, &btnTimer03,   &btnTimer03);   timerMenu=timer03;   };
+        break;
+
+      case mainScreenContrast:
+        if      (screenContrastMenu==screenContrastAuto) { selectNextItem(&rowScreenContrast, &btnScreenContrastAuto, &btnScreenContrast10,   &btnScreenContrast35  ); screenContrastMenu=screenContrast10;   }
+        else if (screenContrastMenu==screenContrast10  ) { selectNextItem(&rowScreenContrast, &btnScreenContrast10,   &btnScreenContrast35,   &btnScreenContrast100 ); screenContrastMenu=screenContrast35;   }
+        else if (screenContrastMenu==screenContrast35  ) { selectNextItem(&rowScreenContrast, &btnScreenContrast35,   &btnScreenContrast100,  &btnScreenContrastBack); screenContrastMenu=screenContrast100;  }
+        else if (screenContrastMenu==screenContrast100 ) { selectNextItem(&rowScreenContrast, &btnScreenContrast100,  &btnScreenContrastBack, NULL                  ); screenContrastMenu=screenContrastBack; }
+        else if (screenContrastMenu==screenContrastBack) { selectNextItem(&rowScreenContrast, &btnScreenContrastBack, &btnScreenContrastAuto, &btnScreenContrastAuto); screenContrastMenu=screenContrastAuto; }
         break;
 
     } // switch mainMenu
@@ -389,7 +427,19 @@ tMenuItem tDisplay::selectButton() {
           return timerMenu;
         }
         break;
-    }; // switch case  
+
+      case mainScreenContrast:
+        if(screenContrastMenu==screenContrastBack) {
+          showTopRow();
+          return mainMenu;
+        }
+        else {
+          showTopRow();
+          return screenContrastMenu;
+        }
+        break;
+        
+      }; // switch case  
   }; // selectedRow>0
 }; // tDisplay::selectButton
 

@@ -19,10 +19,19 @@ const char *CONFIG_FILE = "/config.jsn";
 // All commands displayed on screen and sent to light
 enum tMenuItem { mainScreen, mainFull, mainNight, mainEmpty, 
                  mainPowerOn, mainTogglePower, mainTimerExpired, 
-                 mainBrightness, mainColor, mainTimer, mainBack,
+                 mainBrightness, mainColor, mainTimer, mainScreenContrast, mainBack,
                  brightness25, brightness35, brightness50, brightness70, brightness100, brightnessBack,
                  colorWhite, colorYellow, colorOrange, colorRed, colorBack,
-                 timer03, timer05, timer10, timer20, timerOff, timerBack };
+                 timer03, timer05, timer10, timer20, timerOff, timerBack, 
+                 screenContrastAuto, screenContrast10, screenContrast35, screenContrast100, screenContrastBack };
+
+char *menuItem[] = { "mainScreen", "mainFull", "mainNight", "mainEmpty", 
+                     "mainPowerOn", "mainTogglePower", "mainTimerExpired", 
+                     "mainBrightness", "mainColor", "mainTimer", "mainScreenContrast", "mainBack",
+                     "brightness25", "brightness35", "brightness50", "brightness70", "brightness100", "brightnessBack",
+                     "colorWhite", "colorYellow", "colorOrange", "colorRed", "colorBack",
+                     "timer03", "timer05", "timer10", "timer20", "timerOff", "timerBack", 
+                     "screenContrastAuto", "screenContrast10", "screenContrast35", "screenContrast100", "screenContrastBack" };
 
 enum tButtonClick { btnNext, btnSelect, btnPower, keyboardTimeout };
 
@@ -32,7 +41,6 @@ struct tPrecipitation {
   long t;
   float prec;
 };
-
 
 class tData {
   public:
@@ -53,6 +61,10 @@ class tData {
     float outsideTemp;
     list<tPrecipitation> precipitation;
     char weatherIcon[12];
+    // Todo: deal with time to adjust screen contrast
+    //https://en.cppreference.com/w/cpp/chrono/c/time
+    time_t sunrise;
+    time_t sunset;
   
     // System info
     UBaseType_t lightHighWaterMark;   // Unused stack for the measurement thread

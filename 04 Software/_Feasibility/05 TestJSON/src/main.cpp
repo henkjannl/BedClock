@@ -166,8 +166,8 @@ class WeatherAPI {
     }
 };
 
-const char* ssid = "MacDonalds";
-const char* password = "#LeukeFeitjesMetEliza";
+const char* ssid = "********";
+const char* password = "********";
 
 WiFiUDP ntpUDP;                                 //initialise UDP NTP
 NTPClient ntpClient(ntpUDP, "time.google.com"); // initialist NTP client with server name 
