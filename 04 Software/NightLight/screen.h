@@ -116,6 +116,7 @@ void taskScreen(void * parameter ) {
         
         if(command==screenContrastAuto) {
             autoScreenContrast = true;
+            triggerScreenContrastAdjustment = true;
             Serial.println("Auto screen brightness selected");
         }
         else if(command==screenContrast10) {
@@ -148,12 +149,15 @@ void taskScreen(void * parameter ) {
         Serial.println("Sunrise and sunset are not yet available");
         setScreenBrightness(  1, 0,  0, 0); // least bright   */
       }
+      else if(!data.syncTime) {
+        Serial.println("Time not yet synched");
+        setScreenBrightness(  1, 0,  0, 0); // least bright   */
+      }
       else {        
         time_t currentTime;
         time(&currentTime);
         
         struct tm * timeinfo;
-        
         timeinfo = localtime(&data.sunrise);  Serial.printf("Sunrise: %s",      asctime(timeinfo));
         timeinfo = localtime(&currentTime);   Serial.printf("Current time: %s", asctime(timeinfo));
         timeinfo = localtime(&data.sunset);   Serial.printf("Sunset: %s",       asctime(timeinfo));

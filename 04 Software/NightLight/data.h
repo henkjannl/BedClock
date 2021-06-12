@@ -65,16 +65,24 @@ class tData {
     //https://en.cppreference.com/w/cpp/chrono/c/time
     time_t sunrise;
     time_t sunset;
+
+    // Quote
+    tDataQuality quoteAvailable;
+    string quote1;
+    string quote2;
   
     // System info
     UBaseType_t lightHighWaterMark;   // Unused stack for the measurement thread
     UBaseType_t screenHighWaterMark;  // Unused stack for the display thread
     UBaseType_t weatherHighWaterMark; // Unused stack for the weather thread
+    UBaseType_t quoteHighWaterMark; // Unused stack for the weather thread
     
     uint32_t lightAlive;
     uint32_t screenAlive;
     uint32_t keyboardAlive;
     uint32_t weatherAlive;
+    uint32_t quoteAlive;
+
     uint32_t screenRedrawMillis;
     
     tData() {
@@ -86,6 +94,8 @@ class tData {
       lon=6.78546;
 
       weatherAvailable=dqUnavailable;
+
+      quoteAvailable=dqUnavailable;
 
       lightAlive=0;
       screenAlive=0;
@@ -144,6 +154,9 @@ class tConfig {
 // ======== GLOBAL VARIABLES ============= 
 tConfig config; // Configuration data, to be stored as JSON file in SPIFFS
 tData data;
+
+bool requestQuote;
+
 portMUX_TYPE dataAccessMux = portMUX_INITIALIZER_UNLOCKED;
 
 QueueHandle_t keyboardQueue;

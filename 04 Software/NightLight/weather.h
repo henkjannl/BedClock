@@ -123,8 +123,8 @@ void taskWeather(void * parameter ) {
     
         data.weatherAvailable=dqRefreshed;
         Serial.printf("Outside temperature %.1f C\n", data.outsideTemp);
-        data.weatherAlive++;
         data.requestWeather=false;
+        data.weatherAlive++;
         portEXIT_CRITICAL(&dataAccessMux);
 
         // Trigger screen contrast adjustment

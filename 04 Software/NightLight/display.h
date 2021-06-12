@@ -23,6 +23,8 @@ class tDisplay {
 
     // Second section of main screen
     tLabel  lblTimeThin; 
+    tLabel  lblQuote1; 
+    tLabel  lblQuote2; 
 
     // Third section of main screen is empty
     // ..
@@ -130,9 +132,24 @@ tDisplay::tDisplay(U8G2 &u8g2) {
   lblTimeThin.setText(u8g2, "--:--");
   uint8_t  w = lblTimeThin.getWidth(u8g2, "--:--");
   lblTimeThin.setX(128+60-0.5*w);
-  lblTimeThin.setY(7);
+  lblTimeThin.setY(0);
 
-  
+  grpMainScreen.addChild(lblQuote1);
+  //lblQuote1.setFont(u8g2_font_tom_thumb_4x6_tf);
+  lblQuote1.setFont(u8g2_font_t0_11_te);
+  lblQuote1.setText(u8g2, ".");
+  w = lblQuote1.getWidth(u8g2, ".");
+  lblQuote1.setX(128+60-0.5*w);
+  lblQuote1.setY(12);
+
+  grpMainScreen.addChild(lblQuote2);
+  //lblQuote2.setFont(u8g2_font_tom_thumb_4x6_tf);
+  lblQuote2.setFont(u8g2_font_t0_11_te);
+  lblQuote2.setText(u8g2, ".");
+  w = lblQuote2.getWidth(u8g2, ".");
+  lblQuote2.setX(128+60-0.5*w);
+  lblQuote2.setY(22);
+
   // Main row
   rowMain.setY(33);
   grpMain.addChild(rowMain);
@@ -204,6 +221,23 @@ void tDisplay::display(U8G2 &u8g2) {
     w=lblTimeThin.getWidth(u8g2, currentTime);
     lblTimeThin.moveX(128+60-0.5*w);
   }
+
+  if(data.quoteAvailable==dqRefreshed) {
+    uint8_t w1=lblQuote1.getWidth(u8g2, data.quote1);
+    if(w1>128) requestQuote=true;
+
+    uint8_t w2=lblQuote2.getWidth(u8g2, data.quote2);
+    if(w2>128) requestQuote=true;
+
+    if(!requestQuote) {
+      lblQuote1.setText(u8g2, data.quote1);
+      lblQuote1.moveX(128+60-0.5*w1);
+      lblQuote2.setText(u8g2, data.quote2);
+      lblQuote2.moveX(128+60-0.5*w2);
+    } // !requestQuote
+
+    data.quoteAvailable==dqDisplayed;
+  } // data.quoteAvailable==dqRefreshed
 
   if(data.weatherAvailable==dqRefreshed) {
     snprintf (outsideTemp, sizeof(outsideTemp), "%0.1fC", data.outsideTemp);

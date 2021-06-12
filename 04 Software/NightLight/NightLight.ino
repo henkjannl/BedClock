@@ -23,6 +23,7 @@
 #include "light.h"
 #include "screen.h"
 #include "weather.h"
+#include "quote.h"
 
 using namespace std;
 
@@ -42,7 +43,9 @@ void setup(void) {
   config.load();
 
   connectToWiFi();
+  delay(250);
   syncTime();
+  delay(300);
   
   setupKeyboard();
   Serial.println("Keyboard setup finished");  
@@ -55,6 +58,10 @@ void setup(void) {
 
   setupWeather();
   Serial.println("Weather setup finished");  
+
+  setupQuote();
+  Serial.println("Quote setup finished");  
+
 
 } // setup
 
@@ -78,6 +85,10 @@ void loop(void) {
      data.keyboardAlive,
      data.weatherAlive,
      data.weatherHighWaterMark);
+
+  Serial.printf("      Quote: %d updates %d bytes\n", 
+     data.quoteAlive,
+     data.quoteHighWaterMark);
 
   Serial.println();
 

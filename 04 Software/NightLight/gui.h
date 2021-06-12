@@ -79,6 +79,7 @@ class tLabel: public tAbstractScreenElement {
     uint8_t getFont() { return *_font; };
     void setText(U8G2 &u8g2, string text);
     uint8_t getWidth(U8G2 &u8g2, const char *s) { u8g2.setFont(_font); return u8g2.getStrWidth(s); };
+    uint8_t getWidth(U8G2 &u8g2, string s) { u8g2.setFont(_font); return u8g2.getStrWidth(s.c_str()); };
     
   protected:
     void internalDraw(U8G2 &u8g2);
