@@ -4,7 +4,6 @@
 #include "data.h"
 #include "display.h"
 
-#include <U8g2lib.h>
 #include <Wire.h>
 #include <math.h>       
 
@@ -12,12 +11,10 @@ using namespace std;
 
 
 // ======== GLOBAL CONSTANTS ============= 
-# define PI 3.141592653589793238462643383279502884L /* pi */
+# define PI 3.141592653589793238462643383279502884L // daylight calculation for screen contrast
 
 // ======== GLOBAL VARIABLES ============= 
-U8G2_SSD1306_128X32_UNIVISION_F_SW_I2C u8g2(U8G2_R2, 22, 21, U8X8_PIN_NONE);  
 tDisplay display(u8g2);
-
 TimerHandle_t timerScreenContrast; // Adjust the screen contrast periodically
 bool triggerScreenContrastAdjustment;
 
@@ -26,11 +23,6 @@ static void timerScreenContrastCallback( TimerHandle_t xTimer );
 void taskScreen(void * parameter );
 
 void setupScreen() {
-
-  // Initialize display
-  u8g2.initDisplay();
-  delay(500);
-  u8g2.begin();
   
   xTaskCreatePinnedToCore(
     taskScreen,             // The function containing the task

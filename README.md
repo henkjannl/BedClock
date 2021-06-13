@@ -30,8 +30,9 @@ This file is not provided in the github repository. Instead, a template file con
 
 The device connects to a WiFi access point and synchronises time with a time server. Multiple access points can be entered, the device connect to any available access point of which the data are known.
 
-For each access point, the GPS coordinates are given, so depending on the access point, the location is known. With this location, the time zone, correction for daylight saving time and local weather report can be retrieved.
+For each access point, the timezone and the GPS coordinates are given, so depending on the access point, the location is known. With this location, the time, correction for daylight saving time and local weather report can be retrieved.
 
+The offset for the timezone and the offset for daylight saving time are retrieved from 
 Weather is retrieved from api.openweathermap.org. For this service, an API-key must be provided. The API key is free after registration. From this server, the following data is retrieved:
 * name of the timezone
 * time correction of the timezone (including daylight saving time)
@@ -39,17 +40,28 @@ Weather is retrieved from api.openweathermap.org. For this service, an API-key m
 * expected precipitation per minute, for the next hour
 * sunrise and sunset (used to automatically correct OLED screen brightness)
 
-
-
-
-
-In order to connect to the internet, access point and password of the router need to be provided. 
+Quotes (or rather: random pieces of advice) are retrieved from api.adviceslip.com. It may be more interesting to retrieve quotes, but these are typically too long to fit the small screen.
 
 
 ## Configuration
 
+The JSON file 
 
-The file 
+...\BedClock\04 Software\NightLight\data\config.jsn
+
+Has the following content:
+
+{
+    "AccessPoints": [
+        { "SSID": "ssid1", "password": "pwd1", "timezone" : "Europe/Amsterdam", "lat": x.xxx, "lon": y.yyy },
+        { "SSID": "ssid2", "password": "pwd1", "timezone" : "Europe/Amsterdam", "lat": x.xxx, "lon": y.yyy },
+        { "SSID": "ssid3", "password": "pwd1", "timezone" : "Europe/Amsterdam", "lat": x.xxx, "lon": y.yyy } ],
+    "openweathermapAPIkey": "abcdefghijklmnopqrst"
+}
+
+
+
+
 
 ..\BedClock\04 Software\NightLight\data\config.jsn
 

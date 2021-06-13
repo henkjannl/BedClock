@@ -16,8 +16,6 @@ void getQuote();
 
 void setupQuote() {
 
-  data.requestQuote=true;
-
   xTaskCreatePinnedToCore(
     taskQuote,              // The function containing the task
     "taskQuote",            // Name for mortals
@@ -53,7 +51,13 @@ void taskQuote(void * parameter ) {
 
   while(true) {
 
-    if(data.requestQuote & data.connected) getQuote();
+    if(data.requestQuote & data.connected) {
+      portENTER_CRITICAL(&connectionMux);
+      portENTER_CRITICAL(&dataAccessMux);
+      getQuote();
+      portEXIT_CRITICAL(&connectionMux);
+      portEXIT_CRITICAL(&dataAccessMux);
+    }
 
     data.quoteHighWaterMark= uxTaskGetStackHighWaterMark(NULL);
     vTaskDelay(1000);
@@ -63,11 +67,16 @@ void taskQuote(void * parameter ) {
 
 void getQuote() {
   
-  portENTER_CRITICAL(&connectionMux);
   HTTPClient http;
-  http.begin(F("http://api.adviceslip.com/advice"));
+  string url = "http://api.adviceslip.com/advice";
+  Serial.printf("Sending request to %s\n", url.c_str());
+  Serial.printf("xPortGetFreeHeapSize = %d Heap valid: %s\n", xPortGetFreeHeapSize(), heap_caps_check_integrity_all(false) ? "Y" : "N");
+
+  http.begin(url.c_str());
+  Serial.printf("http begin url done\n");
+  
   int httpCode = http.GET();
-  portEXIT_CRITICAL(&connectionMux);
+  Serial.printf("http get done\n");
   
   if(httpCode > 0) {    
     if(httpCode == HTTP_CODE_OK) {
@@ -81,14 +90,12 @@ void getQuote() {
         return;
       }
       
-      portENTER_CRITICAL(&dataAccessMux);
-      //int slip_id = doc["slip"]["id"]; // 19
+      //int slip_id = doc["slip"]["id"]; // 143
       data.quote = doc["slip"]["advice"].as<string>(); // "If you cannot unscrew the lid of a jar, try placing ...
       data.quoteAvailable=dqRefreshed;
       data.requestQuote=false;
       data.quoteAlive++;
       Serial.println(data.quote.c_str());
-      portEXIT_CRITICAL(&dataAccessMux);
     } // httpCode == HTTP_CODE_OK
   } // httpCode > 0
 } //

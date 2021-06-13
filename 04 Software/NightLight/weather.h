@@ -52,7 +52,11 @@ void taskWeather(void * parameter ) {
       Serial.println("Retrieving the weather"); 
       
       if(data.connected) {
+        portENTER_CRITICAL(&connectionMux);
+        portENTER_CRITICAL(&dataAccessMux);
         getWeather();
+        portEXIT_CRITICAL(&dataAccessMux);
+        portEXIT_CRITICAL(&connectionMux);
       }
       else {
         Serial.println("No data connection"); 
@@ -68,17 +72,14 @@ void taskWeather(void * parameter ) {
 
 void getWeather() {
   
-  portENTER_CRITICAL(&connectionMux);
-
   HTTPClient http;
   char buff[250];    
   snprintf(buff, sizeof(buff), "http://api.openweathermap.org/data/2.5/onecall?lat=%.8f&lon=%.8f&exclude=hourly,daily,alerts&appid=%s", 
-    data.lat, data.lon, config.openweathermapAPIkey);
+    data.lat, data.lon, config.openweathermapAPIkey.c_str());
+  Serial.printf("Sending request to %s", buff);
   http.begin(buff);
   int httpCode = http.GET();
-  
-  portEXIT_CRITICAL(&connectionMux);
-  
+    
   if(httpCode > 0) {    
     if(httpCode == HTTP_CODE_OK) {
       
@@ -92,12 +93,10 @@ void getWeather() {
       return;
     }
     
-    portENTER_CRITICAL(&dataAccessMux);
-
     //float lat = doc["lat"]; // 52.2183
     //float lon = doc["lon"]; // 6.8958
-    data.timezone = doc["timezone"].as<string>(); // "Europe/Amsterdam"
-    data.timeZoneOffset = doc["timezone_offset"]; // 7200
+    //data.timezone = doc["timezone"].as<string>(); // "Europe/Amsterdam"
+    //data.timeZoneOffset = doc["timezone_offset"]; // 7200
     
     JsonObject current = doc["current"];
     //long current_dt = current["dt"]; // 1617992165
@@ -140,7 +139,6 @@ void getWeather() {
     Serial.printf("Outside temperature %.1f C\n", data.outsideTemp);
     data.requestWeather=false;
     data.weatherAlive++;
-    portEXIT_CRITICAL(&dataAccessMux);
 
     // Trigger screen contrast adjustment
     triggerScreenContrastAdjustment=true;

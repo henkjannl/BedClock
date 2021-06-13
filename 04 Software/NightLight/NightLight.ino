@@ -15,20 +15,29 @@
 
 #define FORMAT_SPIFFS_IF_FAILED false
 
-#include "data.h"
-#include "keyboard.h"
-#include "light.h"
-#include "screen.h"
-#include "weather.h"
-#include "quote.h"
+#include "data.h"              // Type definitions and global constants
+#include "helperfunctions.h"   // Wifi connection and time synchronisation
+#include "keyboard.h"          // Monitoring the buttons and sending signals to the screen
+#include "light.h"             // LEDs on top of the device
+#include "screen.h"            // OLED screen
+#include "weather.h"           // Weather server
+#include "quote.h"             // Random piece of advice server
 
 using namespace std;
 
-void initMessage(string msg);
+void initMessage(uint8_t step, string msg);
 
 void setup(void) {
   Serial.begin(115200);
+
+  // Initialize display
+  delay(500);
+  u8g2.initDisplay();
+  delay(500);
+  u8g2.begin();
+  u8g2.enableUTF8Print();
   
+  initMessage(1, "Config");
   delay(100);
   // Initialize SPIFFS
   if(!SPIFFS.begin(FORMAT_SPIFFS_IF_FAILED)){
@@ -38,52 +47,52 @@ void setup(void) {
   Serial.println("SPIFFS loaded");  
   config.load();
   
-  initMessage("1/7 WiFi");
+  initMessage(2, "WiFi");
   while(!data.connected) {
-      connectToWiFi();
-      delay(250);
-    }
+    connectToWiFi();
+    delay(250);
+  }
 
-  initMessage("2/7 Weather");
-
-  // Retrieve timezone from the weather server
+  initMessage(3, "Time");
+  while(!data.syncTime) {
+    syncTime();
+    delay(3000); // retry not too fast to prevent getting rejected
+  }
+  
+  initMessage(4, "Weather");
   while(data.weatherAvailable==dqUnavailable) {
     getWeather();
-    delay(500);
+    delay(3000); // retry not too fast to prevent getting rejected
   }
   Serial.println("Weather setup finished");  
 
-  initMessage("3/7 Sync time");
-
-  while(!data.syncTime) {
-      portENTER_CRITICAL(&connectionMux);
-      syncTime();
-      portEXIT_CRITICAL(&connectionMux);
-      delay(300);
-    }
-  
-  initMessage("4/7 Keyboard");
-
+  initMessage(5, "Keyboard");
   setupKeyboard();
   Serial.println("Keyboard setup finished");  
 
-  initMessage("5/7 Light");
-
+  initMessage(6, "Light");
   setupLight();
   Serial.println("Light setup finished");  
 
-  initMessage("6/7 Screen");
+  initMessage(7, "Screen");
   setupScreen();
   Serial.println("Display setup finished");  
 
-  initMessage("7/7 Quote");
+  initMessage(8, "Quote");
+  getQuote();
   setupQuote();
   Serial.println("Quote setup finished");  
 
-  initMessage("Setup finished");
+  initMessage(9, "Ready");
+
+  // Reset the display
+  u8g2.begin();
+
 } // setup
 
 void loop(void) {
+
+  Serial.printf("      xPortGetFreeHeapSize = %d Heap valid: %s\n", xPortGetFreeHeapSize(), heap_caps_check_integrity_all(false) ? "Y" : "N");
   
   Serial.printf("      Connected: %s Timesync: %s Weather: %s\n", 
      data.connected ? "Y" : "N", 
@@ -109,7 +118,7 @@ void loop(void) {
      data.quoteHighWaterMark);
 
   Serial.println();
-
+/*
   //portENTER_CRITICAL(&dataAccessMux);
   data.connected = (WiFi.status() == WL_CONNECTED);
   //portEXIT_CRITICAL(&dataAccessMux);  
@@ -122,27 +131,19 @@ void loop(void) {
 
   // Retrieve weather
   if(data.connected & (data.weatherAvailable==dqUnavailable)) getWeather();
-
-  vTaskDelay(10000);
+*/
+  delay(10000);
   
 } // loop
 
-void initMessage(string msg) {
-  static bool init=false;
-
-  if(!init) {
-    // Initialize display
-    u8g2.initDisplay();
-    delay(500);
-    u8g2.begin();
-    u8g2.enableUTF8Print();
-    init=true;
-  }
-  
+void initMessage(uint8_t step, string msg) {
   u8g2.clearBuffer();  
-  u8g2.setFont(u8g2_font_t0_12b_mf);
-  u8g2.drawUTF8(3, 10, "Initialisation:");
+  u8g2.setFont(u8g2_font_t0_12_mf);
+  u8g2.drawUTF8( 3, 12, "Init:");
+  u8g2.setFont(u8g2_font_t0_12b_tf); 
+  u8g2.drawUTF8(40, 12, msg.c_str());
   u8g2.setFont(u8g2_font_t0_12_tf); 
-  u8g2.drawUTF8(3, 20, msg.c_str());
+  string progress=string("+++++++++++").substr(0, step)+string("-----------").substr(0, 9-step);
+  u8g2.drawUTF8(3, 30, progress.c_str());
   u8g2.sendBuffer();
 }
