@@ -130,7 +130,7 @@ void taskLight(void * parameter ){
   static tFloatVariable R,G,B; // Individual color components
   static float brightness=0.25;
   static uint8_t colorIndex=0;  
-  static bool powerState=true;
+  static bool powerState=false;
   static bool ignoreTimer=false;
 
   static tMenuItem command;
@@ -162,9 +162,12 @@ void taskLight(void * parameter ){
         case mainPowerOn:
           Serial.println("Power on");
           powerState=true;
-          if(powerState) {
-            xTimerReset( timerTimeoutTimer, 0 ); 
-          }
+          xTimerReset( timerTimeoutTimer, 0 ); 
+        break;
+        
+        case mainPowerOff:
+          Serial.println("Power off");
+          powerState=false;
         break;
         
         case mainTogglePower:

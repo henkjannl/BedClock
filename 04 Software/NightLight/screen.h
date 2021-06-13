@@ -83,7 +83,7 @@ void taskScreen(void * parameter ) {
   command=brightness25; xQueueSendToBack(lightQueue, &command, 0 );    
   command=colorWhite;   xQueueSendToBack(lightQueue, &command, 0 );    
   command=timer03;      xQueueSendToBack(lightQueue, &command, 0 );    
-  command=mainPowerOn;  xQueueSendToBack(lightQueue, &command, 0 );    
+  command=mainPowerOff; xQueueSendToBack(lightQueue, &command, 0 );    
 
   // Set default contrast
   u8g2.setContrast(25); // Perhaps remove later, just to test if the contrast function works

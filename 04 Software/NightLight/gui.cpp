@@ -110,7 +110,8 @@ void tLabel::internalDraw(U8G2 &u8g2) {
   u8g2.setFontPosTop();
   u8g2.setFontMode(1);
   u8g2.setDrawColor(1);
-  u8g2.drawStr(globalX(), globalY(), _text.c_str());
+  //u8g2.drawStr(globalX(), globalY(), _text.c_str());
+  u8g2.drawUTF8(globalX(), globalY(), _text.c_str());
 }; // tLabel::internalDraw
 
 
@@ -143,5 +144,6 @@ void tButton::internalDraw(U8G2 &u8g2) {
   }
   else u8g2.drawFrame(globalX(), globalY(), _width, _height);
 
-  u8g2.drawStr(globalX()+3, globalY()+3, _text.c_str());
+  //u8g2.drawStr(globalX()+3, globalY()+3, _text.c_str());
+  u8g2.drawUTF8(globalX()+3, globalY()+3, _text.c_str());
 }; // tButton::internalDraw

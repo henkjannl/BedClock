@@ -61,7 +61,7 @@ void taskQuote(void * parameter ) {
       
       if(httpCode > 0) {    
         if(httpCode == HTTP_CODE_OK) {
-          StaticJsonDocument<192> doc;
+          StaticJsonDocument<1024> doc;
           
           DeserializationError error = deserializeJson(doc, http.getString());
           
@@ -71,42 +71,13 @@ void taskQuote(void * parameter ) {
             return;
           }
           
-          //int slip_id = doc["slip"]["id"]; // 19
-          string quote = doc["slip"]["advice"]; // "If you cannot unscrew the lid of a jar, try placing ...
-
           portENTER_CRITICAL(&dataAccessMux);
-          data.quote1=quote;
-          data.quote2="";
-          uint8_t lengthDiff=data.quote1.length();
-
-          for(int i=0; i<quote.length(); i++) {
-
-            if(isspace(quote[i])) {
-              if(i>(quote.length()-i)) {
-                if(i-(quote.length()-i)<lengthDiff) {
-                  data.quote1=quote.substr(0, i);
-                  data.quote2=quote.substr(i+1);
-                  lengthDiff=abs(data.quote1.length()-data.quote2.length());
-                  Serial.printf("%d | %d diff %d\n", data.quote1.length(), data.quote2.length(), lengthDiff);
-                } // i-quote.length()<lengthDiff
-              } // i>quote.length()-i
-            else { // i<quote.length()-i            
-                if(quote.length()-2*i<lengthDiff) {
-                  data.quote1=quote.substr(0, i);
-                  data.quote2=quote.substr(i+1);
-                  lengthDiff=abs(data.quote1.length()-data.quote2.length());
-                  Serial.printf("%d | %d diff %d\n", data.quote1.length(), data.quote2.length(), lengthDiff);
-                } // quote.length()-2*i<lengthDiff
-              } // i<quote.length()-i
-            } // whitespace
-
-          } // for i
-          Serial.println(data.quote1.c_str());
-          Serial.println(data.quote2.c_str());
-          
+          //int slip_id = doc["slip"]["id"]; // 19
+          data.quote = doc["slip"]["advice"].as<string>(); // "If you cannot unscrew the lid of a jar, try placing ...
           data.quoteAvailable=dqRefreshed;
           data.requestQuote=false;
           data.quoteAlive++;
+          Serial.println(data.quote.c_str());
           portEXIT_CRITICAL(&dataAccessMux);
         }
       }

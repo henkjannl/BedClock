@@ -135,16 +135,16 @@ tDisplay::tDisplay(U8G2 &u8g2) {
   lblTimeThin.setY(0);
 
   grpMainScreen.addChild(lblQuote1);
-  //lblQuote1.setFont(u8g2_font_tom_thumb_4x6_tf);
-  lblQuote1.setFont(u8g2_font_t0_11_te);
+  //lblQuote1.setFont(u8g2_font_t0_11_te);
+  lblQuote1.setFont(u8g2_font_profont11_tf);
   lblQuote1.setText(u8g2, ".");
   w = lblQuote1.getWidth(u8g2, ".");
   lblQuote1.setX(128+60-0.5*w);
   lblQuote1.setY(12);
 
   grpMainScreen.addChild(lblQuote2);
-  //lblQuote2.setFont(u8g2_font_tom_thumb_4x6_tf);
-  lblQuote2.setFont(u8g2_font_t0_11_te);
+  //lblQuote2.setFont(u8g2_font_t0_11_te);
+  lblQuote2.setFont(u8g2_font_profont11_tf);
   lblQuote2.setText(u8g2, ".");
   w = lblQuote2.getWidth(u8g2, ".");
   lblQuote2.setX(128+60-0.5*w);
@@ -209,7 +209,7 @@ void tDisplay::step() {
 }; // tDisplay::step
 
 void tDisplay::display(U8G2 &u8g2) { 
-  uint8_t  w;
+  uint16_t  w;
   static char outsideTemp[16];
   
   struct tm timeinfo;
@@ -223,28 +223,76 @@ void tDisplay::display(U8G2 &u8g2) {
   }
 
   if(data.quoteAvailable==dqRefreshed) {
-    uint16_t w1=lblQuote1.getWidth(u8g2, data.quote1);
-    if(w1>128) data.requestQuote=true;
+    w=lblQuote1.getWidth(u8g2, data.quote);
+    
+    if(w<128) {
+      // Just a single quote
+      lblQuote1.setText(u8g2, data.quote);
+      lblQuote1.moveX(128+60-0.5*w);
+      lblQuote1.moveY(17);
+      lblQuote2.setText(u8g2, ""); // hide the second line 
+      lblQuote2.moveY(17);
+    }
+    else {
+      // Split in two quotes
+      string quote1=data.quote;
+      string quote2="";
+      uint16_t lengthDiff=quote1.length();
 
-    uint16_t w2=lblQuote2.getWidth(u8g2, data.quote2);
-    if(w2>128) data.requestQuote=true;
+      for(int i=0; i<data.quote.length(); i++) {
 
-    if(!data.requestQuote) {
-      lblQuote1.setText(u8g2, data.quote1);
-      lblQuote1.moveX(128+60-0.5*w1);
-      lblQuote2.setText(u8g2, data.quote2);
-      lblQuote2.moveX(128+60-0.5*w2);
-    } // !requestQuote
+        if(isspace(data.quote[i])) {
+          if(i>(data.quote.length()-i)) {
+            if(i-(data.quote.length()-i)<lengthDiff) {
+              quote1=data.quote.substr(0, i);
+              quote2=data.quote.substr(i+1);
+              lengthDiff=abs(quote1.length()-quote2.length());
+              Serial.printf("%d | %d diff %d\n", quote1.length(), quote2.length(), lengthDiff);
+            } // i-quote.length()<lengthDiff
+          } // i>quote.length()-i
+        else { // i<quote.length()-i            
+            if(data.quote.length()-2*i<lengthDiff) {
+              quote1=data.quote.substr(0, i);
+              quote2=data.quote.substr(i+1);
+              lengthDiff=abs(quote1.length()-quote2.length());
+              Serial.printf("%d | %d diff %d\n", quote1.length(), quote2.length(), lengthDiff);
+            } // data.quote.length()-2*i<lengthDiff
+          } // i<data.quote.length()-i
+        } // whitespace
 
-    data.quoteAvailable==dqDisplayed;
+      } // for i
+
+      // If one of the lines is still too long, request a new quote
+      uint16_t w1=lblQuote1.getWidth(u8g2, quote1);
+      if(w1>128) data.requestQuote=true;
+  
+      uint16_t w2=lblQuote2.getWidth(u8g2, quote2);
+      if(w2>128) data.requestQuote=true;
+
+      Serial.printf("Quote 1: %s string length %d bitmap length %d\n", quote1.c_str(), quote1.length(), w1);
+      Serial.printf("Quote 2: %s string length %d bitmap length %d\n", quote2.c_str(), quote2.length(), w2);
+      Serial.println( data.requestQuote ? "Still too long" : "Length OK");
+  
+      if(!data.requestQuote) { // No new quote requested, so lines fit the screen
+        lblQuote1.setText(u8g2, quote1);
+        lblQuote1.moveX(128+60-0.5*w1);
+        lblQuote1.moveY(12);
+        lblQuote2.setText(u8g2, quote2);
+        lblQuote2.moveX(128+60-0.5*w2);
+        lblQuote2.moveY(22);
+      } // !requestQuote
+
+    } // else clause of w<128
+
+    data.quoteAvailable=dqDisplayed;
   } // data.quoteAvailable==dqRefreshed
 
   if(data.weatherAvailable==dqRefreshed) {
-    snprintf (outsideTemp, sizeof(outsideTemp), "%0.1fC", data.outsideTemp);
+    snprintf (outsideTemp, sizeof(outsideTemp), "%0.1f°C", data.outsideTemp);
     Serial.printf("Outside temperature %.1f is displayed as %s\n", data.outsideTemp, outsideTemp);
     lblTemperature.setText(u8g2, outsideTemp);
     w=lblTemperature.getWidth(u8g2, outsideTemp);
-    lblTemperature.setX(127-w);
+    lblTemperature.setX(124-w);
     data.weatherAvailable=dqDisplayed; 
   }
 
@@ -283,7 +331,7 @@ void tDisplay::showTopRow() {
   rowMain.moveY(row0y);
   grpMain.moveY(-rowMain.getHeight()-1);
 
-  rowBrightness     .moveY(row2y);
+  rowBrightness    .moveY(row2y);
   rowColor         .moveY(row2y);
   rowTimer         .moveY(row2y);
   rowScreenContrast.moveY(row2y);

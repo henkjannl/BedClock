@@ -18,7 +18,7 @@ const char *CONFIG_FILE = "/config.jsn";
 
 // All commands displayed on screen and sent to light
 enum tMenuItem { mainScreen, mainFull, mainNight, mainEmpty, 
-                 mainPowerOn, mainTogglePower, mainTimerExpired, 
+                 mainPowerOn, mainPowerOff, mainTogglePower, mainTimerExpired, 
                  mainBrightness, mainColor, mainTimer, mainScreenContrast, mainBack,
                  brightness25, brightness35, brightness50, brightness70, brightness100, brightnessBack,
                  colorWhite, colorYellow, colorOrange, colorRed, colorBack,
@@ -26,7 +26,7 @@ enum tMenuItem { mainScreen, mainFull, mainNight, mainEmpty,
                  screenContrastAuto, screenContrast10, screenContrast35, screenContrast100, screenContrastBack };
 
 char *menuItem[] = { "mainScreen", "mainFull", "mainNight", "mainEmpty", 
-                     "mainPowerOn", "mainTogglePower", "mainTimerExpired", 
+                     "mainPowerOn", "mainPowerOff", "mainTogglePower", "mainTimerExpired", 
                      "mainBrightness", "mainColor", "mainTimer", "mainScreenContrast", "mainBack",
                      "brightness25", "brightness35", "brightness50", "brightness70", "brightness100", "brightnessBack",
                      "colorWhite", "colorYellow", "colorOrange", "colorRed", "colorBack",
@@ -69,8 +69,7 @@ class tData {
     // Quote
     bool requestQuote;
     tDataQuality quoteAvailable;
-    string quote1;
-    string quote2;
+    string quote;
   
     // System info
     UBaseType_t lightHighWaterMark;   // Unused stack for the measurement thread

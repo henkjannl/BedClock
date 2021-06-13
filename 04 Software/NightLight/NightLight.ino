@@ -42,10 +42,18 @@ void setup(void) {
   Serial.println("SPIFFS loaded");  
   config.load();
 
-  connectToWiFi();
-  delay(250);
-  syncTime();
-  delay(300);
+  for(int i=0; i<5; i++) {
+    if(!data.connected) {
+      connectToWiFi();
+      delay(250);
+    }
+  }
+
+  for(int i=0; i<5; i++) {
+    if(!data.syncTime) {
+      syncTime();
+      delay(300);
+    }
   
   setupKeyboard();
   Serial.println("Keyboard setup finished");  
@@ -105,7 +113,7 @@ void loop(void) {
   // Retrieve weather
   if(data.connected & (data.weatherAvailable==dqUnavailable)) getWeather();
 
-  vTaskDelay(5000);
+  vTaskDelay(10000);
   
 } // loop
 
