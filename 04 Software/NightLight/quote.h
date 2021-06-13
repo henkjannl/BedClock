@@ -12,6 +12,7 @@ TimerHandle_t timerQuote; // New quote requested if this timer expires
 
 static void timerQuoteCallback( TimerHandle_t xTimer );
 void taskQuote(void * parameter );
+void getQuote();
 
 void setupQuote() {
 
@@ -52,42 +53,44 @@ void taskQuote(void * parameter ) {
 
   while(true) {
 
-    if(data.requestQuote & data.connected) {        
-      HTTPClient http;
-      
-      http.begin(F("https://api.adviceslip.com/advice"));
-      
-      int httpCode = http.GET();
-      
-      if(httpCode > 0) {    
-        if(httpCode == HTTP_CODE_OK) {
-          StaticJsonDocument<1024> doc;
-          
-          DeserializationError error = deserializeJson(doc, http.getString());
-          
-          if (error) {
-            Serial.print(F("deserializeJson() failed: "));
-            Serial.println(error.f_str());
-            return;
-          }
-          
-          portENTER_CRITICAL(&dataAccessMux);
-          //int slip_id = doc["slip"]["id"]; // 19
-          data.quote = doc["slip"]["advice"].as<string>(); // "If you cannot unscrew the lid of a jar, try placing ...
-          data.quoteAvailable=dqRefreshed;
-          data.requestQuote=false;
-          data.quoteAlive++;
-          Serial.println(data.quote.c_str());
-          portEXIT_CRITICAL(&dataAccessMux);
-        }
-      }
-    } // requestQuote
-    
+    if(data.requestQuote & data.connected) getQuote();
+
     data.quoteHighWaterMark= uxTaskGetStackHighWaterMark(NULL);
     vTaskDelay(1000);
     
   } // while true
 } // taskQuote      
 
+void getQuote() {
+  
+  portENTER_CRITICAL(&connectionMux);
+  HTTPClient http;
+  http.begin(F("http://api.adviceslip.com/advice"));
+  int httpCode = http.GET();
+  portEXIT_CRITICAL(&connectionMux);
+  
+  if(httpCode > 0) {    
+    if(httpCode == HTTP_CODE_OK) {
+      StaticJsonDocument<1024> doc;
+      
+      DeserializationError error = deserializeJson(doc, http.getString());
+      
+      if (error) {
+        Serial.print(F("deserializeJson() failed: "));
+        Serial.println(error.f_str());
+        return;
+      }
+      
+      portENTER_CRITICAL(&dataAccessMux);
+      //int slip_id = doc["slip"]["id"]; // 19
+      data.quote = doc["slip"]["advice"].as<string>(); // "If you cannot unscrew the lid of a jar, try placing ...
+      data.quoteAvailable=dqRefreshed;
+      data.requestQuote=false;
+      data.quoteAlive++;
+      Serial.println(data.quote.c_str());
+      portEXIT_CRITICAL(&dataAccessMux);
+    } // httpCode == HTTP_CODE_OK
+  } // httpCode > 0
+} //
 
 #endif // QUOTE_H

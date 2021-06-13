@@ -225,10 +225,10 @@ void tDisplay::display(U8G2 &u8g2) {
   if(data.quoteAvailable==dqRefreshed) {
     w=lblQuote1.getWidth(u8g2, data.quote);
     
-    if(w<128) {
+    if(w<124) {
       // Just a single quote
       lblQuote1.setText(u8g2, data.quote);
-      lblQuote1.moveX(128+60-0.5*w);
+      lblQuote1.moveX(128+64-0.5*w);
       lblQuote1.moveY(17);
       lblQuote2.setText(u8g2, ""); // hide the second line 
       lblQuote2.moveY(17);
@@ -264,10 +264,10 @@ void tDisplay::display(U8G2 &u8g2) {
 
       // If one of the lines is still too long, request a new quote
       uint16_t w1=lblQuote1.getWidth(u8g2, quote1);
-      if(w1>128) data.requestQuote=true;
+      if(w1>124) data.requestQuote=true;
   
       uint16_t w2=lblQuote2.getWidth(u8g2, quote2);
-      if(w2>128) data.requestQuote=true;
+      if(w2>124) data.requestQuote=true;
 
       Serial.printf("Quote 1: %s string length %d bitmap length %d\n", quote1.c_str(), quote1.length(), w1);
       Serial.printf("Quote 2: %s string length %d bitmap length %d\n", quote2.c_str(), quote2.length(), w2);
@@ -275,14 +275,14 @@ void tDisplay::display(U8G2 &u8g2) {
   
       if(!data.requestQuote) { // No new quote requested, so lines fit the screen
         lblQuote1.setText(u8g2, quote1);
-        lblQuote1.moveX(128+60-0.5*w1);
+        lblQuote1.moveX(128+64-0.5*w1);
         lblQuote1.moveY(12);
         lblQuote2.setText(u8g2, quote2);
-        lblQuote2.moveX(128+60-0.5*w2);
+        lblQuote2.moveX(128+64-0.5*w2);
         lblQuote2.moveY(22);
       } // !requestQuote
 
-    } // else clause of w<128
+    } // else clause of w<124
 
     data.quoteAvailable=dqDisplayed;
   } // data.quoteAvailable==dqRefreshed
