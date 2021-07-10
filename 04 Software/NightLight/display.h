@@ -12,19 +12,19 @@ class tDisplay {
 
   public:
     // Main canvas
-    tGroup  grpMain; 
+    tGroup  grpMain;
 
     // Main screen, split in three sections horizontally: full info, night mode, empty screen
-    tGroup  grpMainScreen; 
+    tGroup  grpMainScreen;
 
     // First section of main screen, to be complemented with weather and quote
-    tLabel  lblTime; 
-    tLabel  lblTemperature; 
+    tLabel  lblTime;
+    tLabel  lblTemperature;
 
     // Second section of main screen
-    tLabel  lblTimeThin; 
-    tLabel  lblQuote1; 
-    tLabel  lblQuote2; 
+    tLabel  lblTimeThin;
+    tLabel  lblQuote1;
+    tLabel  lblQuote2;
 
     // Third section of main screen is empty
     // ..
@@ -310,6 +310,7 @@ void tDisplay::display(U8G2 &u8g2) {
     u8g2.drawVLine(x++, y+31-h, h);
     u8g2.drawVLine(x++, y+31-h, h);
   }
+    
 }; // tDisplay::display
 
 void tDisplay::showMain() {

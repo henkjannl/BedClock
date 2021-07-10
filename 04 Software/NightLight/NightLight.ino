@@ -33,9 +33,10 @@ void setup(void) {
   // Initialize display
   delay(500);
   u8g2.initDisplay();
+  //u8g2.setFlipMode(true);
   delay(500);
   u8g2.begin();
-  u8g2.enableUTF8Print();
+  //u8g2.enableUTF8Print();
   
   initMessage(1, "Config");
   delay(100);
@@ -56,16 +57,17 @@ void setup(void) {
   initMessage(3, "Time");
   while(!data.syncTime) {
     syncTime();
-    delay(3000); // retry not too fast to prevent getting rejected
+    delay(3000); // retry not too fast to prevent getting rejected from the API
   }
-  
+
+  /*
   initMessage(4, "Weather");
   while(data.weatherAvailable==dqUnavailable) {
     getWeather();
     delay(3000); // retry not too fast to prevent getting rejected
   }
   Serial.println("Weather setup finished");  
-
+*/
   initMessage(5, "Keyboard");
   setupKeyboard();
   Serial.println("Keyboard setup finished");  
@@ -78,20 +80,21 @@ void setup(void) {
   setupScreen();
   Serial.println("Display setup finished");  
 
+/*
   initMessage(8, "Quote");
   getQuote();
   setupQuote();
   Serial.println("Quote setup finished");  
+*/
+  delay(500);
 
   initMessage(9, "Ready");
-
-  // Reset the display
-  u8g2.begin();
 
 } // setup
 
 void loop(void) {
 
+/*
   Serial.printf("      xPortGetFreeHeapSize = %d Heap valid: %s\n", xPortGetFreeHeapSize(), heap_caps_check_integrity_all(false) ? "Y" : "N");
   
   Serial.printf("      Connected: %s Timesync: %s Weather: %s\n", 
@@ -116,8 +119,9 @@ void loop(void) {
   Serial.printf("      Quote: %d updates %d bytes\n", 
      data.quoteAlive,
      data.quoteHighWaterMark);
+*/
 
-  Serial.println();
+  Serial.println("Blip.");
 /*
   //portENTER_CRITICAL(&dataAccessMux);
   data.connected = (WiFi.status() == WL_CONNECTED);
@@ -138,12 +142,14 @@ void loop(void) {
 
 void initMessage(uint8_t step, string msg) {
   u8g2.clearBuffer();  
-  u8g2.setFont(u8g2_font_t0_12_mf);
-  u8g2.drawUTF8( 3, 12, "Init:");
   u8g2.setFont(u8g2_font_t0_12b_tf); 
-  u8g2.drawUTF8(40, 12, msg.c_str());
+  //u8g2.drawUTF8(3, 12, msg.c_str());
+  u8g2.drawStr(3, 12, msg.c_str());
   u8g2.setFont(u8g2_font_t0_12_tf); 
   string progress=string("+++++++++++").substr(0, step)+string("-----------").substr(0, 9-step);
-  u8g2.drawUTF8(3, 30, progress.c_str());
+  //u8g2.drawUTF8(3, 30, progress.c_str());
+  u8g2.drawStr(3, 30, progress.c_str());
   u8g2.sendBuffer();
+  Serial.println(msg.c_str());
+  
 }

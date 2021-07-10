@@ -68,15 +68,11 @@ void taskQuote(void * parameter ) {
 void getQuote() {
   
   HTTPClient http;
-  string url = "http://api.adviceslip.com/advice";
-  Serial.printf("Sending request to %s\n", url.c_str());
-  Serial.printf("xPortGetFreeHeapSize = %d Heap valid: %s\n", xPortGetFreeHeapSize(), heap_caps_check_integrity_all(false) ? "Y" : "N");
 
-  http.begin(url.c_str());
-  Serial.printf("http begin url done\n");
+  http.begin("http://api.adviceslip.com/advice");
   
   int httpCode = http.GET();
-  Serial.printf("http get done\n");
+  Serial.printf("http get return code %d\n", httpCode);
   
   if(httpCode > 0) {    
     if(httpCode == HTTP_CODE_OK) {
@@ -97,7 +93,9 @@ void getQuote() {
       data.quoteAlive++;
       Serial.println(data.quote.c_str());
     } // httpCode == HTTP_CODE_OK
+    else Serial.printf("HTTP_CODE not OK: httpCode = %d\n", httpCode);
   } // httpCode > 0
+  else Serial.printf("Error: httpCode = %d0\n", httpCode);
 } //
 
 #endif // QUOTE_H

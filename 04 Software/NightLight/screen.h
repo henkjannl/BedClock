@@ -52,6 +52,8 @@ void setScreenBrightness(uint8_t contrast, uint8_t vcom, uint8_t p1, uint8_t p2)
    *    setScreenBrightness(  5, 0,  0, 0);
    *    setScreenBrightness(  3, 0,  0, 0);
    *    setScreenBrightness(  1, 0,  0, 0); // least bright   */
+
+  /*
   u8g2.setContrast(contrast);
   u8x8_cad_StartTransfer(u8g2.getU8x8());
   u8x8_cad_SendCmd(u8g2.getU8x8(), 0x0db);
@@ -59,6 +61,7 @@ void setScreenBrightness(uint8_t contrast, uint8_t vcom, uint8_t p1, uint8_t p2)
   u8x8_cad_SendCmd(u8g2.getU8x8(), 0x0d9);
   u8x8_cad_SendArg(u8g2.getU8x8(), (p2 << 4) | p1 );
   u8x8_cad_EndTransfer(u8g2.getU8x8());
+  */
 }
 
 void taskScreen(void * parameter ) {
@@ -68,8 +71,9 @@ void taskScreen(void * parameter ) {
   BaseType_t success;
   tMenuItem command;
 
-  static bool autoScreenContrast = true;
-  triggerScreenContrastAdjustment = true;
+  static bool autoScreenContrast = false;
+  triggerScreenContrastAdjustment = false;
+  setScreenBrightness(  5, 0,  0, 0);
   
   // Send default settings to light task
   command=brightness25; xQueueSendToBack(lightQueue, &command, 0 );    
@@ -139,11 +143,11 @@ void taskScreen(void * parameter ) {
       Serial.println("Auto screen brightness timer triggered");
 
       if(data.weatherAvailable==dqUnavailable) {
-        Serial.println("Sunrise and sunset are not yet available");
+        //Serial.println("Sunrise and sunset are not yet available");
         setScreenBrightness(  1, 0,  0, 0); // least bright   */
       }
       else if(!data.syncTime) {
-        Serial.println("Time not yet synched");
+        //Serial.println("Time not yet synched");
         setScreenBrightness(  1, 0,  0, 0); // least bright   */
       }
       else {        
@@ -173,13 +177,12 @@ void taskScreen(void * parameter ) {
         triggerScreenContrastAdjustment=false;
       }
     }
+    
     uint32_t redrawBegin=millis();
-
     u8g2.setDrawColor(0);
     u8g2.clearBuffer();  
     display.display(u8g2);
     u8g2.sendBuffer();
-
     uint32_t redrawReady=millis();
 
     display.step();
