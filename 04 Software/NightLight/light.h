@@ -109,7 +109,7 @@ void setupLight() {
   lightQueue=xQueueCreate(10,sizeof(tMenuItem)); 
 
   timerTimeoutTimer=xTimerCreate( "TimerTimeOut", 
-                TIMER_PERIOD_03,        // Menu goes back to idle after 20 seconds
+                TIMER_PERIOD_03,        // Menu goes back to idle after 3 minutes
                 pdFALSE  ,              // Single shot timer 
                 0,                      // TimerID, unused
                 timerTimeoutCallback);  // Callback function as timer expires
@@ -292,7 +292,7 @@ void taskLight(void * parameter ){
     } // if command received
         
     if(powerState) {
-      // If the user has changed bridghtess or color sett
+      // If the user has changed brightness or color setting
       R.setTarget(MAX_INTENSITY*COLORS[colorIndex].R*brightness);
       G.setTarget(MAX_INTENSITY*COLORS[colorIndex].G*brightness);
       B.setTarget(MAX_INTENSITY*COLORS[colorIndex].B*brightness);
@@ -308,7 +308,7 @@ void taskLight(void * parameter ){
     uint16_t bG=(uint16_t) G.getValue();
     uint16_t bB=(uint16_t) B.getValue();
 
-    // Translate into sublevels for the individual levels
+    // Translate into mainlevels and sublevels for the individual levels
     uint8_t  baseR = bR>>4;  uint16_t subR = SUB_BRIGHTNESS[bR & 0xF]; 
     uint8_t  baseG = bG>>4;  uint16_t subG = SUB_BRIGHTNESS[bG & 0xF]; 
     uint8_t  baseB = bB>>4;  uint16_t subB = SUB_BRIGHTNESS[bB & 0xF]; 

@@ -45,23 +45,22 @@ static void timerScreenContrastCallback( TimerHandle_t xTimer ){
   triggerScreenContrastAdjustment=true;
 }
 
-void setScreenBrightness(uint8_t contrast, uint8_t vcom, uint8_t p1, uint8_t p2) {
-  /* Typical values for the parameters:
-   *    setScreenBrightness(255, 0,  1, 1); // most bright
-   *    setScreenBrightness( 16, 0,  1, 1);
-   *    setScreenBrightness(  5, 0,  0, 0);
-   *    setScreenBrightness(  3, 0,  0, 0);
-   *    setScreenBrightness(  1, 0,  0, 0); // least bright   */
+void setScreenBrightness(uint8_t brightnessLevel) {
+  uint8_t contrast; uint8_t p1; uint8_t p2;
 
-  /*
+       if(brightnessLevel==0) { contrast=  1; p1=0; p2=0; }
+  else if(brightnessLevel==1) { contrast=  3; p1=0; p2=0; }
+  else if(brightnessLevel==2) { contrast=  5; p1=0; p2=0; }
+  else if(brightnessLevel==3) { contrast= 16; p1=1; p2=1; }
+  else                        { contrast=255; p1=1; p2=1; }
+
   u8g2.setContrast(contrast);
   u8x8_cad_StartTransfer(u8g2.getU8x8());
   u8x8_cad_SendCmd(u8g2.getU8x8(), 0x0db);
-  u8x8_cad_SendArg(u8g2.getU8x8(), vcom << 4);
+  u8x8_cad_SendArg(u8g2.getU8x8(), 0);
   u8x8_cad_SendCmd(u8g2.getU8x8(), 0x0d9);
   u8x8_cad_SendArg(u8g2.getU8x8(), (p2 << 4) | p1 );
   u8x8_cad_EndTransfer(u8g2.getU8x8());
-  */
 }
 
 void taskScreen(void * parameter ) {
@@ -73,7 +72,7 @@ void taskScreen(void * parameter ) {
 
   static bool autoScreenContrast = false;
   triggerScreenContrastAdjustment = false;
-  setScreenBrightness(  5, 0,  0, 0);
+  setScreenBrightness(3);
   
   // Send default settings to light task
   command=brightness25; xQueueSendToBack(lightQueue, &command, 0 );    
@@ -117,17 +116,23 @@ void taskScreen(void * parameter ) {
             Serial.println("Auto screen brightness selected");
         }
         else if(command==screenContrast10) {
-            setScreenBrightness(  1, 0,  0, 0); 
+
+            // JUST FOR DEBUG: RESET THE SCREEN
+            Serial.println("DEBUG: reset the screen");
+            u8g2.begin();
+            u8g2.setMaxClipWindow();
+
+            setScreenBrightness(0); 
             Serial.println("10% screen brightness selected");
-            autoScreenContrast = false;
+            autoScreenContrast = false;            
         }
         else if(command==screenContrast35) {
-            setScreenBrightness(  5, 0,  0, 0);
+            setScreenBrightness(2); 
             autoScreenContrast = false;
             Serial.println("35% screen brightness selected");
         }
         else if(command==screenContrast100) {
-            setScreenBrightness( 16, 0,  1, 1);
+            setScreenBrightness(4); 
             Serial.println("100% screen brightness selected");
             autoScreenContrast = false;
         }
@@ -144,12 +149,11 @@ void taskScreen(void * parameter ) {
 
       if(data.weatherAvailable==dqUnavailable) {
         //Serial.println("Sunrise and sunset are not yet available");
-        setScreenBrightness(  1, 0,  0, 0); // least bright   */
+        setScreenBrightness(2);
       }
       else if(!data.syncTime) {
-        //Serial.println("Time not yet synched");
-        setScreenBrightness(  1, 0,  0, 0); // least bright   */
-      }
+        setScreenBrightness(2);
+        }
       else {        
         time_t currentTime;
         time(&currentTime);
@@ -168,11 +172,11 @@ void taskScreen(void * parameter ) {
         Serial.printf("Day length: %.3f\n", dayLength);
         Serial.printf("Sun strength: %.3f\n", sunStrength);
   
-             if(sunStrength> 0.40) setScreenBrightness(255, 0,  1, 1); // most bright
-        else if(sunStrength> 0.13) setScreenBrightness( 16, 0,  1, 1);
-        else if(sunStrength>-0.13) setScreenBrightness(  5, 0,  0, 0);
-        else if(sunStrength>-0.40) setScreenBrightness(  3, 0,  0, 0);
-        else                       setScreenBrightness(  1, 0,  0, 0); // least bright   */
+             if(sunStrength> 0.40) setScreenBrightness(4); // most bright
+        else if(sunStrength> 0.13) setScreenBrightness(3);
+        else if(sunStrength>-0.13) setScreenBrightness(2);
+        else if(sunStrength>-0.40) setScreenBrightness(1);
+        else                       setScreenBrightness(0); // least bright   */
         
         triggerScreenContrastAdjustment=false;
       }

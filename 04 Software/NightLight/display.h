@@ -11,7 +11,7 @@ using namespace std;
 class tDisplay {
 
   public:
-    // Main canvas
+    // Main canvas, covering all screens
     tGroup  grpMain;
 
     // Main screen, split in three sections horizontally: full info, night mode, empty screen
@@ -21,15 +21,15 @@ class tDisplay {
     tLabel  lblTime;
     tLabel  lblTemperature;
 
-    // Second section of main screen
+    // Second section of main screen, with qte
     tLabel  lblTimeThin;
     tLabel  lblQuote1;
     tLabel  lblQuote2;
 
-    // Third section of main screen is empty
-    // ..
+    // Third section of main screen is empty 
 
-    // Top row with first row of buttons
+
+    // Top row with first row of buttons with main menu
     tGroup  rowMain;     
     tButton btnBrightness;  
     tButton btnColor;
@@ -211,15 +211,17 @@ void tDisplay::step() {
 void tDisplay::display(U8G2 &u8g2) { 
   uint16_t  w;
   static char outsideTemp[16];
-  
-  struct tm timeinfo;
-  if(getLocalTime(&timeinfo)){
-    char currentTime[6];
-    strftime(currentTime,sizeof(currentTime),"%H:%M",&(timeinfo)); // Hour 00-23 + Minute 00-59
-    lblTime    .setText(u8g2, currentTime);
-    lblTimeThin.setText(u8g2, currentTime);
-    w=lblTimeThin.getWidth(u8g2, currentTime);
-    lblTimeThin.moveX(128+60-0.5*w);
+
+  if(data.syncTime) {
+    struct tm timeinfo;
+    if(getLocalTime(&timeinfo)){
+      char currentTime[6];
+      strftime(currentTime,sizeof(currentTime),"%H:%M",&(timeinfo)); // Hour 00-23 + Minute 00-59
+      lblTime    .setText(u8g2, currentTime);
+      lblTimeThin.setText(u8g2, currentTime);
+      w=lblTimeThin.getWidth(u8g2, currentTime);
+      lblTimeThin.moveX(128+60-0.5*w);
+    }
   }
 
   if(data.quoteAvailable==dqRefreshed) {
@@ -298,17 +300,19 @@ void tDisplay::display(U8G2 &u8g2) {
 
   grpMain.draw(u8g2); 
 
-  // Display bar graph with precipitation
-  int16_t x=0;
-  int16_t y=grpMain.globalY();
-
-  for (tPrecipitation & p : data.precipitation) {
-    // int h=18.0*log(p.prec+1); // Curve through (0,0) (0.25,3) (3,25)
-    // int h=36.0*log(p.prec+1); // Curve through (0,0) (0.25,8) (3,50)
-    int h=(int) 12.0*log(p.prec+1); // Curve through (0,0) (0.25,2.6) (3,20)
-    if(h>20) h=20;
-    u8g2.drawVLine(x++, y+31-h, h);
-    u8g2.drawVLine(x++, y+31-h, h);
+  if(data.weatherAvailable!=dqUnavailable) {
+    // Display bar graph with precipitation
+    int16_t x=0;
+    int16_t y=grpMain.globalY();
+  
+    for (tPrecipitation & p : data.precipitation) {
+      // int h=18.0*log(p.prec+1); // Curve through (0,0) (0.25,3) (3,25)
+      // int h=36.0*log(p.prec+1); // Curve through (0,0) (0.25,8) (3,50)
+      int h=(int) 12.0*log(p.prec+1); // Curve through (0,0) (0.25,2.6) (3,20)
+      if(h>20) h=20;
+      u8g2.drawVLine(x++, y+31-h, h);
+      u8g2.drawVLine(x++, y+31-h, h);
+    }
   }
     
 }; // tDisplay::display

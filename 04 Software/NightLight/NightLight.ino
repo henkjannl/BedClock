@@ -32,10 +32,12 @@ void setup(void) {
 
   // Initialize display
   delay(500);
-  u8g2.initDisplay();
+  //u8g2.initDisplay();
   //u8g2.setFlipMode(true);
-  delay(500);
+  //delay(500);
+  u8g2.setBusClock(50000);
   u8g2.begin();
+  
   //u8g2.enableUTF8Print();
   
   initMessage(1, "Config");
@@ -47,7 +49,8 @@ void setup(void) {
   }
   Serial.println("SPIFFS loaded");  
   config.load();
-  
+
+  /*
   initMessage(2, "WiFi");
   while(!data.connected) {
     connectToWiFi();
@@ -59,6 +62,7 @@ void setup(void) {
     syncTime();
     delay(3000); // retry not too fast to prevent getting rejected from the API
   }
+  */
 
   /*
   initMessage(4, "Weather");
@@ -94,7 +98,6 @@ void setup(void) {
 
 void loop(void) {
 
-/*
   Serial.printf("      xPortGetFreeHeapSize = %d Heap valid: %s\n", xPortGetFreeHeapSize(), heap_caps_check_integrity_all(false) ? "Y" : "N");
   
   Serial.printf("      Connected: %s Timesync: %s Weather: %s\n", 
@@ -119,9 +122,14 @@ void loop(void) {
   Serial.printf("      Quote: %d updates %d bytes\n", 
      data.quoteAlive,
      data.quoteHighWaterMark);
-*/
 
-  Serial.println("Blip.");
+  Serial.printf("      Bus clock %d\n", u8g2.getBusClock() );
+
+  Serial.println();
+  
+  //u8g2.setBusClock(uint32_t clock_speed) { u8g2_GetU8x8(&u8g2)->bus_clock = clock_speed; }
+     
+
 /*
   //portENTER_CRITICAL(&dataAccessMux);
   data.connected = (WiFi.status() == WL_CONNECTED);

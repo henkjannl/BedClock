@@ -164,7 +164,4 @@ tData data;     // Global datastructure, volatile
 QueueHandle_t keyboardQueue; // Button presses sent from the keyboard to the display
 QueueHandle_t lightQueue;    // Commands sent from the display to the light
 
-
-
-
 #endif // DATA_H
