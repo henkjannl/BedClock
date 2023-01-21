@@ -7,7 +7,6 @@
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
 #include <HTTPClient.h>
-//#include <ESP32Ping.h>
 
 #define TELEGRAM_INTERVAL 1000
 
@@ -17,105 +16,6 @@ using namespace std;
  *  DATA STRUCTURES THAT MANAGE USERS, MENUS AND COMMANDS IN TELEGRAM  *
  * =================================================================== */
 
-// All available Telegram buttons that are associated with a command
-struct tgLabelCallback {
-  String label;            // label can change depending on the context
-  const String callback;   // callback strings must remain the same
-};
-
-std::map<command_t, tgLabelCallback> telegramButtons = {
-  { cmdSetpointLower,                { String(EMOTICON_MINUS)       + " Cooler",                 "/cmdSetpointLower"                } },
-  { cmdSetpointAutomatic,            { String(EMOTICON_MAGIC_STICK) + " Auto",                   "/cmdSetpointAutomatic"            } },
-  { cmdSetpointHigher,               { String(EMOTICON_PLUS)        + " Warmer",                 "/cmdSetpointHigher"               } },
-
-  { cmdMenuOverruleToday,            { "Overrule today...",                                      "/cmdMenuOverruleToday"            } },
-  { cmdMenuOverruleTomorrow,         { "Overrule tomorrow...",                                   "/cmdMenuOverruleTomorrow"         } },
-  { cmdMenuOverruleMultipleDays,     { "Overrule multiple days...",                              "/cmdMenuOverruleMultipleDays"     } },
-  { cmdMenuSettings,                 { String(EMOTICON_GEAR)        + " Settings...",            "/cmdMenuSettings"                 } },
-  { cmdUpdateStatus,                 { String(EMOTICON_STHETOSCOPE) + " Status",                 "/cmdUpdateStatus"                 } },
-
-  { cmdOverruleTodayWorkFromHome,    { String(EMOTICON_HOUSE)       + " Work from home",         "/cmdOverruleTodayWorkFromHome"    } },
-  { cmdOverruleTodayWorkAtOffice,    { String(EMOTICON_OFFICE)      + " Work from office",       "/cmdOverruleTodayWorkAtOffice"    } },
-  { cmdOverruleTodayWeekend,         { String(EMOTICON_DANCER)      + " Weekend day",            "/cmdOverruleTodayWeekend"         } },
-  { cmdOverruleTodayAway,            { String(EMOTICON_ISLAND)      + " All day away",           "/cmdOverruleTodayAway"            } },
-  { cmdOverruleTodayAutomatic,       { String(EMOTICON_MAGIC_STICK) + " Switch off",             "/cmdOverruleTodayAutomatic"       } },
-  { cmdMenuMain,                     { String(EMOTICON_BACK)        + " Back to main menu...",   "/cmdMenuMain"                     } },
-
-  { cmdOverruleTomorrowWorkFromHome, { String(EMOTICON_HOUSE)       + " Work from home",         "/cmdOverruleTomorrowWorkFromHome" } },
-  { cmdOverruleTomorrowWorkAtOffice, { String(EMOTICON_OFFICE)      + " Work from office",       "/cmdOverruleTomorrowWorkAtOffice" } },
-  { cmdOverruleTomorrowWeekend,      { String(EMOTICON_DANCER)      + " Weekend day",            "/cmdOverruleTomorrowWeekend"      } },
-  { cmdOverruleTomorrowAway,         { String(EMOTICON_ISLAND)      + " All day away",           "/cmdOverruleTomorrowAway"         } },
-  { cmdOverruleTomorrowAutomatic,    { String(EMOTICON_MAGIC_STICK) + " Switch off",             "/cmdOverruleTomorrowAutomatic"    } },
-
-  { cmdOverruleMultipleWorkFromHome, { String(EMOTICON_HOUSE)       + " Work from home",         "/cmdOverruleMultipleWorkFromHome" } },
-  { cmdOverruleMultipleWorkAtOffice, { String(EMOTICON_OFFICE)      + " Work from office",       "/cmdOverruleMultipleWorkAtOffice" } },
-  { cmdOverruleMultipleWeekend,      { String(EMOTICON_DANCER)      + " Weekend day",            "/cmdOverruleMultipleWeekend"      } },
-  { cmdOverruleMultipleAway,         { String(EMOTICON_ISLAND)      + " All day away",           "/cmdOverruleMultipleAway"         } },
-  { cmdOverruleMultipleAutomatic,    { String(EMOTICON_MAGIC_STICK) + " Switch off",             "/cmdOverruleMultipleAutomatic"    } },
-  { cmdOverruleMultipleFewerDays,    { "..days",                                                 "/cmdOverruleMultipleFewerDays"    } },
-  { cmdOverruleMultipleMoreDays,     { "..days",                                                 "/cmdOverruleMultipleMoreDays"     } },
-  { cmdOverruleMultipleForever,      { String(EMOTICON_SPIDERWEB)   + " Forever",                "/cmdOverruleMultipleForever"      } },
-
-  { cmdMenuWeekSchedule,             { String(EMOTICON_CLIPBOARD)   + " Weekly schedule...",     "/cmdMenuWeekSchedule"             } },
-  { cmdMenuHomeTimes,                { String(EMOTICON_HOUSE)       + " Home times...",          "/cmdMenuHomeTimes"                } },
-  { cmdMenuOfficeTimes,              { String(EMOTICON_OFFICE)      + " Office times...",        "/cmdMenuOfficeTimes"              } },
-  { cmdMenuWeekendTimes,             { String(EMOTICON_DANCER)      + " Weekend times...",       "/cmdMenuWeekendTimes"             } },
-  { cmdMenuTemperature,              { String(EMOTICON_BULLSEYE)    + " Temperatures...",        "/cmdMenuTemperature"              } },
-  { cmdMenuSensorOffset,             { String(EMOTICON_LEVEL_SLIDER) + " Sensor offset...",      "/cmdMenuSensorOffset"             } },
-  { cmdMenuDebug,                    { String(EMOTICON_LIFEBUOY)    + " Debugging...",           "/cmdMenuDebug"                    } },
-  
-  { cmdReportBoiler,                 { String(EMOTICON_FLAME)       + " Boiler report",          "/cmdReportBoiler"                 } },
-  { cmdReportLog,                    { String(EMOTICON_GEAR)        + " Log",                    "/cmdReportLog"                    } },
-  { cmdReportTiming,                 { String(EMOTICON_STOPWATCH)   + " Timing report",          "/cmdReportTiming"                 } },
-  { cmdReportDebug,                  { String(EMOTICON_BEETLE)      + " Debug report",           "/cmdReportDebug"                  } },
-  
-  { cmdResetDeviceMenu,              { String(EMOTICON_WARNING)   + " Restart the thermostat..", "/cmdResetDeviceMenu"              } },
-  { cmdResetDeviceYes,               { String(EMOTICON_WARNING)   + " Continue restart",         "/cmdResetDeviceYes"               } },
-  { cmdResetDeviceNo,                { String(EMOTICON_BACK)      + " Return without restart",   "/cmdResetDeviceNo"                } },
-  
-  { cmdUpdateSoftware,               { String(EMOTICON_SATTELITE_DISH) + " Over the air update...", "/cmdUpdateSoftware"            } },
-    
-  { cmdMonday,                       { "Monday",                                                 "/cmdMonday"                       } },
-  { cmdTuesday,                      { "Tuesday",                                                "/cmdTuesday"                      } },
-  { cmdWednesday,                    { "Wednesday",                                              "/cmdWednesday"                    } },
-  { cmdThursday,                     { "Thursday",                                               "/cmdThursday"                     } },
-  { cmdFriday,                       { "Friday",                                                 "/cmdFriday"                       } },
-  { cmdSaturday,                     { "Saturday",                                               "/cmdSaturday"                     } },
-  { cmdSunday,                       { "Sunday",                                                 "/cmdSunday"                       } },
-
-  { cmdWorkFromHome,                 { String(EMOTICON_HOUSE)       + " Work from home",         "/cmdWorkFromHome"                 } },
-  { cmdWorkAtOffice,                 { String(EMOTICON_OFFICE)      + " Work from office",       "/cmdWorkAtOffice"                 } },
-  { cmdWeekend,                      { String(EMOTICON_DANCER)      + " Weekend day",            "/cmdWeekend"                      } },
-  { cmdAllDayAway,                   { String(EMOTICON_ISLAND)      + " All day away",           "/cmdAllDayAway"                   } },
-
-  { cmdHomeWakeUpEarlier,            { String(EMOTICON_ALARM_CLOCK) + " Wake up -",              "/cmdHomeWakeUpEarlier"            } },
-  { cmdHomeWakeUpLater,              { String(EMOTICON_ALARM_CLOCK) + " Wake up +",              "/cmdHomeWakeUpLater"              } },
-  { cmdHomeGoToSleepEarlier,         { String(EMOTICON_BED)         + " Sleep -",                "/cmdHomeGoToSleepEarlier"         } },
-  { cmdHomeGoToSleepLater,           { String(EMOTICON_BED)         + " Sleep +",                "/cmdHomeGoToSleepLater"           } },
- 
-  { cmdOfficeWakeUpEarlier,          { String(EMOTICON_ALARM_CLOCK) + " Wake up -",              "/cmdOfficeWakeUpEarlier"          } },
-  { cmdOfficeWakeUpLater,            { String(EMOTICON_ALARM_CLOCK) + " Wake up +",              "/cmdOfficeWakeUpLater"            } },
-  { cmdOfficeLeaveEarlier,           { String(EMOTICON_FOOTSTEPS)   + " Go out -",               "/cmdOfficeLeaveEarlier"           } },
-  { cmdOfficeLeaveLater,             { String(EMOTICON_FOOTSTEPS)   + " Go out +",               "/cmdOfficeLeaveLater"             } },
-  { cmdOfficeComeHomeEarlier,        { String(EMOTICON_HOUSE)       + " Come in -",              "/cmdOfficeComeHomeEarlier"        } },
-  { cmdOfficeComeHomeLater,          { String(EMOTICON_HOUSE)       + " Come in +",              "/cmdOfficeComeHomeLater"          } },
-  { cmdOfficeGoToSleepEarlier,       { String(EMOTICON_BED)         + " Sleep -",                "/cmdOfficeGoToSleepEarlier"       } },
-  { cmdOfficeGoToSleepLater,         { String(EMOTICON_BED)         + " Sleep +",                "/cmdOfficeGoToSleepLater"         } },
-
-  { cmdWeekendWakeUpEarlier,         { String(EMOTICON_ALARM_CLOCK) + " Wake up -",              "/cmdWeekendWakeUpEarlier"         } },
-  { cmdWeekendWakeUpLater,           { String(EMOTICON_ALARM_CLOCK) + " Wake up +",              "/cmdWeekendWakeUpLater"           } },
-  { cmdWeekendGoToSleepEarlier,      { String(EMOTICON_BED)         + " Sleep -",                "/cmdWeekendGoToSleepEarlier"      } },
-  { cmdWeekendGoToSleepLater,        { String(EMOTICON_BED)         + " Sleep +",                "/cmdWeekendGoToSleepLater"        } },
-
-  { cmdHighTemperatureDown,          { "High temp -",                                            "/cmdHighTemperatureDown"          } },
-  { cmdHighTemperatureUp,            { "High temp +",                                            "/cmdHighTemperatureUp"            } },
-  { cmdLowTemperatureDown,           { "Low temp -",                                             "/cmdLowTemperatureDown"           } },
-  { cmdLowTemperatureUp,             { "Low temp +",                                             "/cmdLowTemperatureUp"             } },
-
-  { cmdSensorOffsetDown,             { String(EMOTICON_DOWN_ARROW) + " decrease offset",         "/cmdSensorOffsetDown"             } },
-  { cmdSensorOffsetUp,               { String(EMOTICON_UP_ARROW)   + " increase offset",         "/cmdSensorOffsetUp"               } }
-};  
-
 // Helper function that generates JSON code for an inline button
 String btnInline(command_t command) {
   return "{ \"text\" : \"" + telegramButtons[command].label + "\", \"callback_data\" : \"" + telegramButtons[command].callback+ "\" }";
@@ -124,160 +24,15 @@ String btnInline(command_t command) {
 // Helper function that updates button text for certain buttons and generates JSON code for the keyboard of a specific screen
 String keyboard(screen_t & screen, ControllerData_t & controllerData) {
   
-  switch (screen) {
-      
-    case scnOverruleToday: 
-
-      return "[["+ btnInline(cmdOverruleTodayWorkFromHome) + "]," +
-              "["+ btnInline(cmdOverruleTodayWorkAtOffice) + "]," +
-              "["+ btnInline(cmdOverruleTodayWeekend)      + "]," +
-              "["+ btnInline(cmdOverruleTodayAway)         + "]," +
-              "["+ btnInline(cmdOverruleTodayAutomatic)    + "]," +
-              "["+ btnInline(cmdMenuMain)                  + "]]";
-
-      break;
+      return "[["+ btnInline(cmdLightOn)  + "," + btnInline(cmdLightOff) + "]," +
+              "["+ btnInline(cmdDuration03) +  ","+ btnInline(cmdColorWhite)  + ","+ btnInline(cmdBrightness25) + "],"  +
+              "["+ btnInline(cmdDuration05) +  ","+ btnInline(cmdColorYellow) + ","+ btnInline(cmdBrightness40) + "],"  +
+              "["+ btnInline(cmdDuration10) +  ","+ btnInline(cmdColorAmber)  + ","+ btnInline(cmdBrightness60) + "],"  +
+              "["+ btnInline(cmdDuration20) +  ","+ btnInline(cmdColorRed)    + ","+ btnInline(cmdBrightness100) + "]," +
+              "["+ btnInline(cmdStatus)          + "]]";
     
-    case scnOverruleTomorrow: 
-      return "[["+ btnInline(cmdOverruleTomorrowWorkFromHome) + "]," +
-              "["+ btnInline(cmdOverruleTomorrowWorkAtOffice) + "]," +
-              "["+ btnInline(cmdOverruleTomorrowWeekend)      + "]," +
-              "["+ btnInline(cmdOverruleTomorrowAway)         + "]," +
-              "["+ btnInline(cmdOverruleTomorrowAutomatic)    + "]," +
-              "["+ btnInline(cmdMenuMain)                     + "]]";
-      break;
-
-    case scnOverruleMultiple: 
-
-      telegramButtons[cmdOverruleMultipleFewerDays].label = String(controllerData.overrideMultipleCount-1) + " days";
-      telegramButtons[cmdOverruleMultipleMoreDays ].label = String(controllerData.overrideMultipleCount+1) + " days";
-
-      return "[["+ btnInline(cmdOverruleMultipleWorkFromHome) + "]," +
-              "["+ btnInline(cmdOverruleMultipleWorkAtOffice) + "]," +
-              "["+ btnInline(cmdOverruleMultipleWeekend)      + "]," +
-              "["+ btnInline(cmdOverruleMultipleAway)         + "]," +
-              "["+ btnInline(cmdOverruleMultipleFewerDays)    + "," + btnInline(cmdOverruleMultipleAutomatic) + "," + btnInline(cmdOverruleMultipleMoreDays) + "]," +
-              "["+ btnInline(cmdOverruleMultipleForever)      + "]," +
-              "["+ btnInline(cmdMenuMain)                     + "]]";
-              
-      break;
-
-    case scnSettingsMain: 
-  
-      return "[[" + btnInline(cmdMenuWeekSchedule) + "," + btnInline(cmdMenuHomeTimes)    + "]," +
-              "[" + btnInline(cmdMenuOfficeTimes)  + "," + btnInline(cmdMenuWeekendTimes) + "]," +
-              "[" + btnInline(cmdMenuTemperature)  + "," + btnInline(cmdMenuSensorOffset) + "]," +
-              "[" + btnInline(cmdMenuDebug)                                               + "]," + 
-              "[" + btnInline(cmdMenuMain)                                                + "]]";
-
-      break;
-
-    case scnDebug: 
-  
-      return "[[" + btnInline(cmdReportBoiler)     + "," + btnInline(cmdReportLog)        + "]," +
-              "[" + btnInline(cmdReportDebug)      + "," + btnInline(cmdReportTiming)     + "]," +
-              "[" + btnInline(cmdResetDeviceMenu)                                         + "]," + 
-              "[" + btnInline(cmdUpdateSoftware)                                          + "]," +
-              "[" + btnInline(cmdMenuSettings)                                            + "]]";
-              
-      break;
-      
-    case scnSettingsWeekSchedule: 
-      return "[["+ btnInline(cmdMonday)    + "," + btnInline(cmdTuesday)  + "]," +
-              "["+ btnInline(cmdWednesday) + "," + btnInline(cmdThursday) + "]," +
-              "["+ btnInline(cmdFriday)    + "," + btnInline(cmdSaturday) + "]," +
-              "["+ btnInline(cmdSunday)                                   + "]," +
-              "["+ btnInline(cmdMenuSettings)                             + "]]";
-    
-      break;
-        
-    case scnSettingsDaySchedule: 
-
-      return "[["+ btnInline(cmdWorkFromHome) + "]," +
-              "["+ btnInline(cmdWorkAtOffice) + "]," +
-              "["+ btnInline(cmdWeekend)      + "]," +
-              "["+ btnInline(cmdAllDayAway)   + "]," +
-              "["+ btnInline(cmdMenuSettings) + "]]";
-             
-      break;
-    
-    case scnSettingsHomeTimes: 
-      
-      telegramButtons[cmdHomeWakeUpEarlier    ].label = "wake "    +String( (controllerData.workFromHomeWakeUp -timeValue_t(0,15) ).str().c_str());
-      telegramButtons[cmdHomeWakeUpLater      ].label = "wake "    +String( (controllerData.workFromHomeWakeUp +timeValue_t(0,15) ).str().c_str());
-      telegramButtons[cmdHomeGoToSleepEarlier ].label = "sleep "   +String( (controllerData.workFromHomeSleep  -timeValue_t(0,15) ).str().c_str());
-      telegramButtons[cmdHomeGoToSleepLater   ].label = "sleep "   +String( (controllerData.workFromHomeSleep  +timeValue_t(0,15) ).str().c_str());
-    
-      return "[["+ btnInline(cmdHomeWakeUpEarlier)     + "," + btnInline(cmdHomeWakeUpLater)    + "]," +
-              "["+ btnInline(cmdHomeGoToSleepEarlier)  + "," + btnInline(cmdHomeGoToSleepLater) + "]," +
-              "["+ btnInline(cmdMenuSettings)                                                   + "]]";
-      break;
-      
-    case scnSettingsOfficeTimes: 
-
-      telegramButtons[ cmdOfficeWakeUpEarlier    ].label = "wake "    +String( (controllerData.workAtOfficeWakeUp -timeValue_t(0,15) ).str().c_str());
-      telegramButtons[ cmdOfficeWakeUpLater      ].label = "wake "    +String( (controllerData.workAtOfficeWakeUp +timeValue_t(0,15) ).str().c_str());
-      telegramButtons[ cmdOfficeLeaveEarlier     ].label = "go out "  +String( (controllerData.workAtOfficeGoOut  -timeValue_t(0,15) ).str().c_str());
-      telegramButtons[ cmdOfficeLeaveLater       ].label = "go out "  +String( (controllerData.workAtOfficeGoOut  +timeValue_t(0,15) ).str().c_str());
-      telegramButtons[ cmdOfficeComeHomeEarlier  ].label = "come in " +String( (controllerData.workAtOfficeComeIn -timeValue_t(0,15) ).str().c_str());
-      telegramButtons[ cmdOfficeComeHomeLater    ].label = "come in " +String( (controllerData.workAtOfficeComeIn +timeValue_t(0,15) ).str().c_str());
-      telegramButtons[ cmdOfficeGoToSleepEarlier ].label = "sleep "   +String( (controllerData.workAtOfficeSleep  -timeValue_t(0,15) ).str().c_str());
-      telegramButtons[ cmdOfficeGoToSleepLater   ].label = "sleep "   +String( (controllerData.workAtOfficeSleep  +timeValue_t(0,15) ).str().c_str());
-      
-      return "[["+ btnInline(cmdOfficeWakeUpEarlier)     + "," + btnInline(cmdOfficeWakeUpLater)    + "]," +
-              "["+ btnInline(cmdOfficeLeaveEarlier)      + "," + btnInline(cmdOfficeLeaveLater)     + "]," +
-              "["+ btnInline(cmdOfficeComeHomeEarlier)   + "," + btnInline(cmdOfficeComeHomeLater)  + "]," +
-              "["+ btnInline(cmdOfficeGoToSleepEarlier)  + "," + btnInline(cmdOfficeGoToSleepLater) + "]," +
-              "["+ btnInline(cmdMenuSettings)                                                       + "]]";
-      break;
-      
-    case scnSettingsWeekendTimes: 
-
-      telegramButtons[ cmdWeekendWakeUpEarlier    ].label = "wake "    +String( (controllerData.weekendWakeUp -timeValue_t(0,15) ).str().c_str());
-      telegramButtons[ cmdWeekendWakeUpLater      ].label = "wake "    +String( (controllerData.weekendWakeUp +timeValue_t(0,15) ).str().c_str());
-      telegramButtons[ cmdWeekendGoToSleepEarlier ].label = "sleep "   +String( (controllerData.weekendSleep  -timeValue_t(0,15) ).str().c_str());
-      telegramButtons[ cmdWeekendGoToSleepLater   ].label = "sleep "   +String( (controllerData.weekendSleep  +timeValue_t(0,15) ).str().c_str());
-      
-      return "[["+ btnInline(cmdWeekendWakeUpEarlier)     + "," + btnInline(cmdWeekendWakeUpLater)    + "]," +
-              "["+ btnInline(cmdWeekendGoToSleepEarlier)  + "," + btnInline(cmdWeekendGoToSleepLater) + "]," +
-              "["+ btnInline(cmdMenuSettings)                                                         + "]]";
-
-      break;
-      
-    case scnSettingsTemperature: 
-
-      telegramButtons[ cmdHighTemperatureDown ].label = "High " + String(controllerData.highTemp-0.5, 1) + "°C";
-      telegramButtons[ cmdHighTemperatureUp   ].label = "High " + String(controllerData.highTemp+0.5, 1) + "°C";
-      telegramButtons[ cmdLowTemperatureDown  ].label = "Low "  + String(controllerData.lowTemp -0.5, 1) + "°C";
-      telegramButtons[ cmdLowTemperatureUp    ].label = "Low "  + String(controllerData.lowTemp +0.5, 1) + "°C";
-
-      return "[["+ btnInline(cmdHighTemperatureDown) + "," + btnInline(cmdHighTemperatureUp) + "]," +
-              "["+ btnInline(cmdLowTemperatureDown)  + "," + btnInline(cmdLowTemperatureUp)  + "]," +
-              "["+ btnInline(cmdMenuSettings)                                                + "]]";
-
-      break;
-
-    case scnSettingsSensorOffset: 
-      return "[["+ btnInline(cmdSensorOffsetDown) + "," + btnInline(cmdSensorOffsetUp) + "]," +
-              "["+ btnInline(cmdMenuSettings)                                          + "]]";
-
-      break;
-
-    case scnResetDevice:
-      return "[["+ btnInline(cmdResetDeviceYes) + "]," +
-              "["+ btnInline(cmdResetDeviceNo ) + "]]";
-             
-      break;
-
-    default:
-
-      return "[[" + btnInline(cmdSetpointLower) + "," + btnInline(cmdSetpointAutomatic)+ "," + btnInline(cmdSetpointHigher) + "]," +
-              "[" + btnInline(cmdMenuOverruleToday)                                                 + "]," +
-              "[" + btnInline(cmdMenuOverruleTomorrow)                                              + "]," +
-              "[" + btnInline(cmdMenuOverruleMultipleDays)                                          + "]," +
-              "[" + btnInline(cmdMenuSettings) + "," + btnInline(cmdUpdateStatus) + "]]";
-
-  } // switch (screen)
 }
+
 
 // Helper function that generates a string with the current time, used under a message sent to the user
 String currentTime() {

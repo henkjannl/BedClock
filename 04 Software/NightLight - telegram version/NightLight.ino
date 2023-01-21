@@ -6,6 +6,18 @@
 
 #include <stdlib.h>     
 
+/*
+TODO:
+Remove gui altogether
+Start with no adaption of screen brightness
+Start with screen only displaysing time
+Add weather 
+Add quote
+Adapt and debug screen brightness
+Implement more than one screen
+*/
+
+
 // ======== DEFINES ================
 #if CONFIG_FREERTOS_UNICORE
   #define ARDUINO_RUNNING_CORE 0
@@ -18,12 +30,12 @@
 #include <WiFi.h>
 #include "time.h"
 
-#include "data.h"
-#include "keyboard.h"
+#include "a_data.h"
+#include "b_keyboard.h"
+#include "c_quote.h"
+#include "d_weather.h"
 #include "light.h"
 #include "screen.h"
-#include "weather.h"
-#include "quote.h"
 
 using namespace std;
 

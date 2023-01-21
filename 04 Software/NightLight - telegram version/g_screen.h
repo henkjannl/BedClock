@@ -16,7 +16,6 @@ using namespace std;
 
 // ======== GLOBAL VARIABLES ============= 
 U8G2_SSD1306_128X32_UNIVISION_F_SW_I2C u8g2(U8G2_R2, 22, 21, U8X8_PIN_NONE);  
-tDisplay display(u8g2);
 
 TimerHandle_t timerScreenContrast; // Adjust the screen contrast periodically
 bool triggerScreenContrastAdjustment;
@@ -53,13 +52,18 @@ static void timerScreenContrastCallback( TimerHandle_t xTimer ){
   triggerScreenContrastAdjustment=true;
 }
 
-void setScreenBrightness(uint8_t contrast, uint8_t vcom, uint8_t p1, uint8_t p2) {
-  /* Typical values for the parameters:
-   *    setScreenBrightness(255, 0,  1, 1); // most bright
-   *    setScreenBrightness( 16, 0,  1, 1);
-   *    setScreenBrightness(  5, 0,  0, 0);
-   *    setScreenBrightness(  3, 0,  0, 0);
-   *    setScreenBrightness(  1, 0,  0, 0); // least bright   */
+void setScreenBrightness(uint8_t contrast) {
+  /* Typical values for the parameters contrast, vcom, p1, p2:
+   *  255, 0,  1, 1 // most bright
+   *   16, 0,  1, 1
+   *    5, 0,  0, 0
+   *    3, 0,  0, 0
+   *    1, 0,  0, 0 // least bright   */
+
+  uint8_t vcom = 0;
+  uint8_t p1 = contrast > 15 ? 1 : 0; 
+  uint8_t p2 = contrast > 15 ? 1 : 0;
+
   u8g2.setContrast(contrast);
   u8x8_cad_StartTransfer(u8g2.getU8x8());
   u8x8_cad_SendCmd(u8g2.getU8x8(), 0x0db);
@@ -71,7 +75,7 @@ void setScreenBrightness(uint8_t contrast, uint8_t vcom, uint8_t p1, uint8_t p2)
 
 void taskScreen(void * parameter ) {
 
-  tButtonClick keystroke;
+  button_t keystroke;
   BaseType_t buttonRead;
   BaseType_t success;
   tMenuItem command;
@@ -80,79 +84,44 @@ void taskScreen(void * parameter ) {
   triggerScreenContrastAdjustment = true;
   
   // Send default settings to light task
-  command=brightness25; xQueueSendToBack(lightQueue, &command, 0 );    
-  command=colorWhite;   xQueueSendToBack(lightQueue, &command, 0 );    
-  command=timer03;      xQueueSendToBack(lightQueue, &command, 0 );    
-  command=mainPowerOff; xQueueSendToBack(lightQueue, &command, 0 );    
+  command=cmdDuration10;   xQueueSendToBack(lightQueue, &command, 0 );    
+  command=cmdColorWhite;   xQueueSendToBack(lightQueue, &command, 0 );    
+  command=cmdBrightness40; xQueueSendToBack(lightQueue, &command, 0 );    
+  command=cmdLightOn;      xQueueSendToBack(lightQueue, &command, 0 );    
 
   // Set default contrast
-  u8g2.setContrast(25); // Perhaps remove later, just to test if the contrast function works
+  u8g2.setContrast(255); // Perhaps remove later, just to test if the contrast function works
 
   while(true) {
     buttonRead=xQueueReceive(keyboardQueue, (void *) &keystroke, 0); 
-    if (buttonRead) {
+    switch (buttonRead) {
 
-      if(keystroke==keyboardTimeout) {
-        // Keyboard timeout, switch back to main screen
-        display.showMain();
-      }
-      else if (keystroke==btnPower) {
-        // Switch power on off    
-        Serial.println("Power button pressed");
-        command=mainTogglePower;
-        xQueueSendToBack( lightQueue, &command, 0 );    
-      }
-      else if (keystroke==btnNext) {
+      case btnNext:
         Serial.println("Next button pressed");
-        display.nextButton();
-      }
-      else if (keystroke==btnSelect) {
-        
-        // Notify the light that the user selected a command
+      break;
+
+      case btnSelect: 
         Serial.println("Select button pressed");
+      break;
 
-        command = display.selectButton();
-
-        Serial.printf("Command %s received from select button\n", menuItem[command]);
-        
-        if(command==screenContrastAuto) {
-            autoScreenContrast = true;
-            triggerScreenContrastAdjustment = true;
-            Serial.println("Auto screen brightness selected");
-        }
-        else if(command==screenContrast10) {
-            setScreenBrightness(  1, 0,  0, 0); 
-            Serial.println("10% screen brightness selected");
-            autoScreenContrast = false;
-        }
-        else if(command==screenContrast35) {
-            setScreenBrightness(  5, 0,  0, 0);
-            autoScreenContrast = false;
-            Serial.println("35% screen brightness selected");
-        }
-        else if(command==screenContrast100) {
-            setScreenBrightness( 16, 0,  1, 1);
-            Serial.println("100% screen brightness selected");
-            autoScreenContrast = false;
-        }
-        else {
-            // Not something for us. See if the light can do something with it
-            xQueueSendToBack(lightQueue, &command, 0 );
-        } // if then else command
-        
-      }
-    }; // buttonRead
+      case btnLight:
+        // Switch power on off    
+        command=cmdLightToggle;
+        xQueueSendToBack( lightQueue, &command, 0 );    
+        Serial.println("Light button pressed");
+      break;
+    }; // switch buttonRead
 
     if(autoScreenContrast & triggerScreenContrastAdjustment) {
       Serial.println("Auto screen brightness timer triggered");
 
       if(data.weatherAvailable==dqUnavailable) {
         Serial.println("Sunrise and sunset are not yet available");
-        setScreenBrightness(  1, 0,  0, 0); // least bright   */
+        setScreenBrightness( 1 ); // least bright   */
       }
       else if(!data.syncTime) {
         Serial.println("Time not yet synched");
-        setScreenBrightness(  1, 0,  0, 0); // least bright   */
+        setScreenBrightness(  1 ); // least bright   */
       }
       else {        
         time_t currentTime;
@@ -172,11 +141,11 @@ void taskScreen(void * parameter ) {
         Serial.printf("Day length: %.3f\n", dayLength);
         Serial.printf("Sun strength: %.3f\n", sunStrength);
   
-             if(sunStrength> 0.40) setScreenBrightness(255, 0,  1, 1); // most bright
-        else if(sunStrength> 0.13) setScreenBrightness( 16, 0,  1, 1);
-        else if(sunStrength>-0.13) setScreenBrightness(  5, 0,  0, 0);
-        else if(sunStrength>-0.40) setScreenBrightness(  3, 0,  0, 0);
-        else                       setScreenBrightness(  1, 0,  0, 0); // least bright   */
+             if(sunStrength> 0.40) setScreenBrightness( 255 ); // most bright
+        else if(sunStrength> 0.13) setScreenBrightness(  16 );
+        else if(sunStrength>-0.13) setScreenBrightness(   5 );
+        else if(sunStrength>-0.40) setScreenBrightness(   3 );
+        else                       setScreenBrightness(   1 ); // least bright   */
         
         triggerScreenContrastAdjustment=false;
       }
@@ -185,12 +154,12 @@ void taskScreen(void * parameter ) {
 
     u8g2.setDrawColor(0);
     u8g2.clearBuffer();  
-    display.display(u8g2);
+    /*
+    Implement drawing the display here
+    */
     u8g2.sendBuffer();
 
     uint32_t redrawReady=millis();
-
-    display.step();
     
     /* Keep a watch on how much memory is used by the measurement thread */
     data.screenHighWaterMark= uxTaskGetStackHighWaterMark(NULL);
