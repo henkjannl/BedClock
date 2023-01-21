@@ -15,6 +15,7 @@ Add weather
 Add quote
 Adapt and debug screen brightness
 Implement more than one screen
+Add settings to Telegram, e.g. screen contrast auto or manual
 */
 
 
