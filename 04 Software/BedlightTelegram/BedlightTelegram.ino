@@ -31,12 +31,34 @@ Add settings to Telegram, e.g. screen contrast auto or manual
 #include <WiFi.h>
 #include "time.h"
 
+#define USE_WIFI false
+#define USE_QUOTE false
+#define USE_WEATHER false
+#define USE_TELEGRAM false
+#define USE_SCREEN false
+
 #include "a_data.h"
 #include "b_keyboard.h"
+
+#if(USE_QUOTE)
 #include "c_quote.h"
+#endif
+
+#if(USE_WEATHER)
 #include "d_weather.h"
-#include "light.h"
-#include "screen.h"
+#endif
+
+#if(USE_TELEGRAM)
+#include "e_telegram.h"
+#endif
+
+#if(USE_SCREEN)
+#include "f_screen.h"
+#else
+void debugMessage( String msg ) { Serial.println(msg); };
+#endif
+
+#include "g_light.h"
 
 using namespace std;
 
@@ -45,6 +67,12 @@ void syncTime();
 
 void setup(void) {
   Serial.begin(115200);
+
+#if(USE_SCREEN)
+  setupScreen();
+  Serial.println("Display setup finished");  
+  debugMessage("Screen initialized");
+#endif
   
   delay(100);
   // Initialize SPIFFS
@@ -53,8 +81,12 @@ void setup(void) {
       return;
   }
   Serial.println("SPIFFS loaded");  
+  debugMessage("SPIFFS initialized");
   config.load();
 
+  debugMessage("Config loaded");
+
+#if(USE_WIFI)
   for(int i=0; i<5; i++) {
     if(!data.connected) {
       connectToWiFi();
@@ -62,27 +94,38 @@ void setup(void) {
     }
   }
 
+  debugMessage("Wifi connected");
+
   for(int i=0; i<5; i++) {
     if(!data.syncTime) {
       syncTime();
       delay(300);
     }
+  }
+
+  debugMessage("Time synched");
+#endif
   
   setupKeyboard();
-  Serial.println("Keyboard setup finished");  
+  debugMessage("Keyboard initialized");
 
   setupLight();
-  Serial.println("Light setup finished");  
+  debugMessage("Light initialized");
 
-  setupScreen();
-  Serial.println("Display setup finished");  
-
-  setupWeather();
-  Serial.println("Weather setup finished");  
-
+#if(USE_QUOTE)
   setupQuote();
   Serial.println("Quote setup finished");  
+  debugMessage("Quote initialized");
+#endif
 
+#if(USE_WEATHER)
+  setupWeather();
+  Serial.println("Weather setup finished");  
+  debugMessage("Weather initialized");
+#endif
+
+
+  debugMessage("Setup finished");
 
 } // setup
 
@@ -113,18 +156,23 @@ void loop(void) {
 
   Serial.println();
 
-  //portENTER_CRITICAL(&dataAccessMux);
+#if(USE_WIFI)
+
+  portENTER_CRITICAL(&dataAccessMux);
   data.connected = (WiFi.status() == WL_CONNECTED);
-  //portEXIT_CRITICAL(&dataAccessMux);  
+  portEXIT_CRITICAL(&dataAccessMux);  
 
   //connect to WiFi
   if(!data.connected) connectToWiFi();
 
   // Sync time
   if(data.connected & !data.syncTime ) syncTime();  
+#endif
 
   // Retrieve weather
+#if(USE_WEATHER)
   if(data.connected & (data.weatherAvailable==dqUnavailable)) getWeather();
+#endif
 
   vTaskDelay(10000);
   

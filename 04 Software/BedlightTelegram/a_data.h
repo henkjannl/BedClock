@@ -2,6 +2,7 @@
 #define DATA_H
 
 #include <Arduino.h>
+#include <map>
 #include "esp_system.h"
 #include "FS.h"
 #include "SPIFFS.h"
@@ -10,6 +11,9 @@
 #include <ArduinoJson.h>
 
 using namespace std;
+
+// ======== DEFINES ================
+#define PIN_ESP32_LED             2
 
 // ======== CONSTANTS ================
 const char *CONFIG_FILE = "/config.jsn";
@@ -72,46 +76,59 @@ const char EMOTICON_WARNING[]             = { 0xe2, 0x9a, 0xa0, 0xef, 0xb8, 0x8f
 
 // ======== TYPES ================
 
-// All commands displayed on screen and sent to light
-enum command_t { cmdLightOn, cmdLightOff, cmdLightToggle,
-cmdDuration03, cmdDuration05, cmdDuration10, cmdDuration20,
-cmdColorWhite, cmdColorYellow, cmdColorAmber, cmdColorRed,
-cmdBrightness25, cmdBrightness40, cmdBrightness60, cmdBrightness100,
-cmdStatus };
+enum screen_t { scnMain };
 
+enum command_t { 
+  // Commands to control the light
+  cmdLightOn, cmdLightOff, cmdLightToggle,
+  cmdDuration03, cmdDuration05, cmdDuration10, cmdDuration20, cmdDurationForever,
+  cmdColorWhite, cmdColorYellow, cmdColorAmber, cmdColorRed,
+  cmdBrightness25, cmdBrightness40, cmdBrightness60, cmdBrightness100,
+  cmdLightTimerExpired,
+  
+  cmdEndOfLightCommands,
+  
+  // Commands only for the keyboard
+  cmdButtonLeft, cmdButtonRight,
 
-// All available Telegram buttons that are associated with a command
+  // Commands only for Telegram
+  cmdStartTelegram,
+  cmdUpdateSoftware,
+  cmdRedrawScreen,
+  
+  cmdCommandNotRecognized };
+
+// Button faces for commands that are available in Telegram
 struct labelCallback_t {
   String label;            // label can change depending on the context
   const String callback;   // callback strings must remain the same
 };
 
+// Commands that have an associated button in Telegram
 std::map<command_t, labelCallback_t> telegramButtons = {
-  { cmdLightOn,       { String(EMOTICON_DOT_YELLOW) + " Light on",  "/cmdLightOn" } },
-  { cmdLightOff,      { String(EMOTICON_DOT_BLACK)  + " Light off", "/cmdLightOff" } },
-  { cmdDuration03,    { "3 minutes",  "/cmdDuration03"    } },
-  { cmdDuration05,    { "5 minutes",  "/cmdDuration05"    } },
-  { cmdDuration10,    { "10 minutes", "/cmdDuration10"    } },
-  { cmdDuration20,    { "20 minutes", "/cmdDuration20"    } },
-  { cmdColorWhite,    { "White",      "/cmdColorWhite"    } },
-  { cmdColorYellow,   { "Yellow",     "/cmdColorYellow"   } },
-  { cmdColorAmber,    { "Amber",      "/cmdColorAmber"    } },
-  { cmdColorRed,      { "Red",        "/cmdColorRed"      } },
-  { cmdBrightness25,  { "25%",        "/cmdBrightness25"  } },
-  { cmdBrightness40,  { "40%",        "/cmdBrightness40"  } },
-  { cmdBrightness60,  { "60%",        "/cmdBrightness60"  } },
-  { cmdBrightness100, { "100%",       "/cmdBrightness100" } },
-  { cmdStatus,        { String(EMOTICON_STHETOSCOPE)  + " Status", "/cmdStatus" } }
+  { cmdLightOn,         { String(EMOTICON_DOT_YELLOW) + " Light on",  "/cmdLightOn" } },
+  { cmdLightOff,        { String(EMOTICON_DOT_BLACK)  + " Light off", "/cmdLightOff" } },
+  { cmdDuration03,      { "3 minutes",  "/cmdDuration03"      } },
+  { cmdDuration05,      { "5 minutes",  "/cmdDuration05"      } },
+  { cmdDuration10,      { "10 minutes", "/cmdDuration10"      } },
+  { cmdDuration20,      { "20 minutes", "/cmdDuration20"      } },
+  { cmdDurationForever, { "Timer off",  "/cmdDurationForever" } },
+  { cmdColorWhite,      { "White",      "/cmdColorWhite"      } },
+  { cmdColorYellow,     { "Yellow",     "/cmdColorYellow"     } },
+  { cmdColorAmber,      { "Amber",      "/cmdColorAmber"      } },
+  { cmdColorRed,        { "Red",        "/cmdColorRed"        } },
+  { cmdBrightness25,    { "25%",        "/cmdBrightness25"    } },
+  { cmdBrightness40,    { "40%",        "/cmdBrightness40"    } },
+  { cmdBrightness60,    { "60%",        "/cmdBrightness60"    } },
+  { cmdBrightness100,   { "100%",       "/cmdBrightness100"   } },
 };  
-
-enum button_t { btnNext, btnSelect, btnLight };
-
-enum dataQuality_t { dqUnavailable, dqRefreshed, dqDisplayed };
 
 struct precipitation_t {
   long t;
   float prec;
 };
+
+enum dataQuality_t { dqUnavailable, dqRefreshed, dqDisplayed };
 
 class data_t {
   public:
@@ -128,9 +145,9 @@ class data_t {
 
     // Weather info
     bool requestWeather;
-    tDataQuality weatherAvailable;
+    dataQuality_t weatherAvailable;
     float outsideTemp;
-    list<tPrecipitation> precipitation;
+    list<precipitation_t> precipitation;
     char weatherIcon[12];
     // Todo: deal with time to adjust screen contrast
     //https://en.cppreference.com/w/cpp/chrono/c/time
@@ -139,7 +156,7 @@ class data_t {
 
     // Quote
     bool requestQuote;
-    tDataQuality quoteAvailable;
+    dataQuality_t quoteAvailable;
     string quote;
   
     // System info
@@ -203,7 +220,7 @@ class config_t {
       }
       
       for (JsonObject elem : doc["AccessPoints"].as<JsonArray>()) {
-        tAccessPoint AccessPoint;
+        accessPoint_t AccessPoint;
         strlcpy(AccessPoint.ssid     ,elem["SSID"],    sizeof(AccessPoint.ssid    ));
         strlcpy(AccessPoint.password ,elem["password"],sizeof(AccessPoint.password));
         strlcpy(AccessPoint.timezone ,elem["timezone"],sizeof(AccessPoint.timezone));         
@@ -214,7 +231,8 @@ class config_t {
 
       strlcpy(botToken,doc["BotToken"],sizeof(botToken)); // "xxxxxxxxxx:yyyyyyyyyyyy-zzzzzzzzzzzzzz_qqqqqqq"
       strlcpy(chatID  ,doc["ChatID"]  ,sizeof(chatID  )); // "-xxxxxxxxxx"
-      strlcpy(openweathermapAPIkey,doc["openweathermapAPIkey"]  ,sizeof(openweathermapAPIkey)); 
+      strlcpy(openweathermapAPIkey,doc["openweathermapAPIkey"]  ,sizeof(openweathermapAPIkey) ); 
+      Serial.println("Config loaded");
     }
 
     void Save() {
@@ -223,13 +241,40 @@ class config_t {
 }; // config_t
 
 
+// ======== HELPER FUNCTIONS ============= 
+// Helper function that generates a string with the current time, used under a message sent to the user
+String currentTime() {
+  time_t now;
+  time(&now);
+  struct tm * local;
+  local = localtime(&now);
+  char buffer[20];
+  snprintf(buffer, 20, "%02d:%02d:%02d", local->tm_hour, local->tm_min, local->tm_sec);
+  return String(buffer);
+};
+
+String convertToHexString( String input ) {
+  String result = "{ ";
+  for( int i=0; i<input.length(); i++ ) {
+    result += String("0x") + String( (int) input[i], HEX ) + ", ";
+  }
+  result+="0x00 };";
+  result.toLowerCase();
+  return result;
+};
+
+void sendCommandToQueue( command_t command, QueueHandle_t queue ) {
+  xQueueSendToBack( queue, &command, 0 );
+};
+
 // ======== GLOBAL VARIABLES ============= 
 config_t config; // Configuration data, to be stored as JSON file in SPIFFS
 data_t data;
 
 portMUX_TYPE dataAccessMux = portMUX_INITIALIZER_UNLOCKED;
 
-QueueHandle_t keyboardQueue;
-QueueHandle_t lightQueue;
+QueueHandle_t screenQueue   = xQueueCreate( 20, sizeof(command_t) );
+QueueHandle_t lightQueue    = xQueueCreate( 20, sizeof(command_t) );
+QueueHandle_t displayQueue  = xQueueCreate( 20, sizeof(command_t) );
 
 #endif // DATA_H

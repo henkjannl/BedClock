@@ -7,15 +7,17 @@
   #define ARDUINO_RUNNING_CORE 1
 #endif
 
+#include "a_data.h"
+#include <map>
+#include <Freenove_WS2812_Lib_for_ESP32.h>
+
+using namespace std;
+
+// ======== DEFINES ============= 
 #define TIMER_PERIOD_03 pdMS_TO_TICKS( 3*60*1000) 
 #define TIMER_PERIOD_05 pdMS_TO_TICKS( 5*60*1000) 
 #define TIMER_PERIOD_10 pdMS_TO_TICKS(10*60*1000) 
 #define TIMER_PERIOD_20 pdMS_TO_TICKS(20*60*1000) 
-
-#include "data.h"
-#include <Freenove_WS2812_Lib_for_ESP32.h>
-
-using namespace std;
 
 // ======== CONSTANTS ============= 
 const float LIGHT_INC[] = { 0.0008, 0.0056, 0.0148, 0.0274, 0.0422, 0.0578, 0.0726, 0.0852, 0.0944, 0.0992, 0.0992, 
@@ -23,17 +25,26 @@ const float LIGHT_INC[] = { 0.0008, 0.0056, 0.0148, 0.0274, 0.0422, 0.0578, 0.07
 
 const int MAX_INC = 19;
 
-typedef struct { float R,G,B; } color_t;
-
 const float MAX_INTENSITY = 255.0;
-const color_t COLORS[]  = { { 1.000, 1.000, 1.000 },   // White
-                            { 1.000, 1.000, 0.500 },   // Yellow
-                            { 1.000, 0.750, 0.500 },   // Orange
-                            { 1.000, 0.500, 0.500 } }; // Red
 
+enum color_t { clrWhite, clrYellow, clrAmber, clrRed };
+
+struct rgb_t { 
+  float R;
+  float G;
+  float B; 
+};
+
+std::map<color_t, rgb_t> COLORS = { 
+  { clrWhite,  { 1.000, 1.000, 1.000 } },   
+  { clrYellow, { 1.000, 1.000, 0.500 } },   
+  { clrAmber,  { 1.000, 0.750, 0.500 } },   
+  { clrRed,    { 1.000, 0.500, 0.500 } }
+};
+
+// The order in which the LEDs in the 4x4 grid are switched on
 const uint16_t SUB_BRIGHTNESS[] = {0x0000, 0x0008, 0x0208, 0x020A, 0x0A0A, 0x2A0A, 0x2A8A, 0x2AAA, 0xAAAA, 
     0xAABA, 0xABBA, 0xABBE, 0xEBBE, 0xEBBF, 0xFBBF, 0xFBFF };
-
 
 // This class is used to smoothly control the values for the RGB channels of the light
 class tFloatVariable {
@@ -97,16 +108,13 @@ TimerHandle_t timerTimeoutTimer; // Light goes out if this timer is expired
 void taskLight(void * parameter );
 
 static void timerTimeoutCallback( TimerHandle_t xTimer ) {
-  tMenuItem command=mainTimerExpired; 
-  xQueueSendToBack( lightQueue, &command, 0 );
+  sendCommandToQueue( cmdLightTimerExpired, lightQueue );
 }; // timerTimeoutCallback
 
 void setupLight() {
   strip = Freenove_ESP32_WS2812(LED_COUNT, LED_PIN, LED_CHANNEL, TYPE_GRB);
   strip.begin();
   strip.setBrightness(255);  
-
-  lightQueue=xQueueCreate(10,sizeof(tMenuItem)); 
 
   timerTimeoutTimer=xTimerCreate( "TimerTimeOut", 
                 TIMER_PERIOD_03,        // Menu goes back to idle after 20 seconds
@@ -127,175 +135,131 @@ void setupLight() {
 
 void taskLight(void * parameter ){
   
-  static tFloatVariable R,G,B; // Individual color components
   static float brightness=0.25;
-  static uint8_t colorIndex=0;  
+  static color_t color=clrWhite;  
   static bool powerState=false;
   static bool ignoreTimer=false;
+  static tFloatVariable R,G,B; // Individual color components
 
-  static tMenuItem command;
-  static BaseType_t commandReceived;
+  command_t command;
 
   while(true) {
 
-    commandReceived=xQueueReceive(lightQueue, (void *) &command, 0); 
+    if ( xQueueReceive( lightQueue, &command, 10) == pdPASS ) {
 
-    if(commandReceived) {
       switch(command) {
 
-        case mainScreen:
-          // command can be ignored
-        break;
-
-        case mainFull:
-          // command can be ignored
-        break;
-
-        case mainNight:
-          // command can be ignored
-        break;
-
-        case mainEmpty:
-          // command can be ignored
-        break;
-
-        case mainPowerOn:
-          Serial.println("Power on");
+        case cmdLightOn: 
+          Serial.println("Light on");
           powerState=true;
           xTimerReset( timerTimeoutTimer, 0 ); 
-        break;
-        
-        case mainPowerOff:
-          Serial.println("Power off");
+          break; 
+          
+        case cmdLightOff:           
+          Serial.println("Light off");
           powerState=false;
-        break;
-        
-        case mainTogglePower:
-          Serial.println("Power toggle");
+          break; 
+          
+        case cmdLightToggle: 
+          Serial.println("Toggle light");
           powerState=!powerState;
-          if(powerState) {
+          if(powerState) { 
             xTimerReset( timerTimeoutTimer, 0 ); 
           }
         break;
 
-        case mainTimerExpired:
-          Serial.println("Timer expired");
+        case cmdLightTimerExpired:
+          Serial.println("Light timer expired");
           if(!ignoreTimer) powerState=false;
         break;
-        
-        case mainBrightness:
-          // command can be ignored
-        break;
-        
-        case mainColor:
-          // command can be ignored
-        break;
-        
-        case mainTimer:
-          // command can be ignored
-        break;
-        
-        case mainBack:
-          // command can be ignored
-        break;
-        
-        case brightness25:
-          Serial.println("Brightness 25%");
-          brightness=0.25;
-        break;
-        
-        case brightness35:
-          Serial.println("Brightness 35%");
-          brightness=0.35;
-        break;
-        
-        case brightness50:
-          Serial.println("Brightness 50%");
-          brightness=0.50;
-        break;
-        
-        case brightness70:
-          Serial.println("Brightness 70%");
-          brightness=0.70;
-        break;
-        
-        case brightness100:
-          Serial.println("Brightness 100%");
-          brightness=1.00;
-        break;
-        
-        case brightnessBack:
-          // command can be ignored
-        break;
-        
-        case colorWhite:
-          Serial.println("Color white");
-          colorIndex=0;
-        break;
-        
-        case colorYellow:
-          Serial.println("Color yellow");
-          colorIndex=1;
-        break;
-        
-        case colorOrange:
-          Serial.println("Color orange");
-          colorIndex=2;
-        break;
-        
-        case colorRed:
-          Serial.println("Color red");
-          colorIndex=3;
-        break;
-        
-        case colorBack:
-          // command can be ignored
-        break;
-        
-        case timer03:
+
+        case cmdDuration03: 
           Serial.println("Timer 3 min");
           xTimerChangePeriod(timerTimeoutTimer, TIMER_PERIOD_03, 0); 
           xTimerReset(timerTimeoutTimer, 0 ); // ToDO: not sure if this is needed
           ignoreTimer=false;
-        break;
-        
-        case timer05:
+          break; 
+          
+        case cmdDuration05: 
           Serial.println("Timer 5 min");
           xTimerChangePeriod(timerTimeoutTimer, TIMER_PERIOD_05, 0); 
           xTimerReset(timerTimeoutTimer, 0 ); // ToDO: not sure if this is needed
           ignoreTimer=false;
-        break;
-        
-        case timer10:
+          break; 
+          
+        case cmdDuration10: 
           Serial.println("Timer 10 min");
           xTimerChangePeriod(timerTimeoutTimer, TIMER_PERIOD_10, 0); 
           xTimerReset(timerTimeoutTimer, 0 ); // ToDO: not sure if this is needed
           ignoreTimer=false;
-        break;
-        
-        case timer20:
+          break; 
+          
+        case cmdDuration20: 
           Serial.println("Timer 20 min");
           xTimerChangePeriod(timerTimeoutTimer, TIMER_PERIOD_20, 0); 
           xTimerReset(timerTimeoutTimer, 0 ); // ToDO: not sure if this is needed
           ignoreTimer=false;
-        break;
-        
-        case timerOff:
+          break; 
+
+        case cmdDurationForever:
           Serial.println("Timer off");
           ignoreTimer=true;
         break;
+          
+        case cmdColorWhite: 
+          Serial.println("Color white");
+          color=clrWhite;
+          break; 
+
+        case cmdColorYellow: 
+          Serial.println("Color yellow");
+          color=clrWhite;
+          break; 
+
+        case cmdColorAmber: 
+          Serial.println("Color amber");
+          color=clrAmber;
+          break; 
+
+        case cmdColorRed: 
+          Serial.println("Color red");
+          color=clrRed;
+          break; 
+
+        case cmdBrightness25: 
+          Serial.println("Brightness 25%");
+          brightness=0.25;
+          break; 
+          
+        case cmdBrightness40: 
+          Serial.println("Brightness 40%");
+          brightness=0.40;
+          break; 
+          
+        case cmdBrightness60: 
+          Serial.println("Brightness 60%");
+          brightness=0.60;
+          break; 
+          
+        case cmdBrightness100: 
+          Serial.println("Brightness 100%");
+          brightness=1.00;
+          break; 
+
+        case cmdUpdateSoftware: break; 
+        case cmdButtonLeft: break; 
+        case cmdButtonRight: break; 
+        case cmdRedrawScreen: break; 
+        case cmdCommandNotRecognized: break; 
         
-        case timerBack:
-          // command can be ignored
-        break;
       } // switch command
-    } // if command received
+    } // if xQueueReceive === pdPASS
         
     if(powerState) {
-      // If the user has changed bridghtess or color sett
-      R.setTarget(MAX_INTENSITY*COLORS[colorIndex].R*brightness);
-      G.setTarget(MAX_INTENSITY*COLORS[colorIndex].G*brightness);
-      B.setTarget(MAX_INTENSITY*COLORS[colorIndex].B*brightness);
+      // If the user has changed brightess or color set
+      R.setTarget(MAX_INTENSITY*COLORS[color].R*brightness);
+      G.setTarget(MAX_INTENSITY*COLORS[color].G*brightness);
+      B.setTarget(MAX_INTENSITY*COLORS[color].B*brightness);
     }
     else {
       R.setTarget(0);
@@ -317,17 +281,17 @@ void taskLight(void * parameter ){
     uint16_t controlBit=0x01;
    
     for(uint8_t i=0; i<16; i++) {
-        ledR=baseR;
-        ledG=baseG; 
-        ledB=baseB;
+      ledR=baseR;
+      ledG=baseG; 
+      ledB=baseB;
 
-        if( (subR & controlBit) !=0 ) ledR++;
-        if( (subG & controlBit) !=0 ) ledG++;
-        if( (subB & controlBit) !=0 ) ledB++;
+      if( (subR & controlBit) !=0 ) ledR++;
+      if( (subG & controlBit) !=0 ) ledG++;
+      if( (subB & controlBit) !=0 ) ledB++;
 
-        controlBit=controlBit<<1;
+      controlBit=controlBit<<1;
 
-        strip.setLedColorData(i, ledR, ledG, ledB);        
+      strip.setLedColorData(i, ledR, ledG, ledB);        
     } // for i
 
     strip.show();    

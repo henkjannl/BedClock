@@ -2,7 +2,7 @@
 
 #define WEATHER_H
 
-#include "data.h"
+#include "a_data.h"
 #include <ArduinoJson.h>
 
 TimerHandle_t timerWeather; // New weather report requested if this timer expires
@@ -112,7 +112,7 @@ void taskWeather(void * parameter ) {
         data.precipitation.clear();
         
         for (JsonObject elem : doc["minutely"].as<JsonArray>()) {
-          tPrecipitation p;
+          precipitation_t p;
           p.t = elem["dt"]; // 1617992220, 1617992280, 1617992340, 1617992400, 1617992460, 1617992520, ...
           p.prec = elem["precipitation"]; // 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
           //p.prec= rand() % 3 + 1; // for debugging purposes
@@ -127,9 +127,6 @@ void taskWeather(void * parameter ) {
         data.weatherAlive++;
         portEXIT_CRITICAL(&dataAccessMux);
 
-        // Trigger screen contrast adjustment
-        triggerScreenContrastAdjustment=true;
-        
        } // httpCode == HTTP_CODE_OK
       } // httpCode > 0
     } // command received  
