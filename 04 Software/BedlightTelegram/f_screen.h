@@ -143,7 +143,9 @@ void taskScreen(void * parameter ) {
         }
       }
       uint32_t redrawBegin=millis();
-  
+
+      disableKeyboard();
+      
       u8g2.clearBuffer();  
   
       /*
@@ -157,7 +159,9 @@ void taskScreen(void * parameter ) {
       u8g2.drawStr( 0, 0, currentTime().c_str() );
   
       u8g2.sendBuffer();
-  
+
+      enableKeyboard();
+
       uint32_t redrawReady=millis();
       
       /* Keep a watch on how much memory is used by the measurement thread */
@@ -173,12 +177,14 @@ void taskScreen(void * parameter ) {
 
 // ============ HELPER FUNCTIONS ===================
 void debugMessage( String msg ) {
+  disableKeyboard();
   u8g2.setFont(u8g2_font_6x10_tf);
   u8g2.setFontRefHeightExtendedText();
   u8g2.setDrawColor(0);
   u8g2.setFontPosTop();
   u8g2.setFontDirection(0);
   u8g2.drawStr( 0, 16, msg.c_str() );
+  enableKeyboard();
 }
 
 #endif // SCREEN_H

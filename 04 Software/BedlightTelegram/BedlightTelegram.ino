@@ -31,6 +31,7 @@ Add settings to Telegram, e.g. screen contrast auto or manual
 #include <WiFi.h>
 #include "time.h"
 
+#define USE_KEYBOARD false
 #define USE_WIFI false
 #define USE_QUOTE false
 #define USE_WEATHER false
@@ -38,7 +39,10 @@ Add settings to Telegram, e.g. screen contrast auto or manual
 #define USE_SCREEN false
 
 #include "a_data.h"
+
+#if(USE_KEYBOARD)
 #include "b_keyboard.h"
+#endif
 
 #if(USE_QUOTE)
 #include "c_quote.h"
@@ -106,8 +110,10 @@ void setup(void) {
   debugMessage("Time synched");
 #endif
   
+#if(USE_KEYBOARD)
   setupKeyboard();
   debugMessage("Keyboard initialized");
+#endif
 
   setupLight();
   debugMessage("Light initialized");
@@ -130,7 +136,10 @@ void setup(void) {
 } // setup
 
 void loop(void) {
-  
+
+  Serial.printf("Keyboard: %d\n", data.keyboardAlive );
+
+  /*
   Serial.printf("      Connected: %s Timesync: %s Weather: %s\n", 
      data.connected ? "Y" : "N", 
      data.syncTime ? "Y" : "N", 
@@ -153,11 +162,9 @@ void loop(void) {
   Serial.printf("      Quote: %d updates %d bytes\n", 
      data.quoteAlive,
      data.quoteHighWaterMark);
-
-  Serial.println();
-
+  */
+  
 #if(USE_WIFI)
-
   portENTER_CRITICAL(&dataAccessMux);
   data.connected = (WiFi.status() == WL_CONNECTED);
   portEXIT_CRITICAL(&dataAccessMux);  

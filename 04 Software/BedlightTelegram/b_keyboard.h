@@ -22,35 +22,49 @@ using namespace std;
 
 //============= GLOBAL DECLARATIONS =============//
 TimerHandle_t keyboardTimer;   // Polls capacitive keys @30Hz
+volatile uint32_t keyboardEnableCounter = 0;
 
 //================== FUNCTIONS ==================//
+void enableKeyboard() {
+  keyboardEnableCounter--;
+};
+
+void disableKeyboard() {
+  keyboardEnableCounter++;
+};
+
+bool keyboardEnabled() {
+  return (keyboardEnableCounter==0);
+};
+
 static void keyboardTimerCallback( TimerHandle_t xTimer ) {
 
   static volatile uint32_t keyLeftCounter  = 0;
   static volatile uint32_t keyRightCounter = 0;
   static volatile uint32_t keyTopCounter   = 0;
 
-  if (touchRead(PIN_KEY_LEFT )<KEY_TRESHOLD) keyLeftCounter++;  else keyLeftCounter =0; 
-  if (touchRead(PIN_KEY_TOP  )<KEY_TRESHOLD) keyTopCounter++;   else keyTopCounter  =0; 
-  if (touchRead(PIN_KEY_RIGHT)<KEY_TRESHOLD) keyRightCounter++; else keyRightCounter=0; 
-  
-  if(keyLeftCounter ==3) { sendCommandToQueue( cmdButtonLeft,  screenQueue ); }; 
-  if(keyTopCounter  ==3) { sendCommandToQueue( cmdLightToggle, lightQueue  ); };
-  if(keyRightCounter==3) { sendCommandToQueue( cmdButtonRight, screenQueue ); }; 
-
-  data.keyboardAlive++;
+  if( keyboardEnabled() ) {
+    if (touchRead(PIN_KEY_LEFT )<KEY_TRESHOLD) keyLeftCounter++;  else keyLeftCounter =0; 
+    if (touchRead(PIN_KEY_TOP  )<KEY_TRESHOLD) keyTopCounter++;   else keyTopCounter  =0; 
+    if (touchRead(PIN_KEY_RIGHT)<KEY_TRESHOLD) keyRightCounter++; else keyRightCounter=0; 
+    
+    if(keyLeftCounter ==2) { sendCommandToQueue( cmdButtonLeft,  screenQueue ); }; 
+    if(keyTopCounter  ==2) { sendCommandToQueue( cmdLightToggle, lightQueue  ); };
+    if(keyRightCounter==2) { sendCommandToQueue( cmdButtonRight, screenQueue ); }; 
+    
+    data.keyboardAlive++;
+  };
 
 }; // keyboardTimerCallback
 
 void setupKeyboard() {  
 
   keyboardTimer=xTimerCreate( "Keys", 
-                pdMS_TO_TICKS(30), // Routine called at 30 Hz, so key response at 10 Hz
+                pdMS_TO_TICKS(50), // Routine called at 20 Hz, so key response at 10 Hz
                 pdTRUE,            // Auto reload, 
                 0,                 // TimerID, unused
                 keyboardTimerCallback); 
                   
-
   xTimerStart(keyboardTimer, 0 );
 }; // setupKeyboard
 

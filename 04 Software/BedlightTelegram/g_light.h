@@ -117,7 +117,7 @@ void setupLight() {
   strip.setBrightness(255);  
 
   timerTimeoutTimer=xTimerCreate( "TimerTimeOut", 
-                TIMER_PERIOD_03,        // Menu goes back to idle after 20 seconds
+                TIMER_PERIOD_20,        // Menu goes back to idle after 20 seconds
                 pdFALSE  ,              // Single shot timer 
                 0,                      // TimerID, unused
                 timerTimeoutCallback);  // Callback function as timer expires
@@ -245,17 +245,11 @@ void taskLight(void * parameter ){
           Serial.println("Brightness 100%");
           brightness=1.00;
           break; 
-
-        case cmdUpdateSoftware: break; 
-        case cmdButtonLeft: break; 
-        case cmdButtonRight: break; 
-        case cmdRedrawScreen: break; 
-        case cmdCommandNotRecognized: break; 
         
       } // switch command
     } // if xQueueReceive === pdPASS
         
-    if(powerState) {
+    if( powerState ) {
       // If the user has changed brightess or color set
       R.setTarget(MAX_INTENSITY*COLORS[color].R*brightness);
       G.setTarget(MAX_INTENSITY*COLORS[color].G*brightness);
