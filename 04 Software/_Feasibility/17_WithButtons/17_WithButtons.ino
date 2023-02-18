@@ -4,7 +4,6 @@
 
 // Timezone definition
 #include <time.h>
-#define MYTZ "CET-1CEST,M3.5.0,M10.5.0/3"
 
 #include <WiFi.h>
 #include <WiFiMulti.h>
@@ -15,6 +14,8 @@
 #include "FS.h"
 #include "SPIFFS.h"
 #include <map>
+
+#include <U8g2lib.h>
 
 #define VERSION "1.0.0"
 /* 
@@ -37,9 +38,16 @@ std::map<String, String > ACCESS_POINTS {
 */
 #include "MyCredentials.h"
 
+#define MYTZ "CET-1CEST,M3.5.0,M10.5.0/3"
+
 #define LED_COUNT   16
 #define LED_PIN     23
 #define LED_CHANNEL  0
+
+#define PIN_KEY_LEFT   4
+#define PIN_KEY_RIGHT 12
+#define PIN_KEY_TOP   14
+#define KEY_TRESHOLD  50
 
 // Messages for he callback functions
 #define CB_COLOR_WHITE     "clrWhite"
@@ -178,6 +186,18 @@ struct lightStatus_t {
       B.setTarget(0);
     } // if lightOn
   }; // UpdateStatus()
+
+  void LightOn() {
+    lightOn = true;
+    previousTimer = millis();
+    UpdateStatus();
+  }; // LightOn()
+  
+  void SwitchLight() {
+    lightOn = !lightOn;
+    previousTimer = millis();
+    UpdateStatus();
+  }
 };
 
 // ======== GLOBAL VARIABLES ============= 
@@ -187,6 +207,7 @@ AsyncTelegram2 myBot(client);
 InlineKeyboard inlineKeyboard;
 lightStatus_t lightStatus;
 Freenove_ESP32_WS2812 strip = Freenove_ESP32_WS2812(LED_COUNT, LED_PIN, LED_CHANNEL, TYPE_GRB);
+U8G2_SSD1306_128X32_UNIVISION_F_SW_I2C u8g2(U8G2_R2, 22, 21, U8X8_PIN_NONE);  
 
 String convertToHexString( String input ) {
   String result = "{ ";
@@ -197,6 +218,32 @@ String convertToHexString( String input ) {
   result.toLowerCase();
   Serial.println(input + ": " + result);
   return result;
+}
+
+void setScreenBrightness(uint8_t brightness) {
+  /* Typical values for the parameters:
+   *    setScreenBrightness(255, 0,  1, 1); // most bright
+   *    setScreenBrightness( 16, 0,  1, 1);
+   *    setScreenBrightness(  5, 0,  0, 0);
+   *    setScreenBrightness(  3, 0,  0, 0);
+   *    setScreenBrightness(  1, 0,  0, 0); // least bright   */
+  uint8_t contrast, vcom, p1, p2;
+
+  switch( brightness ) {
+    case 0: contrast = 255; vcom=0; p1=1; p2=1; break;
+    case 1: contrast =  16; vcom=0; p1=1; p2=1; break;
+    case 2: contrast =   5; vcom=0; p1=0; p2=0; break;
+    case 3: contrast =   3; vcom=0; p1=0; p2=0; break;
+    case 5: contrast =   1; vcom=0; p1=0; p2=0; break;
+  }
+   
+  u8g2.setContrast(contrast);
+  u8x8_cad_StartTransfer(u8g2.getU8x8());
+  u8x8_cad_SendCmd(u8g2.getU8x8(), 0x0db);
+  u8x8_cad_SendArg(u8g2.getU8x8(), vcom << 4);
+  u8x8_cad_SendCmd(u8g2.getU8x8(), 0x0d9);
+  u8x8_cad_SendArg(u8g2.getU8x8(), (p2 << 4) | p1 );
+  u8x8_cad_EndTransfer(u8g2.getU8x8());
 }
 
 // Callback functions definition for inline keyboard buttons
@@ -251,8 +298,7 @@ void onQueryReply(const TBMessage &queryMsg){
   }
   else if( queryMsg.callbackQueryData == CB_LIGHT_ON ) {
     Serial.println("Bedlight on");
-    lightStatus.lightOn = true;
-    lightStatus.previousTimer = millis();
+    lightStatus.LightOn();
   }
   else if( queryMsg.callbackQueryData == CB_LIGHT_OFF ) {
     Serial.println("Bedlight off");
@@ -269,7 +315,27 @@ void setup() {
 
   // Start the filesystem 
   SPIFFS.begin();
-  
+
+  // Initialize light
+  Serial.println( "Initialize light" );
+  strip.begin();
+  strip.setBrightness(255);    
+
+  // Initialize display
+  Serial.println( "Initialize display" );
+  u8g2.initDisplay();
+  delay(500);
+  u8g2.begin();
+  delay(500);
+  u8g2.clearBuffer();
+  u8g2.setFontMode(1);
+  u8g2.setFont(u8g2_font_cu12_tr);    
+  u8g2.setCursor(0,15);
+  u8g2.print("--:--");    
+  u8g2.sendBuffer();
+
+  // Initialize Wifi
+  Serial.println( "Initialize WiFi" );
   WiFi.mode(WIFI_STA);
 
   // Add wifi access points 
@@ -279,7 +345,7 @@ void setup() {
   }
 
   Serial.println("Connecting Wifi...");
-  if(wifiMulti.run() == WL_CONNECTED) {
+  if(wifiMulti.run( connectTimeoutMs ) == WL_CONNECTED) {
     Serial.println("WiFi connected");
     Serial.println("IP address: ");
     Serial.println(WiFi.localIP());
@@ -292,6 +358,8 @@ void setup() {
 
   // Sync time with NTP
   configTzTime(MYTZ, "time.google.com", "time.windows.com", "pool.ntp.org");
+
+  // Initialize Telegram
   client.setCACert(telegram_cert);
 
   // Set the Telegram bot properties
@@ -324,7 +392,6 @@ void setup() {
   inlineKeyboard.addButton("Red",    CB_COLOR_RED,      KeyboardButtonQuery, onQueryReply);
   inlineKeyboard.addButton("20 min", CB_TIME_20MIN,     KeyboardButtonQuery, onQueryReply);
   inlineKeyboard.addButton("100%",   CB_BRIGHTNESS_100, KeyboardButtonQuery, onQueryReply);
-    
 
   // Add pointer to this keyboard to bot (in order to run callback function)
   myBot.addInlineKeyboard(&inlineKeyboard);
@@ -332,21 +399,17 @@ void setup() {
   String text = String(EMOTICON_WELCOME) + " Welcome!";
   myBot.sendTo(userid, text.c_str(), inlineKeyboard.getJSON() );
 
-  strip.begin();
-  strip.setBrightness(255);    
 }
 
 
 void loop() {
-  time_t rawtime;
-  struct tm * timeinfo;
-  static int prev_min = -1;
   static bool wifiConnectReported = false;
   static bool wifiNotConnectReported = false;
 
-  if (wifiMulti.run(connectTimeoutMs) == WL_CONNECTED) {  /*if the connection lost it will connect to next network*/
+  // Check if WiFi is still alive
+  if (wifiMulti.run( connectTimeoutMs ) == WL_CONNECTED) {  /*if the connection lost it will connect to next network*/
     if( !wifiConnectReported ) {
-      Serial.printf( "WiFi connected to SSID %s signl strength %ddB\n", WiFi.SSID(), WiFi.RSSI() );
+      Serial.printf( "WiFi connected to SSID %s signl strength %ddB\n", WiFi.SSID().c_str(), WiFi.RSSI() );
       wifiConnectReported=true;
       wifiNotConnectReported=false;
     };
@@ -359,6 +422,37 @@ void loop() {
     }
   }
 
+  static volatile uint32_t keyLeftCounter  = 0;
+  static volatile uint32_t keyRightCounter = 0;
+  static volatile uint32_t keyTopCounter   = 0;
+
+  // Check if button is pressed
+  if (touchRead(PIN_KEY_LEFT )<KEY_TRESHOLD) keyLeftCounter++;  else keyLeftCounter =0; 
+  if (touchRead(PIN_KEY_TOP  )<KEY_TRESHOLD) keyTopCounter++;   else keyTopCounter  =0; 
+  if (touchRead(PIN_KEY_RIGHT)<KEY_TRESHOLD) keyRightCounter++; else keyRightCounter=0; 
+
+  if(keyLeftCounter ==3) { /* Nothing to do yet */ };
+  if(keyTopCounter  ==3) { lightStatus.SwitchLight();  };
+  if(keyRightCounter==3) { /* Nothing to do yet */ };
+
+  // Update clock
+  time_t rawtime;
+  struct tm * timeinfo;
+  static int prev_min = -1;
+  time (&rawtime);
+  timeinfo = localtime (&rawtime);
+  if( ( timeinfo->tm_year > 80 ) and ( timeinfo->tm_min != prev_min ) ) {
+    prev_min = timeinfo->tm_min;
+    char timestr[10];
+    snprintf(timestr, 10, "%02d:%02d", timeinfo->tm_hour, timeinfo->tm_min );
+    Serial.printf("Update time %s\n", timestr);
+    u8g2.clearBuffer();
+    u8g2.setFont(u8g2_font_cu12_tr);    
+    u8g2.setCursor(0,15);
+    u8g2.print( timestr );    
+    u8g2.sendBuffer();
+  }
+  
   // Increase or decrease light intensity in small timesteps
   unsigned long currentTime = millis();
   const unsigned long lightDimInterval = 100;
