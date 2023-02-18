@@ -22,6 +22,11 @@
 1.0.0 Initial release
 
 To do:
+Center time on screen
+Add screen brightness
+Add screen brightness to Telegram settings
+Make settings persistent in SPIFFS
+Add weather
 Switch back to FreeRTOS
 */
  
@@ -326,13 +331,6 @@ void setup() {
   u8g2.initDisplay();
   delay(500);
   u8g2.begin();
-  delay(500);
-  u8g2.clearBuffer();
-  u8g2.setFontMode(1);
-  u8g2.setFont(u8g2_font_cu12_tr);    
-  u8g2.setCursor(0,15);
-  u8g2.print("--:--");    
-  u8g2.sendBuffer();
 
   // Initialize Wifi
   Serial.println( "Initialize WiFi" );
@@ -346,9 +344,7 @@ void setup() {
 
   Serial.println("Connecting Wifi...");
   if(wifiMulti.run( connectTimeoutMs ) == WL_CONNECTED) {
-    Serial.println("WiFi connected");
-    Serial.println("IP address: ");
-    Serial.println(WiFi.localIP());
+    Serial.printf( "WiFi connected to SSID %s signl strength %ddB\n", WiFi.SSID().c_str(), WiFi.RSSI() );
   }
   else {
     Serial.println("WiFi not connected yet");
@@ -357,9 +353,11 @@ void setup() {
   WiFi.setAutoReconnect(true);
 
   // Sync time with NTP
+  Serial.println("Sync clock with timeserver");
   configTzTime(MYTZ, "time.google.com", "time.windows.com", "pool.ntp.org");
-
+  
   // Initialize Telegram
+  Serial.println("Setup Telegram");
   client.setCACert(telegram_cert);
 
   // Set the Telegram bot properties
@@ -399,6 +397,7 @@ void setup() {
   String text = String(EMOTICON_WELCOME) + " Welcome!";
   myBot.sendTo(userid, text.c_str(), inlineKeyboard.getJSON() );
 
+  Serial.println("End of setup loop");
 }
 
 
@@ -439,16 +438,20 @@ void loop() {
   time_t rawtime;
   struct tm * timeinfo;
   static int prev_min = -1;
+  static bool firstClockUpdate = true;
+  
   time (&rawtime);
   timeinfo = localtime (&rawtime);
-  if( ( timeinfo->tm_year > 80 ) and ( timeinfo->tm_min != prev_min ) ) {
+  if( firstClockUpdate or ( ( timeinfo->tm_year > 80 ) and ( timeinfo->tm_min != prev_min ) ) ) {
     prev_min = timeinfo->tm_min;
+    firstClockUpdate = false;
     char timestr[10];
     snprintf(timestr, 10, "%02d:%02d", timeinfo->tm_hour, timeinfo->tm_min );
     Serial.printf("Update time %s\n", timestr);
     u8g2.clearBuffer();
     u8g2.setFont(u8g2_font_cu12_tr);    
-    u8g2.setCursor(0,15);
+    u8g2.setFontPosCenter();
+    u8g2.setCursor( ( (u8g2.getDisplayWidth() - (u8g2.getUTF8Width(timestr))) / 2) , 16);
     u8g2.print( timestr );    
     u8g2.sendBuffer();
   }
