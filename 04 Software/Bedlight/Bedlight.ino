@@ -695,6 +695,20 @@ void loop() {
     redrawScreen = true;
   };
 
+  // Check if the clock needs an update
+  time_t rawtime;
+  struct tm * timeinfo;
+  static int prev_min = -1;
+  static bool firstClockUpdate = true;
+  
+  time( &rawtime );
+  timeinfo = localtime( &rawtime );
+  if( firstClockUpdate or ( ( timeinfo->tm_year > 80 ) and ( timeinfo->tm_min != prev_min ) ) ) {
+    prev_min = timeinfo->tm_min;
+    firstClockUpdate = false;
+    if( lightStatus.screen == scnMain ) redrawScreen = true;
+  }
+
   // Periodically get new weather
   static bool firstTimeWeather = true;
   const unsigned long getWeatherInterval = 10*60*1000;
@@ -707,57 +721,52 @@ void loop() {
       previousGetWeather = currentTime;
       firstTimeWeather = false;
       Serial.println("success");
-      redrawScreen = true;
+      if( lightStatus.screen == scnWeather ) redrawScreen = true;
     } else {
       Serial.println("fail");
     }
   };
 
-  switch( lightStatus.screen ) {
-    case scnMain:
-      // Update clock
-      time_t rawtime;
-      struct tm * timeinfo;
-      static int prev_min = -1;
-      static bool firstClockUpdate = true;
+  // Redraw the screen if requested
+  if( redrawScreen ) {
+
+    switch( lightStatus.screen ) {
+      case scnMain:
+
+          u8g2.clearBuffer();
+
+          char timestr[12];
+          snprintf(timestr, 12, "%02d:%02d", timeinfo->tm_hour, timeinfo->tm_min );
+          Serial.printf("Update time %s\n", timestr);
+          
+          //u8g2.setFont(u8g2_font_missingplanet_tr);
+          //u8g2.setFont(u8g2_font_calibration_gothic_nbp_tr);
+          u8g2.setFont(u8g2_font_courR18_tr);
+          //u8g2.setFont(u8g2_font_helvR10_tf); // Includes degree symbol
+          
+          u8g2.setFontPosCenter();
+          u8g2.setCursor( ( (u8g2.getDisplayWidth() - (u8g2.getUTF8Width(timestr))) / 2) , 16);
+          u8g2.print( timestr );    
       
-      time( &rawtime );
-      timeinfo = localtime( &rawtime );
-      if( firstClockUpdate or redrawScreen or ( ( timeinfo->tm_year > 80 ) and ( timeinfo->tm_min != prev_min ) ) ) {
-        prev_min = timeinfo->tm_min;
-        firstClockUpdate = false;
+          u8g2.sendBuffer();
+        }
+      break;
 
+      case scnWeather:
         u8g2.clearBuffer();
-
-        char timestr[12];
-        snprintf(timestr, 12, "%02d:%02d", timeinfo->tm_hour, timeinfo->tm_min );
-        Serial.printf("Update time %s\n", timestr);
-        
-        //u8g2.setFont(u8g2_font_missingplanet_tr);
-        //u8g2.setFont(u8g2_font_calibration_gothic_nbp_tr);
-        u8g2.setFont(u8g2_font_courR18_tr);
-        //u8g2.setFont(u8g2_font_helvR10_tf); // Includes degree symbol
-        
-        u8g2.setFontPosCenter();
-        u8g2.setCursor( ( (u8g2.getDisplayWidth() - (u8g2.getUTF8Width(timestr))) / 2) , 16);
-        u8g2.print( timestr );    
+        u8g2.setFont(u8g2_font_helvR14_tf); // Includes degree symbol
     
-        u8g2.sendBuffer();
-      }
-    break;
+        if( redrawScreen ) {
+          String temperature = String(weather.outsideTemp, 1) + DEGREE_SYMBOL + "C";
+          u8g2.setFontPosCenter();
+          u8g2.setCursor( ( (u8g2.getDisplayWidth() - (u8g2.getUTF8Width( temperature.c_str() ))) / 2) , 16);
+          u8g2.print( temperature.c_str() );    
+          u8g2.sendBuffer();
+        }
+      break;
+    }
 
-    case scnWeather:
-      u8g2.clearBuffer();
-      u8g2.setFont(u8g2_font_helvR14_tf); // Includes degree symbol
-  
-      if( redrawScreen ) {
-        String temperature = String(weather.outsideTemp, 1) + DEGREE_SYMBOL + "C";
-        u8g2.setFontPosCenter();
-        u8g2.setCursor( ( (u8g2.getDisplayWidth() - (u8g2.getUTF8Width( temperature.c_str() ))) / 2) , 16);
-        u8g2.print( temperature.c_str() );    
-        u8g2.sendBuffer();
-      }
-    break;
+    redrawScreen = false;
   }
 
   // Periodically save settings
