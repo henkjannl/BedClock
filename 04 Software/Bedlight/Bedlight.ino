@@ -606,6 +606,9 @@ void setup() {
 void loop() {
   static bool wifiConnectReported = false;
   static bool wifiNotConnectReported = false;
+  bool redrawScreen = true;
+
+  unsigned long currentTime = millis();
 
   // Check if WiFi is still alive
   if (wifiMulti.run( CONNECT_TIMEOUT_MS ) == WL_CONNECTED) {  /*if the connection lost it will connect to next network*/
@@ -636,10 +639,9 @@ void loop() {
 
   if(keyLeftCounter ==2) { /* Nothing to do yet */ };
   if(keyTopCounter  ==2) { lightStatus.SwitchLight();  };
-  if(keyRightCounter==2) { lightStatus.screen = scnWeather; screenChange = millis(); };
+  if(keyRightCounter==2) { lightStatus.screen = scnWeather; redrawScreen=true; screenChange = millis(); };
   
   // Increase or decrease light intensity in small timesteps
-  unsigned long currentTime = millis();
   const unsigned long lightDimInterval = 100;
   static unsigned long previousLightDim = millis();
 
@@ -690,6 +692,7 @@ void loop() {
   const unsigned long mainScreenInterval = 5*1000;
   if (currentTime - screenChange >= mainScreenInterval ) {
     lightStatus.screen = scnMain;
+    redrawScreen = true;
   };
 
   // Periodically get new weather
@@ -704,6 +707,7 @@ void loop() {
       previousGetWeather = currentTime;
       firstTimeWeather = false;
       Serial.println("success");
+      redrawScreen = true;
     } else {
       Serial.println("fail");
     }
@@ -719,7 +723,7 @@ void loop() {
       
       time( &rawtime );
       timeinfo = localtime( &rawtime );
-      if( firstClockUpdate or ( ( timeinfo->tm_year > 80 ) and ( timeinfo->tm_min != prev_min ) ) ) {
+      if( firstClockUpdate or redrawScreen or ( ( timeinfo->tm_year > 80 ) and ( timeinfo->tm_min != prev_min ) ) ) {
         prev_min = timeinfo->tm_min;
         firstClockUpdate = false;
 
@@ -746,7 +750,7 @@ void loop() {
       u8g2.clearBuffer();
       u8g2.setFont(u8g2_font_helvR14_tf); // Includes degree symbol
   
-      if( weather.updated ) {
+      if( redrawScreen ) {
         String temperature = String(weather.outsideTemp, 1) + DEGREE_SYMBOL + "C";
         u8g2.setFontPosCenter();
         u8g2.setCursor( ( (u8g2.getDisplayWidth() - (u8g2.getUTF8Width( temperature.c_str() ))) / 2) , 16);
