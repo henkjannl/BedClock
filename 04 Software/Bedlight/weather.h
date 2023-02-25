@@ -1,6 +1,4 @@
-#ifndef WEATHER_H
-
-#define WEATHER_H
+#pragma once
 
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
@@ -98,4 +96,5 @@ bool getWeather(weather_t & weather) {
   return true;
 } // getWeather
 
-#endif WEATHER_H
+// ======== GLOBAL VARIABLES ============= 
+weather_t weather;
