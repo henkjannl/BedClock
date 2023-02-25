@@ -100,7 +100,6 @@ void loop() {
   if(keyRightCounter==2) { data.screen = scnWeather; updateScreen = true; screenChange = millis(); };
   
   // Increase or decrease light intensity in small timesteps
-  unsigned long currentTime = millis();
   const unsigned long lightDimInterval = 100;
   static unsigned long previousLightDim = millis();
 
@@ -134,6 +133,20 @@ void loop() {
     setScreenBrightness(data.screenBrightness);
   };
 
+  // Check if the clock needs an update
+  time_t rawtime;
+  struct tm * timeinfo;
+  static int prev_min = -1;
+  static bool firstClockUpdate = true;
+  
+  time( &rawtime );
+  timeinfo = localtime( &rawtime );
+  if( firstClockUpdate or ( ( timeinfo->tm_year > 80 ) and ( timeinfo->tm_min != prev_min ) ) ) {
+    prev_min = timeinfo->tm_min;
+    firstClockUpdate = false;
+    if( lightStatus.screen == scnMain ) redrawScreen = true;
+  }
+
   // Periodically get new weather
   static bool firstTimeWeather = true;
   const unsigned long getWeatherInterval = 10*60*1000;
@@ -145,6 +158,7 @@ void loop() {
       previousGetWeather = currentTime;
       firstTimeWeather = false;
       Serial.println("success");
+      if( lightStatus.screen == scnWeather ) redrawScreen = true;
     } else {
       Serial.println("fail");
     }
