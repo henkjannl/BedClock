@@ -4,8 +4,10 @@
 1.0.0 First working version
 1.1.0 Restructured code
       Added precipitation in screen on press of right button
+      Saving /loading settings finally works
 1.2.0 Added advice on press of left button
       Most optimal font for advice chosen
+      Timers in separate class
 
 To do:
   Reintroduce weather icons
