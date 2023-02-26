@@ -59,7 +59,7 @@ InlineKeyboard mainKeyboard, settingsKeyboard;
 
 std::map<keyboard_t, InlineKeyboard* > KEYBOARDS = { 
   { kbMain,    &mainKeyboard     },
-  { kbSetings, &settingsKeyboard }
+  { kbSettings, &settingsKeyboard }
 };
 
 String convertToHexString( String input ) {
@@ -96,83 +96,68 @@ void onQueryReply(const TBMessage &queryMsg){
 
   if( queryMsg.callbackQueryData == CB_COLOR_WHITE ) {
     newMessage = "The color of the light is set to white";
-    data.color = lcWhite;
-    data.settingsChanged = true;
+    data.setColor(lcWhite);
   }
   else if( queryMsg.callbackQueryData == CB_COLOR_YELLOW ) {
     newMessage = "The color of the light is set to yellow";
-    data.color = lcYellow;
-    data.settingsChanged = true;
+    data.setColor(lcYellow);
   }
   else if( queryMsg.callbackQueryData == CB_COLOR_ORANGE ) {
     newMessage = "The color of the light is set to orange";
-    data.color = lcOrange;
-    data.settingsChanged = true;
+    data.setColor(lcOrange);
   }
   else if( queryMsg.callbackQueryData == CB_COLOR_RED ) {
     newMessage = "The color of the light is set to red";
-    data.color = lcRed;
-    data.settingsChanged = true;
+    data.setColor(lcRed);
   }
   else if( queryMsg.callbackQueryData == CB_TIME_3MIN ) {
     newMessage = "Timer set to 3 minutes";
-    data.timer = lt03;
-    data.settingsChanged = true;
+    data.setTimer( lt03 );
   }
   else if( queryMsg.callbackQueryData == CB_TIME_5MIN ) {
     newMessage = "Timer set to 5 minutes";
-    data.timer = lt05;
-    data.settingsChanged = true;
+    data.setTimer( lt05 );
   }
   else if( queryMsg.callbackQueryData == CB_TIME_10MIN ) {
     newMessage = "Timer set to 10 minutes";
-    data.timer = lt10;
-    data.settingsChanged = true;
+    data.setTimer( lt10 );
   }
   else if( queryMsg.callbackQueryData == CB_TIME_20MIN ) {
     newMessage = "Timer set to 20 minutes";
-    data.timer = lt20;
-    data.settingsChanged = true;
+    data.setTimer( lt20 );
   }
   else if( queryMsg.callbackQueryData == CB_BRIGHTNESS_15 ) {
     newMessage = "Brightness of the light set to 15%";
-    data.brightness = lb15;
-    data.settingsChanged = true;
+    data.setBrightness( lb15 );
   }
   else if( queryMsg.callbackQueryData == CB_BRIGHTNESS_30 ) {
     newMessage = "Brightness of the light set to 30%";
-    data.brightness = lb30;
-    data.settingsChanged = true;
+    data.setBrightness( lb30 );
   }
   else if( queryMsg.callbackQueryData == CB_BRIGHTNESS_50 ) {
     newMessage = "Brightness of the light set to 50%";
-    data.brightness = lb50;
-    data.settingsChanged = true;
+    data.setBrightness( lb50 );
   }
   else if( queryMsg.callbackQueryData == CB_BRIGHTNESS_100 ) {
     newMessage = "Brightness of the light set to 100%";
-    data.brightness = lb100;
-    data.settingsChanged = true;
+    data.setBrightness( lb100 );
   }
   else if( queryMsg.callbackQueryData == CB_LIGHT_ON ) {
     newMessage = "Light switched on. Timer set to " + TIMES_STR[ data.timer ];
-    data.LightOn();
+    data.setLightOn();
   }
   else if( queryMsg.callbackQueryData == CB_LIGHT_OFF ) {
     newMessage = "Light switched off";
-    data.LightOff();
+    data.setLightOff();
   }
   else if( queryMsg.callbackQueryData == CB_SETTINGS ) {
     newMessage = "Settings menu";
-    data.lightOn = false;
-    data.menu = kbSetings;
+    data.menu = kbSettings;
   }
   else newMessage = "Command not recognized";
 
   newMessage += "\n" + StatusMessage();
 
-  data.UpdateStatus();
-  data.settingsChanged = true;
   myBot.editMessage(queryMsg.chatId, queryMsg.messageID, newMessage, *KEYBOARDS[data.menu] );
   Serial.println( newMessage );
 }
@@ -181,29 +166,24 @@ void onQueryScreenBrightness(const TBMessage &queryMsg){
   String newMessage;
   
   if( queryMsg.callbackQueryData == CB_SCREEN_BR_1 ) {
-    data.screenBrightness = sb1;
-    data.settingsChanged = true;
     newMessage = "Screen brightness set to 1/5";
+    data.setScreenBrightness( sb1 );
   }
   else if( queryMsg.callbackQueryData == CB_SCREEN_BR_2 ) {
-    data.screenBrightness = sb2;
-    data.settingsChanged = true;
     newMessage = "Screen brightness set to 2/5";
+    data.setScreenBrightness( sb2 );
   }
   else if( queryMsg.callbackQueryData == CB_SCREEN_BR_3 ) {
-    data.screenBrightness = sb3;
-    data.settingsChanged = true;
     newMessage = "Screen brightness set to 3/5";
+    data.setScreenBrightness( sb3 );
   }
   else if( queryMsg.callbackQueryData == CB_SCREEN_BR_4 ) {
-    data.screenBrightness = sb4;
-    data.settingsChanged = true;
     newMessage = "Screen brightness set to 4/5";
+    data.setScreenBrightness( sb4 );
   }
   else if( queryMsg.callbackQueryData == CB_SCREEN_BR_5 ) {
-    data.screenBrightness = sb5;
-    data.settingsChanged = true;
     newMessage = "Screen brightness set to 5/5";
+    data.setScreenBrightness( sb5 );
   }
   else if( queryMsg.callbackQueryData == CB_MAIN_MENU ) {
     newMessage = "Back to main menu";
@@ -262,7 +242,7 @@ void setupWifi() {
 
   // Add wifi access points 
   for (const auto &ap : ACCESS_POINTS ) {
-    Serial.printf( "%s %s\n", ap.first.c_str(), ap.second.c_str() );
+    //Serial.printf( "%s %s\n", ap.first.c_str(), ap.second.c_str() );
     wifiMulti.addAP( ap.first.c_str(), ap.second.c_str() );
   }
 
@@ -330,7 +310,7 @@ void loopTelegram() {
 
         if (tgReply.equalsIgnoreCase("/start")) {          
           myBot.sendMessage(msg, "Welcome!", mainKeyboard);      
-          Serial.printf("Start command received from %d", msg.chatId);    
+          Serial.printf("Start command received from %d\n", msg.chatId);    
         }        
         else {
           // write back feedback message and show a hint

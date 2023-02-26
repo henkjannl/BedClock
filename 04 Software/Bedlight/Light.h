@@ -9,9 +9,6 @@
 Freenove_ESP32_WS2812 strip = Freenove_ESP32_WS2812(LED_COUNT, LED_PIN, LED_CHANNEL, TYPE_GRB);
 
 void setupLight() {
-  
-  data.loadSettings(SPIFFS, SETTINGS_FILE);
-
   // Initialize light
   Serial.println( "Initialize light" );
   strip.begin();

@@ -4,22 +4,7 @@
 #include <ArduinoJson.h>
 #include <list>
 
-// Weather 
-struct precipitation_t {
-  long t;
-  float prec;
-};
-
-struct weather_t {
-  float outsideTemp = -300;
-  std::list<precipitation_t> precipitation;
-  char weatherIcon[12];
-  time_t sunrise;
-  time_t sunset;
-  bool updated = false;
-};
-
-bool getWeather(weather_t & weather) {
+void getWeather() {
       
   Serial.println("Retrieving the weather"); 
   
@@ -41,7 +26,7 @@ bool getWeather(weather_t & weather) {
       if (error) {
         Serial.print(F("deserializeJson() failed: "));
         Serial.println(error.f_str());
-        return false;
+        return;
       }
       
       //float lat = doc["lat"]; // 52.2183
@@ -51,10 +36,10 @@ bool getWeather(weather_t & weather) {
       
       JsonObject current = doc["current"];
       //long current_dt = current["dt"]; // 1617992165
-      weather.sunrise = current["sunrise"]; // 1617943698
-      weather.sunset  = current["sunset"]; // 1617992353
-      weather.outsideTemp = current["temp"]; // 282.57
-      weather.outsideTemp-=273.15;
+      data.sunrise = current["sunrise"]; // 1617943698
+      data.sunset  = current["sunset"]; // 1617992353
+      data.outsideTemp = current["temp"]; // 282.57
+      data.outsideTemp-=273.15;
       //int current_feels_like = current["feels_like"]; // 281
       //int current_pressure = current["pressure"]; // 1008
       //int current_humidity = current["humidity"]; // 60
@@ -71,30 +56,29 @@ bool getWeather(weather_t & weather) {
       //const char* current_weather_0_main = current_weather_0["main"]; // "Clouds"
       const char* current_weather_0_description = current_weather_0["description"]; // "overcast clouds"
       const char* current_weather_0_icon = current_weather_0["icon"]; // "04d"
-      strcpy(weather.weatherIcon, current_weather_0_icon);    
+      strcpy(data.weatherIcon, current_weather_0_icon);    
       //current_weather_0_description[0]=(char)toupper(current_weather_0_description[0]);
   
-      weather.precipitation.clear();
+      data.precipitation.clear();
+      data.precipitationExpected = false;
       
       for (JsonObject elem : doc["minutely"].as<JsonArray>()) {
         precipitation_t p;
         p.t = elem["dt"]; // 1617992220, 1617992280, 1617992340, 1617992400, 1617992460, 1617992520, ...
         p.prec = elem["precipitation"]; // 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
         //p.prec= rand() % 3 + 1; // for debugging purposes
-        weather.precipitation.push_back(p);
+        data.precipitation.push_back(p);
+        if( p.prec>0 ) data.precipitationExpected = true;
       } // elem : minutely
   
-      Serial.printf("%d precipitation points parsed\n", weather.precipitation.size());
-  
-      Serial.printf("Outside temperature %.1f C\n", weather.outsideTemp);
+      Serial.printf("%d precipitation points parsed\n", data.precipitation.size());  
+      Serial.printf("Outside temperature %.1f C\n", data.outsideTemp);
     
-   } else return false; // httpCode == HTTP_CODE_OK
-  } else return false; // httpCode > 0
+   } else return; // httpCode == HTTP_CODE_OK
+  } else return; // httpCode > 0
 
   // Everything went well
-  weather.updated = true;
-  return true;
+  snprintf( data.displayTemperature, sizeof( data.displayTemperature ), "%0d%sC", (int) data.outsideTemp, DEGREE_SYMBOL );
+  data.weatherUpdated = true;
+  data.requestNewWeather = false;
 } // getWeather
-
-// ======== GLOBAL VARIABLES ============= 
-weather_t weather;

@@ -5,6 +5,7 @@
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 #include <map>
+#include <list>
 
 #define LED_COUNT     16
 #define LED_PIN       23
@@ -23,8 +24,8 @@ enum lightColor_t       { lcWhite, lcYellow, lcOrange, lcRed };
 enum lightBrightness_t  { lb15, lb30, lb50, lb100 };
 enum lightTimer_t       { lt03, lt05, lt10, lt20 };
 enum screenBrightness_t { sb1, sb2, sb3, sb4, sb5 };
-enum screen_t           { scnMain, scnWeather };
-enum keyboard_t         { kbMain, kbSetings };
+enum screen_t           { scnMain, scnWeather, scnAdvice };
+enum keyboard_t         { kbMain, kbSettings };
 
 struct rgb_t { 
   float R;
@@ -59,11 +60,17 @@ std::map<lightTimer_t, String > TIMES_STR = {
   { lt20, "20 minutes" }
 };
 
+// Precipitation for the weather 
+struct precipitation_t {
+  long t;
+  float prec;
+};
+
 // Smooth light increments. It is the incremental derivative of x-1/(2*pi)*sin(2*pi*x) in the domain x=0..1. The sum is 1. 
 std::vector<float> LIGHT_INC = { 0.0008, 0.0056, 0.0148, 0.0274, 0.0422, 0.0578, 0.0726, 0.0852, 0.0944, 0.0992, 0.0992, 
   0.0944, 0.0852, 0.0726, 0.0578, 0.0422, 0.0274, 0.0148, 0.0056, 0.0008};
 
-const float    MAX_INTENSITY = 255.0;
+const float MAX_INTENSITY = 255.0;
 
 // The order in which the LEDs in the 4x4 grid are switched on
 const uint16_t SUB_BRIGHTNESS[] = {0x0000, 0x0008, 0x0208, 0x020A, 0x0A0A, 0x2A0A, 0x2A8A, 0x2AAA, 0xAAAA, 
@@ -119,17 +126,43 @@ class floatVariable_t {
     bool _ready; 
 }; // class floatVariable_t
 
+
+// This is the central repository for data shared between all modules, stored in the global 'data' variable at the bottom of this file
 class data_t {
   public:
     // Status of the light
     bool              lightOn    = false;
-    lightColor_t      color      = lcWhite;
-    lightBrightness_t brightness = lb50;
-    lightTimer_t      timer      = lt03;
+    lightColor_t      color      = lcWhite;    // Saved to settings
+    lightBrightness_t brightness = lb50;       // Saved to settings
+    lightTimer_t      timer      = lt03;       // Saved to settings
   
     // Screen brightness
-    screenBrightness_t screenBrightness = sb4;
+    screenBrightness_t screenBrightness = sb4; // Saved to settings
 
+    // Weather
+    bool requestNewWeather = true;
+    bool weatherUpdated = false;
+    float outsideTemp = -300;
+    std::list<precipitation_t> precipitation;
+    bool precipitationExpected;
+    char weatherIcon[12];
+    time_t sunrise;
+    time_t sunset;
+
+    // Flag to update screen
+    bool updateScreen = true;
+
+    // Clock, temperature and advice
+    char displayClock[20];
+
+    // Outside temperature display
+    char displayTemperature[20];
+
+    // Advice
+    bool newAdviceRequested = true; // Stored in settings
+    int displayAdviceLines = 0;     // Stored in settings
+    char displayAdvice[2][200];     // Stored in settings
+    
     // Which screen to display
     screen_t screen = scnMain;
 
@@ -142,8 +175,30 @@ class data_t {
     floatVariable_t R, G, B;
   
     unsigned long previousTimer;
-  
-    void UpdateStatus() {
+    
+    void setColor( lightColor_t color) { 
+      this->color = color; 
+      settingsChanged = true;
+      updateStatus();
+    };
+
+    void setTimer( lightTimer_t timer ) {
+      this->timer = timer;
+      settingsChanged = true;
+    };
+
+    void setBrightness( lightBrightness_t brightness ) {
+      this->brightness = brightness;
+      settingsChanged = true;
+      updateStatus();
+    };
+
+    void setScreenBrightness( screenBrightness_t screenBrightness ) {
+      this->screenBrightness = screenBrightness;
+      settingsChanged = true;
+    };
+    
+    void updateStatus() {
       if( lightOn ) {
         // If the user has changed bridghtess or color sett
         R.setTarget(MAX_INTENSITY*COLORS[color].R*BRIGHTNESSES[brightness]);
@@ -156,46 +211,67 @@ class data_t {
         G.setTarget(0);
         B.setTarget(0);
       } // if lightOn
-    }; // UpdateStatus()
+    }; // updateStatus()
   
-    void LightOn() {
+    void setLightOn() {
       lightOn = true;
       previousTimer = millis();
-      UpdateStatus();
-    }; // LightOn()
+      updateStatus();
+    }; // setLightOn()
     
-    void LightOff() {
+    void setLightOff() {
       lightOn = false;
-      UpdateStatus();
-    }; // LightOff()
+      updateStatus();
+    }; // setLightOff()
     
-    void SwitchLight() {
+    void switchLight() {
       lightOn = !lightOn;
       previousTimer = millis();
-      UpdateStatus();
+      updateStatus();
     }
 
-    void saveSettings(fs::FS &fs, const char * tempFile, const char * settingsFile) {    
+    void saveSettings(fs::FS &fs, const char * settingsFile, const char * tempFile) {    
+
+      Serial.printf("Saving settings to temporary file %s\n", tempFile);
     
       // Saves the settings to a file
       StaticJsonDocument<1024> doc;
     
       File output = fs.open(tempFile, FILE_WRITE);
 
-      doc[ "lightOn"            ] = lightOn;
+      if( output.isDirectory() ){
+          Serial.printf("- temporary file %s is directory\n", tempFile);
+          return;
+      }
+      if(!output ){
+          Serial.printf("- failed to open temporary file %s for writing\n", tempFile);
+          return;
+      }
+
       doc[ "lightColor"         ] = (int) color;    
       doc[ "lightBrightness"    ] = (int) brightness;    
       doc[ "timer"              ] = (int) timer;    
       doc[ "screenBrightness"   ] = (int) screenBrightness;
-        
+      doc[ "newAdviceRequested" ] = newAdviceRequested;
+      doc[ "adviceLines"        ] = displayAdviceLines;
+      doc[ "adviceLine0"        ] = displayAdvice[0];
+      doc[ "adviceLine1"        ] = displayAdvice[1];
+
       if( serializeJson(doc, output) > 0) {
         // Assume success if at least one byte was written
     
-        // Remove settings file to temp file and replace settings file
-        fs.remove(settingsFile);
-        fs.rename(tempFile, settingsFile);
-        Serial.printf("Saved settings to '%s'\n", settingsFile);
+        if( fs.remove(settingsFile) ) 
+          Serial.printf("Previous settings file %s removed\n", settingsFile);
+        else 
+          Serial.printf("Error removing previous settings file %s\n", settingsFile);
+          
+        if( fs.rename(tempFile, settingsFile) )
+          Serial.printf("Temporary file %s renamed to %s\n", tempFile, settingsFile);
+        else
+          Serial.println("Renaming failed");
       }
+      else
+       Serial.println("Error during serialization");
     
       settingsChanged = false;
     } 
@@ -219,17 +295,69 @@ class data_t {
         return;
       }
 
-      lightOn          = doc[ "lightOn"            ];
-      color            = (lightColor_t)       doc[ "lightColor"         ].as<int>();
-      brightness       = (lightBrightness_t)  doc[ "lightBrightness"    ].as<int>();
-      timer            = (lightTimer_t)       doc[ "timer"              ].as<int>();
-      screenBrightness = (screenBrightness_t) doc[ "screenBrightness"   ].as<int>();
-    
+      try { 
+        color             = (lightColor_t)       doc[ "lightColor"         ].as<int>(); 
+        brightness        = (lightBrightness_t)  doc[ "lightBrightness"    ].as<int>(); 
+        timer             = (lightTimer_t)       doc[ "timer"              ].as<int>();
+        screenBrightness  = (screenBrightness_t) doc[ "screenBrightness"   ].as<int>();
+        newAdviceRequested = doc[ "newAdviceRequested"  ].as<bool>();
+        displayAdviceLines = doc[ "adviceLines"         ]; 
+        String advice;
+        advice = doc[ "adviceLine0"].as<String>(); 
+        snprintf( displayAdvice[0], sizeof( displayAdvice[0]), advice.c_str() );
+        advice = doc[ "adviceLine1"].as<String>(); 
+        snprintf( displayAdvice[1], sizeof( displayAdvice[1]), advice.c_str() );
+      } 
+      catch (const std::exception& e) { 
+        Serial.println("Exception occured when deserializing JSON file");
+        color              = lcWhite;
+        brightness         = lb100;   
+        timer              = lt10;   
+        screenBrightness   = sb5;    
+        newAdviceRequested = true;  
+        displayAdviceLines = 0;  
+        snprintf( displayAdvice[0], sizeof( displayAdvice[0] ), "Always" ); 
+        snprintf( displayAdvice[1], sizeof( displayAdvice[1] ), "block trolls" );
+      };
+      
       settingsChanged = false;
+
+      updateStatus();
 
       Serial.println("Settings loaded");  
     };
     
 };
+
+void listDir(fs::FS &fs, const char * dirname, uint8_t levels){
+    Serial.printf("Listing directory: %s\r\n", dirname);
+
+    File root = fs.open(dirname);
+    if(!root){
+        Serial.println("- failed to open directory");
+        return;
+    }
+    if(!root.isDirectory()){
+        Serial.println(" - not a directory");
+        return;
+    }
+
+    File file = root.openNextFile();
+    while(file){
+        if(file.isDirectory()){
+            Serial.print("  DIR : ");
+            Serial.println(file.name());
+            if(levels){
+                listDir(fs, file.name(), levels -1);
+            }
+        } else {
+            Serial.print("  FILE: ");
+            Serial.print(file.name());
+            Serial.print("\tSIZE: ");
+            Serial.println(file.size());
+        }
+        file = root.openNextFile();
+    }
+}
 
 data_t data;
