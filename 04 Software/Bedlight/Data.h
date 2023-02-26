@@ -22,7 +22,7 @@
 
 enum lightColor_t       { lcWhite, lcYellow, lcOrange, lcRed };
 enum lightBrightness_t  { lb15, lb30, lb50, lb100 };
-enum lightTimer_t       { lt03, lt05, lt10, lt20 };
+enum lightOffTimer_t    { lt03, lt05, lt10, lt20 };
 enum screenBrightness_t { sb1, sb2, sb3, sb4, sb5 };
 enum screen_t           { scnMain, scnWeather, scnAdvice };
 enum keyboard_t         { kbMain, kbSettings };
@@ -46,14 +46,14 @@ std::map<lightBrightness_t, float> BRIGHTNESSES = {
   { lb50,  0.50 },
   { lb100, 1.00 } };
 
-std::map<lightTimer_t, unsigned int> TIMES = { 
+std::map<lightOffTimer_t, unsigned int> TIMES = { 
   { lt03,  3*60*1000 }, 
   { lt05,  5*60*1000 },
   { lt10, 10*60*1000 },
   { lt20, 20*60*1000 }
 };
 
-std::map<lightTimer_t, String > TIMES_STR = { 
+std::map<lightOffTimer_t, String > TIMES_STR = { 
   { lt03, "3 minutes"  }, 
   { lt05, "5 minutes"  },
   { lt10, "10 minutes" },
@@ -126,15 +126,37 @@ class floatVariable_t {
     bool _ready; 
 }; // class floatVariable_t
 
+class realTimeClockTimer_t {
+  public:
+    unsigned long previous;
+    unsigned long interval;
+    bool autoReset;
+    
+    // Constructor
+    realTimeClockTimer_t(unsigned long interval, bool autoReset = true) {
+      this->previous = millis();
+      this->interval = interval;
+      this->autoReset = autoReset;
+    }
+    
+    void reset() { previous = millis(); }
+      
+    bool lapsed() {
+      bool result = (millis() - previous >= interval );
+      if(result and autoReset) reset();
+      return result;
+    }
+};
 
 // This is the central repository for data shared between all modules, stored in the global 'data' variable at the bottom of this file
 class data_t {
   public:
+  
     // Status of the light
     bool              lightOn    = false;
     lightColor_t      color      = lcWhite;    // Saved to settings
     lightBrightness_t brightness = lb50;       // Saved to settings
-    lightTimer_t      timer      = lt03;       // Saved to settings
+    lightOffTimer_t   timer      = lt03;       // Saved to settings
   
     // Screen brightness
     screenBrightness_t screenBrightness = sb4; // Saved to settings
@@ -172,18 +194,26 @@ class data_t {
     // Current menu
     keyboard_t menu = kbMain;
 
+    // Individual RBG values for the light
     floatVariable_t R, G, B;
+
+    // A number of timers for all kinds of tasks
+    realTimeClockTimer_t screenBacktoMainTimer = realTimeClockTimer_t(5000);                // Flip screen back to main after 5 seconds, autoreset
+    realTimeClockTimer_t switchLightOffTimer   = realTimeClockTimer_t(TIMES[timer], true);  // Switch the light off
+    realTimeClockTimer_t lightStepTimer        = realTimeClockTimer_t(100, true);           // Change intensity of light in sall steps
+    realTimeClockTimer_t refreshWeatherTimer   = realTimeClockTimer_t(12*60*1000, true);    // Refresh the weather
+    realTimeClockTimer_t saveSettingsTimer     = realTimeClockTimer_t(5*60*1000);     // Save settings if settings were changed
   
-    unsigned long previousTimer;
-    
     void setColor( lightColor_t color) { 
       this->color = color; 
       settingsChanged = true;
       updateStatus();
     };
 
-    void setTimer( lightTimer_t timer ) {
+    void setTimer( lightOffTimer_t timer ) {
       this->timer = timer;
+      // Update the interval of the light timer in case it was changed
+      switchLightOffTimer.interval = TIMES[timer];
       settingsChanged = true;
     };
 
@@ -200,7 +230,7 @@ class data_t {
     
     void updateStatus() {
       if( lightOn ) {
-        // If the user has changed bridghtess or color sett
+        // If the user has changed bridghtness or color setting
         R.setTarget(MAX_INTENSITY*COLORS[color].R*BRIGHTNESSES[brightness]);
         G.setTarget(MAX_INTENSITY*COLORS[color].G*BRIGHTNESSES[brightness]);
         B.setTarget(MAX_INTENSITY*COLORS[color].B*BRIGHTNESSES[brightness]);
@@ -215,7 +245,7 @@ class data_t {
   
     void setLightOn() {
       lightOn = true;
-      previousTimer = millis();
+      switchLightOffTimer.reset();
       updateStatus();
     }; // setLightOn()
     
@@ -225,8 +255,10 @@ class data_t {
     }; // setLightOff()
     
     void switchLight() {
-      lightOn = !lightOn;
-      previousTimer = millis();
+      if( lightOn ) 
+        setLightOff(); 
+      else
+        setLightOn();
       updateStatus();
     }
 
@@ -298,7 +330,8 @@ class data_t {
       try { 
         color             = (lightColor_t)       doc[ "lightColor"         ].as<int>(); 
         brightness        = (lightBrightness_t)  doc[ "lightBrightness"    ].as<int>(); 
-        timer             = (lightTimer_t)       doc[ "timer"              ].as<int>();
+        timer             = (lightOffTimer_t)    doc[ "timer"              ].as<int>();
+        switchLightOffTimer.interval = TIMES[timer];
         screenBrightness  = (screenBrightness_t) doc[ "screenBrightness"   ].as<int>();
         newAdviceRequested = doc[ "newAdviceRequested"  ].as<bool>();
         displayAdviceLines = doc[ "adviceLines"         ]; 

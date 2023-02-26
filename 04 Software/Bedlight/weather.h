@@ -66,7 +66,9 @@ void getWeather() {
         precipitation_t p;
         p.t = elem["dt"]; // 1617992220, 1617992280, 1617992340, 1617992400, 1617992460, 1617992520, ...
         p.prec = elem["precipitation"]; // 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
+
         //p.prec= rand() % 3 + 1; // for debugging purposes
+
         data.precipitation.push_back(p);
         if( p.prec>0 ) data.precipitationExpected = true;
       } // elem : minutely

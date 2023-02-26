@@ -1,41 +1,45 @@
 #define VERSION "1.2.0"
 
 /* 
-1.0.0 Initial release
+1.0.0 First working version
 1.1.0 Restructured code
       Added precipitation in screen on press of right button
 1.2.0 Added advice on press of left button
       Most optimal font for advice chosen
 
 To do:
-  Add chosen setting in Telegram keyboard
+  Reintroduce weather icons
+  Highlight chosen setting in Telegram keyboard
   Allow over the air updates
   Change LIGHT_INC to function in Light.h
 */
 
 /*
-MyCredentials.h is in gitignore and should have the following content:
+MyCredentials.h is in gitignore to keep confidential 
+data from github This file should have the following content:
 
-      #include <map>
-      
-      // Telegram token for the Bedlight bot
-      const char* token =  "aaaaaaaaaa:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";  
-      
-      // Telegram user ID for the user to be notified on startup
-      int64_t userid = 12345678; 
-      
-      // Timezone where the bedlight is located
-      // https://github.com/nayarsystems/posix_tz_db/blob/master/zones.csv
-      #define localTimezone "CET-1CEST,M3.5.0,M10.5.0/3"
-      
-      // List of SSID, password combinations for WiFi access points to connect to
-      std::map<String, String > ACCESS_POINTS { 
-        {"SSID-1", "Password-1" }, 
-        {"SSID-2", "Password-2" }, 
-        {"SSID-3", "Password-3" } };
+  #include <map>
+  
+  // Telegram token for the Bedlight bot
+  const char* token =  "aaaaaaaaaa:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";  
+  
+  // Telegram user ID for the user to be notified on startup
+  int64_t userid = 12345678; 
+  
+  // Timezone where the bedlight is located
+  // https://github.com/nayarsystems/posix_tz_db/blob/master/zones.csv
+  #define localTimezone "CET-1CEST,M3.5.0,M10.5.0/3"
+  
+  // List of SSID, password combinations for WiFi access points to connect to
+  std::map<String, String > ACCESS_POINTS { 
+    {"SSID-1", "Password-1" }, 
+    {"SSID-2", "Password-2" }, 
+    {"SSID-3", "Password-3" } };
+
 */
+
 #include "MyCredentials.h" // All modules have access to data in MyCredentials
-#include "Data.h"
+#include "Data.h"          // This file contains all types and the struct 'data' which acts as a central databus
 #include "Light.h"
 #include "Telegram.h"
 #include "Display.h"
@@ -61,19 +65,12 @@ void setup() {
   setupLight();
   setupWifi();
   setupTelegram();
-  
-  //listDir(SPIFFS, "/" , 8);  
 }
 
 
 void loop() {
   static bool wifiConnectReported = false;
   static bool wifiNotConnectReported = false;
-  unsigned long currentTime;
-  static unsigned long screenChange = millis();
-
-  // Read the clock for this round
-  currentTime = millis();
 
   // Check if WiFi is still alive
   if (wifiMulti.run( CONNECT_TIMEOUT_MS ) == WL_CONNECTED) {  /*if the connection lost it will connect to next network*/
@@ -100,52 +97,41 @@ void loop() {
   if (touchRead(PIN_KEY_TOP  )<KEY_TRESHOLD) keyTopCounter++;   else keyTopCounter  =0; 
   if (touchRead(PIN_KEY_RIGHT)<KEY_TRESHOLD) keyRightCounter++; else keyRightCounter=0; 
 
-  if(keyLeftCounter ==2) { 
+  if( keyLeftCounter == 2 ) { 
     data.screen = scnAdvice; 
+    data.screenBacktoMainTimer.reset();
     data.updateScreen = true; 
-    screenChange = currentTime;     
   };
 
-  if(keyTopCounter  ==2) { data.switchLight();  };
+  if( keyTopCounter == 2 ) { 
+    data.switchLight();    
+    Serial.printf( "Light switched %s\n", data.lightOn ? "on" : "off" );
+  };
 
-  if(keyRightCounter==2) { 
+  if( keyRightCounter == 2 ) { 
     data.screen = scnWeather; 
+    data.screenBacktoMainTimer.reset();
     data.updateScreen = true; 
-    screenChange = currentTime; 
   };
-
-  // Increase or decrease light intensity in tiny timesteps
-  const unsigned long lightDimInterval = 100;
-  static unsigned long previousLightDim = currentTime;
 
   // Tell the light to take the next step
-  if (currentTime - previousLightDim >= lightDimInterval ) {
-    previousLightDim = currentTime;
+  if( data.lightStepTimer.lapsed() ) {
     loopLight();
+    if( !data.R.ready() ) Serial.printf("Red ready: %s value %d target %.3f\n", data.R.ready() ? "Y" : "N", data.R.getValue(), data.R.getTarget() );
   }  
 
-  // Switch off the light if the timer elapses
-  if ( data.lightOn and (currentTime - data.previousTimer >= TIMES[data.timer] ) ) data.setLightOff();
+  // Switch the light off if the timer elapses
+  if ( data.lightOn and (data.switchLightOffTimer.lapsed() ) ) data.setLightOff();
 
   // Retrieve weather every now and then so it is available upon request
-  const unsigned long weatherInterval = 12*60*1000;
-  static unsigned long lastTimeWeatherWasFetched = currentTime;
-  if ( currentTime - lastTimeWeatherWasFetched >= weatherInterval ) {
-    data.requestNewWeather = true;
-    lastTimeWeatherWasFetched = currentTime;
-  }
-
+  if ( data.refreshWeatherTimer.lapsed() ) data.requestNewWeather = true;
   if( data.requestNewWeather ) getWeather();
 
   // Switch back to main screen after time has passed
-  const unsigned long mainScreenInterval = 10*1000;
-  if (currentTime - screenChange >= mainScreenInterval ) {
-    screenChange = currentTime;
-    if( data.screen != scnMain ) {
-      resetScreen(); // Reset display sometimes, cause it sometimes stops working
+ if( data.screenBacktoMainTimer.lapsed() and ( data.screen != scnMain ) ) {
+      resetScreen(); // Completely reset the screen, since sometimes it switches off
       data.screen = scnMain;
       data.updateScreen = true;
-    };
   };
 
   // Change screen brightness if needed
@@ -170,6 +156,9 @@ void loop() {
     if( data.screen == scnMain ) data.updateScreen = true;
   }
 
+  // Repeat getting advice if previous advice was too long to be displayed
+  if( data.newAdviceRequested ) getAdvice();
+
   // Only call loopDisplay if screen update is requested
   if( data.updateScreen ) { 
     loopDisplay();
@@ -182,18 +171,10 @@ void loop() {
   loopTelegram();
 
   // Periodically save settings
-  const unsigned long saveSettingsInterval = 3*60*1000;
-  static unsigned long previousSaveSettings = millis();
-
-  if (currentTime - previousSaveSettings >= saveSettingsInterval ) {
-    previousSaveSettings = currentTime;
+  if (data.saveSettingsTimer.lapsed() ) {
     if( data.settingsChanged) { 
       data.saveSettings(SPIFFS, SETTINGS_FILE, SETTINGS_TEMP);
       listDir(SPIFFS, "/", 6);
     }
-  };
-
-  // Get first advice. Subsequent advices will be retrieved when an advice is displayed
-  if( data.newAdviceRequested ) getAdvice();
-  
+  }  
 }
