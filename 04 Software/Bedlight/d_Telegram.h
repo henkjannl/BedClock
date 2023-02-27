@@ -9,8 +9,6 @@
 #include "Data.h"
 #include "Light.h"
 
-const uint32_t CONNECT_TIMEOUT_MS = 10000;
-
 // Messages for the callback functions
 #define CB_COLOR_WHITE     "clrWhite"
 #define CB_COLOR_YELLOW    "clrYellow"
@@ -52,7 +50,6 @@ const char DEGREE_SYMBOL[]        = { 0xB0, '\0' };
 
 
 // ======== GLOBAL VARIABLES ============= 
-WiFiMulti wifiMulti;
 WiFiClientSecure client;  
 AsyncTelegram2 myBot(client);
 InlineKeyboard mainKeyboard, settingsKeyboard;
@@ -234,32 +231,6 @@ void addInlineKeyboard() {
   settingsKeyboard.addRow();
   btntext=String(EMOTICON_MAIN_MENU)  + " Back to main menu"; settingsKeyboard.addButton(btntext.c_str(), CB_MAIN_MENU,   KeyboardButtonQuery, onQueryScreenBrightness);
 }
-
-void setupWifi() {
-  // Initialize Wifi
-  Serial.println( "Initialize WiFi" );
-  WiFi.mode(WIFI_STA);
-
-  // Add wifi access points 
-  for (const auto &ap : ACCESS_POINTS ) {
-    //Serial.printf( "%s %s\n", ap.first.c_str(), ap.second.c_str() );
-    wifiMulti.addAP( ap.first.c_str(), ap.second.c_str() );
-  }
-
-  Serial.println("Connecting Wifi...");
-  if(wifiMulti.run( CONNECT_TIMEOUT_MS ) == WL_CONNECTED) {
-    Serial.printf( "WiFi connected to SSID %s signl strength %ddB\n", WiFi.SSID().c_str(), WiFi.RSSI() );
-  }
-  else {
-    Serial.println("WiFi not connected yet");
-  }
-
-  WiFi.setAutoReconnect(true);
-
-  // Sync time with NTP
-  Serial.println("Sync clock with timeserver");
-  configTzTime(localTimezone, "time.google.com", "time.windows.com", "pool.ntp.org");
-};
 
 void setupTelegram() {
   

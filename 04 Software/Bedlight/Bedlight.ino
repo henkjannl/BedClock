@@ -41,12 +41,13 @@ data from github This file should have the following content:
 */
 
 #include "MyCredentials.h" // All modules have access to data in MyCredentials
-#include "Data.h"          // This file contains all types and the struct 'data' which acts as a central databus
-#include "Light.h"
-#include "Telegram.h"
-#include "Display.h"
-#include "Weather.h"
-#include "Advice.h"
+#include "a_Data.h"          // This file contains all types and the struct 'data' which acts as a central databus
+#include "b_Light.h"
+#include "c_WiFi.h"
+#include "d_Telegram.h"
+#include "e_Display.h"
+#include "f_Weather.h"
+#include "g_Advice.h"
 
 #include <time.h>
 #include <vector>
@@ -71,24 +72,8 @@ void setup() {
 
 
 void loop() {
-  static bool wifiConnectReported = false;
-  static bool wifiNotConnectReported = false;
 
-  // Check if WiFi is still alive
-  if (wifiMulti.run( CONNECT_TIMEOUT_MS ) == WL_CONNECTED) {  /*if the connection lost it will connect to next network*/
-    if( !wifiConnectReported ) {
-      Serial.printf( "WiFi connected to SSID %s signl strength %ddB\n", WiFi.SSID().c_str(), WiFi.RSSI() );
-      wifiConnectReported=true;
-      wifiNotConnectReported=false;
-    };
-  }
-  else {
-    if( !wifiNotConnectReported ) {
-      Serial.println("WiFi not connected!");  /*if all conditions fail print this*/
-      wifiNotConnectReported=true;
-      wifiConnectReported=false;
-    }
-  }
+  loopWifi();
 
   // Check if button is pressed
   static volatile uint32_t keyLeftCounter  = 0;
