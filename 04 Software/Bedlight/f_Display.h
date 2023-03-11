@@ -2,35 +2,11 @@
 
 #include <Wire.h>
 #include <U8g2lib.h>
+#include "b_Icons.h"
 
-//#define ADVICE_FONT u8g2_font_courR10_tf
-//#define ADVICE_FONT u8g2_font_helvR08_tf
-//#define ADVICE_FONT u8g2_font_helvB10_tf
-//#define ADVICE_FONT u8g2_font_helvB08_tf
-//#define ADVICE_FONT u8g2_font_Engrish_tf
-//#define ADVICE_FONT u8g2_font_koleeko_tf 
-//#define ADVICE_FONT u8g2_font_7x14_tf 
 #define ADVICE_FONT u8g2_font_7x14B_tf    // Quite good
-//#define ADVICE_FONT u8g2_font_lubI08_tf
-//#define ADVICE_FONT u8g2_font_BBSesque_tf
-//#define ADVICE_FONT u8g2_font_7x14_tf
-//#define ADVICE_FONT u8g2_font_profont12_tf // too small
 
-// No rain icon
-#define NoRain_width 32
-#define NoRain_height 32
-static unsigned char NoRain_bits[] = {
-   0x00, 0x00, 0x00, 0x00, 0x00, 0xf8, 0x00, 0x00, 0x60, 0xfe, 0x03, 0x00,
-   0xf0, 0x0e, 0x0f, 0x00, 0xe0, 0x01, 0x1c, 0x00, 0xc0, 0x03, 0xf8, 0x03,
-   0x80, 0x07, 0xf8, 0x07, 0x00, 0x0f, 0x00, 0x0e, 0x40, 0x1e, 0x00, 0x0c,
-   0xc0, 0x3c, 0x00, 0x0c, 0xf8, 0x79, 0x00, 0x1c, 0x3c, 0xf0, 0x00, 0x3c,
-   0x0e, 0xe0, 0x01, 0x70, 0x07, 0xc0, 0x03, 0x60, 0x03, 0x80, 0x07, 0xc0,
-   0x03, 0x00, 0x0f, 0xc0, 0x03, 0x00, 0x1e, 0xc0, 0x03, 0x00, 0x3c, 0xc0,
-   0x06, 0x00, 0x78, 0x60, 0x0e, 0x00, 0xf0, 0x70, 0xfc, 0xff, 0xe7, 0x39,
-   0xf0, 0xff, 0xcf, 0x1b, 0x00, 0x00, 0x80, 0x07, 0x00, 0x00, 0x00, 0x0f,
-   0x10, 0x20, 0x40, 0x1e, 0x18, 0x30, 0x60, 0x3c, 0x38, 0x70, 0x60, 0x18,
-   0x3c, 0x78, 0xf0, 0x00, 0x3c, 0x78, 0xf0, 0x00, 0x3c, 0x78, 0xf0, 0x00,
-   0x38, 0x70, 0xe0, 0x00, 0x00, 0x00, 0x00, 0x00 };
+#define WEATHER_FONT u8g2_font_helvB14_tf
 
 // ======== GLOBAL VARIABLES ============= 
 U8G2_SSD1306_128X32_UNIVISION_F_SW_I2C u8g2(U8G2_R2, 22, 21, U8X8_PIN_NONE);  
@@ -105,22 +81,31 @@ void loopDisplay() {
     case scnMain:
       Serial.println("scnMain");
       //u8g2.setFont(u8g2_font_helvR10_tf); // _tf includes degree symbol
-      u8g2.setFont(u8g2_font_courR18_tf);
+      u8g2.setFont(u8g2_font_courR18_tf);      
+
       u8g2.setFontPosCenter();
-      u8g2.setCursor( ( (u8g2.getDisplayWidth() - (u8g2.getUTF8Width( data.displayClock ))) / 2) , 16);
+      u8g2.setCursor( ( (u8g2.getDisplayWidth() - 32 - (u8g2.getUTF8Width( data.displayClock ))) / 2) , 16);
       u8g2.print( data.displayClock );        
+
+      if( WEATHER_ICONS.count( data.weatherIcon ) == 1 ) {        
+        u8g2.drawXBMP( 96, 0, WEATHER_ICON_WIDTH, WEATHER_ICON_HEIGHT, *WEATHER_ICONS[ data.weatherIcon ]  );
+      }
+      else {
+        Serial.printf("Could not find weather icon %s\n", data.weatherIcon);
+      }
+      
     break; // case scnMain
 
     case scnWeather:
       Serial.println("scnWeather");
 
-      u8g2.setFont(u8g2_font_courR12_tf);  
+      u8g2.setFont(WEATHER_FONT);  
       u8g2.setFontPosCenter();
       u8g2.setCursor( 2 , 16);
       Serial.printf("Wheather displaying temperature %s\n", data.displayTemperature );
       u8g2.print( data.displayTemperature );    
 
-      x  = 2 + u8g2.getUTF8Width( data.displayTemperature ) + 5;
+      x  = 2 + u8g2.getUTF8Width( data.displayTemperature ) + 3;
       
       if( data.precipitationExpected ) {
   
@@ -146,7 +131,7 @@ void loopDisplay() {
       }
       else {
         // Display no rain icon 
-        u8g2.drawXBMP(64,0, NoRain_width, NoRain_height, NoRain_bits );
+        u8g2.drawXBMP((int16_t) x, 0, NoRain_width, NoRain_height, NoRain_bits );
       }
 
     break; // case scnWeather

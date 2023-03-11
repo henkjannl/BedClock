@@ -57,6 +57,7 @@ void getWeather() {
       const char* current_weather_0_description = current_weather_0["description"]; // "overcast clouds"
       const char* current_weather_0_icon = current_weather_0["icon"]; // "04d"
       strcpy(data.weatherIcon, current_weather_0_icon);    
+      Serial.printf("Weather icon: %s\n", data.weatherIcon);
       //current_weather_0_description[0]=(char)toupper(current_weather_0_description[0]);
   
       data.precipitation.clear();
@@ -68,7 +69,6 @@ void getWeather() {
         p.prec = elem["precipitation"]; // 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
 
         // p.prec= rand() % 3 + 1; // for debugging purposes
-        Serial.printf("p.t\t%d\n", p.t);
 
         data.precipitation.push_back(p);
         if( p.prec>0 ) data.precipitationExpected = true;

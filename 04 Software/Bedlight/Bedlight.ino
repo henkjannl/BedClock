@@ -1,4 +1,4 @@
-#define VERSION "1.3"
+#define VERSION "1.4"
 
 /* 
 1.0 First working version
@@ -10,10 +10,12 @@
     Timers in separate class
 1.3 Added hour scale on precipitation graph
     Added no precipitation icon to weather menu
-    Increased number of key press events to prevent light in middle of the night      
+    Increased number of key press events to prevent light in middle of the night     
+    Larger font for current outside temperature 
+1.4 Weather icons reintroduced
 
 To do:
-  Reintroduce weather icons
+  Getting new advice can take long. Check how to obtain advice without clogging the system
   Highlight chosen setting in Telegram keyboard
   Allow over the air updates
   Change LIGHT_INC to function in Light.h
@@ -45,12 +47,13 @@ data from github This file should have the following content:
 
 #include "MyCredentials.h" // All modules have access to data in MyCredentials
 #include "a_Data.h"          // This file contains all types and the struct 'data' which acts as a central databus
-#include "b_Light.h"
-#include "c_WiFi.h"
-#include "d_Telegram.h"
-#include "e_Display.h"
-#include "f_Weather.h"
-#include "g_Advice.h"
+#include "b_Icons.h"
+#include "c_Light.h"
+#include "d_WiFi.h"
+#include "e_Telegram.h"
+#include "f_Display.h"
+#include "g_Weather.h"
+#include "h_Advice.h"
 
 #include <time.h>
 #include <vector>
@@ -89,6 +92,7 @@ void loop() {
 
   if( keyLeftCounter == 3 ) { 
     data.screen = scnAdvice; 
+    data.newAdviceRequested = true; // After displaying the advice, ask new advice
     data.screenBacktoMainTimer.interval=4000;
     data.screenBacktoMainTimer.reset();
     data.updateScreen = true; 
@@ -148,16 +152,11 @@ void loop() {
     if( data.screen == scnMain ) data.updateScreen = true;
   }
 
+  // Only call loopDisplay if screen update is requested
+  if( data.updateScreen ) loopDisplay();    
+
   // Repeat getting advice if previous advice was too long to be displayed
   if( data.newAdviceRequested ) getAdvice();
-
-  // Only call loopDisplay if screen update is requested
-  if( data.updateScreen ) { 
-    loopDisplay();
-    
-    // After display is refreshed, get new advice for next time an advice is requested
-    if( data.screen == scnAdvice ) getAdvice();
-  }
 
   // Handle Telegram messages not already done by the handlers
   loopTelegram();
