@@ -126,14 +126,14 @@ class floatVariable_t {
     bool _ready; 
 }; // class floatVariable_t
 
-class realTimeClockTimer_t {
+class milliSecTimer {
   public:
     unsigned long previous;
     unsigned long interval;
     bool autoReset;
     
     // Constructor
-    realTimeClockTimer_t(unsigned long interval, bool autoReset = true) {
+    milliSecTimer(unsigned long interval, bool autoReset = true) {
       this->previous = millis();
       this->interval = interval;
       this->autoReset = autoReset;
@@ -198,11 +198,11 @@ class data_t {
     floatVariable_t R, G, B;
 
     // A number of timers for all kinds of tasks
-    realTimeClockTimer_t screenBacktoMainTimer = realTimeClockTimer_t(5000);                // Flip screen back to main after 5 seconds, autoreset
-    realTimeClockTimer_t switchLightOffTimer   = realTimeClockTimer_t(TIMES[timer], true);  // Switch the light off
-    realTimeClockTimer_t lightStepTimer        = realTimeClockTimer_t(100, true);           // Change intensity of light in sall steps
-    realTimeClockTimer_t refreshWeatherTimer   = realTimeClockTimer_t(12*60*1000, true);    // Refresh the weather
-    realTimeClockTimer_t saveSettingsTimer     = realTimeClockTimer_t(5*60*1000);     // Save settings if settings were changed
+    milliSecTimer screenBacktoMainTimer = milliSecTimer(5000);                // Flip screen back to main after 5 seconds, autoreset
+    milliSecTimer switchLightOffTimer   = milliSecTimer(TIMES[timer], true);  // Switch the light off
+    milliSecTimer lightStepTimer        = milliSecTimer(100, true);           // Change intensity of light in sall steps
+    milliSecTimer refreshWeatherTimer   = milliSecTimer(12*60*1000, true);    // Refresh the weather
+    milliSecTimer saveSettingsTimer     = milliSecTimer(5*60*1000);           // Save settings if settings were changed
   
     void setColor( lightColor_t color) { 
       this->color = color; 

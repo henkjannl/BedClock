@@ -16,6 +16,22 @@
 //#define ADVICE_FONT u8g2_font_7x14_tf
 //#define ADVICE_FONT u8g2_font_profont12_tf // too small
 
+// No rain icon
+#define NoRain_width 32
+#define NoRain_height 32
+static unsigned char NoRain_bits[] = {
+   0x00, 0x00, 0x00, 0x00, 0x00, 0xf8, 0x00, 0x00, 0x60, 0xfe, 0x03, 0x00,
+   0xf0, 0x0e, 0x0f, 0x00, 0xe0, 0x01, 0x1c, 0x00, 0xc0, 0x03, 0xf8, 0x03,
+   0x80, 0x07, 0xf8, 0x07, 0x00, 0x0f, 0x00, 0x0e, 0x40, 0x1e, 0x00, 0x0c,
+   0xc0, 0x3c, 0x00, 0x0c, 0xf8, 0x79, 0x00, 0x1c, 0x3c, 0xf0, 0x00, 0x3c,
+   0x0e, 0xe0, 0x01, 0x70, 0x07, 0xc0, 0x03, 0x60, 0x03, 0x80, 0x07, 0xc0,
+   0x03, 0x00, 0x0f, 0xc0, 0x03, 0x00, 0x1e, 0xc0, 0x03, 0x00, 0x3c, 0xc0,
+   0x06, 0x00, 0x78, 0x60, 0x0e, 0x00, 0xf0, 0x70, 0xfc, 0xff, 0xe7, 0x39,
+   0xf0, 0xff, 0xcf, 0x1b, 0x00, 0x00, 0x80, 0x07, 0x00, 0x00, 0x00, 0x0f,
+   0x10, 0x20, 0x40, 0x1e, 0x18, 0x30, 0x60, 0x3c, 0x38, 0x70, 0x60, 0x18,
+   0x3c, 0x78, 0xf0, 0x00, 0x3c, 0x78, 0xf0, 0x00, 0x3c, 0x78, 0xf0, 0x00,
+   0x38, 0x70, 0xe0, 0x00, 0x00, 0x00, 0x00, 0x00 };
+
 // ======== GLOBAL VARIABLES ============= 
 U8G2_SSD1306_128X32_UNIVISION_F_SW_I2C u8g2(U8G2_R2, 22, 21, U8X8_PIN_NONE);  
 
@@ -101,7 +117,7 @@ void loopDisplay() {
       u8g2.setFont(u8g2_font_courR12_tf);  
       u8g2.setFontPosCenter();
       u8g2.setCursor( 2 , 16);
-      Serial.printf("Wheather displaying temperature %s\n", data.displayTemperature);
+      Serial.printf("Wheather displaying temperature %s\n", data.displayTemperature );
       u8g2.print( data.displayTemperature );    
 
       x  = 2 + u8g2.getUTF8Width( data.displayTemperature ) + 5;
@@ -111,19 +127,26 @@ void loopDisplay() {
         // Display bar graph with precipitation
         dx = ( u8g2.getDisplayWidth() - x ) / data.precipitation.size();
         y=u8g2.getDisplayHeight()-2;
+
+        int nextHour = int(time(NULL)/3600+1) * 3600;
   
         for (precipitation_t & p : data.precipitation) {
           int h=(int) 14.4*log(p.prec+1); // Curve through (0 , 0) (0.25 , 3.2) (3 , 20.0)
           if( h>u8g2.getDisplayHeight()-4 ) h = u8g2.getDisplayHeight()-4;
           Serial.printf("x %d prec: %.1f y-h: %d h: %d\n" , (int) x, p.prec, y-h, h );
           for( int i = 0; i<dx; i++ ) u8g2.drawVLine( (int16_t)  x+1 , y-h, h );
+
+          if( p.t>=nextHour ) {
+            u8g2.drawVLine( (u8g2_uint_t) x, (u8g2_uint_t) 0,                         (u8g2_uint_t)                         3 );
+            u8g2.drawVLine( (u8g2_uint_t) x, (u8g2_uint_t) u8g2.getDisplayHeight()-4, (u8g2_uint_t) u8g2.getDisplayHeight()-1 );
+            nextHour+=3600;
+          }
           x+=dx;
         }
       }
       else {
-        u8g2.setFont( u8g2_font_helvR08_tf );
-        u8g2.setCursor( (int) x , 10); u8g2.print("No precipitation" );
-        u8g2.setCursor( (int) x , 22); u8g2.print("expected" );
+        // Display no rain icon 
+        u8g2.drawXBMP(64,0, NoRain_width, NoRain_height, NoRain_bits );
       }
 
     break; // case scnWeather

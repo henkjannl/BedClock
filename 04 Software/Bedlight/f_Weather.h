@@ -11,7 +11,7 @@ void getWeather() {
   HTTPClient http;
 
   char request[250];    
-  snprintf(request, sizeof(request), "https://api.openweathermap.org/data/2.5/onecall?lat=%.8f&lon=%.8f&exclude=hourly,daily,alerts&appid=%s", 
+  snprintf(request, sizeof(request), "https://api.openweathermap.org/data/2.5/onecall?lat=%.8f&lon=%.8f&exclude=hourly,daily,alerts&units=metric&appid=%s", 
     latitude, longitude, openweathermapAPIkey);
   http.begin(request);
   int httpCode = http.GET();
@@ -39,7 +39,7 @@ void getWeather() {
       data.sunrise = current["sunrise"]; // 1617943698
       data.sunset  = current["sunset"]; // 1617992353
       data.outsideTemp = current["temp"]; // 282.57
-      data.outsideTemp-=273.15;
+      //data.outsideTemp-=273.15;
       //int current_feels_like = current["feels_like"]; // 281
       //int current_pressure = current["pressure"]; // 1008
       //int current_humidity = current["humidity"]; // 60
@@ -67,7 +67,8 @@ void getWeather() {
         p.t = elem["dt"]; // 1617992220, 1617992280, 1617992340, 1617992400, 1617992460, 1617992520, ...
         p.prec = elem["precipitation"]; // 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
 
-        //p.prec= rand() % 3 + 1; // for debugging purposes
+        // p.prec= rand() % 3 + 1; // for debugging purposes
+        Serial.printf("p.t\t%d\n", p.t);
 
         data.precipitation.push_back(p);
         if( p.prec>0 ) data.precipitationExpected = true;

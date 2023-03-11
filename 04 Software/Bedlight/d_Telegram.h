@@ -6,8 +6,8 @@
 #include <AsyncTelegram2.h>
 #include <map>
 
-#include "Data.h"
-#include "Light.h"
+#include "a_Data.h"
+#include "b_Light.h"
 
 // Messages for the callback functions
 #define CB_COLOR_WHITE     "clrWhite"

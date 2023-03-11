@@ -1,13 +1,16 @@
-#define VERSION "1.2.0"
+#define VERSION "1.3"
 
 /* 
-1.0.0 First working version
-1.1.0 Restructured code
-      Added precipitation in screen on press of right button
-      Saving /loading settings finally works
-1.2.0 Added advice on press of left button
-      Most optimal font for advice chosen
-      Timers in separate class
+1.0 First working version
+1.1 Restructured code
+    Added precipitation in screen on press of right button
+    Saving /loading settings finally works
+1.2 Added advice on press of left button
+    Most optimal font for advice chosen
+    Timers in separate class
+1.3 Added hour scale on precipitation graph
+    Added no precipitation icon to wther menu
+    Increased number of key press events to prevent light in middle of the night      
 
 To do:
   Reintroduce weather icons
@@ -84,19 +87,21 @@ void loop() {
   if (touchRead(PIN_KEY_TOP  )<KEY_TRESHOLD) keyTopCounter++;   else keyTopCounter  =0; 
   if (touchRead(PIN_KEY_RIGHT)<KEY_TRESHOLD) keyRightCounter++; else keyRightCounter=0; 
 
-  if( keyLeftCounter == 2 ) { 
+  if( keyLeftCounter == 3 ) { 
     data.screen = scnAdvice; 
+    data.screenBacktoMainTimer.interval=4000;
     data.screenBacktoMainTimer.reset();
     data.updateScreen = true; 
   };
 
-  if( keyTopCounter == 2 ) { 
+  if( keyTopCounter == 3 ) { 
     data.switchLight();    
     Serial.printf( "Light switched %s\n", data.lightOn ? "on" : "off" );
   };
 
-  if( keyRightCounter == 2 ) { 
+  if( keyRightCounter == 3 ) { 
     data.screen = scnWeather; 
+    data.screenBacktoMainTimer.interval=2000;
     data.screenBacktoMainTimer.reset();
     data.updateScreen = true; 
   };
