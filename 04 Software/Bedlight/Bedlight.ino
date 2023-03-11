@@ -9,7 +9,7 @@
     Most optimal font for advice chosen
     Timers in separate class
 1.3 Added hour scale on precipitation graph
-    Added no precipitation icon to wther menu
+    Added no precipitation icon to weather menu
     Increased number of key press events to prevent light in middle of the night      
 
 To do:
