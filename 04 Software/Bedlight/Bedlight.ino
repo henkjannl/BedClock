@@ -13,6 +13,7 @@
     Increased number of key press events to prevent light in middle of the night     
     Larger font for current outside temperature 
 1.4 Weather icons reintroduced
+    Fixed missing weather icon
 
 To do:
   Getting new advice can take long. Check how to obtain advice without clogging the system
@@ -113,7 +114,7 @@ void loop() {
   // Tell the light to take the next step
   if( data.lightStepTimer.lapsed() ) {
     loopLight();
-    if( !data.R.ready() ) Serial.printf("Red ready: %s value %d target %.3f\n", data.R.ready() ? "Y" : "N", data.R.getValue(), data.R.getTarget() );
+    if( !data.R.ready() ) Serial.printf("Red ready: %s value %.3f target %.3f\n", data.R.ready() ? "Y" : "N", data.R.getValue(), data.R.getTarget() );
   }  
 
   // Switch the light off if the timer elapses

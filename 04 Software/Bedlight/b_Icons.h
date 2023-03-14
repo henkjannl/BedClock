@@ -256,6 +256,7 @@ static unsigned char icon50n[] = {
    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
 std::map< std::string, unsigned char (*)[128] > WEATHER_ICONS = { 
+  { "01d", & icon01d },
   { "01n", & icon01n },
   { "02d", & icon02d },
   { "02n", & icon02n },

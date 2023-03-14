@@ -81,6 +81,7 @@ void getWeather() {
   } else return; // httpCode > 0
 
   // Everything went well
+  Serial.println("Weather request went well");
   snprintf( data.displayTemperature, sizeof( data.displayTemperature ), "%0d%sC", (int) data.outsideTemp, DEGREE_SYMBOL );
   data.weatherUpdated = true;
   data.requestNewWeather = false;

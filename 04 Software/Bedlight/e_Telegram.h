@@ -70,6 +70,10 @@ String convertToHexString( String input ) {
   return result;
 }
 
+void sendMessageToKeyUser( String msg ) {
+  myBot.sendTo(userid, msg.c_str(), mainKeyboard.getJSON() );  
+}
+
 String StatusMessage() {
   String result;
   result = String(EMOTICON_LIGHT_ON) + String( data.lightOn ? " On " : " Off " );

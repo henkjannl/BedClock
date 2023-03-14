@@ -2,6 +2,8 @@
 
 #include <Wire.h>
 #include <U8g2lib.h>
+#include <list>
+
 #include "b_Icons.h"
 
 #define ADVICE_FONT u8g2_font_7x14B_tf    // Quite good
@@ -71,6 +73,9 @@ void loopDisplay() {
   float x;
   float dx;
   int16_t y;
+
+  static std::list< String > unexpectedIcons;
+  bool iconFound;
   
   Serial.print("loopDisplay > ");
   
@@ -92,6 +97,15 @@ void loopDisplay() {
       }
       else {
         Serial.printf("Could not find weather icon %s\n", data.weatherIcon);
+
+        // See if this icon is in the list of unexpected icons
+        iconFound = false;
+        for( auto & iconInList : unexpectedIcons ) if( iconInList == String( data.weatherIcon ) ) iconFound = true;
+
+        if( !iconFound ) {
+          unexpectedIcons.push_back( String( data.weatherIcon ) );
+          sendMessageToKeyUser( String( "The following weather icon is not supported: " ) + data.weatherIcon );
+        }
       }
       
     break; // case scnMain
