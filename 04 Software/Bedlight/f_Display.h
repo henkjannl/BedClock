@@ -104,7 +104,7 @@ void loopDisplay() {
 
         if( !iconFound ) {
           unexpectedIcons.push_back( String( data.weatherIcon ) );
-          sendMessageToKeyUser( String( "The following weather icon is not supported: " ) + data.weatherIcon );
+          sendMessageToKeyUser( String( "The following weather icon is not supported: [" ) + data.weatherIcon + "]" );
         }
       }
       
