@@ -266,6 +266,8 @@ std::map< std::string, unsigned char (*)[128] > WEATHER_ICONS = {
   { "04n", & icon04n },
   { "09d", & icon09d },
   { "09n", & icon09n },
+  { "10d", & icon10d },
+  { "10n", & icon10n },
   { "11d", & icon11d },
   { "11n", & icon11n },
   { "13d", & icon13d },
@@ -273,3 +275,4 @@ std::map< std::string, unsigned char (*)[128] > WEATHER_ICONS = {
   { "50d", & icon50d },
   { "50n", & icon50n }
 };
+
