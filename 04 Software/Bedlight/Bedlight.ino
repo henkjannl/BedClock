@@ -1,4 +1,4 @@
-#define VERSION "1.4"
+#define VERSION "1.6"
 
 /* 
 1.0 First working version
@@ -14,9 +14,12 @@
     Larger font for current outside temperature 
 1.4 Weather icons reintroduced
     Fixed missing weather icon
+1.5 Removed advice
+    Added second weather screen with 'feels like' temperature and relative humidity
+1.6 'Feels like' replaced by maximum day temperature
+    Time in main screen two pixels lower to match icon better
 
 To do:
-  Getting new advice can take long. Check how to obtain advice without clogging the system
   Highlight chosen setting in Telegram keyboard
   Allow over the air updates
   Change LIGHT_INC to function in Light.h
@@ -54,7 +57,6 @@ data from github This file should have the following content:
 #include "e_Telegram.h"
 #include "f_Display.h"
 #include "g_Weather.h"
-#include "h_Advice.h"
 
 #include <time.h>
 #include <vector>
@@ -92,8 +94,7 @@ void loop() {
   if (touchRead(PIN_KEY_RIGHT)<KEY_TRESHOLD) keyRightCounter++; else keyRightCounter=0; 
 
   if( keyLeftCounter == 3 ) { 
-    data.screen = scnAdvice; 
-    data.newAdviceRequested = true; // After displaying the advice, ask new advice
+    data.screen = scnWeather2; 
     data.screenBacktoMainTimer.interval=4000;
     data.screenBacktoMainTimer.reset();
     data.updateScreen = true; 
@@ -105,7 +106,7 @@ void loop() {
   };
 
   if( keyRightCounter == 3 ) { 
-    data.screen = scnWeather; 
+    data.screen = scnWeather1; 
     data.screenBacktoMainTimer.interval=2000;
     data.screenBacktoMainTimer.reset();
     data.updateScreen = true; 
@@ -155,9 +156,6 @@ void loop() {
 
   // Only call loopDisplay if screen update is requested
   if( data.updateScreen ) loopDisplay();    
-
-  // Repeat getting advice if previous advice was too long to be displayed
-  if( data.newAdviceRequested ) getAdvice();
 
   // Handle Telegram messages not already done by the handlers
   loopTelegram();

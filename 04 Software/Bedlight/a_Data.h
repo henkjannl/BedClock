@@ -16,6 +16,9 @@
 #define PIN_KEY_TOP   14
 #define KEY_TRESHOLD  50
 
+//#define DEG_C "\xB0\x43\x00"
+const char DEG_C[] = { 0xb0, 0x43, 0x0 };
+
 // For storing settings in SPIFFS
 #define SETTINGS_FILE "/settings.jsn"
 #define SETTINGS_TEMP "/settings.tmp"
@@ -24,7 +27,7 @@ enum lightColor_t       { lcWhite, lcYellow, lcOrange, lcRed };
 enum lightBrightness_t  { lb15, lb30, lb50, lb100 };
 enum lightOffTimer_t    { lt03, lt05, lt10, lt20 };
 enum screenBrightness_t { sb1, sb2, sb3, sb4, sb5 };
-enum screen_t           { scnMain, scnWeather, scnAdvice };
+enum screen_t           { scnMain, scnWeather1, scnWeather2 };
 enum keyboard_t         { kbMain, kbSettings };
 
 struct rgb_t { 
@@ -165,6 +168,9 @@ class data_t {
     bool requestNewWeather = true;
     bool weatherUpdated = false;
     float outsideTemp = -300;
+    float maxDayTemp = -300;
+    float outsideFeelsLike = -300; 
+    int humidity = -1;
     std::list<precipitation_t> precipitation;
     bool precipitationExpected;
     char weatherIcon[12];
@@ -174,16 +180,11 @@ class data_t {
     // Flag to update screen
     bool updateScreen = true;
 
-    // Clock, temperature and advice
+    // Clock, temperature
     char displayClock[20];
 
     // Outside temperature display
     char displayTemperature[20];
-
-    // Advice
-    bool newAdviceRequested = true; // Stored in settings
-    int displayAdviceLines = 0;     // Stored in settings
-    char displayAdvice[2][200];     // Stored in settings
     
     // Which screen to display
     screen_t screen = scnMain;
@@ -284,10 +285,6 @@ class data_t {
       doc[ "lightBrightness"    ] = (int) brightness;    
       doc[ "timer"              ] = (int) timer;    
       doc[ "screenBrightness"   ] = (int) screenBrightness;
-      doc[ "newAdviceRequested" ] = newAdviceRequested;
-      doc[ "adviceLines"        ] = displayAdviceLines;
-      doc[ "adviceLine0"        ] = displayAdvice[0];
-      doc[ "adviceLine1"        ] = displayAdvice[1];
 
       if( serializeJson(doc, output) > 0) {
         // Assume success if at least one byte was written
@@ -333,13 +330,6 @@ class data_t {
         timer             = (lightOffTimer_t)    doc[ "timer"              ].as<int>();
         switchLightOffTimer.interval = TIMES[timer];
         screenBrightness  = (screenBrightness_t) doc[ "screenBrightness"   ].as<int>();
-        newAdviceRequested = doc[ "newAdviceRequested"  ].as<bool>();
-        displayAdviceLines = doc[ "adviceLines"         ]; 
-        String advice;
-        advice = doc[ "adviceLine0"].as<String>(); 
-        snprintf( displayAdvice[0], sizeof( displayAdvice[0]), advice.c_str() );
-        advice = doc[ "adviceLine1"].as<String>(); 
-        snprintf( displayAdvice[1], sizeof( displayAdvice[1]), advice.c_str() );
       } 
       catch (const std::exception& e) { 
         Serial.println("Exception occured when deserializing JSON file");
@@ -347,10 +337,6 @@ class data_t {
         brightness         = lb100;   
         timer              = lt10;   
         screenBrightness   = sb5;    
-        newAdviceRequested = true;  
-        displayAdviceLines = 0;  
-        snprintf( displayAdvice[0], sizeof( displayAdvice[0] ), "Always" ); 
-        snprintf( displayAdvice[1], sizeof( displayAdvice[1] ), "block trolls" );
       };
       
       settingsChanged = false;
