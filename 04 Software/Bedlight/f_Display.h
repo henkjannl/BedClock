@@ -63,7 +63,7 @@ void loopDisplay() {
   int16_t y;
 
   static std::list< String > unexpectedIcons;
-  bool iconFound;
+  bool iconPresent, iconFound;
   
   Serial.print("loopDisplay > ");
   
@@ -77,25 +77,29 @@ void loopDisplay() {
       u8g2.setFont(u8g2_font_courR18_tf);      
 
       u8g2.setFontPosCenter();
-      //u8g2.setCursor( ( (u8g2.getDisplayWidth() - 32 - (u8g2.getUTF8Width( data.displayClock ))) / 2) , 16);
-      u8g2.setCursor( ( (u8g2.getDisplayWidth() - 32 - (u8g2.getUTF8Width( data.displayClock ))) / 2) , 20);
+
+      iconPresent = data.weatherUpdated && ( WEATHER_ICONS.count( data.weatherIcon ) > 0 );
+      
+      if( iconPresent )  
+        u8g2.setCursor( ( (u8g2.getDisplayWidth() - 32 - (u8g2.getUTF8Width( data.displayClock ))) / 2) , 20);
+      else
+        u8g2.setCursor( ( (u8g2.getDisplayWidth()      - (u8g2.getUTF8Width( data.displayClock ))) / 2) , 20);
+
       u8g2.print( data.displayClock );        
 
-      if( WEATHER_ICONS.count( data.weatherIcon ) == 1 ) {        
+      if( iconPresent ) 
         u8g2.drawXBMP( 96, 0, WEATHER_ICON_WIDTH, WEATHER_ICON_HEIGHT, *WEATHER_ICONS[ data.weatherIcon ]  );
-      }
       else {
-        Serial.printf("Could not find weather icon %s\n", data.weatherIcon);
 
         // See if this icon is in the list of unexpected icons
         iconFound = false;
         for( auto & iconInList : unexpectedIcons ) if( iconInList == String( data.weatherIcon ) ) iconFound = true;
-
+  
         if( !iconFound ) {
           unexpectedIcons.push_back( String( data.weatherIcon ) );
           sendMessageToKeyUser( String( "The following weather icon is not supported: [" ) + data.weatherIcon + "]" );
         }
-      }
+      } // iconPresent
       
     break; // case scnMain
 
@@ -143,6 +147,13 @@ void loopDisplay() {
           // Display no rain icon 
           //u8g2.drawXBMP( u8g2.getDisplayWidth() - NoRain_width , 0, NoRain_width, NoRain_height, NoRain_bits );          
         }
+      } else {
+          u8g2.setFont( u8g2_font_7x14_tf );  
+          u8g2.setFontPosCenter();
+          u8g2.setCursor( 5,  8 );
+          u8g2.print( "WEATHER DATA" );    
+          u8g2.setCursor( 5, 24 );
+          u8g2.print( "NOT AVAILABLE" );    
       }
 
     break; // case scnWeather1
@@ -203,6 +214,13 @@ void loopDisplay() {
         u8g2.setCursor( x[1], y );  u8g2.print( DEG_C );
         u8g2.setCursor( x[3], y );  u8g2.print( DEG_C );
         u8g2.setCursor( x[5], y );  u8g2.print(  "%"  );
+      } else {
+          u8g2.setFont( u8g2_font_7x14_tf );  
+          u8g2.setFontPosCenter();
+          u8g2.setCursor( 5,  8 );
+          u8g2.print( "WEATHER DATA" );    
+          u8g2.setCursor( 5, 24 );
+          u8g2.print( "NOT AVAILABLE" );    
       }
       
     break; // case data.screen == scnWeather2

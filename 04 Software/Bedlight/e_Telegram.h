@@ -30,6 +30,8 @@
 #define CB_SCREEN_BR_3     "scnbrht3" 
 #define CB_SCREEN_BR_4     "scnbrht4" 
 #define CB_SCREEN_BR_5     "scnbrht5" 
+#define CB_DEBUG           "debug" 
+#define CB_DEBUG_RESET     "deb_rst" 
 #define CB_MAIN_MENU       "mainmenu" 
 
 // Emoticons to spice up the Telegram messages
@@ -186,6 +188,13 @@ void onQueryScreenBrightness(const TBMessage &queryMsg){
     newMessage = "Screen brightness set to 5/5";
     data.setScreenBrightness( sb5 );
   }
+  else if( queryMsg.callbackQueryData == CB_DEBUG ) {
+    newMessage = "Weather counter: " + String( (int) data.weatherRetrievalCounter );
+  }
+  else if( queryMsg.callbackQueryData == CB_DEBUG_RESET ) {
+    data.weatherRetrievalCounter = 0;
+    newMessage = "Weather counter reset";
+  }
   else if( queryMsg.callbackQueryData == CB_MAIN_MENU ) {
     newMessage = "Back to main menu";
   }
@@ -232,6 +241,9 @@ void addInlineKeyboard() {
   btntext=String(EMOTICON_BRIGHTNESS) + " Screen brightness 4"; settingsKeyboard.addButton(btntext.c_str(), CB_SCREEN_BR_4, KeyboardButtonQuery, onQueryScreenBrightness);
   settingsKeyboard.addRow();
   btntext=String(EMOTICON_BRIGHTNESS) + " Screen brightness 5"; settingsKeyboard.addButton(btntext.c_str(), CB_SCREEN_BR_5, KeyboardButtonQuery, onQueryScreenBrightness);
+  settingsKeyboard.addRow();
+  settingsKeyboard.addButton("Counter", CB_DEBUG,        KeyboardButtonQuery, onQueryScreenBrightness);
+  settingsKeyboard.addButton("Reset",   CB_DEBUG_RESET , KeyboardButtonQuery, onQueryScreenBrightness);
   settingsKeyboard.addRow();
   btntext=String(EMOTICON_MAIN_MENU)  + " Back to main menu"; settingsKeyboard.addButton(btntext.c_str(), CB_MAIN_MENU,   KeyboardButtonQuery, onQueryScreenBrightness);
 }

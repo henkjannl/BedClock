@@ -165,7 +165,8 @@ class data_t {
     screenBrightness_t screenBrightness = sb4; // Saved to settings
 
     // Weather
-    bool requestNewWeather = true;
+    int64_t weatherRetrievalCounter = 0;
+    
     bool weatherUpdated = false;
     float outsideTemp = -300;
     float maxDayTemp = -300;

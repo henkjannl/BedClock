@@ -1,4 +1,4 @@
-#define VERSION "1.6"
+#define VERSION "1.7"
 
 /* 
 1.0 First working version
@@ -18,6 +18,9 @@
     Added second weather screen with 'feels like' temperature and relative humidity
 1.6 'Feels like' replaced by maximum day temperature
     Time in main screen two pixels lower to match icon better
+1.7 Removed multiple tries of weather retrieval, since we reach the 1000 limit otherwise    
+    Display message if weather was not retrieved on time
+    Center clock if no weather icon available
 
 To do:
   Highlight chosen setting in Telegram keyboard
@@ -122,8 +125,10 @@ void loop() {
   if ( data.lightOn and (data.switchLightOffTimer.lapsed() ) ) data.setLightOff();
 
   // Retrieve weather every now and then so it is available upon request
-  if ( data.refreshWeatherTimer.lapsed() ) data.requestNewWeather = true;
-  if( data.requestNewWeather ) getWeather();
+  if ( data.refreshWeatherTimer.lapsed() ) {
+    data.weatherUpdated = false;
+    getWeather();
+  }
 
   // Switch back to main screen after time has passed
  if( data.screenBacktoMainTimer.lapsed() and ( data.screen != scnMain ) ) {

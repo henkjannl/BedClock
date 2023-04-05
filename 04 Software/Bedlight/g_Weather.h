@@ -7,6 +7,7 @@
 void getWeather() {
 
   Serial.println("Retrieving the weather"); 
+  data.weatherRetrievalCounter++;
   
   HTTPClient http;
 
@@ -35,9 +36,9 @@ void getWeather() {
         Serial.println(error.f_str());
         return;
       }
-      
-  
 
+      Serial.println("Still retrieving the weather");
+      
       //====================
       //float lat = doc["lat"]; // 52.2532
       //float lon = doc["lon"]; // 6.7855
@@ -407,12 +408,17 @@ void getWeather() {
       Serial.printf("%d precipitation points parsed\n", data.precipitation.size());  
       Serial.printf("Outside temperature %.1f C\n", data.outsideTemp);
     
-   } else return; // httpCode == HTTP_CODE_OK
-  } else return; // httpCode > 0
+   } else {
+      Serial.printf("httpCode: %d != %d\n", httpCode, HTTP_CODE_OK);
+      return; // httpCode == HTTP_CODE_OK
+   }
+  } else {
+      Serial.printf("httpCode: %d <= 0", httpCode);
+      return; // httpCode > 0
+  }
 
   // Everything went well
   Serial.println("Weather request went well");
   snprintf( data.displayTemperature, sizeof( data.displayTemperature ), "%0d%sC", (int) data.outsideTemp, DEGREE_SYMBOL );
   data.weatherUpdated = true;
-  data.requestNewWeather = false;
 } // getWeather
