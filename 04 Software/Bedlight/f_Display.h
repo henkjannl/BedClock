@@ -64,6 +64,9 @@ void loopDisplay() {
 
   static std::list< String > unexpectedIcons;
   bool iconPresent, iconFound;
+
+  // Check if weather was last retrieved less than an hour ago
+  bool weatherFresh = ( difftime( time( NULL ), data.lastWeatherUpdate ) < 3600.0 ); 
   
   Serial.print("loopDisplay > ");
   
@@ -78,7 +81,7 @@ void loopDisplay() {
 
       u8g2.setFontPosCenter();
 
-      iconPresent = data.weatherUpdated && ( WEATHER_ICONS.count( data.weatherIcon ) > 0 );
+      iconPresent = weatherFresh && ( WEATHER_ICONS.count( data.weatherIcon ) > 0 );
       
       if( iconPresent )  
         u8g2.setCursor( ( (u8g2.getDisplayWidth() - 32 - (u8g2.getUTF8Width( data.displayClock ))) / 2) , 20);
@@ -161,7 +164,7 @@ void loopDisplay() {
     case scnWeather2:
       Serial.println("scnWeather2");
 
-      if( data.weatherUpdated ) {
+      if( weatherFresh ) {
         const char* TEMP_LABEL = "outside";
         const char* MAX_DAY_LABEL = "max day";
         const char* HUMID_LABEL = "humidity";

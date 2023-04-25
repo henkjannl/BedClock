@@ -168,6 +168,7 @@ class data_t {
     int64_t weatherRetrievalCounter = 0;
     
     bool weatherUpdated = false;
+    time_t lastWeatherUpdate = 0; // weather was last updated in 1970
     float outsideTemp = -300;
     float maxDayTemp = -300;
     float outsideFeelsLike = -300; 

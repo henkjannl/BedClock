@@ -1,4 +1,4 @@
-#define VERSION "1.7"
+#define VERSION "1.8"
 
 /* 
 1.0 First working version
@@ -21,6 +21,7 @@
 1.7 Removed multiple tries of weather retrieval, since we reach the 1000 limit otherwise    
     Display message if weather was not retrieved on time
     Center clock if no weather icon available
+1.8 Changed timeout for retrieve weather error    
 
 To do:
   Highlight chosen setting in Telegram keyboard

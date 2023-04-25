@@ -3,6 +3,10 @@
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 #include <list>
+#include <ctime>
+
+using namespace std;
+
 
 void getWeather() {
 
@@ -63,7 +67,8 @@ void getWeather() {
       
       JsonObject current_weather_0 = current["weather"][0];
       //const char* current_weather_0_icon = current_weather_0["icon"]; // "04d"
-      strcpy(data.weatherIcon, current_weather_0["icon"]);    
+      strcpy(data.weatherIcon, current_weather_0["icon"]);
+          
       Serial.printf("Weather icon: %s\n", data.weatherIcon);
       //const char* current_weather_0_main = current_weather_0["main"]; // "Clouds"
       //const char* current_weather_0_description = current_weather_0["description"]; // "overcast clouds"
@@ -420,5 +425,6 @@ void getWeather() {
   // Everything went well
   Serial.println("Weather request went well");
   snprintf( data.displayTemperature, sizeof( data.displayTemperature ), "%0d%sC", (int) data.outsideTemp, DEGREE_SYMBOL );
+  data.lastWeatherUpdate = time( NULL );
   data.weatherUpdated = true;
 } // getWeather
