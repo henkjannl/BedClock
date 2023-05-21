@@ -1,4 +1,4 @@
-#define VERSION "1.8"
+#define VERSION "1.9"
 
 /* 
 1.0 First working version
@@ -22,6 +22,7 @@
     Display message if weather was not retrieved on time
     Center clock if no weather icon available
 1.8 Changed timeout for retrieve weather error    
+1.9 Added logging
 
 To do:
   Highlight chosen setting in Telegram keyboard
@@ -61,6 +62,7 @@ data from github This file should have the following content:
 #include "e_Telegram.h"
 #include "f_Display.h"
 #include "g_Weather.h"
+#include "h_log.h"
 
 #include <time.h>
 #include <vector>
@@ -81,6 +83,8 @@ void setup() {
   setupLight();
   setupWifi();
   setupTelegram();
+
+  getWeather();
 }
 
 

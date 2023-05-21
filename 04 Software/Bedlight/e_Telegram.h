@@ -32,6 +32,7 @@
 #define CB_SCREEN_BR_5     "scnbrht5" 
 #define CB_DEBUG           "debug" 
 #define CB_DEBUG_RESET     "deb_rst" 
+#define CB_DEBUG_INFO      "deb_info"
 #define CB_MAIN_MENU       "mainmenu" 
 
 // Emoticons to spice up the Telegram messages
@@ -48,17 +49,18 @@ const char EMOTICON_LIGHT_ON[]    = { 0xf0, 0x9f, 0x92, 0xa1, 0x00 };
 const char EMOTICON_LIGHT_OFF[]   = { 0xf0, 0x9f, 0x98, 0xb4, 0x00 };
 const char EMOTICON_MAIN_MENU[]   = { 0xf0, 0x9f, 0x8f, 0xa0, 0x00 };
 
-const char DEGREE_SYMBOL[]        = { 0xB0, '\0' };
-
+const unsigned char DEGREE_SYMBOL[]        = { 0xB0, '\0' };
 
 // ======== GLOBAL VARIABLES ============= 
 WiFiClientSecure client;  
 AsyncTelegram2 myBot(client);
-InlineKeyboard mainKeyboard, settingsKeyboard;
+InlineKeyboard mainKeyboard, settingsKeyboard, screenBrightnessKeyboard, logKeyboard;
 
 std::map<keyboard_t, InlineKeyboard* > KEYBOARDS = { 
-  { kbMain,    &mainKeyboard     },
-  { kbSettings, &settingsKeyboard }
+  { kbMain,             &mainKeyboard             },
+  { kbSettings,         &settingsKeyboard         },
+  { kbScreenBrightness, &screenBrightnessKeyboard }, 
+  { kbLog,              &logKeyboard              }
 };
 
 String convertToHexString( String input ) {
@@ -84,9 +86,8 @@ String StatusMessage() {
     case lcYellow: result+= EMOTICON_YELLOW; break;
     case lcOrange: result+= EMOTICON_ORANGE; break;
     case lcRed:    result+= EMOTICON_RED;    break;
-  }
+  } // switch( data.color )
 
-   
   result += String(" ") + EMOTICON_BRIGHTNESS + " " + String(100*BRIGHTNESSES[data.brightness],0)+"%";
   result += String(" ") + EMOTICON_TIMER + " " + TIMES_STR[data.timer];
   return result;
@@ -195,6 +196,12 @@ void onQueryScreenBrightness(const TBMessage &queryMsg){
     data.weatherRetrievalCounter = 0;
     newMessage = "Weather counter reset";
   }
+  else if( queryMsg.callbackQueryData == CB_DEBUG_INFO ) {
+    newMessage  = "Weather retrieval counter: " + String( (int) data.weatherRetrievalCounter ) + "\n";
+    struct tm * timeinfo;
+    timeinfo = localtime ( &(data.lastWeatherUpdate) );
+    newMessage += "Weather last retrieved: " + String( asctime( timeinfo ) ) + "\n";
+  }  
   else if( queryMsg.callbackQueryData == CB_MAIN_MENU ) {
     newMessage = "Back to main menu";
   }
@@ -245,6 +252,7 @@ void addInlineKeyboard() {
   settingsKeyboard.addButton("Counter", CB_DEBUG,        KeyboardButtonQuery, onQueryScreenBrightness);
   settingsKeyboard.addButton("Reset",   CB_DEBUG_RESET , KeyboardButtonQuery, onQueryScreenBrightness);
   settingsKeyboard.addRow();
+  settingsKeyboard.addButton("Debug info",   CB_DEBUG_INFO , KeyboardButtonQuery, onQueryScreenBrightness);
   btntext=String(EMOTICON_MAIN_MENU)  + " Back to main menu"; settingsKeyboard.addButton(btntext.c_str(), CB_MAIN_MENU,   KeyboardButtonQuery, onQueryScreenBrightness);
 }
 

@@ -55,7 +55,7 @@ void getWeather() {
       data.sunset  = current["sunset"]; // 1617992353
       data.outsideTemp = current["temp"]; // 282.57
       data.outsideFeelsLike = current["feels_like"]; // 282.57
-      //int current_pressure = current["pressure"]; // 1008
+      data.pressure = current["pressure"]; // 1008
       data.humidity = current["humidity"]; // 60
       //float current_dew_point = current["dew_point"]; // 9.84
       //float current_uvi = current["uvi"]; // 0.1
@@ -93,8 +93,10 @@ void getWeather() {
       JsonObject daily_0 = daily[0];
       /*
       long daily_0_dt = daily_0["dt"]; // 1680087600
-      long daily_0_sunrise = daily_0["sunrise"]; // 1680066921
-      long daily_0_sunset = daily_0["sunset"]; // 1680112794
+      */
+      data.daySunrise = daily_0["sunrise"]; // 1680066921
+      data.daySunset  = daily_0["sunset"];  // 1680112794
+      /*
       long daily_0_moonrise = daily_0["moonrise"]; // 1680080880
       long daily_0_moonset = daily_0["moonset"]; // 1680057300
       float daily_0_moon_phase = daily_0["moon_phase"]; // 0.25
@@ -131,19 +133,25 @@ void getWeather() {
       int daily_0_clouds = daily_0["clouds"]; // 100
       float daily_0_pop = daily_0["pop"]; // 0.41
       float daily_0_uvi = daily_0["uvi"]; // 2.63
+      */
       
       JsonObject daily_1 = daily[1];
+      /*
       long daily_1_dt = daily_1["dt"]; // 1680174000
       long daily_1_sunrise = daily_1["sunrise"]; // 1680153180
       long daily_1_sunset = daily_1["sunset"]; // 1680199298
       long daily_1_moonrise = daily_1["moonrise"]; // 1680171060
       long daily_1_moonset = daily_1["moonset"]; // 1680146280
       float daily_1_moon_phase = daily_1["moon_phase"]; // 0.29
+      */
       
       JsonObject daily_1_temp = daily_1["temp"];
+      /*
       float daily_1_temp_day = daily_1_temp["day"]; // 12.06
       float daily_1_temp_min = daily_1_temp["min"]; // 8.85
-      float daily_1_temp_max = daily_1_temp["max"]; // 13.3
+      */
+      data.maxTomorrowTemp = daily_1_temp["max"]; // 13.3
+      /*
       float daily_1_temp_night = daily_1_temp["night"]; // 8.85
       float daily_1_temp_eve = daily_1_temp["eve"]; // 11.9
       float daily_1_temp_morn = daily_1_temp["morn"]; // 10.64

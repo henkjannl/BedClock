@@ -28,7 +28,7 @@ enum lightBrightness_t  { lb15, lb30, lb50, lb100 };
 enum lightOffTimer_t    { lt03, lt05, lt10, lt20 };
 enum screenBrightness_t { sb1, sb2, sb3, sb4, sb5 };
 enum screen_t           { scnMain, scnWeather1, scnWeather2 };
-enum keyboard_t         { kbMain, kbSettings };
+enum keyboard_t         { kbMain, kbSettings, kbScreenBrightness, kbLog };
 
 struct rgb_t { 
   float R;
@@ -170,7 +170,11 @@ class data_t {
     bool weatherUpdated = false;
     time_t lastWeatherUpdate = 0; // weather was last updated in 1970
     float outsideTemp = -300;
+    time_t daySunrise = 0; // weather was last updated in 1970
+    time_t daySunset = 0; // weather was last updated in 1970
     float maxDayTemp = -300;
+    float maxTomorrowTemp = -300;
+    int pressure = 0;
     float outsideFeelsLike = -300; 
     int humidity = -1;
     std::list<precipitation_t> precipitation;
