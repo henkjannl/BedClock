@@ -8,6 +8,11 @@
 
 const uint32_t CONNECT_TIMEOUT_MS = 10000;
 
+milliSecTimer reconnectTimer1 = milliSecTimer(  1*60*1000, false ); // First reconnect attempt
+milliSecTimer reconnectTimer2 = milliSecTimer(  2*60*1000, false ); // Second reconnect attempt
+milliSecTimer reconnectTimer3 = milliSecTimer(  5*60*1000, false ); // Third reconnect attempt
+milliSecTimer restartTimer    = milliSecTimer( 10*60*1000, false ); // Restart ESP
+
 WiFiMulti wifiMulti;
 
 void setupWifi() {
@@ -41,11 +46,15 @@ void loopWifi() {
   static bool wifiNotConnectReported = false;
 
   // Check if WiFi is still alive
-  if (wifiMulti.run( CONNECT_TIMEOUT_MS ) == WL_CONNECTED) {  /*if the connection lost it will connect to next network*/
+  if ( WiFi.status() == WL_CONNECTED) {  /*if the connection lost it will connect to next network*/
     if( !wifiConnectReported ) {
       Serial.printf( "WiFi connected to SSID %s signal strength %ddB\n", WiFi.SSID().c_str(), WiFi.RSSI() );
       wifiConnectReported=true;
       wifiNotConnectReported=false;
+      reconnectTimer1.reset();
+      reconnectTimer2.reset();
+      reconnectTimer3.reset();
+      restartTimer.reset();
     };
   }
   else {
@@ -55,4 +64,15 @@ void loopWifi() {
       wifiConnectReported=false;
     }
   }
+
+  if( reconnectTimer1.lapsed() || reconnectTimer2.lapsed() || reconnectTimer3.lapsed() ) {
+    // Try to connect to the strongest available network
+    wifiMulti.run( CONNECT_TIMEOUT_MS );
+  };
+
+  if( restartTimer.lapsed() ) {
+    // After three unsuccessful attempts, restart the ESP
+    ESP.restart();
+  };
+
 };

@@ -123,7 +123,7 @@ void loop() {
   // Tell the light to take the next step
   if( data.lightStepTimer.lapsed() ) {
     loopLight();
-    if( !data.R.ready() ) Serial.printf("Red ready: %s value %.3f target %.3f\n", data.R.ready() ? "Y" : "N", data.R.getValue(), data.R.getTarget() );
+    //if( !data.R.ready() ) Serial.printf("Red ready: %s value %.3f target %.3f\n", data.R.ready() ? "Y" : "N", data.R.getValue(), data.R.getTarget() );
   }  
 
   // Switch the light off if the timer elapses
