@@ -179,14 +179,14 @@ void loopDisplay() {
         int humidX = u8g2.getDisplayWidth() - u8g2.getUTF8Width( HUMID_LABEL );
   
         u8g2.setFontPosTop();
-        u8g2.setCursor( 0           , 0);  u8g2.print( TEMP_LABEL  );
-        u8g2.setCursor( maxDayTempX , 0);  u8g2.print( MAX_DAY_LABEL  );
-        u8g2.setCursor( humidX      , 0);  u8g2.print( HUMID_LABEL );
+        u8g2.setCursor( 0           , 0);  u8g2.print( TEMP_LABEL    );
+        u8g2.setCursor( maxDayTempX , 0);  u8g2.print( MAX_DAY_LABEL );
+        u8g2.setCursor( humidX      , 0);  u8g2.print( HUMID_LABEL   );
   
         int w[6];
-        char outTemp[5];    snprintf( outTemp,    sizeof( outTemp    ), "%d", (int) data.outsideTemp      );
-        char maxDayTemp[5]; snprintf( maxDayTemp, sizeof( maxDayTemp ), "%d", (int) data.maxDayTemp);
-        char humid[5];      snprintf( humid,      sizeof( humid      ), "%d", data.humidity );
+        char outTemp[5];    snprintf( outTemp,    sizeof( outTemp    ), "%d", (int) data.outsideTemp    );
+        char maxDayTemp[5]; snprintf( maxDayTemp, sizeof( maxDayTemp ), "%d",       data.maxDisplayTemp );
+        char humid[5];      snprintf( humid,      sizeof( humid      ), "%d",       data.humidity       );
         
         u8g2.setFont( WEATHER2_VALUE );
         w[0] = u8g2.getUTF8Width( outTemp );

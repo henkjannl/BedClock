@@ -55,8 +55,8 @@ data from github This file should have the following content:
 
 */
 
-#include "MyCredentials.h" // All modules have access to data in MyCredentials
-#include "a_Data.h"          // This file contains all types and the struct 'data' which acts as a central databus
+#include "MyCredentials.h"  // All modules have access to data in MyCredentials
+#include "a_Data.h"         // This file contains all types and the struct 'data' which acts as a central databus
 #include "b_Icons.h"
 #include "c_Light.h"
 #include "d_WiFi.h"
@@ -93,8 +93,6 @@ void setup() {
 
 
 void loop() {
-
-  loopWifi();
 
   // Check if button is pressed
   static volatile uint32_t keyLeftCounter  = 0;
@@ -157,6 +155,7 @@ void loop() {
   time_t rawtime;
   struct tm * timeinfo;
   static int prev_min = -1;
+  static int prev_hour = -1;
   static bool firstClockUpdate = true;
   
   time( &rawtime );
@@ -165,18 +164,38 @@ void loop() {
     firstClockUpdate = false;
     prev_min = timeinfo->tm_min;
     snprintf(data.displayClock, sizeof( data.displayClock ), "%02d:%02d", timeinfo->tm_hour, timeinfo->tm_min );
+
+    // Before 15:00, display today's maximum temperature, after 15:00 switch to tomorrows
+    if( timeinfo->tm_hour < 15 ) {
+      data.maxDisplayTemp =  (int) (data.maxDayTemp+0.5);
+    } else {
+      data.maxDisplayTemp =  (int) (data.maxTomorrowTemp+0.5);
+    }
+
     if( data.screen == scnMain ) data.updateScreen = true;
+  }
+
+  // Automatically reset the daily weather retrieval counter
+  if( (timeinfo->tm_hour ==0) && (prev_hour != 0) ) {
+    prev_hour = timeinfo->tm_hour;
+    char item[80];
+    snprintf( item, sizeof(item), "%d calls to weather API made, resetting counter", data.weatherRetrievalCounter );
+    addToEventLogfile( item );
+    data.weatherRetrievalCounter = 0;
   }
 
   // Only call loopDisplay if screen update is requested
   if( data.updateScreen ) loopDisplay();    
 
+  // Check if wifi timer has lapsed
+  if( data.loopWifiTimer.lapsed() ) loopWifi();
+
   // Handle Telegram messages not already done by the handlers
   loopTelegram();
 
   // Periodically save settings
-  if (data.saveSettingsTimer.lapsed() ) {
-    if( data.settingsChanged) { 
+  if ( data.saveSettingsTimer.lapsed() ) {
+    if( data.settingsChanged ) { 
       data.saveSettings(SPIFFS, SETTINGS_FILE, SETTINGS_TEMP);
       listDir(SPIFFS, "/", 6);
     }

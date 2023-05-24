@@ -28,9 +28,9 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="px"
      showgrid="false"
-     inkscape:zoom="1.3794325"
-     inkscape:cx="423.00003"
-     inkscape:cy="237.054"
+     inkscape:zoom="1.5738398"
+     inkscape:cx="423.16887"
+     inkscape:cy="236.99998"
      inkscape:window-width="1920"
      inkscape:window-height="1000"
      inkscape:window-x="-11"
@@ -86,7 +86,7 @@
          id="tspan426"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;font-family:Noway;-inkscape-font-specification:Noway;fill:#ffffff;stroke:none;stroke-width:0.264583px"
          x="163.26028"
-         y="42.676991">Weather</tspan></text><text
+         y="42.676991">Precipitation</tspan></text><text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;line-height:100%;font-family:Noway;-inkscape-font-specification:Noway;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#fffccd;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="163.26028"
@@ -96,7 +96,7 @@
          id="tspan430"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;font-family:Noway;-inkscape-font-specification:Noway;text-align:start;text-anchor:start;fill:#ffffff;stroke:none;stroke-width:0.264583px"
          x="163.26028"
-         y="14.087862">Good advice</tspan></text><path
+         y="14.087862">Temperature and humidity</tspan></text><path
        style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.449792;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
        d="M 105.49234,61.557542 V 26.615506 h 56.35113"
        id="path1334"
@@ -126,4 +126,15 @@
          id="tspan1440"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;font-family:Noway;-inkscape-font-specification:Noway;fill:#ffffff;stroke:none;stroke-width:0.264583px"
          x="174.55275"
-         y="57.376762">Telegram interface</tspan></text></g></svg>
+         y="57.376762">Telegram interface</tspan></text><text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:4.93889px;line-height:100%;font-family:Noway;-inkscape-font-specification:'Noway Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#00d9dc;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="103.06166"
+       y="104.21867"
+       id="text408"
+       transform="matrix(0.98736797,-0.20923194,0.05623531,1.0008769,0,0)"><tspan
+         sodipodi:role="line"
+         id="tspan406"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:4.93889px;font-family:Noway;-inkscape-font-specification:'Noway Light';text-align:start;text-anchor:start;fill:#00d9dc;stroke:none;stroke-width:0.264583px"
+         x="103.06166"
+         y="104.21867">12:34</tspan></text></g></svg>

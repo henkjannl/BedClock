@@ -133,7 +133,7 @@ class milliSecTimer {
   public:
     unsigned long previous;
     unsigned long interval;
-    bool autoReset;
+    bool autoReset; // Beware, reset happens only when calling lapsed(), and interval is not accurate
     
     // Constructor
     milliSecTimer(unsigned long interval, bool autoReset = true) {
@@ -146,7 +146,7 @@ class milliSecTimer {
       
     bool lapsed() {
       bool result = (millis() - previous >= interval );
-      if(result and autoReset) reset();
+      if(result and autoReset) reset(); // interval could be made more accurate with % operator 
       return result;
     }
 };
@@ -174,6 +174,7 @@ class data_t {
     time_t daySunset = 0; // weather was last updated in 1970
     float maxDayTemp = -300;
     float maxTomorrowTemp = -300;
+    int16_t maxDisplayTemp = -300;
     int pressure = 0;
     float outsideFeelsLike = -300; 
     int humidity = -1;
@@ -210,6 +211,7 @@ class data_t {
     milliSecTimer lightStepTimer        = milliSecTimer(100, true);           // Change intensity of light in sall steps
     milliSecTimer refreshWeatherTimer   = milliSecTimer(12*60*1000, true);    // Refresh the weather
     milliSecTimer saveSettingsTimer     = milliSecTimer( 5*60*1000, true);    // Save settings if settings were changed
+    milliSecTimer loopWifiTimer         = milliSecTimer(1000, true);          // Check wifi
   
     void setColor( lightColor_t color) { 
       this->color = color; 

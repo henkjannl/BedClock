@@ -9,11 +9,14 @@ Normally, the time is displayed on the screen, together with an icon representin
 
 The device has three touch buttons:
 * The top button is used to toggle the bedlight on and off. If the bedlight is switched on, it will automatically switch of after the timer expires. The timer can be set in the Telegram menu.
-* Upon touching the left button, an advice is displayed on the screen. After some time, the display switches back to the time
-* Upon touching the right button, the outside temperature is displayed, together with a graph showin the local precipitation for each minute of the next hour. If no precipitation is expected, an icon is displayed instead. After some time, the display switches back to the time.
+* Upon touching the left button, the current outside temperature, the daily maximum temperature and the outside relative humidity are displayed. After 15:00, the daily maximum temperature of the next day is displayed instead. 
+* Upon touching the right button, the outside temperature is displayed, together with a graph showin the local precipitation for each minute of the next hour. 
+
+After some time, the display switches back to the time.
 
 In Telegram, the light can be switched on or off, and the color, timer and intensity of the bedlight can be set. 
-Under settings, the intensity of the OLED screen can be set. The settings are saved if power is lost.  
+Under settings, the intensity of the OLED screen can be set. The settings are saved if power is lost. 
+Also under settings, a logfile with events can be retrieved for debugging purposes, and a logfile with weather data can be retrieved.
 
 
 ## Electrical hardware
@@ -122,4 +125,6 @@ Where:
 <sup>2)</sup> The code for the local timezone can be found in https://github.com/nayarsystems/posix_tz_db/blob/master/zones.csv
 
 <sup>3)</sup> The API key for Openweathermap can be retrieved after making an account at https://openweathermap.org/
+ The free plan allows for 1000 daily API calls. Currently, the weather is retrieved every 12 minutes, resulting in 120 daily calls.
+ 
 
