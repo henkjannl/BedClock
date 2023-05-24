@@ -25,6 +25,7 @@
 1.9 Added logging
 
 To do:
+  Update readme
   Highlight chosen setting in Telegram keyboard
   Allow over the air updates
   Change LIGHT_INC to function in Light.h
