@@ -21,25 +21,38 @@ Also under settings, a logfile with events can be retrieved for debugging purpos
 
 ## Hardware
 
-This is a list of all items (e.g., at AliExpress), including fasteners:
+This is a list of all items:
 
-| Item | Count | Description                              | Order                                                 | Print time | Price March 2023 |
-|:----:|:-----:|------------------------------------------|-------------------------------------------------------|------------|-----------------:|
-|   1  |   1   | ESP32 MH-ET Live Minikit                 | https://www.aliexpress.com/item/32858054775.html      |            | € 3.63           |
-|   2  |   1   | 4x4 Led grid WS2812B                     | https://www.aliexpress.com/item/32963152993.html      |            | € 1.00           |
-|   3  |   1   | 0.91" OLED 128x64 #12832 SSD1306         | https://www.aliexpress.com/item/32788923016.html      |            | € 1.53           |
-|   4  |   1   | Electrical wire AWG 30                   | https://www.aliexpress.com/item/33030965448.html      |            | € 1.68           | 
-|   5  |   3   | Hexagon head button screw ISO7380-1 M3x8 | https://www.aliexpress.com/item/32970195293.html      |            | € 1.45           |
-|   6  |   3   | Hexagon nut ISO4032 M3 h=2.4             | https://www.aliexpress.com/item/1005003780212966.html |            | € 1.68           |
-|   7  |   4   | Self tapping screw M2.3x12               | https://www.aliexpress.com/item/1005003981975435.html |            | € 2.33           |
-|   8  |   2   | Self tapping screw M2.3x6                | https://www.aliexpress.com/item/1005003981975435.html |            | € 1.85           |
-|   9  |   1   | Bottom part                              |                                                       | 1h27       | € 0.50           |
-|  10  |   1   | Top part (transparent filament)          |                                                       | 1h14       | € 0.42           |
-|  11  |   1   | LED bridge                               |                                                       | 0h34       | € 0.14           |
-|  12  |   1   | Light cover                              |                                                       | 0h05       | € 0.02           |
-|      |       | **Total**                                |                                                       | **3h20**   | **€ 16.23**      | 
+| Item | Count | Description                              | Print time | Price March 2023 |
+|:----:|:-----:|------------------------------------------|------------|-----------------:|
+|   1  |   1   | ESP32 MH-ET Live Minikit                 |            | € 3.63           |
+|   2  |   1   | 4x4 Led grid WS2812B                     |            | € 1.00           |
+|   3  |   1   | 0.91" OLED 128x64 #12832 SSD1306         |            | € 1.53           |
+|   4  |   1   | Electrical wire AWG 30                   |            | € 1.68           | 
+|   5  |   3   | Hexagon head button screw ISO7380-1 M3x8 |            | € 1.45           |
+|   6  |   3   | Hexagon nut ISO4032 M3 h=2.4             |            | € 1.68           |
+|   7  |   4   | Self tapping screw M2.3x12               |            | € 2.33           |
+|   8  |   2   | Self tapping screw M2.3x6                |            | € 1.85           |
+|   9  |   1   | Bottom part                              | 1h27       | € 0.50           |
+|  10  |   1   | Top part (transparent filament)          | 1h14       | € 0.42           |
+|  11  |   1   | LED bridge                               | 0h34       | € 0.14           |
+|  12  |   1   | Light cover                              | 0h05       | € 0.02           |
+|      |       | **Total**                                | **3h20**   | **€ 16.23**      | 
 
-Items 1..8 were ordered at AliExpress. It can be beneficial to go for an assortment box of stainless steel screws if you have more similar products, like https://www.aliexpress.com/item/1005002526248698.html instead of items 5 and 6. Self tapping screws can also be ordered in assortment boxes.
+Items 1..8 were ordered at AliExpress through the following hyperlinks:
+
+| Item | Count | Order                                                 |
+|:----:|:-----:|-------------------------------------------------------|
+|   1  |   1   | https://www.aliexpress.com/item/32858054775.html      |
+|   2  |   1   | https://www.aliexpress.com/item/32963152993.html      |
+|   3  |   1   | https://www.aliexpress.com/item/32788923016.html      |
+|   4  |   1   | https://www.aliexpress.com/item/33030965448.html      | 
+|   5  |   3   | https://www.aliexpress.com/item/32970195293.html      |
+|   6  |   3   | https://www.aliexpress.com/item/1005003780212966.html |
+|   7  |   4   | https://www.aliexpress.com/item/1005003981975435.html |
+|   8  |   2   | https://www.aliexpress.com/item/1005003981975435.html |
+
+It can be beneficial to go for an assortment box of stainless steel screws if you have more similar products, like https://www.aliexpress.com/item/1005002526248698.html instead of items 5 and 6. Self tapping screws can also be ordered in assortment boxes.
 
 Items 9..12 were 3D printed. Assumptions for print time and filament cost:
 * Printer Prusa Mk3s 
