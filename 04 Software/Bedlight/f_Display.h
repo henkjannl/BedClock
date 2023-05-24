@@ -81,19 +81,19 @@ void loopDisplay() {
 
       u8g2.setFontPosCenter();
 
-      iconPresent = weatherFresh && ( WEATHER_ICONS.count( data.weatherIcon ) > 0 );
+      iconPresent = ( WEATHER_ICONS.count( data.weatherIcon ) > 0 );
       
-      if( iconPresent )  
+      if( weatherFresh && iconPresent ) {
         u8g2.setCursor( ( (u8g2.getDisplayWidth() - 32 - (u8g2.getUTF8Width( data.displayClock ))) / 2) , 20);
-      else
-        u8g2.setCursor( ( (u8g2.getDisplayWidth()      - (u8g2.getUTF8Width( data.displayClock ))) / 2) , 20);
-
-      u8g2.print( data.displayClock );        
-
-      if( iconPresent ) 
+        u8g2.print( data.displayClock );        
         u8g2.drawXBMP( 96, 0, WEATHER_ICON_WIDTH, WEATHER_ICON_HEIGHT, *WEATHER_ICONS[ data.weatherIcon ]  );
+      }  
       else {
+        u8g2.setCursor( ( (u8g2.getDisplayWidth()      - (u8g2.getUTF8Width( data.displayClock ))) / 2) , 20);
+        u8g2.print( data.displayClock );        
+      } // if( weatherFresh && iconPresent )
 
+      if( !iconPresent ) {
         // See if this icon is in the list of unexpected icons
         iconFound = false;
         for( auto & iconInList : unexpectedIcons ) if( iconInList == String( data.weatherIcon ) ) iconFound = true;

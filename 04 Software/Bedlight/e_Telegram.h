@@ -8,6 +8,8 @@
 
 #include "a_Data.h"
 #include "c_Light.h"
+#include "h_Log.h"
+#include "i_Eventlog.h"
 
 // Messages for the callback functions
 #define CB_COLOR_WHITE     "clrWhite"
@@ -25,15 +27,20 @@
 #define CB_LIGHT_ON        "lgtOn" 
 #define CB_LIGHT_OFF       "lgtOff" 
 #define CB_SETTINGS        "settings" 
+#define CB_DEBUG           "debug" 
+#define CB_DEBUG_RESET     "deb_rst" 
+#define CB_DEBUG_INFO      "deb_info"
+#define CB_EVT_SEND        "event_send" 
+#define CB_EVT_CLEAR       "event_clear" 
+#define CB_LOG_SEND        "log_send" 
+#define CB_LOG_CLEAR       "log_clear" 
+#define CB_MAIN_MENU       "mainmenu" 
+#define CB_MN_SCR_BR       "mnuScreen"
 #define CB_SCREEN_BR_1     "scnbrht1" 
 #define CB_SCREEN_BR_2     "scnbrht2" 
 #define CB_SCREEN_BR_3     "scnbrht3" 
 #define CB_SCREEN_BR_4     "scnbrht4" 
 #define CB_SCREEN_BR_5     "scnbrht5" 
-#define CB_DEBUG           "debug" 
-#define CB_DEBUG_RESET     "deb_rst" 
-#define CB_DEBUG_INFO      "deb_info"
-#define CB_MAIN_MENU       "mainmenu" 
 
 // Emoticons to spice up the Telegram messages
 const char EMOTICON_WELCOME[]     = { 0xf0, 0x9f, 0x99, 0x8b, 0xe2, 0x80, 0x8d, 0xe2, 0x99, 0x80, 0xef, 0xb8, 0x8f, 0x00 };
@@ -94,8 +101,7 @@ String StatusMessage() {
 };  
   
 // Callback functions definition for inline keyboard buttons
-void onQueryReply(const TBMessage &queryMsg){
-
+void onQueryMain( const TBMessage &queryMsg ) {
   String newMessage = "Command not recognized";
 
   if( queryMsg.callbackQueryData == CB_COLOR_WHITE ) {
@@ -166,7 +172,71 @@ void onQueryReply(const TBMessage &queryMsg){
   Serial.println( newMessage );
 }
 
-void onQueryScreenBrightness(const TBMessage &queryMsg){
+void onQuerySettings(const TBMessage &queryMsg) {
+  String newMessage;
+
+  if( queryMsg.callbackQueryData == CB_MN_SCR_BR ) {
+    newMessage = "Screen brightness menu";
+    data.menu = kbScreenBrightness;
+  }
+  else if( queryMsg.callbackQueryData == CB_DEBUG ) {
+    newMessage = "Weather counter: " + String( (int) data.weatherRetrievalCounter );
+  }
+  else if( queryMsg.callbackQueryData == CB_DEBUG_RESET ) {
+    data.weatherRetrievalCounter = 0;
+    newMessage = "Weather counter reset";
+  }
+  else if( queryMsg.callbackQueryData == CB_DEBUG_INFO ) {
+    newMessage  = "Weather retrieval counter: " + String( (int) data.weatherRetrievalCounter ) + "\n";
+    struct tm * timeinfo;
+    timeinfo = localtime ( &(data.lastWeatherUpdate) );
+    newMessage += "Weather last retrieved: " + String( asctime( timeinfo ) );
+  }  
+  else if( queryMsg.callbackQueryData == CB_EVT_SEND ) {
+    newMessage = "Send event log";
+    File file = SPIFFS.open(EVT_LOG_FILE, "r");
+    if (file) {
+      myBot.sendDocument(queryMsg, file, file.size(), AsyncTelegram2::DocumentType::CSV, file.name());
+      file.close();
+    }
+    else
+      Serial.println("Can't open the event log file");
+  }  
+  else if( queryMsg.callbackQueryData == CB_EVT_CLEAR ) {
+    newMessage = "Clear event log";
+    newEventLogfile();
+  }  
+  else if( queryMsg.callbackQueryData == CB_LOG_SEND ) {
+    newMessage = "Send logfile";
+    File file = SPIFFS.open(LOG_FILE, "r");
+    if (file) {
+      myBot.sendDocument(queryMsg, file, file.size(), AsyncTelegram2::DocumentType::CSV, file.name());
+      file.close();
+    }
+    else
+      Serial.println("Can't open the log file");
+  }  
+  else if( queryMsg.callbackQueryData == CB_LOG_CLEAR ) {
+    newMessage = "Clear log file";
+    newLogfile();
+  }  
+  else if( queryMsg.callbackQueryData == CB_MN_SCR_BR ) {
+    newMessage = "Set screen brightness";
+    data.menu = kbScreenBrightness;
+  }  
+  else if( queryMsg.callbackQueryData == CB_MAIN_MENU ) {
+    newMessage = "Back to main menu";
+    data.menu = kbMain;
+  }
+  else newMessage = "Command not recognized";
+
+  newMessage += "\n" + StatusMessage();  
+  myBot.editMessage( queryMsg.chatId, queryMsg.messageID, newMessage, *KEYBOARDS[ data.menu ] );
+  Serial.println( newMessage );
+}; // onQuerySettings
+
+
+void onQueryScreenBrightness(const TBMessage &queryMsg) {
   String newMessage;
   
   if( queryMsg.callbackQueryData == CB_SCREEN_BR_1 ) {
@@ -189,71 +259,110 @@ void onQueryScreenBrightness(const TBMessage &queryMsg){
     newMessage = "Screen brightness set to 5/5";
     data.setScreenBrightness( sb5 );
   }
-  else if( queryMsg.callbackQueryData == CB_DEBUG ) {
-    newMessage = "Weather counter: " + String( (int) data.weatherRetrievalCounter );
-  }
-  else if( queryMsg.callbackQueryData == CB_DEBUG_RESET ) {
-    data.weatherRetrievalCounter = 0;
-    newMessage = "Weather counter reset";
-  }
-  else if( queryMsg.callbackQueryData == CB_DEBUG_INFO ) {
-    newMessage  = "Weather retrieval counter: " + String( (int) data.weatherRetrievalCounter ) + "\n";
-    struct tm * timeinfo;
-    timeinfo = localtime ( &(data.lastWeatherUpdate) );
-    newMessage += "Weather last retrieved: " + String( asctime( timeinfo ) ) + "\n";
-  }  
-  else if( queryMsg.callbackQueryData == CB_MAIN_MENU ) {
-    newMessage = "Back to main menu";
+  else if( queryMsg.callbackQueryData == CB_SETTINGS ) {
+    newMessage = "Back to settings menu";
   }
   else newMessage = "Command not recognized";
 
   newMessage += "\n" + StatusMessage();
   
-  data.menu = kbMain;
-  myBot.editMessage(queryMsg.chatId, queryMsg.messageID, newMessage, *KEYBOARDS[data.menu] );
+  data.menu = kbSettings;
+  myBot.editMessage( queryMsg.chatId, queryMsg.messageID, newMessage, *KEYBOARDS[ data.menu ] );
   Serial.println( newMessage );
 }; // onQueryScreenBrightness
+
 
 void addInlineKeyboard() {
   // Add sample inline keyboard
   String btntext;
   
-  btntext=String(EMOTICON_LIGHT_ON)   + " On";       mainKeyboard.addButton(btntext.c_str(), CB_LIGHT_ON,       KeyboardButtonQuery, onQueryReply);
-  btntext=String(EMOTICON_LIGHT_OFF)  + " Off";      mainKeyboard.addButton(btntext.c_str(), CB_LIGHT_OFF,      KeyboardButtonQuery, onQueryReply);
+  // Add buttons for main keyboard
+  btntext=String(EMOTICON_LIGHT_ON)   + " On";       
+  mainKeyboard.addButton(btntext.c_str(), CB_LIGHT_ON,       KeyboardButtonQuery, onQueryMain);
+  btntext=String(EMOTICON_LIGHT_OFF)  + " Off";      
+  mainKeyboard.addButton(btntext.c_str(), CB_LIGHT_OFF,      KeyboardButtonQuery, onQueryMain);
   mainKeyboard.addRow();
-  btntext=String(EMOTICON_WHITE)      + " White";    mainKeyboard.addButton(btntext.c_str(), CB_COLOR_WHITE,    KeyboardButtonQuery, onQueryReply);
-  btntext=String(EMOTICON_TIMER)      + " 3 min";    mainKeyboard.addButton(btntext.c_str(), CB_TIME_3MIN,      KeyboardButtonQuery, onQueryReply);
-  btntext=String(EMOTICON_BRIGHTNESS) + " 15%";      mainKeyboard.addButton(btntext.c_str(), CB_BRIGHTNESS_15,  KeyboardButtonQuery, onQueryReply);
+  
+  btntext=String(EMOTICON_WHITE)      + " White";    
+  mainKeyboard.addButton(btntext.c_str(), CB_COLOR_WHITE,    KeyboardButtonQuery, onQueryMain);
+  btntext=String(EMOTICON_TIMER)      + " 3 min";    
+  mainKeyboard.addButton(btntext.c_str(), CB_TIME_3MIN,      KeyboardButtonQuery, onQueryMain);
+  btntext=String(EMOTICON_BRIGHTNESS) + " 15%";      
+  mainKeyboard.addButton(btntext.c_str(), CB_BRIGHTNESS_15,  KeyboardButtonQuery, onQueryMain);
   mainKeyboard.addRow();
-  btntext=String(EMOTICON_YELLOW)     + " Yellow";   mainKeyboard.addButton(btntext.c_str(), CB_COLOR_YELLOW,   KeyboardButtonQuery, onQueryReply);
-  btntext=String(EMOTICON_TIMER)      + " 5 min";    mainKeyboard.addButton(btntext.c_str(), CB_TIME_5MIN,      KeyboardButtonQuery, onQueryReply);
-  btntext=String(EMOTICON_BRIGHTNESS) + " 30%";      mainKeyboard.addButton(btntext.c_str(), CB_BRIGHTNESS_30,  KeyboardButtonQuery, onQueryReply);
-  mainKeyboard.addRow();
-  btntext=String(EMOTICON_ORANGE)     + " Orange";   mainKeyboard.addButton(btntext.c_str(), CB_COLOR_ORANGE,   KeyboardButtonQuery, onQueryReply);
-  btntext=String(EMOTICON_TIMER)      + " 10 min";   mainKeyboard.addButton(btntext.c_str(), CB_TIME_10MIN,     KeyboardButtonQuery, onQueryReply);
-  btntext=String(EMOTICON_BRIGHTNESS) + " 50%";      mainKeyboard.addButton(btntext.c_str(), CB_BRIGHTNESS_50,  KeyboardButtonQuery, onQueryReply);
-  mainKeyboard.addRow();
-  btntext=String(EMOTICON_RED)        + " Red";      mainKeyboard.addButton(btntext.c_str(), CB_COLOR_RED,      KeyboardButtonQuery, onQueryReply);
-  btntext=String(EMOTICON_TIMER)      + " 20 min";   mainKeyboard.addButton(btntext.c_str(), CB_TIME_20MIN,     KeyboardButtonQuery, onQueryReply);
-  btntext=String(EMOTICON_BRIGHTNESS) + " 100%";     mainKeyboard.addButton(btntext.c_str(), CB_BRIGHTNESS_100, KeyboardButtonQuery, onQueryReply);
-  mainKeyboard.addRow();
-  btntext=String(EMOTICON_SETTINGS)   + " Settings"; mainKeyboard.addButton(btntext.c_str(), CB_SETTINGS,       KeyboardButtonQuery, onQueryReply);
 
-  btntext=String(EMOTICON_BRIGHTNESS) + " Screen brightness 1"; settingsKeyboard.addButton(btntext.c_str(), CB_SCREEN_BR_1, KeyboardButtonQuery, onQueryScreenBrightness);
+  btntext=String(EMOTICON_YELLOW)     + " Yellow";   
+  mainKeyboard.addButton(btntext.c_str(), CB_COLOR_YELLOW,   KeyboardButtonQuery, onQueryMain);
+  btntext=String(EMOTICON_TIMER)      + " 5 min";    
+  mainKeyboard.addButton(btntext.c_str(), CB_TIME_5MIN,      KeyboardButtonQuery, onQueryMain);
+  btntext=String(EMOTICON_BRIGHTNESS) + " 30%";      
+  mainKeyboard.addButton(btntext.c_str(), CB_BRIGHTNESS_30,  KeyboardButtonQuery, onQueryMain);
+  mainKeyboard.addRow();
+
+  btntext=String(EMOTICON_ORANGE)     + " Orange";   
+  mainKeyboard.addButton(btntext.c_str(), CB_COLOR_ORANGE,   KeyboardButtonQuery, onQueryMain);
+  btntext=String(EMOTICON_TIMER)      + " 10 min";   
+  mainKeyboard.addButton(btntext.c_str(), CB_TIME_10MIN,     KeyboardButtonQuery, onQueryMain);
+  btntext=String(EMOTICON_BRIGHTNESS) + " 50%";      
+  mainKeyboard.addButton(btntext.c_str(), CB_BRIGHTNESS_50,  KeyboardButtonQuery, onQueryMain);
+  mainKeyboard.addRow();
+
+  btntext=String(EMOTICON_RED)        + " Red";      
+  mainKeyboard.addButton(btntext.c_str(), CB_COLOR_RED,      KeyboardButtonQuery, onQueryMain);
+  btntext=String(EMOTICON_TIMER)      + " 20 min";   
+  mainKeyboard.addButton(btntext.c_str(), CB_TIME_20MIN,     KeyboardButtonQuery, onQueryMain);
+  btntext=String(EMOTICON_BRIGHTNESS) + " 100%";     
+  mainKeyboard.addButton(btntext.c_str(), CB_BRIGHTNESS_100, KeyboardButtonQuery, onQueryMain);
+  mainKeyboard.addRow();
+
+  btntext=String(EMOTICON_SETTINGS)   + " Settings"; 
+  mainKeyboard.addButton(btntext.c_str(), CB_SETTINGS,       KeyboardButtonQuery, onQueryMain);
+
+  // Add buttons for settings keyboard
+  settingsKeyboard.addButton("Set screen brightness",   CB_MN_SCR_BR , KeyboardButtonQuery, onQuerySettings);
   settingsKeyboard.addRow();
-  btntext=String(EMOTICON_BRIGHTNESS) + " Screen brightness 2"; settingsKeyboard.addButton(btntext.c_str(), CB_SCREEN_BR_2, KeyboardButtonQuery, onQueryScreenBrightness);
+
+  settingsKeyboard.addButton("Send event log",  CB_EVT_SEND , KeyboardButtonQuery, onQuerySettings);
+  settingsKeyboard.addButton("Clear event log", CB_EVT_CLEAR, KeyboardButtonQuery, onQuerySettings);
   settingsKeyboard.addRow();
-  btntext=String(EMOTICON_BRIGHTNESS) + " Screen brightness 3"; settingsKeyboard.addButton(btntext.c_str(), CB_SCREEN_BR_3, KeyboardButtonQuery, onQueryScreenBrightness);
+
+  settingsKeyboard.addButton("Send logfile",  CB_LOG_SEND , KeyboardButtonQuery, onQuerySettings);
+  settingsKeyboard.addButton("Clear logfile", CB_LOG_CLEAR, KeyboardButtonQuery, onQuerySettings);
   settingsKeyboard.addRow();
-  btntext=String(EMOTICON_BRIGHTNESS) + " Screen brightness 4"; settingsKeyboard.addButton(btntext.c_str(), CB_SCREEN_BR_4, KeyboardButtonQuery, onQueryScreenBrightness);
+
+  settingsKeyboard.addButton("Counter",    CB_DEBUG,        KeyboardButtonQuery, onQuerySettings);
+  settingsKeyboard.addButton("Reset",      CB_DEBUG_RESET , KeyboardButtonQuery, onQuerySettings);
   settingsKeyboard.addRow();
-  btntext=String(EMOTICON_BRIGHTNESS) + " Screen brightness 5"; settingsKeyboard.addButton(btntext.c_str(), CB_SCREEN_BR_5, KeyboardButtonQuery, onQueryScreenBrightness);
+
+  settingsKeyboard.addButton("Debug info", CB_DEBUG_INFO , KeyboardButtonQuery, onQuerySettings);
   settingsKeyboard.addRow();
-  settingsKeyboard.addButton("Counter", CB_DEBUG,        KeyboardButtonQuery, onQueryScreenBrightness);
-  settingsKeyboard.addButton("Reset",   CB_DEBUG_RESET , KeyboardButtonQuery, onQueryScreenBrightness);
-  settingsKeyboard.addRow();
-  settingsKeyboard.addButton("Debug info",   CB_DEBUG_INFO , KeyboardButtonQuery, onQueryScreenBrightness);
-  btntext=String(EMOTICON_MAIN_MENU)  + " Back to main menu"; settingsKeyboard.addButton(btntext.c_str(), CB_MAIN_MENU,   KeyboardButtonQuery, onQueryScreenBrightness);
+
+  btntext=String(EMOTICON_MAIN_MENU)  + " Back to main menu"; 
+  settingsKeyboard.addButton(btntext.c_str(), CB_MAIN_MENU,   KeyboardButtonQuery, onQuerySettings);
+
+  // Add buttons for settings keyboard
+  btntext=String(EMOTICON_BRIGHTNESS) + " Screen brightness 1"; 
+  screenBrightnessKeyboard.addButton(btntext.c_str(), CB_SCREEN_BR_1, KeyboardButtonQuery, onQueryScreenBrightness);
+  screenBrightnessKeyboard.addRow();
+  
+  btntext=String(EMOTICON_BRIGHTNESS) + " Screen brightness 2"; 
+  screenBrightnessKeyboard.addButton(btntext.c_str(), CB_SCREEN_BR_2, KeyboardButtonQuery, onQueryScreenBrightness);
+  screenBrightnessKeyboard.addRow();
+  
+  btntext=String(EMOTICON_BRIGHTNESS) + " Screen brightness 3"; 
+  screenBrightnessKeyboard.addButton(btntext.c_str(), CB_SCREEN_BR_3, KeyboardButtonQuery, onQueryScreenBrightness);
+  screenBrightnessKeyboard.addRow();
+
+  btntext=String(EMOTICON_BRIGHTNESS) + " Screen brightness 4"; 
+  screenBrightnessKeyboard.addButton(btntext.c_str(), CB_SCREEN_BR_4, KeyboardButtonQuery, onQueryScreenBrightness);
+  screenBrightnessKeyboard.addRow();
+
+  btntext=String(EMOTICON_BRIGHTNESS) + " Screen brightness 5"; 
+  screenBrightnessKeyboard.addButton(btntext.c_str(), CB_SCREEN_BR_5, KeyboardButtonQuery, onQueryScreenBrightness);
+  screenBrightnessKeyboard.addRow();
+
+  btntext=String(EMOTICON_SETTINGS)   + " Back to settings"; 
+  screenBrightnessKeyboard.addButton(btntext.c_str(), CB_SETTINGS,    KeyboardButtonQuery, onQueryScreenBrightness);
 }
 
 void setupTelegram() {
@@ -278,6 +387,7 @@ void setupTelegram() {
   // Add pointer to this keyboard to bot (in order to run callback function)
   myBot.addInlineKeyboard(&mainKeyboard);
   myBot.addInlineKeyboard(&settingsKeyboard);
+  myBot.addInlineKeyboard(&screenBrightnessKeyboard);
 
   String text = String(EMOTICON_WELCOME) + " Welcome";
   myBot.sendTo(userid, text.c_str(), mainKeyboard.getJSON() );

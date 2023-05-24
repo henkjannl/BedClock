@@ -63,6 +63,7 @@ data from github This file should have the following content:
 #include "f_Display.h"
 #include "g_Weather.h"
 #include "h_log.h"
+#include "i_Eventlog.h"
 
 #include <time.h>
 #include <vector>
@@ -83,6 +84,8 @@ void setup() {
   setupLight();
   setupWifi();
   setupTelegram();
+
+  addToEventLogfile( "Bedlight started" );
 
   getWeather();
 }

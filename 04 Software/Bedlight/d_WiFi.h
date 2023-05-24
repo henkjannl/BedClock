@@ -5,6 +5,7 @@
 #include <map>
 
 #include "a_Data.h"
+#include "i_Eventlog.h"
 
 const uint32_t CONNECT_TIMEOUT_MS = 10000;
 
@@ -44,35 +45,59 @@ void setupWifi() {
 void loopWifi() {
   static bool wifiConnectReported = false;
   static bool wifiNotConnectReported = false;
+  static uint8_t reconnectReport = 0;
+  uint8_t reconnectAttempt = 0;
+  char item[80];
 
   // Check if WiFi is still alive
   if ( WiFi.status() == WL_CONNECTED) {  /*if the connection lost it will connect to next network*/
+
+    reconnectReport = 0;
+    reconnectTimer1.reset();
+    reconnectTimer2.reset();
+    reconnectTimer3.reset();
+    restartTimer.reset();
+
     if( !wifiConnectReported ) {
-      Serial.printf( "WiFi connected to SSID %s signal strength %ddB\n", WiFi.SSID().c_str(), WiFi.RSSI() );
+      snprintf( item, sizeof(item), "WiFi connected to SSID %s. Signal strength %ddB", WiFi.SSID().c_str(), WiFi.RSSI() );
+      addToEventLogfile( item );
+      Serial.println( item );
+
       wifiConnectReported=true;
       wifiNotConnectReported=false;
-      reconnectTimer1.reset();
-      reconnectTimer2.reset();
-      reconnectTimer3.reset();
-      restartTimer.reset();
     };
   }
   else {
     if( !wifiNotConnectReported ) {
       Serial.println("WiFi not connected!");  /*if all conditions fail print this*/
+      addToEventLogfile( "Wifi connection lost" );
       wifiNotConnectReported=true;
       wifiConnectReported=false;
     }
   }
 
-  if( reconnectTimer1.lapsed() || reconnectTimer2.lapsed() || reconnectTimer3.lapsed() ) {
+  reconnectAttempt = 0;
+  if( reconnectTimer1.lapsed() ) reconnectAttempt = 1;
+  if( reconnectTimer2.lapsed() ) reconnectAttempt = 2;
+  if( reconnectTimer3.lapsed() ) reconnectAttempt = 3;
+
+  if( reconnectAttempt>0 ) {
     // Try to connect to the strongest available network
     wifiMulti.run( CONNECT_TIMEOUT_MS );
-  };
+
+    if( reconnectAttempt > reconnectReport ) {
+      snprintf( item, sizeof(item), "%s attempt to reconnect WiFi after %d attempts", 
+        ( WiFi.status() == WL_CONNECTED) ? "Successful" : "Unsuccessful", reconnectAttempt );
+
+      addToEventLogfile( item );
+      reconnectReport = reconnectAttempt;
+    }
+  } // reconnectAttempt>0
 
   if( restartTimer.lapsed() ) {
     // After three unsuccessful attempts, restart the ESP
+    addToEventLogfile( "Restarting ESP due to loss of WiFi connection" );
     ESP.restart();
   };
 
-};
+}; // loopWifi()

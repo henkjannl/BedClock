@@ -36,12 +36,11 @@ void getWeather() {
       DeserializationError error = deserializeJson(doc, http.getString());
       
       if (error) {
+        addToEventLogfile( "Error retrieving weather, deserialization failed" );
         Serial.print(F("deserializeJson() failed: "));
         Serial.println(error.f_str());
         return;
       }
-
-      Serial.println("Still retrieving the weather");
       
       //====================
       //float lat = doc["lat"]; // 52.2532
@@ -423,10 +422,12 @@ void getWeather() {
     
    } else {
       Serial.printf("httpCode: %d != %d\n", httpCode, HTTP_CODE_OK);
+      addToEventLogfile( "Error retrieving weather, httpCode != HTTP_CODE_OK" );
       return; // httpCode == HTTP_CODE_OK
    }
   } else {
       Serial.printf("httpCode: %d <= 0", httpCode);
+      addToEventLogfile( "Error retrieving weather, httpCode <= 0" );
       return; // httpCode > 0
   }
 
@@ -435,4 +436,5 @@ void getWeather() {
   snprintf( data.displayTemperature, sizeof( data.displayTemperature ), "%0d%sC", (int) data.outsideTemp, DEGREE_SYMBOL );
   data.lastWeatherUpdate = time( NULL );
   data.weatherUpdated = true;
+  addToLogfile();
 } // getWeather

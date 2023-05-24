@@ -2,6 +2,7 @@
 
 #include "FS.h"
 #include "SPIFFS.h"
+#include <AsyncTelegram2.h>
 
 #define LOG_FILE "/Logfile.csv"
 
@@ -71,8 +72,16 @@ void addToLogfile( ) {
   file.close();
 } 
 
-void sendLogFile( ) {
-
+void sendLogFile(const TBMessage &queryMsg) {
+  /*
+  File file = SPIFFS.open(LOG_FILE, "r");
+  if (file) {
+    myBot.sendDocument(queryMsg, file, file.size(), AsyncTelegram2::DocumentType::CSV, file.name());
+    file.close();
+  }
+  else
+    Serial.println("Can't open the file");
+  */  
 }
 
 void listDir(String & result, const char * dirname, uint16_t level = 0 ) {
