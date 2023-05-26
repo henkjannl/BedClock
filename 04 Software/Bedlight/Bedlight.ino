@@ -57,14 +57,14 @@ data from github This file should have the following content:
 
 #include "MyCredentials.h"  // All modules have access to data in MyCredentials
 #include "a_Data.h"         // This file contains all types and the struct 'data' which acts as a central databus
-#include "b_Icons.h"
-#include "c_Light.h"
-#include "d_WiFi.h"
-#include "e_Telegram.h"
-#include "f_Display.h"
-#include "g_Weather.h"
-#include "h_log.h"
-#include "i_Eventlog.h"
+#include "b_Icons.h"        // Icons to show on screen
+#include "c_Log.h"          // Logfile for weather data
+#include "d_Eventlog.h"     // Event loggers
+#include "e_Light.h"        // Controlling the light
+#include "f_WiFi.h"         // Wifi 
+#include "g_Telegram.h"     // Interaction with Telegram
+#include "h_Display.h"      // OLED display
+#include "i_Weather.h"      // Communication with OpenWeatherMap API
 
 #include <time.h>
 #include <vector>
@@ -179,7 +179,7 @@ void loop() {
   if( (timeinfo->tm_hour ==0) && (prev_hour != 0) ) {
     prev_hour = timeinfo->tm_hour;
     char item[80];
-    snprintf( item, sizeof(item), "%d calls to weather API made, resetting counter", data.weatherRetrievalCounter );
+    snprintf( item, sizeof(item), "%d calls to weather API made. Resetting counter", data.weatherRetrievalCounter );
     addToEventLogfile( item );
     data.weatherRetrievalCounter = 0;
   }

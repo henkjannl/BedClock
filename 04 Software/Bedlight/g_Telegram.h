@@ -6,10 +6,10 @@
 #include <AsyncTelegram2.h>
 #include <map>
 
-#include "a_Data.h"
-#include "c_Light.h"
-#include "h_Log.h"
-#include "i_Eventlog.h"
+#include "a_Data.h"         // This file contains all types and the struct 'data' which acts as a central databus
+#include "c_Log.h"          // Logfile for weather data
+#include "d_Eventlog.h"     // Event loggers
+#include "e_Light.h"        // Controlling the light
 
 // Messages for the callback functions
 #define CB_COLOR_WHITE     "clrWhite"
@@ -27,8 +27,6 @@
 #define CB_LIGHT_ON        "lgtOn" 
 #define CB_LIGHT_OFF       "lgtOff" 
 #define CB_SETTINGS        "settings" 
-#define CB_DEBUG           "debug" 
-#define CB_DEBUG_RESET     "deb_rst" 
 #define CB_DEBUG_INFO      "deb_info"
 #define CB_EVT_SEND        "event_send" 
 #define CB_EVT_CLEAR       "event_clear" 
@@ -174,23 +172,38 @@ void onQueryMain( const TBMessage &queryMsg ) {
 
 void onQuerySettings(const TBMessage &queryMsg) {
   String newMessage;
+  char item[80];
+  struct tm * timeinfo;
 
   if( queryMsg.callbackQueryData == CB_MN_SCR_BR ) {
     newMessage = "Screen brightness menu";
     data.menu = kbScreenBrightness;
   }
-  else if( queryMsg.callbackQueryData == CB_DEBUG ) {
-    newMessage = "Weather counter: " + String( (int) data.weatherRetrievalCounter );
-  }
-  else if( queryMsg.callbackQueryData == CB_DEBUG_RESET ) {
-    data.weatherRetrievalCounter = 0;
-    newMessage = "Weather counter reset";
-  }
   else if( queryMsg.callbackQueryData == CB_DEBUG_INFO ) {
-    newMessage  = "Weather retrieval counter: " + String( (int) data.weatherRetrievalCounter ) + "\n";
-    struct tm * timeinfo;
+
+    // First item must not use +=
+    newMessage = "Outside temperature: " + String( data.outsideTemp ) + "°C\n";
+    newMessage += "Max day temp: " + String( data.maxDayTemp ) + "°C\n";
+    newMessage += "Feels like temp: " + String( data.outsideFeelsLike ) + "°C\n";
+    newMessage += "Max tomorrow temp: " + String( data.maxTomorrowTemp ) + "°C\n";
+    newMessage += "Max temp displayed: " + String( data.maxDisplayTemp ) + "°C\n";
+
+    timeinfo = localtime ( &(data.daySunrise ) );
+    snprintf(item, sizeof( item ), "Sunrise %d:%02d\n", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec );
+    newMessage += item;
+
+    timeinfo = localtime ( &(data.daySunset ) );
+    snprintf(item, sizeof( item ), "Sunset %d:%02d\n", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec );
+    newMessage += item;
+
+    newMessage += "Air pressure: " + String( data.pressure ) + " mbar\n";
+    newMessage += "Humidity: " + String( data.humidity ) + " %\n";
+    newMessage += "Weather retrieval counter: " + String( (int) data.weatherRetrievalCounter ) + "\n";
+
+    // Last item must not get \n 
     timeinfo = localtime ( &(data.lastWeatherUpdate) );
-    newMessage += "Weather last retrieved: " + String( asctime( timeinfo ) );
+    snprintf(item, sizeof( item ), "Last weather update %02d:%02d:%02d", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec );
+    newMessage += item;
   }  
   else if( queryMsg.callbackQueryData == CB_EVT_SEND ) {
     newMessage = "Send event log";
@@ -322,16 +335,12 @@ void addInlineKeyboard() {
   settingsKeyboard.addButton("Set screen brightness",   CB_MN_SCR_BR , KeyboardButtonQuery, onQuerySettings);
   settingsKeyboard.addRow();
 
-  settingsKeyboard.addButton("Send event log",  CB_EVT_SEND , KeyboardButtonQuery, onQuerySettings);
+  settingsKeyboard.addButton("Download event log",  CB_EVT_SEND , KeyboardButtonQuery, onQuerySettings);
   settingsKeyboard.addButton("Clear event log", CB_EVT_CLEAR, KeyboardButtonQuery, onQuerySettings);
   settingsKeyboard.addRow();
 
-  settingsKeyboard.addButton("Send logfile",  CB_LOG_SEND , KeyboardButtonQuery, onQuerySettings);
+  settingsKeyboard.addButton("Download logfile",  CB_LOG_SEND , KeyboardButtonQuery, onQuerySettings);
   settingsKeyboard.addButton("Clear logfile", CB_LOG_CLEAR, KeyboardButtonQuery, onQuerySettings);
-  settingsKeyboard.addRow();
-
-  settingsKeyboard.addButton("Counter",    CB_DEBUG,        KeyboardButtonQuery, onQuerySettings);
-  settingsKeyboard.addButton("Reset",      CB_DEBUG_RESET , KeyboardButtonQuery, onQuerySettings);
   settingsKeyboard.addRow();
 
   settingsKeyboard.addButton("Debug info", CB_DEBUG_INFO , KeyboardButtonQuery, onQuerySettings);

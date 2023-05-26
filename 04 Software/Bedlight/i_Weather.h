@@ -7,8 +7,9 @@
 
 using namespace std;
 
-
 void getWeather() {
+
+  char item[80];
 
   Serial.println("Retrieving the weather"); 
   data.weatherRetrievalCounter++;
@@ -36,7 +37,7 @@ void getWeather() {
       DeserializationError error = deserializeJson(doc, http.getString());
       
       if (error) {
-        addToEventLogfile( "Error retrieving weather, deserialization failed" );
+        addToEventLogfile( "Error retrieving weather. Deserialization failed" );
         Serial.print(F("deserializeJson() failed: "));
         Serial.println(error.f_str());
         return;
@@ -421,13 +422,15 @@ void getWeather() {
       Serial.printf("Outside temperature %.1f C\n", data.outsideTemp);
     
    } else {
-      Serial.printf("httpCode: %d != %d\n", httpCode, HTTP_CODE_OK);
-      addToEventLogfile( "Error retrieving weather, httpCode != HTTP_CODE_OK" );
+      snprintf( item, sizeof(item), "httpCode: %d != %d", httpCode, HTTP_CODE_OK );
+      Serial.println( item );
+      addToEventLogfile( item );
       return; // httpCode == HTTP_CODE_OK
    }
   } else {
-      Serial.printf("httpCode: %d <= 0", httpCode);
-      addToEventLogfile( "Error retrieving weather, httpCode <= 0" );
+      snprintf( item, sizeof(item), "httpCode: %d <= 0", httpCode );
+      Serial.println( item );
+      addToEventLogfile( item );
       return; // httpCode > 0
   }
 

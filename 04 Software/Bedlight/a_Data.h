@@ -1,5 +1,7 @@
 #pragma once
 
+#include "d_Eventlog.h"     // Event loggers
+
 #include "FS.h"
 #include "SPIFFS.h"
 #include <HTTPClient.h>
@@ -274,6 +276,7 @@ class data_t {
     void saveSettings(fs::FS &fs, const char * settingsFile, const char * tempFile) {    
 
       Serial.printf("Saving settings to temporary file %s\n", tempFile);
+      addToEventLogfile( "Saving settings" );
     
       // Saves the settings to a file
       StaticJsonDocument<1024> doc;
@@ -289,10 +292,12 @@ class data_t {
           return;
       }
 
-      doc[ "lightColor"         ] = (int) color;    
-      doc[ "lightBrightness"    ] = (int) brightness;    
-      doc[ "timer"              ] = (int) timer;    
-      doc[ "screenBrightness"   ] = (int) screenBrightness;
+      doc[ "lightColor"              ] = (int) color;    
+      doc[ "lightBrightness"         ] = (int) brightness;    
+      doc[ "timer"                   ] = (int) timer;    
+      doc[ "screenBrightness"        ] = (int) screenBrightness;
+
+      doc[ "weatherRetrievalCounter" ] = (int) weatherRetrievalCounter;
 
       if( serializeJson(doc, output) > 0) {
         // Assume success if at least one byte was written
@@ -338,13 +343,15 @@ class data_t {
         timer             = (lightOffTimer_t)    doc[ "timer"              ].as<int>();
         switchLightOffTimer.interval = TIMES[timer];
         screenBrightness  = (screenBrightness_t) doc[ "screenBrightness"   ].as<int>();
+        weatherRetrievalCounter = doc[ "weatherRetrievalCounter" ].as<int>();
       } 
       catch (const std::exception& e) { 
         Serial.println("Exception occured when deserializing JSON file");
-        color              = lcWhite;
-        brightness         = lb100;   
-        timer              = lt10;   
-        screenBrightness   = sb5;    
+        color                   = lcWhite;
+        brightness              = lb100;   
+        timer                   = lt10;   
+        screenBrightness        = sb5; 
+        weatherRetrievalCounter = 0;
       };
       
       settingsChanged = false;
