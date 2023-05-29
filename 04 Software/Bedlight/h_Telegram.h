@@ -183,8 +183,8 @@ void onQuerySettings(const TBMessage &queryMsg) {
 
     // First item must not use +=
     newMessage = "Outside temperature: " + String( data.outsideTemp ) + "°C\n";
-    newMessage += "Max day temp: " + String( data.maxDayTemp ) + "°C\n";
     newMessage += "Feels like temp: " + String( data.outsideFeelsLike ) + "°C\n";
+    newMessage += "Max day temp: " + String( data.maxDayTemp ) + "°C\n";
     newMessage += "Max tomorrow temp: " + String( data.maxTomorrowTemp ) + "°C\n";
     newMessage += "Max temp displayed: " + String( data.maxDisplayTemp ) + "°C\n";
 
@@ -197,7 +197,10 @@ void onQuerySettings(const TBMessage &queryMsg) {
     newMessage += item;
 
     newMessage += "Air pressure: " + String( data.pressure ) + " mbar\n";
-    newMessage += "Humidity: " + String( data.humidity ) + " %\n";
+    newMessage += "Humidity: " + String( data.humidity ) + "%\n";
+    newMessage += "Wind speed: " + String( data.windspeed ) + " m/s\n";
+    newMessage += "Wind direction: " + String( data.windDirection ) + "° " + data.windDirStr + "\n";
+  
     newMessage += "Weather retrieval counter: " + String( (int) data.weatherRetrievalCounter ) + "\n";
 
     // Last item must not get \n 

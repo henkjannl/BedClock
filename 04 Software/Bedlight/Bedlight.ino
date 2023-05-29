@@ -1,28 +1,30 @@
-#define VERSION "1.9"
+#define VERSION "1.10"
 
 /* 
-1.0 First working version
-1.1 Restructured code
+1.00 First working version
+1.01 Restructured code
     Added precipitation in screen on press of right button
     Saving /loading settings finally works
-1.2 Added advice on press of left button
+1.02 Added advice on press of left button
     Most optimal font for advice chosen
     Timers in separate class
-1.3 Added hour scale on precipitation graph
+1.03 Added hour scale on precipitation graph
     Added no precipitation icon to weather menu
     Increased number of key press events to prevent light in middle of the night     
     Larger font for current outside temperature 
-1.4 Weather icons reintroduced
+1.04 Weather icons reintroduced
     Fixed missing weather icon
-1.5 Removed advice
+1.05 Removed advice
     Added second weather screen with 'feels like' temperature and relative humidity
-1.6 'Feels like' replaced by maximum day temperature
+1.06 'Feels like' replaced by maximum day temperature
     Time in main screen two pixels lower to match icon better
-1.7 Removed multiple tries of weather retrieval, since we reach the 1000 limit otherwise    
+1.07 Removed multiple tries of weather retrieval, since we reach the 1000 limit otherwise    
     Display message if weather was not retrieved on time
     Center clock if no weather icon available
-1.8 Changed timeout for retrieve weather error    
-1.9 Added logging
+1.08 Changed timeout for retrieve weather error    
+1.09 Added logging
+1.10 Added over the air updates
+     Reset weatherRetrievalCounter bug fixed
 
 To do:
   Update readme
@@ -36,6 +38,9 @@ MyCredentials.h is in gitignore to keep confidential
 data from github This file should have the following content:
 
   #include <map>
+
+  // Password to upload software through wireless port
+  #define OTApassword "password-x"
   
   // Telegram token for the Bedlight bot
   const char* token =  "aaaaaaaaaa:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";  
@@ -62,9 +67,10 @@ data from github This file should have the following content:
 #include "d_Eventlog.h"     // Event loggers
 #include "e_Light.h"        // Controlling the light
 #include "f_WiFi.h"         // Wifi 
-#include "g_Telegram.h"     // Interaction with Telegram
-#include "h_Display.h"      // OLED display
-#include "i_Weather.h"      // Communication with OpenWeatherMap API
+#include "g_OTA.h"          // Over the air updates
+#include "h_Telegram.h"     // Interaction with Telegram
+#include "i_Display.h"      // OLED display
+#include "j_Weather.h"      // Communication with OpenWeatherMap API
 
 #include <time.h>
 #include <vector>
@@ -84,6 +90,7 @@ void setup() {
   
   setupLight();
   setupWifi();
+  setupOTA();
   setupTelegram();
 
   addToEventLogfile( "Bedlight started" );
@@ -176,19 +183,22 @@ void loop() {
   }
 
   // Automatically reset the daily weather retrieval counter
-  if( (timeinfo->tm_hour ==0) && (prev_hour != 0) ) {
-    prev_hour = timeinfo->tm_hour;
+  if( (timeinfo->tm_hour != prev_hour) && ( timeinfo->tm_hour == 0 ) ) {
     char item[80];
     snprintf( item, sizeof(item), "%d calls to weather API made. Resetting counter", data.weatherRetrievalCounter );
     addToEventLogfile( item );
     data.weatherRetrievalCounter = 0;
   }
+  prev_hour = timeinfo->tm_hour;
 
   // Only call loopDisplay if screen update is requested
   if( data.updateScreen ) loopDisplay();    
 
   // Check if wifi timer has lapsed
-  if( data.loopWifiTimer.lapsed() ) loopWifi();
+  if( data.loopWifiTimer.lapsed() ) {
+    loopWifi(); // Reconnect WiFi if needed
+    loopOTA();  // Update software if needed
+  };
 
   // Handle Telegram messages not already done by the handlers
   loopTelegram();

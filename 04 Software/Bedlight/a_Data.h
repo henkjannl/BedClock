@@ -180,6 +180,9 @@ class data_t {
     int pressure = 0;
     float outsideFeelsLike = -300; 
     int humidity = -1;
+    float windspeed = 0;
+    int16_t windDirection = 0;
+    String windDirStr = "";
     std::list<precipitation_t> precipitation;
     bool precipitationExpected;
     char weatherIcon[12];
@@ -208,12 +211,12 @@ class data_t {
     floatVariable_t R, G, B;
 
     // A number of timers for all kinds of tasks
-    milliSecTimer screenBacktoMainTimer = milliSecTimer(5000);                // Flip screen back to main after 5 seconds, autoreset
-    milliSecTimer switchLightOffTimer   = milliSecTimer(TIMES[timer], true);  // Switch the light off
-    milliSecTimer lightStepTimer        = milliSecTimer(100, true);           // Change intensity of light in sall steps
-    milliSecTimer refreshWeatherTimer   = milliSecTimer(12*60*1000, true);    // Refresh the weather
-    milliSecTimer saveSettingsTimer     = milliSecTimer( 5*60*1000, true);    // Save settings if settings were changed
-    milliSecTimer loopWifiTimer         = milliSecTimer(1000, true);          // Check wifi
+    milliSecTimer screenBacktoMainTimer = milliSecTimer(       5*1000, true);  // Flip screen back to main after 5 seconds, autoreset
+    milliSecTimer switchLightOffTimer   = milliSecTimer( TIMES[timer], true);  // Switch the light off
+    milliSecTimer lightStepTimer        = milliSecTimer(          100, true);  // Change intensity of light in small steps
+    milliSecTimer refreshWeatherTimer   = milliSecTimer(   12*60*1000, true);  // Refresh the weather
+    milliSecTimer saveSettingsTimer     = milliSecTimer(    5*60*1000, true);  // Save settings if settings were changed
+    milliSecTimer loopWifiTimer         = milliSecTimer(         1000, true);  // Check wifi
   
     void setColor( lightColor_t color) { 
       this->color = color; 

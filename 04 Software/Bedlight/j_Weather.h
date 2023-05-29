@@ -7,6 +7,25 @@
 
 using namespace std;
 
+String windDirection( int16_t dir ) {
+  if(      dir <  11 ) return "N";
+  else if( dir <  34 ) return "NNE";
+  else if( dir <  56 ) return "NE";
+  else if( dir <  79 ) return "ENE";
+  else if( dir < 101 ) return "E";
+  else if( dir < 124 ) return "ESE";
+  else if( dir < 146 ) return "SE";
+  else if( dir < 169 ) return "SSE";
+  else if( dir < 191 ) return "S";
+  else if( dir < 214 ) return "SSW";
+  else if( dir < 236 ) return "SW";
+  else if( dir < 259 ) return "WSW";
+  else if( dir < 281 ) return "W";
+  else if( dir < 304 ) return "WNW";
+  else if( dir < 326 ) return "NW";
+  return "N";
+}
+
 void getWeather() {
 
   char item[80];
@@ -61,8 +80,9 @@ void getWeather() {
       //float current_uvi = current["uvi"]; // 0.1
       //int current_clouds = current["clouds"]; // 100
       //int current_visibility = current["visibility"]; // 10000
-      //float current_wind_speed = current["wind_speed"]; // 1.79
-      //int current_wind_deg = current["wind_deg"]; // 167
+      data.windspeed = current["wind_speed"]; // 1.79
+      data.windDirection = current["wind_deg"]; // 167
+      data.windDirStr = windDirection( data.windDirection );
       //float current_wind_gust = current["wind_gust"]; // 3.13
       
       JsonObject current_weather_0 = current["weather"][0];
