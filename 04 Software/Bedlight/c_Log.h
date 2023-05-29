@@ -17,7 +17,7 @@ void newLogfile() {
   if( SPIFFS.exists( LOG_FILE ) ) removeLogfile();
 
   File file = SPIFFS.open(LOG_FILE, FILE_APPEND);
-  file.print( F("Date, Time, LastWeatherUpdate, outsideTemp, pressure, humidity, feelsLike, sunrise, sunset, maxDayTemp, maxTomorrowTemp\n" ) );
+  file.print( F("Date, Time, LastWeatherUpdate, outsideTemp, pressure, humidity, feelsLike, sunrise, sunset, maxDayTemp, maxTomorrowTemp, windSpeed, windDir, windDirStr\n" ) );
   file.close();
 }
 
@@ -64,8 +64,16 @@ void addToLogfile( ) {
   snprintf( item, sizeof(item), "%f, ", data.maxDayTemp );
   content += String( item );
 
-  snprintf( item, sizeof(item), "%f\n", data.maxTomorrowTemp );
+  snprintf( item, sizeof(item), "%f, ", data.maxTomorrowTemp );
   content += String( item );
+
+  snprintf( item, sizeof(item), "%f, ", data.windspeed );
+  content += String( item );
+
+  snprintf( item, sizeof(item), "%d, ", data.windDirection );
+  content += String( item );
+
+  content += data.windDirStr + "\n";
 
   File file = SPIFFS.open(LOG_FILE, FILE_APPEND);
   file.print( content );
