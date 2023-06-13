@@ -1,31 +1,33 @@
-#define VERSION "1.10"
+#define VERSION "1.11"
 
 /* 
 1.00 First working version
 1.01 Restructured code
-    Added precipitation in screen on press of right button
-    Saving /loading settings finally works
+     Added precipitation in screen on press of right button
+     Saving /loading settings finally works
 1.02 Added advice on press of left button
-    Most optimal font for advice chosen
-    Timers in separate class
+     Most optimal font for advice chosen
+     Timers in separate class
 1.03 Added hour scale on precipitation graph
-    Added no precipitation icon to weather menu
-    Increased number of key press events to prevent light in middle of the night     
-    Larger font for current outside temperature 
+     Added no precipitation icon to weather menu
+     Increased number of key press events to prevent light in middle of the night     
+     Larger font for current outside temperature 
 1.04 Weather icons reintroduced
-    Fixed missing weather icon
+     Fixed missing weather icon
 1.05 Removed advice
-    Added second weather screen with 'feels like' temperature and relative humidity
+     Added second weather screen with 'feels like' temperature and relative humidity
 1.06 'Feels like' replaced by maximum day temperature
-    Time in main screen two pixels lower to match icon better
+     Time in main screen two pixels lower to match icon better
 1.07 Removed multiple tries of weather retrieval, since we reach the 1000 limit otherwise    
-    Display message if weather was not retrieved on time
-    Center clock if no weather icon available
+     Display message if weather was not retrieved on time
+     Center clock if no weather icon available
 1.08 Changed timeout for retrieve weather error    
 1.09 Added logging
 1.10 Added over the air updates
      Reset weatherRetrievalCounter bug fixed
-
+1.11 Larger buffer to pass weather info
+     Detailed error message in event log if JSON fails to pass
+     
 To do:
   Update readme
   Highlight chosen setting in Telegram keyboard
