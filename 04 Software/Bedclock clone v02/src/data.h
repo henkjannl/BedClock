@@ -1,7 +1,5 @@
 #pragma once
 
-#include "d_Eventlog.h"     // Event loggers
-
 #include "FS.h"
 #include "SPIFFS.h"
 #include <HTTPClient.h>
@@ -24,6 +22,8 @@ const char DEG_C[] = { 0xb0, 0x43, 0x0 };
 // For storing settings in SPIFFS
 #define SETTINGS_FILE "/settings.jsn"
 #define SETTINGS_TEMP "/settings.tmp"
+
+enum keys_t       { kyTop, kyLeft, kyRight };
 
 enum lightColor_t       { lcWhite, lcYellow, lcOrange, lcRed };
 enum lightBrightness_t  { lb15, lb30, lb50, lb100 };
@@ -305,7 +305,6 @@ class data_t {
       if(!USE_SPIFFS) return;
 
       Serial.printf("Saving settings to temporary file %s\n", tempFile);
-      addToEventLogfile( "Saving settings" );
     
       // Saves the settings to a file
       StaticJsonDocument<1024> doc;

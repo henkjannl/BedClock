@@ -4,8 +4,6 @@
 #include <U8g2lib.h>
 #include <list>
 
-#include "b_Icons.h"        // Icons to show on screen
-
 #define WEATHER_FONT u8g2_font_helvB14_tf
 
 // ======== GLOBAL VARIABLES ============= 

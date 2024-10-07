@@ -84,16 +84,10 @@ data from github This file should have the following content:
 #include "esp_wifi.h"
 
 #include "MyCredentials.h"  // All modules have access to data in MyCredentials
-#include "a_Data.h"         // This file contains all types and the struct 'data' which acts as a central databus
-// #include "b_Icons.h"        // Icons to show on screen
-// #include "c_Log.h"          // Logfile for weather data
-// #include "d_Eventlog.h"     // Event loggers
-#include "e_Light.h"        // Controlling the light
-#include "f_WiFi.h"         // Wifi 
-// #include "g_OTA.h"          // Over the air updates
-// #include "h_Telegram.h"     // Interaction with Telegram
-#include "i_Display.h"      // OLED display
-// #include "j_Weather.h"      // Communication with OpenWeatherMap API
+#include "data.h"           // This file contains all types and the struct 'data' which acts as a central databus
+#include "light.h"          // Controlling the light
+#include "wifi_time.h"      // Connect to Wifi and sync with timeserver 
+#include "display.h"        // OLED display
 
 #include <time.h>
 #include <vector>
@@ -102,10 +96,39 @@ data from github This file should have the following content:
 #include "FS.h"
 #include "SPIFFS.h"
 #define FORMAT_SPIFFS_IF_FAILED true
- 
+
+hw_timer_t *keyboard_scanner = NULL;
+QueueHandle_t keyboardQueue = xQueueCreate( 20, sizeof(keys_t) );  
+
+static volatile bool key_top_pressed = false; 
+static volatile bool key_left_pressed = false; 
+static volatile bool key_right_pressed = false; 
+
+void IRAM_ATTR scanKeyBoard(){
+  static volatile uint32_t key_left_counter  = 0;
+  static volatile uint32_t key_right_counter = 0;
+  static volatile uint32_t key_top_counter   = 0;
+
+  // Check if button is pressed
+  if (touchRead(PIN_KEY_LEFT )<KEY_TRESHOLD) key_left_counter++;  else key_left_counter =0; 
+  if (touchRead(PIN_KEY_TOP  )<KEY_TRESHOLD) key_top_counter++;   else key_top_counter  =0; 
+  if (touchRead(PIN_KEY_RIGHT)<KEY_TRESHOLD) key_right_counter++; else key_right_counter=0; 
+
+  static keys_t key;
+  if (key_left_counter==3)  { key=kyLeft;  xQueueSendFromISR( keyboardQueue, &key, ( TickType_t ) 0 ); }
+  if (key_top_counter==3)   { key=kyTop;   xQueueSendFromISR( keyboardQueue, &key, ( TickType_t ) 0 ); }
+  if (key_right_counter==3) { key=kyRight; xQueueSendFromISR( keyboardQueue, &key, ( TickType_t ) 0 ); }
+}
+
 void setup() {
   // Wait for stable power
   delay(500);
+
+  // Install the keyboard scanner
+  keyboard_scanner = timerBegin(0, 80, true);
+  timerAttachInterrupt(keyboard_scanner, &scanKeyBoard, true);
+  timerAlarmWrite(keyboard_scanner, 10000, true); // About 100 Hz
+  timerAlarmEnable(keyboard_scanner);
 
   // Initialize serial port
   Serial.begin(115200);
@@ -126,13 +149,8 @@ void setup() {
   WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); //disable brownout detector
   esp_wifi_set_max_tx_power(20);
   setupWifi();
-  // setupOTA();
-  // setupTelegram();
 
   Serial.println( "Bedlight started" );
-  addToEventLogfile( "Bedlight started" );
-
-  // getWeather();
 }
 
 void switchBacklightOn() {
@@ -141,63 +159,62 @@ void switchBacklightOn() {
 }
 
 void loop() {
-  // Check if button is pressed
-  static volatile uint32_t keyLeftCounter  = 0;
-  static volatile uint32_t keyRightCounter = 0;
-  static volatile uint32_t keyTopCounter   = 0;
+  keys_t key;
 
-  if (touchRead(PIN_KEY_LEFT )<KEY_TRESHOLD) keyLeftCounter++;  else keyLeftCounter =0; 
-  if (touchRead(PIN_KEY_TOP  )<KEY_TRESHOLD) keyTopCounter++;   else keyTopCounter  =0; 
-  if (touchRead(PIN_KEY_RIGHT)<KEY_TRESHOLD) keyRightCounter++; else keyRightCounter=0; 
+  if ( xQueueReceive( keyboardQueue, &key, 0) == pdPASS ) {
 
-  if( keyLeftCounter == 3 ) { 
-    data.displayed_item++;
-    if(data.displayed_item>5) data.displayed_item=0;
+    if( key==kyLeft ) { 
+      
+      data.displayed_item++;
+      if(data.displayed_item>5) data.displayed_item=0;
 
-    data.screenBacktoMainTimer.reset();
-    data.backlightTimer.reset();
-    data.updateScreen = true; 
-    data.backLightOn = true;
-  };
-
-  if( keyTopCounter == 3 ) { 
-    data.switchLight();    
-    Serial.printf( "Light switched %s\n", data.lightOn ? "on" : "off" );
-
-    if(data.lightOn) {
       data.screenBacktoMainTimer.reset();
       data.backlightTimer.reset();
       data.updateScreen = true; 
       data.backLightOn = true;
-    }
-  };
+    };
 
-  if( keyRightCounter == 3 ) { 
-    switch(data.displayed_item) {
-      // 0: switch on display, increase to 1 
-      // 1: display already on, increase to 2
+    if( key==kyTop ) { 
 
-      case 2: // modify color of light
-        data.incColor();
-      break;  
+      data.switchLight();    
+      Serial.printf( "Light switched %s\n", data.lightOn ? "on" : "off" );
 
-      case 3: // modify brightness of light
-        data.incBrightness();
-      break; 
+      if(data.lightOn) {
+        data.screenBacktoMainTimer.reset();
+        data.backlightTimer.reset();
+        data.updateScreen = true; 
+        data.backLightOn = true;
+      }
+    };
 
-      case 4: // modify duration of light timer
-        data.incTimer();
-      break;  
+    if( key==kyRight ) { 
 
-      case 5: // modify intensity of backlight
-        data.incScreenBrightness();
-      break;  
-    }
-    data.screenBacktoMainTimer.reset();
-    data.backlightTimer.reset();
-    data.updateScreen = true; 
-    data.backLightOn = true;
-  };
+      switch(data.displayed_item) {
+        // 0: switch on display, increase to 1 
+        // 1: display already on, increase to 2
+
+        case 2: // modify color of light
+          data.incColor();
+        break;  
+
+        case 3: // modify brightness of light
+          data.incBrightness();
+        break; 
+
+        case 4: // modify duration of light timer
+          data.incTimer();
+        break;  
+
+        case 5: // modify intensity of backlight
+          data.incScreenBrightness();
+        break;  
+      }
+      data.screenBacktoMainTimer.reset();
+      data.backlightTimer.reset();
+      data.updateScreen = true; 
+      data.backLightOn = true;
+    };
+  }; // xQueueReceive
 
   // Tell the light to take the next step
   if( data.lightStepTimer.lapsed() ) loopLight();

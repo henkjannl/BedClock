@@ -4,8 +4,7 @@
 #include <WiFiMulti.h>
 #include <map>
 
-#include "a_Data.h"         // This file contains all types and the struct 'data' which acts as a central databus
-#include "d_Eventlog.h"     // Event loggers
+#include "data.h"         // This file contains all types and the struct 'data' which acts as a central databus
 
 const uint32_t CONNECT_TIMEOUT_MS = 10000;
 
@@ -58,7 +57,6 @@ void loopWifi() {
     } else {
       snprintf( item, sizeof(item), "WiFi connection is lost." );
     }
-    addToEventLogfile( item );
     Serial.println( item );
 
     wifiConnectionReported = wifiConnected;
@@ -92,13 +90,11 @@ void loopWifi() {
     snprintf( item, sizeof(item), "%s attempt to reconnect WiFi after %d attempts", 
       ( WiFi.status() == WL_CONNECTED) ? "Successful" : "Unsuccessful", reconnectAttempt );
 
-    addToEventLogfile( item );
     reconnectReport = reconnectAttempt;
   } // reconnectAttempt > reconnectReport
 
   if( restartTimer.lapsed() ) {
     // After three unsuccessful attempts, restart the ESP
-    addToEventLogfile( "Restarting ESP due to loss of WiFi connection" );
     data.saveSettings(SPIFFS, SETTINGS_FILE, SETTINGS_TEMP);
     ESP.restart();
   };
