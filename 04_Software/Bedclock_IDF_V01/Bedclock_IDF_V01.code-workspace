@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "241025-153238-espidf-exceptions",
+			"path": "../../../../../OneDrive/Documents/PlatformIO/Projects/241025-153238-espidf-exceptions"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"rmt_tx.h": "c"
+		}
+	}
+}

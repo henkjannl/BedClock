@@ -2,112 +2,135 @@
 #include "freertos/task.h"
 #include "driver/rmt_tx.h"
 #include "esp_log.h"
+#include "led_strip_encoder.h"
 
-#define RMT_TX_CHANNEL RMT_CHANNEL_0  // RMT channel to use
-#define WS2812_PIN GPIO_NUM_23        // GPIO pin connected to WS2812
-#define NUM_LEDS 16                   // Number of WS2812 LEDs in the chain
-#define WS2812_BITS_PER_LED 24        // 8 bits for each of R, G, B
-#define MAX_INTENSITY 32              // Maximum value of R, G and B to prevent brownout of ESP32 
+#include <string.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "esp_log.h"
+#include "driver/rmt_tx.h"
+#include "led_strip_encoder.h"
 
-#define T0H 14  // 0 bit high time (350ns)
-#define T1H 52  // 1 bit high time (700ns)
-#define T0L 52  // 0 bit low time (800ns)
-#define T1L 14  // 1 bit low time (600ns)
+#define RMT_LED_STRIP_RESOLUTION_HZ 10000000 // 10MHz resolution, 1 tick = 0.1us (led strip needs a high resolution)
+#define RMT_LED_STRIP_GPIO_NUM      23
 
-// Function to configure the RMT for WS2812
-void ws2812_init(void)
+#define MAX_BRIGHTNESS 40
+
+#define EXAMPLE_LED_NUMBERS         16
+#define EXAMPLE_CHASE_SPEED_MS      20
+
+static const char *TAG = "bedclock";
+
+static uint8_t led_strip_pixels[EXAMPLE_LED_NUMBERS * 3];
+
+/**
+ * @brief Simple helper function, converting HSV color space to RGB color space
+ *
+ * Wiki: https://en.wikipedia.org/wiki/HSL_and_HSV
+ *
+ */
+void led_strip_hsv2rgb(uint32_t h, uint32_t s, uint32_t v, uint32_t *r, uint32_t *g, uint32_t *b)
 {
-    rmt_tx_channel_config_t tx_config = {
-        .gpio_num = WS2812_PIN,
-        .clk_src = RMT_CLK_SRC_DEFAULT,
-        .resolution_hz = 80000000,  // 80MHz
-        .mem_block_symbols = 64,
-        .trans_queue_depth = 4,
-        .intr_priority = 0,
-    };
+    h %= 360; // h -> [0,360]
+    uint32_t rgb_max = v * 2.55f;
 
-    rmt_new_tx_channel(&tx_config, NULL);
+    // Clip intensity of the LEDs to prevent brownout
+    rgb_max = rgb_max>MAX_BRIGHTNESS ? MAX_BRIGHTNESS : rgb_max;
 
-    // Enable the RMT TX channel
-    rmt_enable(tx_config.channel);
-}
+    uint32_t rgb_min = rgb_max * (100 - s) / 100.0f;
 
-uint8_t min(uint8_t a, uint8_t b) 
-{
-  return a<b ? a : b;    
-}
+    uint32_t i = h / 60;
+    uint32_t diff = h % 60;
 
-// Function to convert RGB to RMT item array
-void ws2812_set_colors(uint8_t colors[][3])
-{
-    rmt_symbol_word_t items[NUM_LEDS * WS2812_BITS_PER_LED];
+    // RGB adjustment amount by hue
+    uint32_t rgb_adj = (rgb_max - rgb_min) * diff / 60;
 
-    for (int led = 0; led < NUM_LEDS; led++) {
-        colors[led][0] = min(colors[led][0],MAX_INTENSITY);
-        colors[led][1] = min(colors[led][1],MAX_INTENSITY);
-        colors[led][2] = min(colors[led][2],MAX_INTENSITY);
-
-        uint32_t color = (colors[led][1] << 16) | (colors[led][0] << 8) | colors[led][2]; // GRB format
-
-        for (int i = 0; i < WS2812_BITS_PER_LED; i++) {
-            if (color & (1 << (23 - i))) {
-                // Bit is 1
-                items[led * WS2812_BITS_PER_LED + i].duration0 = T1H;
-                items[led * WS2812_BITS_PER_LED + i].level0 = 1;
-                items[led * WS2812_BITS_PER_LED + i].duration1 = T1L;
-                items[led * WS2812_BITS_PER_LED + i].level1 = 0;
-            } else {
-                // Bit is 0
-                items[led * WS2812_BITS_PER_LED + i].duration0 = T0H;
-                items[led * WS2812_BITS_PER_LED + i].level0 = 1;
-                items[led * WS2812_BITS_PER_LED + i].duration1 = T0L;
-                items[led * WS2812_BITS_PER_LED + i].level1 = 0;
-            }
-        }
+    switch (i) {
+    case 0:
+        *r = rgb_max;
+        *g = rgb_min + rgb_adj;
+        *b = rgb_min;
+        break;
+    case 1:
+        *r = rgb_max - rgb_adj;
+        *g = rgb_max;
+        *b = rgb_min;
+        break;
+    case 2:
+        *r = rgb_min;
+        *g = rgb_max;
+        *b = rgb_min + rgb_adj;
+        break;
+    case 3:
+        *r = rgb_min;
+        *g = rgb_max - rgb_adj;
+        *b = rgb_max;
+        break;
+    case 4:
+        *r = rgb_min + rgb_adj;
+        *g = rgb_min;
+        *b = rgb_max;
+        break;
+    default:
+        *r = rgb_max;
+        *g = rgb_min;
+        *b = rgb_max - rgb_adj;
+        break;
     }
-
-    // Create a TX transaction
-    rmt_tx_trans_desc_t tx_desc = {
-        .symbols = items,
-        .num_symbols = NUM_LEDS * WS2812_BITS_PER_LED,
-    };
-
-    // Send the data
-    rmt_tx_send(tx_desc.channel, &tx_desc, pdMS_TO_TICKS(100));
 }
 
 void app_main(void)
 {
-    ws2812_init();
-    
-    uint8_t colors[NUM_LEDS][3];
+    uint32_t red = 0;
+    uint32_t green = 0;
+    uint32_t blue = 0;
+    uint16_t hue = 0;
+    uint16_t start_rgb = 0;
 
+    ESP_LOGI(TAG, "Create RMT TX channel");
+    rmt_channel_handle_t led_chan = NULL;
+    rmt_tx_channel_config_t tx_chan_config = {
+        .clk_src = RMT_CLK_SRC_DEFAULT, // select source clock
+        .gpio_num = RMT_LED_STRIP_GPIO_NUM,
+        .mem_block_symbols = 64, // increase the block size can make the LED less flickering
+        .resolution_hz = RMT_LED_STRIP_RESOLUTION_HZ,
+        .trans_queue_depth = 4, // set the number of transactions that can be pending in the background
+    };
+    ESP_ERROR_CHECK(rmt_new_tx_channel(&tx_chan_config, &led_chan));
+
+    ESP_LOGI(TAG, "Install led strip encoder");
+    rmt_encoder_handle_t led_encoder = NULL;
+    led_strip_encoder_config_t encoder_config = {
+        .resolution = RMT_LED_STRIP_RESOLUTION_HZ,
+    };
+    ESP_ERROR_CHECK(rmt_new_led_strip_encoder(&encoder_config, &led_encoder));
+
+    ESP_LOGI(TAG, "Enable RMT TX channel");
+    ESP_ERROR_CHECK(rmt_enable(led_chan));
+
+    ESP_LOGI(TAG, "Start LED rainbow chase");
+    rmt_transmit_config_t tx_config = {
+        .loop_count = 0, // no transfer loop
+    };
     while (1) {
-        // Set all LEDs to red
-        for (int i = 0; i < NUM_LEDS; i++) {
-            colors[i][0] = MAX_INTENSITY;  // Red
-            colors[i][1] = 0;    // Green
-            colors[i][2] = 0;    // Blue
+        for (int i = 0; i < 3; i++) {
+            for (int j = i; j < EXAMPLE_LED_NUMBERS; j += 3) {
+                // Build RGB pixels
+                hue = j * 360 / EXAMPLE_LED_NUMBERS + start_rgb;
+                led_strip_hsv2rgb(hue, 100, 40, &red, &green, &blue);
+                led_strip_pixels[j * 3 + 0] = green;
+                led_strip_pixels[j * 3 + 1] = blue;
+                led_strip_pixels[j * 3 + 2] = red;
+            }
+            // Flush RGB values to LEDs
+            ESP_ERROR_CHECK(rmt_transmit(led_chan, led_encoder, led_strip_pixels, sizeof(led_strip_pixels), &tx_config));
+            ESP_ERROR_CHECK(rmt_tx_wait_all_done(led_chan, portMAX_DELAY));
+            vTaskDelay(pdMS_TO_TICKS(EXAMPLE_CHASE_SPEED_MS));
+            memset(led_strip_pixels, 0, sizeof(led_strip_pixels));
+            ESP_ERROR_CHECK(rmt_transmit(led_chan, led_encoder, led_strip_pixels, sizeof(led_strip_pixels), &tx_config));
+            ESP_ERROR_CHECK(rmt_tx_wait_all_done(led_chan, portMAX_DELAY));
+            vTaskDelay(pdMS_TO_TICKS(EXAMPLE_CHASE_SPEED_MS));
         }
-        ws2812_set_colors(colors);
-        vTaskDelay(pdMS_TO_TICKS(250));
-
-        // Set all LEDs to green
-        for (int i = 0; i < NUM_LEDS; i++) {
-            colors[i][0] = 0;    // Red
-            colors[i][1] = MAX_INTENSITY;  // Green
-            colors[i][2] = 0;    // Blue
-        }
-        ws2812_set_colors(colors);
-        vTaskDelay(pdMS_TO_TICKS(250));
-
-        // Set all LEDs to blue
-        for (int i = 0; i < NUM_LEDS; i++) {
-            colors[i][0] = 0;    // Red
-            colors[i][1] = 0;    // Green
-            colors[i][2] = MAX_INTENSITY;  // Blue
-        }
-        ws2812_set_colors(colors);
-        vTaskDelay(pdMS_TO_TICKS(250));
+        start_rgb += 5;
     }
 }
