@@ -1,201 +1,125 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "esp_log.h"
-
-#include "ssd1306.h"
-#include "font8x8_basic.h"
+/*
+ * SPDX-FileCopyrightText: 2021-2022 Espressif Systems (Shanghai) CO LTD
+ *
+ * SPDX-License-Identifier: CC0-1.0
+ */
 
 /*
- You have to set this config value with menuconfig
- CONFIG_INTERFACE
+This is a demo for the touch sensor functionality of ESP32
+Practical hints:
+Examples are at https://github.com/espressif/esp-idf/tree/v5.2.3/examples/peripherals/touch_sensor
+Not every example is compatible with all ESP32 versions. See:
+https://github.com/espressif/esp-idf/blob/v5.2.3/examples/peripherals/touch_sensor/touch_periph_version.txt
 
- for i2c
- CONFIG_MODEL
- CONFIG_SDA_GPIO
- CONFIG_SCL_GPIO
- CONFIG_RESET_GPIO
+The watchdog timer can cause problems. Be sure to disable it in menuconfig
+Component config --> ESP System Settings --> Interrupt watchdog
+Component config --> ESP System Settings --> Enable Task Watchdog Timer
 
- for SPI
- CONFIG_CS_GPIO
- CONFIG_DC_GPIO
- CONFIG_RESET_GPIO
+Probably due to the internal wiring, different sensors may have a different open capacitance, and may therefore need
+a different threshold value
 */
+#include <stdio.h>
+#include <inttypes.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "driver/touch_pad.h"
+#include "esp_log.h"
+#include "esp_task_wdt.h"
 
-#define tag "SSD1306"
+#define TOUCH_PAD_NO_CHANGE   (-1)
+#define TOUCH_THRESH_NO_USE   (0)
+#define TOUCH_FILTER_MODE_EN  (1)
+#define TOUCHPAD_FILTER_TOUCH_PERIOD (10)
+
+#define MAX_TOUCH_BTN 3
+
+typedef struct {
+  uint8_t touch_id;
+  uint16_t threshold;
+  const char *id;
+} touch_button_t;
+
+touch_button_t touch_buttons[] = {
+    { .touch_id = 0, .threshold = 1000, .id = "L"},
+    { .touch_id = 6, .threshold = 1000, .id = "T"},
+    { .touch_id = 5, .threshold =  800, .id = "R"}
+};
+
+/*
+  Read values sensed at all available touch pads.
+ Print out values in a loop on a serial monitor.
+ */
+static void tp_example_read_task(void *pvParameter)
+{
+    // uint16_t touch_value;
+    uint16_t touch_filter_value;
+    uint8_t btn_pressed;
+#if TOUCH_FILTER_MODE_EN
+    printf("Touch Sensor filter mode read, the output format is: \nTouchpad num:[raw data, filtered data]\n\n");
+#else
+    printf("Touch Sensor normal mode read, the output format is: \nTouchpad num:[raw data]\n\n");
+#endif
+    while (1) {
+
+        for (uint8_t btn_id=0; btn_id<MAX_TOUCH_BTN; btn_id++) {
+            touch_pad_read_filtered(touch_buttons[btn_id].touch_id, &touch_filter_value);
+            btn_pressed = (touch_filter_value<touch_buttons[btn_id].threshold);
+            printf("T%d:[%4"PRIu16"] %s ", touch_buttons[btn_id].touch_id, touch_filter_value, btn_pressed? touch_buttons[btn_id].id : " ");
+}
+
+//         btn_pressed = 0;
+//         for (int i = 0; i < TOUCH_PAD_MAX; i++) {
+// #if TOUCH_FILTER_MODE_EN
+//             // If open the filter mode, please use this API to get the touch pad count.
+//             // touch_pad_read_raw_data(i, &touch_value);
+//             // touch_pad_read_filtered(i, &touch_filter_value);
+//             // printf("T%d:[%4"PRIu16",%4"PRIu16"] ", i, touch_value, touch_filter_value);
+
+//             // touch_pad_read_raw_data(i, &touch_value);
+//             touch_pad_read_filtered(i, &touch_filter_value);
+//             printf("T%d:[%4"PRIu16"] ", i, touch_filter_value);
+
+//             if( (i==0) && (touch_filter_value<1000) ) { btn_pressed += 1; };
+//             if( (i==6) && (touch_filter_value<1000) ) { btn_pressed += 2; };
+//             if( (i==5) && (touch_filter_value< 800) ) { btn_pressed += 4; };
+
+// #else
+//             touch_pad_read(i, &touch_value);
+//             printf("T%d:[%4"PRIu16"] ", i, touch_value);
+// #endif
+//         }
+//         printf("{%1"PRIu16"} ", btn_pressed);
+
+        printf("\n");
+        vTaskDelay(200 / portTICK_PERIOD_MS);
+    }
+}
+
+static void tp_example_touch_pad_init(void)
+{
+    for (int i = 0; i < TOUCH_PAD_MAX; i++) {
+        touch_pad_config(i, TOUCH_THRESH_NO_USE);
+    }
+}
 
 void app_main(void)
 {
-	SSD1306_t dev;
-	int center, top, bottom;
-	char lineChar[20];
-
-#if CONFIG_I2C_INTERFACE
-	ESP_LOGI(tag, "INTERFACE is i2c");
-	ESP_LOGI(tag, "CONFIG_SDA_GPIO=%d",CONFIG_SDA_GPIO);
-	ESP_LOGI(tag, "CONFIG_SCL_GPIO=%d",CONFIG_SCL_GPIO);
-	ESP_LOGI(tag, "CONFIG_RESET_GPIO=%d",CONFIG_RESET_GPIO);
-	i2c_master_init(&dev, CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO);
-#endif // CONFIG_I2C_INTERFACE
-
-#if CONFIG_SPI_INTERFACE
-	ESP_LOGI(tag, "INTERFACE is SPI");
-	ESP_LOGI(tag, "CONFIG_MOSI_GPIO=%d",CONFIG_MOSI_GPIO);
-	ESP_LOGI(tag, "CONFIG_SCLK_GPIO=%d",CONFIG_SCLK_GPIO);
-	ESP_LOGI(tag, "CONFIG_CS_GPIO=%d",CONFIG_CS_GPIO);
-	ESP_LOGI(tag, "CONFIG_DC_GPIO=%d",CONFIG_DC_GPIO);
-	ESP_LOGI(tag, "CONFIG_RESET_GPIO=%d",CONFIG_RESET_GPIO);
-	spi_master_init(&dev, CONFIG_MOSI_GPIO, CONFIG_SCLK_GPIO, CONFIG_CS_GPIO, CONFIG_DC_GPIO, CONFIG_RESET_GPIO);
-#endif // CONFIG_SPI_INTERFACE
-
-#if CONFIG_FLIP
-	dev._flip = true;
-	ESP_LOGW(tag, "Flip upside down");
+    // Initialize touch pad peripheral.
+    // The default fsm mode is software trigger mode.
+    ESP_ERROR_CHECK(touch_pad_init());
+    // Set reference voltage for charging/discharging
+    // In this case, the high reference valtage will be 2.7V - 1V = 1.7V
+    // The low reference voltage will be 0.5
+    // The larger the range, the larger the pulse count value.
+    touch_pad_set_voltage(TOUCH_HVOLT_2V7, TOUCH_LVOLT_0V5, TOUCH_HVOLT_ATTEN_1V);
+    tp_example_touch_pad_init();
+#if TOUCH_FILTER_MODE_EN
+    touch_pad_filter_start(TOUCHPAD_FILTER_TOUCH_PERIOD);
 #endif
+    // Start task to read values sensed by pads
+    xTaskCreate(&tp_example_read_task, "touch_pad_read_task", 4096, NULL, 5, NULL);
 
-#if CONFIG_SSD1306_128x64
-	ESP_LOGI(tag, "Panel is 128x64");
-	ssd1306_init(&dev, 128, 64);
-#endif // CONFIG_SSD1306_128x64
-#if CONFIG_SSD1306_128x32
-	ESP_LOGI(tag, "Panel is 128x32");
-	ssd1306_init(&dev, 128, 32);
-#endif // CONFIG_SSD1306_128x32
+    while(1) {
 
-	ssd1306_clear_screen(&dev, false);
-	ssd1306_contrast(&dev, 0xff);
-	ssd1306_display_text_x3(&dev, 0, "Hello", 5, false);
-	vTaskDelay(3000 / portTICK_PERIOD_MS);
-
-#if CONFIG_SSD1306_128x64
-	top = 2;
-	center = 3;
-	bottom = 8;
-	ssd1306_display_text(&dev, 0, "SSD1306 128x64", 14, false);
-	ssd1306_display_text(&dev, 1, "ABCDEFGHIJKLMNOP", 16, false);
-	ssd1306_display_text(&dev, 2, "abcdefghijklmnop",16, false);
-	ssd1306_display_text(&dev, 3, "Hello World!!", 13, false);
-	//ssd1306_clear_line(&dev, 4, true);
-	//ssd1306_clear_line(&dev, 5, true);
-	//ssd1306_clear_line(&dev, 6, true);
-	//ssd1306_clear_line(&dev, 7, true);
-	ssd1306_display_text(&dev, 4, "SSD1306 128x64", 14, true);
-	ssd1306_display_text(&dev, 5, "ABCDEFGHIJKLMNOP", 16, true);
-	ssd1306_display_text(&dev, 6, "abcdefghijklmnop",16, true);
-	ssd1306_display_text(&dev, 7, "Hello World!!", 13, true);
-#endif // CONFIG_SSD1306_128x64
-
-#if CONFIG_SSD1306_128x32
-	top = 1;
-	center = 1;
-	bottom = 4;
-	ssd1306_display_text(&dev, 0, "SSD1306 128x32", 14, false);
-	ssd1306_display_text(&dev, 1, "Hello World!!", 13, false);
-	//ssd1306_clear_line(&dev, 2, true);
-	//ssd1306_clear_line(&dev, 3, true);
-	ssd1306_display_text(&dev, 2, "SSD1306 128x32", 14, true);
-	ssd1306_display_text(&dev, 3, "Hello World!!", 13, true);
-#endif // CONFIG_SSD1306_128x32
-	vTaskDelay(3000 / portTICK_PERIOD_MS);
-	
-	// Display Count Down
-	uint8_t image[24];
-	memset(image, 0, sizeof(image));
-	ssd1306_display_image(&dev, top, (6*8-1), image, sizeof(image));
-	ssd1306_display_image(&dev, top+1, (6*8-1), image, sizeof(image));
-	ssd1306_display_image(&dev, top+2, (6*8-1), image, sizeof(image));
-	for(int font=0x39;font>0x30;font--) {
-		memset(image, 0, sizeof(image));
-		ssd1306_display_image(&dev, top+1, (7*8-1), image, 8);
-		memcpy(image, font8x8_basic_tr[font], 8);
-		if (dev._flip) ssd1306_flip(image, 8);
-		ssd1306_display_image(&dev, top+1, (7*8-1), image, 8);
-		vTaskDelay(1000 / portTICK_PERIOD_MS);
-	}
-	
-	// Scroll Up
-	ssd1306_clear_screen(&dev, false);
-	ssd1306_contrast(&dev, 0xff);
-	ssd1306_display_text(&dev, 0, "---Scroll  UP---", 16, true);
-	//ssd1306_software_scroll(&dev, 7, 1);
-	ssd1306_software_scroll(&dev, (dev._pages - 1), 1);
-	for (int line=0;line<bottom+10;line++) {
-		lineChar[0] = 0x01;
-		sprintf(&lineChar[1], " Line %02d", line);
-		ssd1306_scroll_text(&dev, lineChar, strlen(lineChar), false);
-		vTaskDelay(500 / portTICK_PERIOD_MS);
-	}
-	vTaskDelay(3000 / portTICK_PERIOD_MS);
-	
-	// Scroll Down
-	ssd1306_clear_screen(&dev, false);
-	ssd1306_contrast(&dev, 0xff);
-	ssd1306_display_text(&dev, 0, "--Scroll  DOWN--", 16, true);
-	//ssd1306_software_scroll(&dev, 1, 7);
-	ssd1306_software_scroll(&dev, 1, (dev._pages - 1) );
-	for (int line=0;line<bottom+10;line++) {
-		lineChar[0] = 0x02;
-		sprintf(&lineChar[1], " Line %02d", line);
-		ssd1306_scroll_text(&dev, lineChar, strlen(lineChar), false);
-		vTaskDelay(500 / portTICK_PERIOD_MS);
-	}
-	vTaskDelay(3000 / portTICK_PERIOD_MS);
-
-	// Page Down
-	ssd1306_clear_screen(&dev, false);
-	ssd1306_contrast(&dev, 0xff);
-	ssd1306_display_text(&dev, 0, "---Page	DOWN---", 16, true);
-	ssd1306_software_scroll(&dev, 1, (dev._pages-1) );
-	for (int line=0;line<bottom+10;line++) {
-		//if ( (line % 7) == 0) ssd1306_scroll_clear(&dev);
-		if ( (line % (dev._pages-1)) == 0) ssd1306_scroll_clear(&dev);
-		lineChar[0] = 0x02;
-		sprintf(&lineChar[1], " Line %02d", line);
-		ssd1306_scroll_text(&dev, lineChar, strlen(lineChar), false);
-		vTaskDelay(500 / portTICK_PERIOD_MS);
-	}
-	vTaskDelay(3000 / portTICK_PERIOD_MS);
-
-	// Horizontal Scroll
-	ssd1306_clear_screen(&dev, false);
-	ssd1306_contrast(&dev, 0xff);
-	ssd1306_display_text(&dev, center, "Horizontal", 10, false);
-	ssd1306_hardware_scroll(&dev, SCROLL_RIGHT);
-	vTaskDelay(5000 / portTICK_PERIOD_MS);
-	ssd1306_hardware_scroll(&dev, SCROLL_LEFT);
-	vTaskDelay(5000 / portTICK_PERIOD_MS);
-	ssd1306_hardware_scroll(&dev, SCROLL_STOP);
-	
-	// Vertical Scroll
-	ssd1306_clear_screen(&dev, false);
-	ssd1306_contrast(&dev, 0xff);
-	ssd1306_display_text(&dev, center, "Vertical", 8, false);
-	ssd1306_hardware_scroll(&dev, SCROLL_DOWN);
-	vTaskDelay(5000 / portTICK_PERIOD_MS);
-	ssd1306_hardware_scroll(&dev, SCROLL_UP);
-	vTaskDelay(5000 / portTICK_PERIOD_MS);
-	ssd1306_hardware_scroll(&dev, SCROLL_STOP);
-	
-	// Invert
-	ssd1306_clear_screen(&dev, true);
-	ssd1306_contrast(&dev, 0xff);
-	ssd1306_display_text(&dev, center, "  Good Bye!!", 12, true);
-	vTaskDelay(5000 / portTICK_PERIOD_MS);
-
-
-	// Fade Out
-	ssd1306_fadeout(&dev);
-	
-#if 0
-	// Fade Out
-	for(int contrast=0xff;contrast>0;contrast=contrast-0x20) {
-		ssd1306_contrast(&dev, contrast);
-		vTaskDelay(40);
-	}
-#endif
-
-	// Restart module
-	esp_restart();
+    }
 }

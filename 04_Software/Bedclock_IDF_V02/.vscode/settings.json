@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "rmt_tx.h": "c",
-        "ssd1306.h": "c"
+        "ssd1306.h": "c",
+        "string.h": "c"
     }
 }

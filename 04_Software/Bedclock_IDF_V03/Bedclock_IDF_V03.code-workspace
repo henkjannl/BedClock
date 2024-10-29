@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "Bedclock_IDF_V03",
+			"path": "../Bedclock_IDF_V03"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"rmt_tx.h": "c",
+			"ssd1306.h": "c"
+		}
+	}
+}

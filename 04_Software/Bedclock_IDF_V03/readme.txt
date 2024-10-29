@@ -1,4 +1,5 @@
 ### Readme
-Bedclock_IDF_V01 shows that the WS2812 LEDs are working
-Bedclock_IDF_V02 shows the display is working
-
+Bedclock_IDF_V01 demonstrates WS2812 LEDs
+Bedclock_IDF_V02 demonstrates the display
+Bedclock_IDF_V03 demonstrates capacitive touch buttons
+Bedclock_IDF_V03 demonstrates  WiFi
