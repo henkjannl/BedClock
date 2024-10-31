@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"name": "Bedclock_IDF_V04",
+			"path": "../../Bedclock_IDF_V04"
+		}
+	],
+	"settings": {}
+}
