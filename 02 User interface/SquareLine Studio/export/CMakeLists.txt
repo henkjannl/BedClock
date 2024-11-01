@@ -1,0 +1,11 @@
+SET(SOURCES screens/ui_Screen1.c
+    ui.c
+    components/ui_comp_hook.c
+    ui_helpers.c
+    fonts/ui_font_Bahnschrit.c
+    fonts/ui_font_Bahnschrit.c
+    fonts/ui_font_Bahnschrit24.c
+    fonts/ui_font_Bahnschrit48.c
+    fonts/ui_font_Bahnschrift48.c)
+
+add_library(ui ${SOURCES})
