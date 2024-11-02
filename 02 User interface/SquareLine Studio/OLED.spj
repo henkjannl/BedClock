@@ -5541,7 +5541,7 @@
     "theme_color2": 0,
     "uiExportFolderPath": "C:\\Users\\henkj\\Documents\\GitHub\\BedClock\\02 User interface\\SquareLine Studio\\export",
     "projectExportFolderPath": "",
-    "backup_cnt": 26,
+    "backup_cnt": 28,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.11",
     "callfuncsexport": "C_FILE",

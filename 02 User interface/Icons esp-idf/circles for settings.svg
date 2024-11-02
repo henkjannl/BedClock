@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="8"
+   height="8"
+   viewBox="0 0 2.1166667 2.1166667"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="circles for settings.svg"
+   inkscape:export-filename="circle_open.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="4.4347937"
+     inkscape:cx="44.308713"
+     inkscape:cy="36.078341"
+     inkscape:window-width="1440"
+     inkscape:window-height="830"
+     inkscape:window-x="-6"
+     inkscape:window-y="-6"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-75.893395,-71.998323)">
+    <rect
+       style="fill:#ffffff;stroke:none;stroke-width:0.396872;-inkscape-stroke:none"
+       id="rect2"
+       width="2.1166668"
+       height="2.1166668"
+       x="75.893402"
+       y="71.998322" />
+    <circle
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.396875;stroke-dasharray:none"
+       id="path1"
+       cx="76.951729"
+       cy="73.056656"
+       r="0.85989583"
+       inkscape:export-filename="circle_open.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:#ffffff;stroke:none;stroke-width:0.396872;-inkscape-stroke:none"
+       id="rect3"
+       width="2.1166668"
+       height="2.1166668"
+       x="78.53923"
+       y="71.998322"
+       inkscape:export-filename="circle_closed.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:#000000;stroke:#000000;stroke-width:0.396875;stroke-dasharray:none"
+       id="circle3"
+       cx="79.597557"
+       cy="73.056656"
+       r="0.85989583"
+       inkscape:export-filename="circle_open.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:#ffffff;stroke:none;stroke-width:0.396875;stroke-dasharray:none"
+       id="rect4"
+       width="12.7"
+       height="4.2333336"
+       x="81.185059"
+       y="71.998322"
+       inkscape:export-filename=".\intensity.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:condensed;font-size:3.52778px;line-height:100%;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light Condensed';text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;fill:#000000;stroke:none;stroke-width:0.396875;stroke-dasharray:none"
+       x="81.505798"
+       y="74.994347"
+       id="text4"><tspan
+         sodipodi:role="line"
+         id="tspan4"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:condensed;font-size:3.52778px;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light Condensed';fill:#000000;stroke-width:0.396875"
+         x="81.505798"
+         y="74.994347">Intensity</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:condensed;font-size:3.52778px;line-height:100%;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light Condensed';text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;fill:#000000;stroke:none;stroke-width:0.396875;stroke-dasharray:none"
+       x="94.031784"
+       y="75.367279"
+       id="text5"><tspan
+         sodipodi:role="line"
+         id="tspan5"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:condensed;font-size:3.52778px;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light Condensed';fill:#000000;stroke-width:0.396875"
+         x="94.031784"
+         y="75.367279">XXXX</tspan></text>
+    <rect
+       style="fill:#ffffff;stroke:none;stroke-width:0.396875;stroke-dasharray:none"
+       id="rect5"
+       width="12.7"
+       height="4.2333336"
+       x="81.185059"
+       y="77.289986"
+       inkscape:export-filename=".\color.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:condensed;font-size:3.52778px;line-height:100%;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light Condensed';text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;fill:#000000;stroke:none;stroke-width:0.396875;stroke-dasharray:none"
+       x="81.505798"
+       y="80.286011"
+       id="text6"><tspan
+         sodipodi:role="line"
+         id="tspan6"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:condensed;font-size:3.52778px;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light Condensed';fill:#000000;stroke-width:0.396875"
+         x="81.505798"
+         y="80.286011">Color</tspan></text>
+    <rect
+       style="fill:#ffffff;stroke:none;stroke-width:0.396875;stroke-dasharray:none"
+       id="rect6"
+       width="12.7"
+       height="4.2333336"
+       x="81.185059"
+       y="82.58165"
+       inkscape:export-filename=".\timer.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:condensed;font-size:3.52778px;line-height:100%;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light Condensed';text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;fill:#000000;stroke:none;stroke-width:0.396875;stroke-dasharray:none"
+       x="81.505798"
+       y="85.577675"
+       id="text7"><tspan
+         sodipodi:role="line"
+         id="tspan7"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:condensed;font-size:3.52778px;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light Condensed';fill:#000000;stroke-width:0.396875"
+         x="81.505798"
+         y="85.577675">Timer</tspan></text>
+    <rect
+       style="fill:#ffffff;stroke:none;stroke-width:0.396875;stroke-dasharray:none"
+       id="rect7"
+       width="12.7"
+       height="4.2333336"
+       x="81.185059"
+       y="87.873314"
+       inkscape:export-filename=".\display.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:condensed;font-size:3.52778px;line-height:100%;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light Condensed';text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;fill:#000000;stroke:none;stroke-width:0.396875;stroke-dasharray:none"
+       x="81.505798"
+       y="90.869339"
+       id="text8"><tspan
+         sodipodi:role="line"
+         id="tspan8"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:condensed;font-size:3.52778px;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light Condensed';fill:#000000;stroke-width:0.396875"
+         x="81.505798"
+         y="90.869339">Display</tspan></text>
+  </g>
+</svg>
