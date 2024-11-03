@@ -9,17 +9,20 @@
 
 #include <stdio.h>
 
+#include "bl_common.h"
+
 QueueHandle_t keyboard_to_display_queue; // From keyboard to display
-
-typedef int16_t queue_command_t;
-
-const queue_command_t BTN_LEFT  = 1;
-const queue_command_t BTN_TOP   = 2;
-const queue_command_t BTN_RIGHT = 3;
+QueueHandle_t keyboard_to_light_queue;   // From keyboard to light
 
 SemaphoreHandle_t mutex_change_settings;
 
 void queues_init() {
     mutex_change_settings = xSemaphoreCreateMutex();
-    keyboard_to_display_queue = xQueueCreate(20, sizeof(queue_command_t));
+    keyboard_to_display_queue = xQueueCreate(20, sizeof(common_command_t));
+    keyboard_to_light_queue   = xQueueCreate(20, sizeof(common_command_t));
 }
+
+void queue_send_message(QueueHandle_t queue, common_command_t cmd) {
+    xQueueSend(queue, &cmd, pdMS_TO_TICKS(0));
+}
+

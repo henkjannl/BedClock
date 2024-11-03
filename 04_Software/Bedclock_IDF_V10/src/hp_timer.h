@@ -46,6 +46,16 @@ esp_err_t hp_timer_init_ms(hp_timer_t * timer, int64_t interval_ms, bool auto_re
     return ESP_OK;
 }
 
+esp_err_t hp_set_interval(hp_timer_t * timer, int64_t interval_ms) {
+    timer->interval = interval_ms;
+    return ESP_OK;
+}
+
+esp_err_t hp_set_interval_ms(hp_timer_t * timer, int64_t interval_ms) {
+    timer->interval = 1000*interval_ms;
+    return ESP_OK;
+}
+
 bool hp_timer_lapsed(hp_timer_t * timer) {
     // Return false if the timer has not reached the interval
     if(esp_timer_get_time() - timer->previous_call < timer->interval ) return false;

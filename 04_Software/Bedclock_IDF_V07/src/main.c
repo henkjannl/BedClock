@@ -19,6 +19,8 @@ Bedclock_IDF_V05 : Test time sync with timeserver
 Bedclock_IDF_V06 : Port timer object using esp_timer_get_time() / 1000;
 Bedclock_IDF_V07 : Test FreeRTOS
 Bedclock_IDF_V08 : Port current WS2812 functionality to ESP-IDF
+Bedclock_IDF_V09 : Internal Espressif SSD1306 driver including LVGL
+Bedclock_IDF_V10 : Create menu structure
 */
 
 void app_main()
@@ -36,6 +38,7 @@ void app_main()
     while(true) {
         if(hp_timer_lapsed(&timer_500_ms_autoreset)) printf("%" PRId64 " timer_500_ms_autoreset lapsed\n", esp_timer_get_time() );
         if(hp_timer_lapsed(&timer_1250_ms_no_reset)) printf("%" PRId64 "timer_1250_ms_no_reset lapsed\n", esp_timer_get_time() );
+        vTaskDelay(pdMS_TO_TICKS(100));
     }
 
 }

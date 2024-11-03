@@ -8,82 +8,103 @@
 #include <esp_log.h>
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <inttypes.h>
+#include "driver/touch_pad.h"
 
+#include "bl_common.h"
 #include "bl_queues.h"
 
-#define tag "keyboard"
+#define TOUCH_PAD_NO_CHANGE            -1
+#define TOUCH_THRESH_NO_USE             0
+#define TOUCHPAD_FILTER_TOUCH_PERIOD   10
+#define TOUCHPAD_THRESHOLD            671
 
-void task_keyboard(void*arg)
+#define TOUCH_LEFT  0   //  Left button is GPIO  4 = Touch0
+#define TOUCH_TOP   6   //   Top button is GPIO 14 = Touch6
+#define TOUCH_RIGHT 5   // Right button is GPIO 12 = Touch5
+
+#define kb_tag "keyboard"
+
+void task_keyboard(void *arg)
 {
-    uint32_t snd = 0;
+    uint16_t touch_value;
+    uint16_t count_btn_left = 0;
+    uint16_t count_btn_top = 0;
+    uint16_t count_btn_right = 0;
 
-    while(1)
-    {
-        queue_command_t btn=0;
+    // Filter makes the FreeRTOS task crash
+    // touch_pad_filter_start(TOUCHPAD_FILTER_TOUCH_PERIOD);
 
-        switch(snd++) {
-            case 0:
-                btn = BTN_LEFT; 
-                ESP_LOGI(tag, "0: Left button, select item 1 to display time");
-            break;
+    ESP_LOGI(kb_tag, "Keyboard task started...");
 
-            case 1:
-                btn = BTN_LEFT; 
-                ESP_LOGI(tag, "1: Left button, select item 2 to display intensity");
-            break;
+    while(true) {
+        // ESP_LOGI(kb_tag, "Keyboard Blip");
 
-            case 2:
-                btn = BTN_RIGHT; 
-                ESP_LOGI(tag, "2: Right button, increase intensity");
-            break;
+		// Read left button
+		touch_pad_read(TOUCH_LEFT, &touch_value);
+        if(touch_value<TOUCHPAD_THRESHOLD) 
+            count_btn_left++;
+        else
+            count_btn_left=0;
 
-            case 3:
-                btn = BTN_RIGHT; 
-                ESP_LOGI(tag, "3: Right button, increase intensity");
-            break;
-
-            case 4:
-                btn = BTN_RIGHT; 
-                ESP_LOGI(tag, "4: Right button, increase intensity");
-            break;
-
-            case 5:
-                btn = BTN_LEFT; 
-                ESP_LOGI(tag, "5: Left button, select item color");
-            break;
-
-            case 6:
-                btn = BTN_RIGHT; 
-                ESP_LOGI(tag, "6: Right button, increase color");
-            break;
-
-            case 7:
-                btn = BTN_RIGHT; 
-                ESP_LOGI(tag, "7: Right button, increase color");
-            break;
-
-            case 8:
-                btn = BTN_LEFT; 
-                ESP_LOGI(tag, "8: Left button, select item timer");
-            break;
-
-            case 9:
-                btn = BTN_RIGHT; 
-                ESP_LOGI(tag, "9: Right button, increase timer");
-            break;
-
-            case 10:
-                btn = BTN_RIGHT; 
-                ESP_LOGI(tag, "10: Right button, increase timer");
-            break;
+        if(count_btn_left==3) {
+            ESP_LOGI(kb_tag, "Left button filtered value %d", touch_value);
+            queue_send_message(keyboard_to_display_queue, CMD_BTN_LEFT_PRESSED);
         }
 
-        if(btn>0) xQueueSend(keyboard_to_display_queue, &btn, pdMS_TO_TICKS(0));
+		// Read top button
+		touch_pad_read(TOUCH_TOP, &touch_value);
+        if(touch_value<TOUCHPAD_THRESHOLD)
+            count_btn_top++;
+        else
+            count_btn_top=0;
 
-        vTaskDelay(pdMS_TO_TICKS(5000));
-    }
+        if(count_btn_top==3) {
+            ESP_LOGI(kb_tag, "Top button filtered value %d", touch_value);
+            queue_send_message(keyboard_to_light_queue, CMD_BTN_TOP_PRESSED);
+        }
+
+		// Read right button
+		touch_pad_read(TOUCH_RIGHT, &touch_value);
+        if(touch_value<TOUCHPAD_THRESHOLD)
+            count_btn_right++;
+        else
+            count_btn_right=0;
+
+        if(count_btn_right==3) {
+            ESP_LOGI(kb_tag, "Right button filtered value %d", touch_value);
+            queue_send_message(keyboard_to_display_queue, CMD_BTN_RIGHT_PRESSED);
+        }
+
+        vTaskDelay(pdMS_TO_TICKS(50));
+
+    } // while 1
 }
 
 void keyboard_init() {
-    xTaskCreatePinnedToCore(task_keyboard, "task_keyboard", 4096, NULL, 1, NULL, 0);
-}
+    ESP_ERROR_CHECK(touch_pad_init());
+
+    // Set reference voltage for charging/discharging
+    // In this case, the high reference valtage will be 2.7V - 1V = 1.7V
+    // The low reference voltage will be 0.5
+    // The larger the range, the larger the pulse count value.
+    touch_pad_set_voltage(TOUCH_HVOLT_2V7, TOUCH_LVOLT_0V5, TOUCH_HVOLT_ATTEN_1V);
+
+	touch_pad_config(TOUCH_LEFT,  TOUCH_THRESH_NO_USE);
+	touch_pad_config(TOUCH_TOP,   TOUCH_THRESH_NO_USE);
+	touch_pad_config(TOUCH_RIGHT, TOUCH_THRESH_NO_USE);
+
+    // touch_pad_filter_start(TOUCHPAD_FILTER_TOUCH_PERIOD);
+
+    ESP_LOGI(kb_tag, "Starting keyboard task...");
+    xTaskCreatePinnedToCore(task_keyboard,    // TaskFunction_t pxTaskCode,
+                            "task_keyboard",  // const char * const pcName,
+                            4096,           // const uint32_t ulStackDepth,
+                            // 16384,            // const uint32_t ulStackDepth,
+                            NULL,             // void * const pvParameters,
+                            2,                // UBaseType_t uxPriority,
+                            NULL,             // TaskHandle_t * const pxCreatedTask,
+                            0);               // const BaseType_t xCoreID );
+} 

@@ -18,9 +18,15 @@
 #define COMMON_MAX_SELECTED_ITEM 5
 
 // ### TYPE DEFINITIONS ###
+typedef enum {
+  CMD_NONE,
+  CMD_BTN_LEFT_PRESSED,
+  CMD_BTN_TOP_PRESSED,
+  CMD_BTN_RIGHT_PRESSED,
+  CMD_SETTINGS_CHANGED
+} common_command_t;
 
 typedef struct {
-    bool led_on;
     uint8_t led_intensity;
     uint8_t led_color;
     uint8_t led_timer;
@@ -30,14 +36,11 @@ typedef struct {
 
 // ### GLOBAL TYPES ##
 
-// To be protected by a semaphore
-
+// Must be protected by a semaphore
 common_settings_t common_settings = {
-    .led_on = true,
-    .led_intensity=COMMON_MAX_LED_INTENSITY,
-    .led_color = 1,
-    .led_timer = COMMON_MAX_LED_TIMER,
+    .led_intensity=0,
+    .led_color = 0,
+    .led_timer = 3,
     .display_intensity = COMMON_MAX_DISPLAY_INTENSITY,
     .selected_item = 1
 };
-

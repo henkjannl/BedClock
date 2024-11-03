@@ -2,7 +2,6 @@
 #include "freertos/task.h"
 #include "driver/rmt_tx.h"
 #include "esp_log.h"
-#include "led_strip_encoder.h"
 
 #include <string.h>
 #include "freertos/FreeRTOS.h"

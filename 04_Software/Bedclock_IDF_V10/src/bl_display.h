@@ -13,9 +13,10 @@
 #include "ssd1306.h"
 
 #include "bl_queues.h"
+#include "hp_timer.h"
 
 #define MAX_DISPLAY_ITEM 6
-#define tag "display"
+#define dp_tag "display"
 
 SSD1306_t display;
 
@@ -49,49 +50,59 @@ void display_refresh() {
     if(common_settings.selected_item==0) return;
 
     // Show time on line 1
-    ssd1306_display_text(&display, 1, "12:34", 5, false);
+
+    time_t now = 0;
+    struct tm timeinfo = { 0 };
+    time(&now);
+    localtime_r(&now, &timeinfo);
+    sprintf(buffer, "%02d:%02d", timeinfo.tm_hour, timeinfo.tm_min);
+    ssd1306_display_text(&display, 1, buffer, 5, false);
 
     switch(common_settings.selected_item) {
         case 2:
           // Show intensity setting
-          num_chars = sprintf(buffer, "Intensity %s%s%s%s", 
-            common_settings.led_intensity==0 ? "X" : "O",
-            common_settings.led_intensity==1 ? "X" : "O",
-            common_settings.led_intensity==2 ? "X" : "O",
-            common_settings.led_intensity==3 ? "X" : "O"
+          num_chars = sprintf(buffer, "Intensity %s%s%s%s%s",
+            common_settings.led_intensity==0 ? "O" : ".",
+            common_settings.led_intensity==1 ? "O" : ".",
+            common_settings.led_intensity==2 ? "O" : ".",
+            common_settings.led_intensity==3 ? "O" : ".",
+            common_settings.led_intensity==4 ? "O" : "."
           );
           ssd1306_display_text(&display, 3, buffer, num_chars, false);
         break;
 
         case 3:
           // Show color
-          num_chars = sprintf(buffer, "LED color %s%s%s%s", 
-            common_settings.led_color==0 ? "X" : "O",
-            common_settings.led_color==1 ? "X" : "O",
-            common_settings.led_color==2 ? "X" : "O",
-            common_settings.led_color==3 ? "X" : "O"
+          num_chars = sprintf(buffer, "LED color %s%s%s%s%s", 
+            common_settings.led_color==0 ? "O" : ".",
+            common_settings.led_color==1 ? "O" : ".",
+            common_settings.led_color==2 ? "O" : ".",
+            common_settings.led_color==3 ? "O" : ".",
+            common_settings.led_color==4 ? "O" : "."
           );
           ssd1306_display_text(&display, 3, buffer, num_chars, false);
         break;
 
         case 4:
           // Show timer
-          num_chars = sprintf(buffer, "Timer %s%s%s%s", 
-            common_settings.led_timer==0 ? "X" : "O",
-            common_settings.led_timer==1 ? "X" : "O",
-            common_settings.led_timer==2 ? "X" : "O",
-            common_settings.led_timer==3 ? "X" : "O"
+          num_chars = sprintf(buffer, "Timer %s%s%s%s%s", 
+            common_settings.led_timer==0 ? "O" : ".",
+            common_settings.led_timer==1 ? "O" : ".",
+            common_settings.led_timer==2 ? "O" : ".",
+            common_settings.led_timer==3 ? "O" : ".",
+            common_settings.led_timer==4 ? "O" : "."
           );
           ssd1306_display_text(&display, 3, buffer, num_chars, false);
         break;
 
         case 5:
           // Show display intensity
-          num_chars = sprintf(buffer, "Display %s%s%s%s", 
-            common_settings.display_intensity==0 ? "X" : "O",
-            common_settings.display_intensity==1 ? "X" : "O",
-            common_settings.display_intensity==2 ? "X" : "O",
-            common_settings.display_intensity==3 ? "X" : "O"
+          num_chars = sprintf(buffer, "Display %s%s%s%s%s", 
+            common_settings.display_intensity==0 ? "O" : ".",
+            common_settings.display_intensity==1 ? "O" : ".",
+            common_settings.display_intensity==2 ? "O" : ".",
+            common_settings.display_intensity==3 ? "O" : ".",
+            common_settings.display_intensity==4 ? "O" : "."
           );
           ssd1306_display_text(&display, 3, buffer, num_chars, false);
         break;
@@ -99,138 +110,180 @@ void display_refresh() {
 
     int64_t t2 = esp_timer_get_time();
 
-    sprintf (buffer, "t1=%" PRId64 " t2=%" PRId64 " dt=%" PRId64 ". ", t1, t2, t2-t1);
-    ESP_LOGI(tag, "%s", buffer);
+    // sprintf (buffer, "t1=%" PRId64 " t2=%" PRId64 " dt=%" PRId64 ". ", t1, t2, t2-t1);
+    // ESP_LOGI(dp_tag, "%s", buffer);
+    ESP_LOGI(dp_tag, "t1=%" PRId64 " t2=%" PRId64 " dt=%" PRId64 ". ", t1, t2, t2-t1);
 
 }
 
 void task_display(void *z)
 {
-    queue_command_t btn = 0;
+    common_command_t cmd = CMD_NONE;
+    hp_timer_t sleep_timer;
+    hp_timer_init_ms(&sleep_timer, 20000, false);
+    bool refresh_display = true;
 
-    while(1)
-    {
-        if (xQueueReceive(keyboard_to_display_queue, &btn, pdMS_TO_TICKS(100)) == true) 
-        {
-
-            switch(btn) {
-                case BTN_LEFT:
-                    ESP_LOGI(tag, "item received BTN_LEFT"); 
+    while(true) {
+        if (xQueueReceive(keyboard_to_display_queue, &cmd, pdMS_TO_TICKS(100)) == true) {
+            switch(cmd) {
+                case CMD_BTN_LEFT_PRESSED:
+                    ESP_LOGI(dp_tag, "item received BTN_LEFT"); 
+                    hp_timer_reset(&sleep_timer);
                     if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
                         common_settings.selected_item++;
                         if(common_settings.selected_item>COMMON_MAX_SELECTED_ITEM) 
                             common_settings.selected_item=1;
                         xSemaphoreGive(mutex_change_settings);
                     }
+                    refresh_display = true;
                 break;
 
-                case BTN_TOP:
-                    ESP_LOGI(tag, "item received BTN_TOP"); 
-                    if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
-                        common_settings.led_on = !common_settings.led_on;
-                        xSemaphoreGive(mutex_change_settings);
-                    }
-                break;
-
-                case BTN_RIGHT:
-                    ESP_LOGI(tag, "item received BTN_RIGHT"); 
+                case CMD_BTN_RIGHT_PRESSED:
+                    ESP_LOGI(dp_tag, "item received BTN_RIGHT"); 
+                    hp_timer_reset(&sleep_timer);
     
                     switch(common_settings.selected_item) {
     
                         case 2: // Modify LED intensity
-                            ESP_LOGI(tag, "Increase LED intensity"); 
+                            ESP_LOGI(dp_tag, "Increase LED intensity"); 
                             if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
                                 common_settings.led_intensity++;
                                 if(common_settings.led_intensity>COMMON_MAX_LED_INTENSITY)
                                     common_settings.led_intensity=0;
                                 xSemaphoreGive(mutex_change_settings);
                             }
+
+                            // Report to the light that settings were changed
+                            queue_send_message(keyboard_to_light_queue, CMD_SETTINGS_CHANGED);
+
+                            refresh_display = true;
                         break;
 
                         case 3: // Modify LED color 
-                            ESP_LOGI(tag, "Increase LED color"); 
+                            ESP_LOGI(dp_tag, "Increase LED color"); 
                             if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
                                 common_settings.led_color++;
                                 if(common_settings.led_color>COMMON_MAX_LED_COLOR)
                                     common_settings.led_color=0;
                                 xSemaphoreGive(mutex_change_settings);
                             }
+                            // Report to the light that settings were changed
+                            queue_send_message(keyboard_to_light_queue, CMD_SETTINGS_CHANGED);
+
+                            refresh_display = true;
                         break;
 
                         case 4: // Modify LED timer 
-                            ESP_LOGI(tag, "Increase LED timer"); 
+                            ESP_LOGI(dp_tag, "Increase LED timer"); 
                             if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
                                 common_settings.led_timer++;
                                 if(common_settings.led_timer>COMMON_MAX_LED_TIMER)
                                     common_settings.led_timer=0;
                                 xSemaphoreGive(mutex_change_settings);
                             }
+
+                            // Report to the light that settings were changed
+                            queue_send_message(keyboard_to_light_queue, CMD_SETTINGS_CHANGED);
+
+                            refresh_display = true;
                         break;
 
                         case 5: // Modify display intensity 
-                            ESP_LOGI(tag, "Increase display intensity"); 
+                            ESP_LOGI(dp_tag, "Increase display intensity"); 
                             if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
                                 common_settings.display_intensity++;
                                 if(common_settings.display_intensity>COMMON_MAX_DISPLAY_INTENSITY)
                                     common_settings.display_intensity=0;
                                 xSemaphoreGive(mutex_change_settings);
                             }
+
+                            // Report to the light that settings were changed
+                            queue_send_message(keyboard_to_light_queue, CMD_SETTINGS_CHANGED);
+
+                            refresh_display = true;
                         break;
 
                         default:
-                            ESP_LOGI(tag, "Item %d cannot be changed ", common_settings.selected_item); 
-                    }
+                            ESP_LOGI(dp_tag, "Item %d cannot be changed ", common_settings.selected_item); 
+                    } // case CMD_BTN_RIGHT_PRESSED -> switch(common_settings.selected_item) {
                 break;
 
                 default:
-                    ESP_LOGI(tag, "Received unknown button"); 
+                    ESP_LOGI(dp_tag, "Received unknown button"); 
+            } // switch(cmd) {
+        } // if (xQueueReceive(keyboard_to_display_queue
+
+        if(hp_timer_lapsed(&sleep_timer)) {
+            ESP_LOGI(dp_tag, "Display back to sleep"); 
+            if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
+                common_settings.selected_item=0;
+                xSemaphoreGive(mutex_change_settings);                
             }
+            refresh_display = true;
+        } // if(hp_timer_lapsed(&sleep_timer))
 
+        //Refresh display if minute has changed
+        if(common_settings.selected_item>0) {
+            time_t now = 0;
+            struct tm timeinfo = { 0 };
+            time(&now);
+            localtime_r(&now, &timeinfo);
+            static int prev_min = -1;
+            if( prev_min != timeinfo.tm_hour ) {
+                ESP_LOGI(dp_tag, "Update clock due to minute change"); 
+                prev_min = timeinfo.tm_hour;
+                refresh_display=true;
+            }
+        }
+
+        if(refresh_display) {
             display_refresh();
-        } 
+            refresh_display = false;
+        } // if(refresh_display) {
 
-        vTaskDelay(50 / portTICK_PERIOD_MS);
-    }
-}
+        vTaskDelay(pdMS_TO_TICKS(50));
+    } // while true
+} // void task_display(void *z)
 
 void display_init() {
 
 #if CONFIG_I2C_INTERFACE
-	ESP_LOGI(tag, "INTERFACE is i2c");
-	ESP_LOGI(tag, "CONFIG_SDA_GPIO=%d",CONFIG_SDA_GPIO);
-	ESP_LOGI(tag, "CONFIG_SCL_GPIO=%d",CONFIG_SCL_GPIO);
-	ESP_LOGI(tag, "CONFIG_RESET_GPIO=%d",CONFIG_RESET_GPIO);
+	ESP_LOGI(dp_tag, "INTERFACE is i2c");
+	ESP_LOGI(dp_tag, "CONFIG_SDA_GPIO=%d",CONFIG_SDA_GPIO);
+	ESP_LOGI(dp_tag, "CONFIG_SCL_GPIO=%d",CONFIG_SCL_GPIO);
+	ESP_LOGI(dp_tag, "CONFIG_RESET_GPIO=%d",CONFIG_RESET_GPIO);
 	i2c_master_init(&display, CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO);
 #endif // CONFIG_I2C_INTERFACE
 
 #if CONFIG_SPI_INTERFACE
-	ESP_LOGI(tag, "INTERFACE is SPI");
-	ESP_LOGI(tag, "CONFIG_MOSI_GPIO=%d",CONFIG_MOSI_GPIO);
-	ESP_LOGI(tag, "CONFIG_SCLK_GPIO=%d",CONFIG_SCLK_GPIO);
-	ESP_LOGI(tag, "CONFIG_CS_GPIO=%d",CONFIG_CS_GPIO);
-	ESP_LOGI(tag, "CONFIG_DC_GPIO=%d",CONFIG_DC_GPIO);
-	ESP_LOGI(tag, "CONFIG_RESET_GPIO=%d",CONFIG_RESET_GPIO);
+	ESP_LOGI(dp_tag, "INTERFACE is SPI");
+	ESP_LOGI(dp_tag, "CONFIG_MOSI_GPIO=%d",CONFIG_MOSI_GPIO);
+	ESP_LOGI(dp_tag, "CONFIG_SCLK_GPIO=%d",CONFIG_SCLK_GPIO);
+	ESP_LOGI(dp_tag, "CONFIG_CS_GPIO=%d",CONFIG_CS_GPIO);
+	ESP_LOGI(dp_tag, "CONFIG_DC_GPIO=%d",CONFIG_DC_GPIO);
+	ESP_LOGI(dp_tag, "CONFIG_RESET_GPIO=%d",CONFIG_RESET_GPIO);
 	spi_master_init(&display, CONFIG_MOSI_GPIO, CONFIG_SCLK_GPIO, CONFIG_CS_GPIO, CONFIG_DC_GPIO, CONFIG_RESET_GPIO);
 #endif // CONFIG_SPI_INTERFACE
 
 #if CONFIG_FLIP
 	display._flip = true;
-	ESP_LOGW(tag, "Flip upside down");
+	ESP_LOGW(dp_tag, "Flip upside down");
 #endif
 
-#if CONFIG_SSD1306_128x64
-	ESP_LOGI(tag, "Panel is 128x64");
-	ssd1306_init(&display, 128, 64);
-#endif // CONFIG_SSD1306_128x64
-
 #if CONFIG_SSD1306_128x32
-	ESP_LOGI(tag, "Panel is 128x32");
+	ESP_LOGI(dp_tag, "Panel is 128x32");
 	ssd1306_init(&display, 128, 32);
 #endif // CONFIG_SSD1306_128x32
+
+#if CONFIG_SSD1306_128x64
+	ESP_LOGI(dp_tag, "Panel is 128x64");
+	ssd1306_init(&display, 128, 64);
+#endif // CONFIG_SSD1306_128x64
 
 	ssd1306_clear_screen(&display, false);
 
 	ssd1306_contrast(&display, 0xff);
+    display_refresh();
 
     xTaskCreatePinnedToCore(task_display, "task_display", 4096, NULL, 1, NULL, 0);
 }
