@@ -51,7 +51,7 @@ void task_keyboard(void *arg)
 
         if(count_btn_left==3) {
             ESP_LOGI(kb_tag, "Left button filtered value %d", touch_value);
-            queue_send_message(keyboard_to_display_queue, CMD_BTN_LEFT_PRESSED);
+            queue_send_message(display_queue, CMD_BTN_LEFT_PRESSED);
         }
 
 		// Read top button
@@ -63,7 +63,7 @@ void task_keyboard(void *arg)
 
         if(count_btn_top==3) {
             ESP_LOGI(kb_tag, "Top button filtered value %d", touch_value);
-            queue_send_message(keyboard_to_light_queue, CMD_BTN_TOP_PRESSED);
+            queue_send_message(light_queue, CMD_BTN_TOP_PRESSED);
         }
 
 		// Read right button
@@ -75,7 +75,7 @@ void task_keyboard(void *arg)
 
         if(count_btn_right==3) {
             ESP_LOGI(kb_tag, "Right button filtered value %d", touch_value);
-            queue_send_message(keyboard_to_display_queue, CMD_BTN_RIGHT_PRESSED);
+            queue_send_message(display_queue, CMD_BTN_RIGHT_PRESSED);
         }
 
         vTaskDelay(pdMS_TO_TICKS(50));

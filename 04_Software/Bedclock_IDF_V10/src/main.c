@@ -7,7 +7,7 @@
 
 #include "bl_common.h"
 #include "bl_queues.h"
-#include "sync_clock.h"
+#include "bl_time.h"
 #include "bl_keyboard.h"
 #include "bl_display.h"
 #include "bl_light.h"
@@ -21,19 +21,19 @@ Bedclock_IDF_V04 : Test WiFi
 Bedclock_IDF_V05 : Test time sync with timeserver
 Bedclock_IDF_V06 : Port timer object using esp_timer_get_time() / 1000;
 Bedclock_IDF_V07 : Test FreeRTOS
-Bedclock_IDF_V08 : Port current WS2812 functionality to ESP-IDF
+Bedclock_IDF_V08 : Implement multiple parallel processes
 Bedclock_IDF_V09 : Internal Espressif SSD1306 driver including LVGL
 Bedclock_IDF_V10 : First working version
+Bedclock_IDF_V11 : Try using ESP-IDF driver for SSD1306
 
 To do:
-Implement LED color
-Implement gradual LED change
 Implement display intensity
 Init display first, with splash screen
 Display with graphics instead of text
 Animate graphics on display
 Store data in NVS
 Make capacitive touch interrupt controlled
+Only display clock when time is synched
 */
 
 #define mn_tag "main"

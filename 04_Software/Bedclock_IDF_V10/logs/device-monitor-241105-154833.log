@@ -1,0 +1,763 @@
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7176
+load:0x40078000,len:15564
+ho 0 tail 12 room 4
+load:0x40080400,len:4
+load:0x40080404,len:3904
+entry 0x40080638
+[0;32mI (30) boot: ESP-IDF 5.3.1 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Nov  5 2024 15:36:01[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (34) boot: chip revision: v1.0[0m
+[0;32mI (38) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (43) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (47) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (52) boot: Enabling RNG early entropy source...[0m
+[0;32mI (57) boot: Partition Table:[0m
+[0;32mI (61) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (68) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (75) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (83) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (90) boot: End of partition table[0m
+[0;32mI (95) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=23944h (145732) map[0m
+[0;32mI (153) esp_image: segment 1: paddr=0003396c vaddr=3ffb0000 size=04680h ( 18048) load[0m
+[0;32mI (160) esp_image: segment 2: paddr=00037ff4 vaddr=40080000 size=08024h ( 32804) load[0m
+[0;32mI (173) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=8e970h (584048) map[0m
+[0;32mI (373) esp_image: segment 4: paddr=000ce998 vaddr=40088024 size=115fch ( 71164) load[0m
+[0;32mI (414) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (414) boot: Disabling RNG early entropy source...[0m
+[0;32mI (426) cpu_start: Multicore app[0m
+[0;32mI (435) cpu_start: Pro cpu start user code[0m
+[0;32mI (435) cpu_start: cpu freq: 240000000 Hz[0m
+[0;32mI (435) app_init: Application information:[0m
+[0;32mI (438) app_init: Project name:     Bedclock_IDF_V10[0m
+[0;32mI (443) app_init: App version:      1[0m
+[0;32mI (448) app_init: Compile time:     Nov  5 2024 15:35:35[0m
+[0;32mI (454) app_init: ELF file SHA256:  3693aeef1...[0m
+[0;32mI (459) app_init: ESP-IDF:          5.3.1[0m
+[0;32mI (464) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (469) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (473) efuse_init: Chip rev:         v1.0[0m
+[0;32mI (479) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (486) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (492) heap_init: At 3FFB92B0 len 00026D50 (155 KiB): DRAM[0m
+[0;32mI (498) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (504) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (511) heap_init: At 40099620 len 000069E0 (26 KiB): IRAM[0m
+[0;32mI (518) spi_flash: detected chip: generic[0m
+[0;32mI (521) spi_flash: flash io: dio[0m
+[0;33mW (526) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (536) main_task: Started on CPU0[0m
+[0;32mI (546) main_task: Calling app_main()[0m
+[0;32mI (566) wifi station: ESP_WIFI_MODE_STA[0m
+I (586) wifi:wifi driver task: 3ffc12c0, prio:23, stack:6656, core=0
+I (596) wifi:wifi firmware version: ccaebfa
+I (596) wifi:wifi certification version: v7.0
+I (596) wifi:config NVS flash: enabled
+I (596) wifi:config nano formating: disabled
+I (596) wifi:Init data frame dynamic rx buffer num: 32
+I (606) wifi:Init static rx mgmt buffer num: 5
+I (606) wifi:Init management short buffer num: 32
+I (616) wifi:Init dynamic tx buffer num: 32
+I (616) wifi:Init static rx buffer size: 1600
+I (616) wifi:Init static rx buffer num: 10
+I (626) wifi:Init dynamic rx buffer num: 32
+[0;32mI (626) wifi_init: rx ba win: 6[0m
+[0;32mI (636) wifi_init: accept mbox: 6[0m
+[0;32mI (636) wifi_init: tcpip mbox: 32[0m
+[0;32mI (636) wifi_init: udp mbox: 6[0m
+[0;32mI (646) wifi_init: tcp mbox: 6[0m
+[0;32mI (646) wifi_init: tcp tx win: 5760[0m
+[0;32mI (656) wifi_init: tcp rx win: 5760[0m
+[0;32mI (656) wifi_init: tcp mss: 1440[0m
+[0;32mI (656) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (666) wifi_init: WiFi RX IRAM OP enabled[0m
+W (666) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2
+[0;32mI (676) phy_init: phy_version 4830,54550f7,Jun 20 2024,14:22:08[0m
+�ets Jun  8 2016 00:22:57
+
+rst:0x3 (SW_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7176
+load:0x40078000,len:15564
+ho 0 tail 12 room 4
+load:0x40080400,len:4
+load:0x40080404,len:3904
+entry 0x40080638
+[0;32mI (179) boot: ESP-IDF 5.3.1 2nd stage bootloader[0m
+[0;32mI (179) boot: compile time Nov  5 2024 15:36:01[0m
+[0;32mI (179) boot: Multicore bootloader[0m
+[0;32mI (184) boot: chip revision: v1.0[0m
+[0;32mI (188) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (193) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (198) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (202) boot: Enabling RNG early entropy source...[0m
+[0;32mI (208) boot: Partition Table:[0m
+[0;32mI (211) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (219) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (226) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (234) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (242) boot: End of partition table[0m
+[0;32mI (246) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=23944h (145732) map[0m
+[0;32mI (304) esp_image: segment 1: paddr=0003396c vaddr=3ffb0000 size=04680h ( 18048) load[0m
+[0;32mI (311) esp_image: segment 2: paddr=00037ff4 vaddr=40080000 size=08024h ( 32804) load[0m
+[0;32mI (324) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=8e970h (584048) map[0m
+[0;32mI (525) esp_image: segment 4: paddr=000ce998 vaddr=40088024 size=115fch ( 71164) load[0m
+[0;32mI (566) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (566) boot: Disabling RNG early entropy source...[0m
+[0;32mI (578) cpu_start: Multicore app[0m
+[0;32mI (586) cpu_start: Pro cpu start user code[0m
+[0;32mI (586) cpu_start: cpu freq: 240000000 Hz[0m
+[0;32mI (586) app_init: Application information:[0m
+[0;32mI (589) app_init: Project name:     Bedclock_IDF_V10[0m
+[0;32mI (595) app_init: App version:      1[0m
+[0;32mI (599) app_init: Compile time:     Nov  5 2024 15:35:35[0m
+[0;32mI (605) app_init: ELF file SHA256:  3693aeef1...[0m
+[0;32mI (610) app_init: ESP-IDF:          5.3.1[0m
+[0;32mI (615) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (620) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (625) efuse_init: Chip rev:         v1.0[0m
+[0;32mI (630) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (637) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (643) heap_init: At 3FFB92B0 len 00026D50 (155 KiB): DRAM[0m
+[0;32mI (649) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (655) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (662) heap_init: At 40099620 len 000069E0 (26 KiB): IRAM[0m
+[0;32mI (669) spi_flash: detected chip: generic[0m
+[0;32mI (673) spi_flash: flash io: dio[0m
+[0;33mW (677) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (688) main_task: Started on CPU0[0m
+[0;32mI (698) main_task: Calling app_main()[0m
+[0;32mI (718) wifi station: ESP_WIFI_MODE_STA[0m
+I (738) wifi:wifi driver task: 3ffc12c0, prio:23, stack:6656, core=0
+I (748) wifi:wifi firmware version: ccaebfa
+I (748) wifi:wifi certification version: v7.0
+I (748) wifi:config NVS flash: enabled
+I (748) wifi:config nano formating: disabled
+I (748) wifi:Init data frame dynamic rx buffer num: 32
+I (758) wifi:Init static rx mgmt buffer num: 5
+I (758) wifi:Init management short buffer num: 32
+I (768) wifi:Init dynamic tx buffer num: 32
+I (768) wifi:Init static rx buffer size: 1600
+I (768) wifi:Init static rx buffer num: 10
+I (778) wifi:Init dynamic rx buffer num: 32
+[0;32mI (778) wifi_init: rx ba win: 6[0m
+[0;32mI (788) wifi_init: accept mbox: 6[0m
+[0;32mI (788) wifi_init: tcpip mbox: 32[0m
+[0;32mI (788) wifi_init: udp mbox: 6[0m
+[0;32mI (798) wifi_init: tcp mbox: 6[0m
+[0;32mI (798) wifi_init: tcp tx win: 5760[0m
+[0;32mI (808) wifi_init: tcp rx win: 5760[0m
+[0;32mI (808) wifi_init: tcp mss: 1440[0m
+[0;32mI (808) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (818) wifi_init: WiFi RX IRAM OP enabled[0m
+W (818) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2
+[0;32mI (828) phy_init: phy_version 4830,54550f7,Jun 20 2024,14:22:08[0m
+I (908) wifi:mode : sta (8c:aa:b5:8c:5a:cc)
+I (908) wifi:enable tsf
+[0;32mI (908) wifi station: wifi_init_sta finished.[0m
+I (918) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:9, snd_ch_cfg:0x0
+I (918) wifi:state: init -> auth (0xb0)
+I (938) wifi:state: auth -> assoc (0x0)
+I (948) wifi:state: assoc -> run (0x10)
+I (978) wifi:connected with Starbux, aid = 1, channel 1, BW20, bssid = 2c:3a:fd:bf:5d:7c
+I (978) wifi:security: WPA2-PSK, phy: bgn, rssi: -72
+I (978) wifi:pm start, type: 1
+
+I (978) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (998) wifi:<ba-add>idx:0 (ifx:0, 2c:3a:fd:bf:5d:7c), tid:0, ssn:0, winSize:64
+I (1008) wifi:AP's beacon interval = 102400 us, DTIM period = 1
+[0;32mI (1988) esp_netif_handlers: sta ip: 192.168.178.160, mask: 255.255.255.0, gw: 192.168.178.1[0m
+[0;32mI (1988) wifi station: got ip:192.168.178.160[0m
+[0;32mI (1988) wifi station: connected to ap SSID:Starbux password:RodePleinMoskou2019[0m
+[0;32mI (1998) wifi station: Initializing SNTP[0m
+[0;31mE (1998) esp_netif_sntp: sntp_init_api(61): Tried to configure SNTP server from DHCP, while disabled. Please enable CONFIG_LWIP_DHCP_GET_NTP_SRV[0m
+[0;31mE (2018) esp_netif_sntp: esp_netif_sntp_init(119): Failed initialize SNTP service[0m
+[0;32mI (2028) wifi station: Starting SNTP[0m
+Local time in Amsterdam: 01:00:02
+[0;32mI (2028) display: INTERFACE is i2c[0m
+[0;32mI (2038) display: CONFIG_SDA_GPIO=21[0m
+[0;32mI (2038) display: CONFIG_SCL_GPIO=22[0m
+[0;32mI (2048) display: CONFIG_RESET_GPIO=-1[0m
+[0;32mI (2048) SSD1306: Legacy i2c driver is used[0m
+[0;32mI (2048) SSD1306: HenkJan: .master.clk_speed = 400000[0m
+[0;33mW (2058) display: Flip upside down[0m
+I (2058) wifi:<ba-add>idx:1 (ifx:0, 2c:3a:fd:bf:5d:7c), tid:1, ssn:0, winSize:64
+[0;32mI (2068) display: Panel is 128x32[0m
+[0;31mE (2078) SSD1306: OLED configuration failed. code: 0x107[0m
+[0;31mE (2078) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2088) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2088) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2098) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2108) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2108) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2118) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2118) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2128) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2138) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2138) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2148) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2148) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2158) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2168) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2168) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2178) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2178) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2188) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2198) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2198) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2208) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2208) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2218) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2228) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2228) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2238) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2238) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2248) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2258) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2258) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2268) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2268) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2278) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2278) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2288) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2298) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2298) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2308) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2308) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2318) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2328) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2328) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2338) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2338) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2348) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2358) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2358) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2368) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2378) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2378) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2388) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2388) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2398) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2398) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2408) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2418) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2418) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2428) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2428) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2438) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2448) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2448) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2458) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2458) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2468) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2478) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2478) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2488) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2488) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2498) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2508) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2508) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2518) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2518) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2528) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2538) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2538) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2548) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2548) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2558) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2568) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2568) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2578) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2578) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2588) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2598) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2598) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2608) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2608) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2618) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2628) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2628) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2638) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2638) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2648) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2658) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2658) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2668) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2668) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2678) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2688) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2688) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2698) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2698) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2708) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2718) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2718) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2728) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2728) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2738) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2748) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2748) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2758) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2758) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2768) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2778) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2778) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2788) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2788) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2798) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2808) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2808) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2818) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2818) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2828) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2838) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2848) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2848) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2858) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2858) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2868) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (2878) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (2878) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (2878) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (2888) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (2888) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (2908) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (3908) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (3908) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (4908) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (5008) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (5208) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (5208) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (5208) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (6218) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (7218) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (7218) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (7218) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (7228) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (7238) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (7238) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (7248) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (7248) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (7458) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (8458) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (8688) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (9688) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (9688) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (9688) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (9688) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (9698) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (9708) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (9718) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (9718) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (9718) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (9728) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (9738) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (9738) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (9738) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (9748) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (9748) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (10758) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (11758) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (11758) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (11768) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (12768) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (12768) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (12768) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (12768) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;32mI (12778) display: t1=2171303 t2=12115811 dt=9944508. [0m
+[0;32mI (12788) keyboard: Starting keyboard task...[0m
+[0;32mI (12788) keyboard: Keyboard task started...[0m
+[0;32mI (12808) light: Starting light task...[0m
+[0;32mI (12808) light: Light task started...[0m
+[0;32mI (12808) light: Create RMT TX channel[0m
+[0;32mI (12808) gpio: GPIO[23]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (12818) light: Install led strip encoder[0m
+[0;32mI (12818) light: Enable RMT TX channel[0m
+[0;32mI (12828) light: Start LED rainbow chase[0m
+[0;32mI (12828) main: Main blip[0m
+[0;32mI (12888) display: Update clock due to minute change[0m
+[0;32mI (13578) keyboard: Top button filtered value 154[0m
+[0;31mE (13588) SSD1306: Image command failed. code: 0x107[0m
+[0;32mI (13628) light: Light manually switched off[0m
+[0;31mE (13628) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (13628) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (13628) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13658) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (13668) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (13668) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (13678) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (13678) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (13678) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (13688) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (13688) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13708) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (13718) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (13718) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (13718) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (13728) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (13738) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (13738) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (13738) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (13748) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13768) SSD1306: Image command failed. code: 0x107[0m
+[0;31mE (13768) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13768) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13768) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13778) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13788) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13788) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13798) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13798) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13808) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13828) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13828) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13828) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;32mI (13838) main: Main blip[0m
+[0;31mE (13838) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13848) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13848) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13858) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13858) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13868) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13888) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13888) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13888) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13898) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13898) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13908) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13918) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13918) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13928) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13928) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13948) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13948) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13948) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13958) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13968) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13968) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13978) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13978) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (13988) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (14008) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (14008) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (14008) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (14018) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (14018) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (14028) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (14038) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (14038) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (14048) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (14048) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (14068) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (14068) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (14068) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (14078) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (14088) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;31mE (14088) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;32mI (14098) display: t1=12221635 t2=13432430 dt=1210795. [0m
+[0;32mI (14848) main: Main blip[0m
+[0;32mI (15848) main: Main blip[0m
+[0;32mI (16848) main: Main blip[0m
+[0;32mI (17848) main: Main blip[0m
+[0;32mI (18848) main: Main blip[0m
+[0;32mI (19848) main: Main blip[0m
+[0;32mI (20848) main: Main blip[0m
+[0;32mI (21848) main: Main blip[0m
+[0;32mI (22848) main: Main blip[0m
+[0;32mI (23848) main: Main blip[0m
+[0;32mI (24848) main: Main blip[0m
+[0;32mI (24978) keyboard: Top button filtered value 62[0m
+[0;32mI (24988) light: Light manually switched on[0m
+[0;32mI (25848) main: Main blip[0m
+[0;32mI (26848) main: Main blip[0m
+[0;32mI (27848) main: Main blip[0m
+[0;32mI (28458) keyboard: Left button filtered value 117[0m
+[0;32mI (28468) display: item received BTN_LEFT[0m
+[0;32mI (28528) display: t1=27802134 t2=27864230 dt=62096. [0m
+[0;32mI (28848) main: Main blip[0m
+[0;32mI (29668) keyboard: Right button filtered value 100[0m
+[0;32mI (29668) display: item received BTN_RIGHT[0m
+[0;32mI (29668) display: Increase LED intensity[0m
+[0;32mI (29728) display: t1=29005688 t2=29068007 dt=62319. [0m
+[0;32mI (29848) main: Main blip[0m
+[0;32mI (30848) main: Main blip[0m
+[0;32mI (31848) main: Main blip[0m
+[0;32mI (32418) keyboard: Left button filtered value 101[0m
+[0;32mI (32428) display: item received BTN_LEFT[0m
+[0;32mI (32488) display: t1=31761952 t2=31824906 dt=62954. [0m
+[0;32mI (32848) main: Main blip[0m
+[0;32mI (33198) keyboard: Left button filtered value 91[0m
+[0;32mI (33208) display: item received BTN_LEFT[0m
+[0;32mI (33268) display: t1=32542098 t2=32603776 dt=61678. [0m
+[0;32mI (33848) main: Main blip[0m
+[0;32mI (34278) keyboard: Left button filtered value 89[0m
+[0;32mI (34288) display: item received BTN_LEFT[0m
+[0;32mI (34348) display: t1=33622131 t2=33682925 dt=60794. [0m
+[0;32mI (34848) main: Main blip[0m
+[0;32mI (35848) main: Main blip[0m
+[0;32mI (36848) main: Main blip[0m
+[0;32mI (37848) main: Main blip[0m
+[0;32mI (38118) keyboard: Left button filtered value 35[0m
+[0;32mI (38158) display: item received BTN_LEFT[0m
+[0;32mI (38208) display: t1=37489899 t2=37545914 dt=56015. [0m
+[0;32mI (38848) main: Main blip[0m
+[0;32mI (39848) main: Main blip[0m
+[0;32mI (40848) main: Main blip[0m
+[0;32mI (41848) main: Main blip[0m
+[0;32mI (42848) main: Main blip[0m
+[0;32mI (42918) keyboard: Left button filtered value 187[0m
+[0;32mI (42928) display: item received BTN_LEFT[0m
+[0;32mI (42988) display: t1=42261969 t2=42326405 dt=64436. [0m
+[0;32mI (43848) main: Main blip[0m
+[0;32mI (44008) keyboard: Right button filtered value 279[0m
+[0;32mI (44008) display: item received BTN_RIGHT[0m
+[0;32mI (44008) display: Increase LED intensity[0m
+[0;32mI (44068) display: t1=43345749 t2=43408235 dt=62486. [0m
+[0;32mI (44728) keyboard: Right button filtered value 225[0m
+[0;32mI (44728) display: item received BTN_RIGHT[0m
+[0;32mI (44728) display: Increase LED intensity[0m
+[0;32mI (44788) display: t1=44066125 t2=44128753 dt=62628. [0m
+[0;32mI (44848) main: Main blip[0m
+[0;32mI (45678) keyboard: Top button filtered value 183[0m
+[0;32mI (45728) light: Light manually switched off[0m
+[0;32mI (45848) main: Main blip[0m
+[0;32mI (46848) main: Main blip[0m
+[0;32mI (47598) keyboard: Top button filtered value 106[0m
+[0;32mI (47618) light: Light manually switched on[0m
+[0;32mI (47848) main: Main blip[0m
+[0;32mI (48738) keyboard: Top button filtered value 104[0m
+[0;32mI (48798) light: Light manually switched off[0m
+[0;32mI (48848) main: Main blip[0m
+[0;32mI (49848) main: Main blip[0m
+[0;32mI (50848) main: Main blip[0m
+[0;32mI (51848) main: Main blip[0m
+[0;32mI (51978) keyboard: Left button filtered value 357[0m
+[0;32mI (51988) display: item received BTN_LEFT[0m
+[0;32mI (52048) display: t1=51322147 t2=51383637 dt=61490. [0m
+[0;32mI (52848) main: Main blip[0m
+[0;32mI (53308) keyboard: Right button filtered value 465[0m
+[0;32mI (53308) display: item received BTN_RIGHT[0m
+[0;32mI (53308) display: Increase LED color[0m
+[0;32mI (53368) display: t1=52646462 t2=52707878 dt=61416. [0m
+[0;32mI (53848) main: Main blip[0m
+[0;32mI (54028) keyboard: Right button filtered value 286[0m
+[0;32mI (54028) display: item received BTN_RIGHT[0m
+[0;32mI (54028) display: Increase LED color[0m
+[0;32mI (54088) display: t1=53365427 t2=53428217 dt=62790. [0m
+[0;32mI (54848) main: Main blip[0m
+[0;32mI (55848) main: Main blip[0m
+[0;32mI (55998) keyboard: Top button filtered value 418[0m
+[0;32mI (56008) light: Light manually switched on[0m
+[0;32mI (56848) main: Main blip[0m
+[0;32mI (57078) keyboard: Top button filtered value 244[0m
+[0;32mI (57088) light: Light manually switched off[0m
+[0;32mI (57848) main: Main blip[0m
+[0;32mI (58848) main: Main blip[0m
+[0;32mI (59848) main: Main blip[0m
+[0;32mI (60848) main: Main blip[0m
+[0;32mI (61848) main: Main blip[0m
+[0;32mI (62848) main: Main blip[0m
+[0;32mI (63848) main: Main blip[0m
+[0;32mI (64848) main: Main blip[0m
+[0;32mI (65848) main: Main blip[0m
+[0;32mI (66848) main: Main blip[0m
+[0;32mI (67848) main: Main blip[0m
+[0;32mI (68848) main: Main blip[0m
+[0;32mI (69848) main: Main blip[0m
+[0;32mI (70848) main: Main blip[0m
+[0;32mI (71848) main: Main blip[0m
+[0;32mI (72848) main: Main blip[0m
+[0;32mI (73848) main: Main blip[0m
+[0;32mI (74048) display: Display back to sleep[0m
+[0;32mI (74848) main: Main blip[0m
+[0;32mI (75848) main: Main blip[0m
+[0;32mI (76848) main: Main blip[0m
+[0;32mI (77848) main: Main blip[0m
+[0;32mI (78848) main: Main blip[0m
+[0;32mI (79848) main: Main blip[0m
+[0;32mI (80848) main: Main blip[0m
+[0;32mI (81848) main: Main blip[0m
+[0;32mI (82848) main: Main blip[0m
+[0;32mI (83848) main: Main blip[0m
+[0;32mI (84848) main: Main blip[0m
+[0;32mI (85848) main: Main blip[0m
+[0;32mI (86848) main: Main blip[0m
+[0;32mI (87848) main: Main blip[0m
+[0;32mI (88848) main: Main blip[0m
+[0;32mI (89848) main: Main blip[0m
+[0;32mI (90848) main: Main blip[0m
+[0;32mI (91848) main: Main blip[0m
+[0;32mI (92848) main: Main blip[0m
+[0;32mI (93848) main: Main blip[0m
+[0;32mI (94848) main: Main blip[0m
+[0;32mI (95848) main: Main blip[0m
+[0;32mI (96848) main: Main blip[0m
+[0;32mI (97848) main: Main blip[0m
+[0;32mI (98848) main: Main blip[0m
+[0;32mI (99848) main: Main blip[0m
+[0;32mI (100848) main: Main blip[0m
+[0;32mI (101848) main: Main blip[0m
+[0;32mI (102848) main: Main blip[0m
+[0;32mI (103848) main: Main blip[0m
+[0;32mI (104848) main: Main blip[0m
+[0;32mI (105848) main: Main blip[0m
+[0;32mI (106848) main: Main blip[0m
+[0;32mI (107848) main: Main blip[0m
+[0;32mI (108848) main: Main blip[0m
+[0;32mI (109848) main: Main blip[0m
+[0;32mI (110848) main: Main blip[0m
+[0;32mI (111848) main: Main blip[0m
+[0;32mI (112848) main: Main blip[0m
+[0;32mI (113848) main: Main blip[0m
+[0;32mI (114848) main: Main blip[0m
+[0;32mI (115848) main: Main blip[0m
+[0;32mI (116848) main: Main blip[0m
+[0;32mI (117848) main: Main blip[0m
+[0;32mI (118848) main: Main blip[0m
+[0;32mI (119848) main: Main blip[0m
+[0;32mI (120848) main: Main blip[0m
+[0;32mI (121848) main: Main blip[0m
+[0;32mI (122848) main: Main blip[0m
+[0;32mI (123848) main: Main blip[0m
+[0;32mI (124848) main: Main blip[0m
+[0;32mI (125848) main: Main blip[0m
+[0;32mI (126848) main: Main blip[0m
+[0;32mI (127848) main: Main blip[0m
+[0;32mI (128848) main: Main blip[0m
+[0;32mI (129848) main: Main blip[0m
+[0;32mI (130848) main: Main blip[0m
+[0;32mI (131848) main: Main blip[0m
+[0;32mI (132848) main: Main blip[0m
+[0;32mI (133848) main: Main blip[0m
+[0;32mI (134848) main: Main blip[0m
+[0;32mI (135848) main: Main blip[0m
+[0;32mI (136848) main: Main blip[0m
+[0;32mI (137848) main: Main blip[0m
+[0;32mI (138848) main: Main blip[0m
+[0;32mI (139848) main: Main blip[0m
+[0;32mI (140848) main: Main blip[0m
+[0;32mI (141848) main: Main blip[0m
+[0;32mI (142848) main: Main blip[0m
+[0;32mI (143848) main: Main blip[0m
+[0;32mI (144848) main: Main blip[0m
+[0;32mI (145848) main: Main blip[0m
+[0;32mI (146848) main: Main blip[0m
+[0;32mI (147848) main: Main blip[0m
+[0;32mI (148848) main: Main blip[0m
+[0;32mI (149848) main: Main blip[0m
+[0;32mI (150848) main: Main blip[0m
+[0;32mI (151848) main: Main blip[0m
+[0;32mI (152848) main: Main blip[0m
+[0;32mI (153848) main: Main blip[0m
+[0;32mI (154848) main: Main blip[0m
+[0;32mI (155848) main: Main blip[0m
+[0;32mI (156848) main: Main blip[0m
+[0;32mI (157848) main: Main blip[0m
+[0;32mI (158848) main: Main blip[0m
+[0;32mI (159848) main: Main blip[0m
+[0;32mI (160848) main: Main blip[0m
+[0;32mI (161848) main: Main blip[0m
+[0;32mI (162848) main: Main blip[0m
+[0;32mI (163848) main: Main blip[0m
+[0;32mI (164848) main: Main blip[0m
+[0;32mI (165848) main: Main blip[0m
+[0;32mI (166848) main: Main blip[0m
+[0;32mI (167848) main: Main blip[0m
+[0;32mI (168848) main: Main blip[0m
+[0;32mI (169848) main: Main blip[0m
+[0;32mI (170848) main: Main blip[0m
+[0;32mI (171848) main: Main blip[0m
+[0;32mI (172848) main: Main blip[0m
+[0;32mI (173848) main: Main blip[0m
+[0;32mI (174848) main: Main blip[0m
+[0;32mI (175848) main: Main blip[0m
+[0;32mI (176848) main: Main blip[0m
+[0;32mI (177848) main: Main blip[0m
+[0;32mI (178848) main: Main blip[0m
+[0;32mI (179848) main: Main blip[0m
+[0;32mI (180848) main: Main blip[0m
+[0;32mI (181848) main: Main blip[0m
+[0;32mI (182848) main: Main blip[0m
+[0;32mI (183848) main: Main blip[0m
+[0;32mI (184848) main: Main blip[0m
+[0;32mI (185848) main: Main blip[0m
+[0;32mI (186848) main: Main blip[0m
+[0;32mI (187848) main: Main blip[0m
+[0;32mI (188848) main: Main blip[0m
+[0;32mI (189848) main: Main blip[0m
+[0;32mI (190848) main: Main blip[0m
+[0;32mI (191848) main: Main blip[0m
+[0;32mI (192848) main: Main blip[0m
+[0;32mI (193848) main: Main blip[0m
+[0;32mI (194848) main: Main blip[0m
+[0;32mI (195848) main: Main blip[0m
+[0;32mI (196848) main: Main blip[0m
+[0;32mI (197848) main: Main blip[0m
+[0;32mI (198848) main: Main blip[0m
+[0;32mI (199848) main: Main blip[0m
+[0;32mI (200848) main: Main blip[0m
+[0;32mI (201848) main: Main blip[0m
+[0;32mI (202848) main: Main blip[0m
+[0;32mI (203848) main: Main blip[0m
+[0;32mI (204848) main: Main blip[0m
+[0;32mI (205848) main: Main blip[0m
+[0;32mI (206848) main: Main blip[0m
+[0;32mI (207848) main: Main blip[0m
+[0;32mI (208848) main: Main blip[0m
+[0;32mI (209848) main: Main blip[0m
+[0;32mI (210848) main: Main blip[0m
+[0;32mI (211848) main: Main blip[0m
+[0;32mI (212848) main: Main blip[0m
+[0;32mI (213848) main: Main blip[0m
+[0;32mI (214848) main: Main blip[0m
+[0;32mI (215848) main: Main blip[0m
+[0;32mI (216848) main: Main blip[0m
+[0;32mI (217848) main: Main blip[0m
+[0;32mI (218848) main: Main blip[0m
+[0;32mI (219848) main: Main blip[0m
+[0;32mI (220848) main: Main blip[0m
+[0;32mI (221848) main: Main blip[0m
+[0;32mI (222848) main: Main blip[0m
+[0;32mI (223848) main: Main blip[0m
+[0;32mI (224848) main: Main blip[0m
+[0;32mI (225848) main: Main blip[0m
+[0;32mI (226848) main: Main blip[0m
+[0;32mI (227848) main: Main blip[0m
+[0;32mI (228848) main: Main blip[0m
+[0;32mI (229848) main: Main blip[0m
+[0;32mI (230848) main: Main blip[0m
+[0;32mI (231848) main: Main blip[0m
+[0;32mI (232848) main: Main blip[0m
+[0;32mI (233848) main: Main blip[0m
+[0;32mI (234848) main: Main blip[0m
+[0;32mI (235848) main: Main blip[0m
+[0;32mI (236848) main: Main blip[0m
+[0;32mI (237848) main: Main blip[0m
+[0;32mI (238848) main: Main blip[0m
+[0;32mI (239848) main: Main blip[0m
+[0;32mI (240848) main: Main blip[0m
+[0;32mI (241848) main: Main blip[0m
+[0;32mI (242848) main: Main blip[0m
+[0;32mI (243848) main: Main blip[0m
+[0;32mI (244848) main: Main blip[0m
+[0;32mI (245848) main: Main blip[0m
+[0;32mI (246848) main: Main blip[0m
+[0;32mI (247848) main: Main blip[0m
+[0;32mI (248848) main: Main blip[0m
+[0;32mI (249848) main: Main blip[0m
+[0;32mI (250848) main: Main blip[0m
+[0;32mI (251848) main: Main blip[0m
+[0;32mI (252848) main: Main blip[0m
+[0;32mI (253848) main: Main blip[0m
+[0;32mI (254848) main: Main blip[0m
+[0;32mI (255848) main: Main blip[0m
+[0;32mI (256848) main: Main blip[0m
+[0;32mI (257848) main: Main blip[0m

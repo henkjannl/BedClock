@@ -1,0 +1,99 @@
+[0;32mI (6208) main: Main blip[0m
+[0;32mI (7208) main: Main blip[0m
+[0;32mI (8208) main: Main blip[0m
+[0;32mI (9208) main: Main blip[0m
+[0;32mI (10208) main: Main blip[0m
+[0;32mI (11208) main: Main blip[0m
+[0;32mI (11338) keyboard: Top button filtered value 0[0m
+[0;32mI (11398) light: Light manually switched off[0m
+[0;32mI (12208) main: Main blip[0m
+[0;32mI (13208) main: Main blip[0m
+[0;32mI (14208) main: Main blip[0m
+[0;32mI (15208) main: Main blip[0m
+[0;32mI (15718) keyboard: Left button filtered value 173[0m
+[0;32mI (15728) display: item received BTN_LEFT[0m
+[0;32mI (15788) display: t1=15062167 t2=15128800 dt=66633. [0m
+[0;32mI (16208) main: Main blip[0m
+[0;32mI (17208) main: Main blip[0m
+[0;32mI (17348) keyboard: Right button filtered value 77[0m
+[0;32mI (17348) display: item received BTN_RIGHT[0m
+[0;32mI (17348) display: Increase LED intensity[0m
+[0;32mI (17418) display: t1=16685417 t2=16749995 dt=64578. [0m
+[0;32mI (18208) main: Main blip[0m
+[0;32mI (18308) keyboard: Right button filtered value 180[0m
+[0;32mI (18308) display: item received BTN_RIGHT[0m
+[0;32mI (18308) display: Increase LED intensity[0m
+[0;32mI (18368) display: t1=17645746 t2=17707809 dt=62063. [0m
+[0;32mI (19028) keyboard: Right button filtered value 106[0m
+[0;32mI (19028) display: item received BTN_RIGHT[0m
+[0;32mI (19028) display: Increase LED intensity[0m
+[0;32mI (19088) display: t1=18366229 t2=18429007 dt=62778. [0m
+[0;32mI (19208) main: Main blip[0m
+[0;32mI (19508) keyboard: Right button filtered value 69[0m
+[0;32mI (19508) display: item received BTN_RIGHT[0m
+[0;32mI (19508) display: Increase LED intensity[0m
+[0;32mI (19578) display: t1=18845532 t2=18910056 dt=64524. [0m
+[0;32mI (20108) keyboard: Right button filtered value 65[0m
+[0;32mI (20108) display: item received BTN_RIGHT[0m
+[0;32mI (20108) display: Increase LED intensity[0m
+[0;32mI (20178) display: t1=19445586 t2=19510426 dt=64840. [0m
+[0;32mI (20208) main: Main blip[0m
+[0;32mI (20828) keyboard: Right button filtered value 40[0m
+[0;32mI (20828) display: item received BTN_RIGHT[0m
+[0;32mI (20828) display: Increase LED intensity[0m
+[0;32mI (20898) display: t1=20165488 t2=20230372 dt=64884. [0m
+[0;32mI (21208) main: Main blip[0m
+[0;32mI (21248) keyboard: Right button filtered value 27[0m
+[0;32mI (21248) display: item received BTN_RIGHT[0m
+[0;32mI (21248) display: Increase LED intensity[0m
+[0;32mI (21318) display: t1=20585224 t2=20650026 dt=64802. [0m
+[0;32mI (22208) main: Main blip[0m
+[0;32mI (22808) keyboard: Right button filtered value 48[0m
+[0;32mI (22808) display: item received BTN_RIGHT[0m
+[0;32mI (22808) display: Increase LED intensity[0m
+[0;32mI (22868) display: t1=22145643 t2=22207849 dt=62206. [0m
+[0;32mI (23208) main: Main blip[0m
+[0;32mI (24208) main: Main blip[0m
+[0;32mI (25208) main: Main blip[0m
+[0;32mI (26208) main: Main blip[0m
+[0;32mI (27208) main: Main blip[0m
+[0;32mI (28208) main: Main blip[0m
+[0;32mI (29208) main: Main blip[0m
+[0;32mI (30208) main: Main blip[0m
+[0;32mI (31208) main: Main blip[0m
+[0;32mI (32208) main: Main blip[0m
+[0;32mI (33208) main: Main blip[0m
+[0;32mI (34208) main: Main blip[0m
+[0;32mI (35208) main: Main blip[0m
+[0;32mI (36208) main: Main blip[0m
+[0;32mI (37208) main: Main blip[0m
+[0;32mI (38208) main: Main blip[0m
+[0;32mI (39208) main: Main blip[0m
+[0;32mI (40208) main: Main blip[0m
+[0;32mI (41208) main: Main blip[0m
+[0;32mI (42208) main: Main blip[0m
+[0;32mI (42828) display: Display back to sleep[0m
+[0;32mI (43208) main: Main blip[0m
+[0;32mI (44208) main: Main blip[0m
+[0;32mI (45208) main: Main blip[0m
+[0;32mI (46208) main: Main blip[0m
+[0;32mI (47208) main: Main blip[0m
+[0;32mI (48208) main: Main blip[0m
+[0;32mI (49208) main: Main blip[0m
+[0;32mI (50208) main: Main blip[0m
+[0;32mI (51208) main: Main blip[0m
+[0;32mI (52208) main: Main blip[0m
+[0;32mI (53208) main: Main blip[0m
+[0;32mI (54208) main: Main blip[0m
+[0;32mI (55208) main: Main blip[0m
+[0;32mI (56208) main: Main blip[0m
+[0;32mI (57208) main: Main blip[0m
+[0;32mI (58208) main: Main blip[0m
+[0;32mI (59208) main: Main blip[0m
+[0;32mI (60208) main: Main blip[0m
+[0;32mI (61208) main: Main blip[0m
+[0;32mI (62208) main: Main blip[0m
+[0;32mI (63208) main: Main blip[0m
+[0;32mI (64208) main: Main blip[0m
+[0;32mI (65208) main: Main blip[0m
+[0;32mI (66208) main: Main blip[0m

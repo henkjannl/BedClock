@@ -1,0 +1,1420 @@
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7176
+load:0x40078000,len:15564
+ho 0 tail 12 room 4
+load:0x40080400,len:4
+load:0x40080404,len:3904
+entry 0x40080638
+[0;32mI (30) boot: ESP-IDF 5.3.1 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Nov  5 2024 15:36:01[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (34) boot: chip revision: v1.0[0m
+[0;32mI (38) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (43) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (47) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (52) boot: Enabling RNG early entropy source...[0m
+[0;32mI (57) boot: Partition Table:[0m
+[0;32mI (61) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (68) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (75) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (83) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (90) boot: End of partition table[0m
+[0;32mI (95) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=23974h (145780) map[0m
+[0;32mI (153) esp_image: segment 1: paddr=0003399c vaddr=3ffb0000 size=04680h ( 18048) load[0m
+[0;32mI (160) esp_image: segment 2: paddr=00038024 vaddr=40080000 size=07ff4h ( 32756) load[0m
+[0;32mI (173) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=8e9e8h (584168) map[0m
+[0;32mI (373) esp_image: segment 4: paddr=000cea10 vaddr=40087ff4 size=1162ch ( 71212) load[0m
+[0;32mI (414) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (414) boot: Disabling RNG early entropy source...[0m
+[0;32mI (426) cpu_start: Multicore app[0m
+[0;32mI (435) cpu_start: Pro cpu start user code[0m
+[0;32mI (435) cpu_start: cpu freq: 240000000 Hz[0m
+[0;32mI (435) app_init: Application information:[0m
+[0;32mI (438) app_init: Project name:     Bedclock_IDF_V10[0m
+[0;32mI (443) app_init: App version:      1[0m
+[0;32mI (448) app_init: Compile time:     Nov  5 2024 15:35:35[0m
+[0;32mI (454) app_init: ELF file SHA256:  ad3f8175d...[0m
+[0;32mI (459) app_init: ESP-IDF:          5.3.1[0m
+[0;32mI (464) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (469) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (474) efuse_init: Chip rev:         v1.0[0m
+[0;32mI (479) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (486) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (492) heap_init: At 3FFB92B0 len 00026D50 (155 KiB): DRAM[0m
+[0;32mI (498) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (504) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (511) heap_init: At 40099620 len 000069E0 (26 KiB): IRAM[0m
+[0;32mI (518) spi_flash: detected chip: generic[0m
+[0;32mI (521) spi_flash: flash io: dio[0m
+[0;33mW (526) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (537) main_task: Started on CPU0[0m
+[0;32mI (547) main_task: Calling app_main()[0m
+[0;32mI (567) wifi station: ESP_WIFI_MODE_STA[0m
+I (587) wifi:wifi driver task: 3ffc12c0, prio:23, stack:6656, core=0
+I (597) wifi:wifi firmware version: ccaebfa
+I (597) wifi:wifi certification version: v7.0
+I (597) wifi:config NVS flash: enabled
+I (597) wifi:config nano formating: disabled
+I (597) wifi:Init data frame dynamic rx buffer num: 32
+I (607) wifi:Init static rx mgmt buffer num: 5
+I (607) wifi:Init management short buffer num: 32
+I (617) wifi:Init dynamic tx buffer num: 32
+I (617) wifi:Init static rx buffer size: 1600
+I (617) wifi:Init static rx buffer num: 10
+I (627) wifi:Init dynamic rx buffer num: 32
+[0;32mI (627) wifi_init: rx ba win: 6[0m
+[0;32mI (637) wifi_init: accept mbox: 6[0m
+[0;32mI (637) wifi_init: tcpip mbox: 32[0m
+[0;32mI (637) wifi_init: udp mbox: 6[0m
+[0;32mI (647) wifi_init: tcp mbox: 6[0m
+[0;32mI (647) wifi_init: tcp tx win: 5760[0m
+[0;32mI (657) wifi_init: tcp rx win: 5760[0m
+[0;32mI (657) wifi_init: tcp mss: 1440[0m
+[0;32mI (657) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (667) wifi_init: WiFi RX IRAM OP enabled[0m
+W (667) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2
+[0;32mI (677) phy_init: phy_version 4830,54550f7,Jun 20 2024,14:22:08[0m
+�ets Jun  8 2016 00:22:57
+
+rst:0x3 (SW_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7176
+load:0x40078000,len:15564
+ho 0 tail 12 room 4
+load:0x40080400,len:4
+load:0x40080404,len:3904
+entry 0x40080638
+[0;32mI (179) boot: ESP-IDF 5.3.1 2nd stage bootloader[0m
+[0;32mI (179) boot: compile time Nov  5 2024 15:36:01[0m
+[0;32mI (179) boot: Multicore bootloader[0m
+[0;32mI (184) boot: chip revision: v1.0[0m
+[0;32mI (188) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (193) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (198) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (202) boot: Enabling RNG early entropy source...[0m
+[0;32mI (208) boot: Partition Table:[0m
+[0;32mI (211) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (219) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (226) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (234) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (242) boot: End of partition table[0m
+[0;32mI (246) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=23974h (145780) map[0m
+[0;32mI (304) esp_image: segment 1: paddr=0003399c vaddr=3ffb0000 size=04680h ( 18048) load[0m
+[0;32mI (311) esp_image: segment 2: paddr=00038024 vaddr=40080000 size=07ff4h ( 32756) load[0m
+[0;32mI (324) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=8e9e8h (584168) map[0m
+[0;32mI (525) esp_image: segment 4: paddr=000cea10 vaddr=40087ff4 size=1162ch ( 71212) load[0m
+[0;32mI (566) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (566) boot: Disabling RNG early entropy source...[0m
+[0;32mI (578) cpu_start: Multicore app[0m
+[0;32mI (586) cpu_start: Pro cpu start user code[0m
+[0;32mI (586) cpu_start: cpu freq: 240000000 Hz[0m
+[0;32mI (586) app_init: Application information:[0m
+[0;32mI (589) app_init: Project name:     Bedclock_IDF_V10[0m
+[0;32mI (595) app_init: App version:      1[0m
+[0;32mI (599) app_init: Compile time:     Nov  5 2024 15:35:35[0m
+[0;32mI (605) app_init: ELF file SHA256:  ad3f8175d...[0m
+[0;32mI (610) app_init: ESP-IDF:          5.3.1[0m
+[0;32mI (615) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (620) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (625) efuse_init: Chip rev:         v1.0[0m
+[0;32mI (630) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (637) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (643) heap_init: At 3FFB92B0 len 00026D50 (155 KiB): DRAM[0m
+[0;32mI (649) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (655) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (662) heap_init: At 40099620 len 000069E0 (26 KiB): IRAM[0m
+[0;32mI (670) spi_flash: detected chip: generic[0m
+[0;32mI (673) spi_flash: flash io: dio[0m
+[0;33mW (677) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (688) main_task: Started on CPU0[0m
+[0;32mI (698) main_task: Calling app_main()[0m
+[0;32mI (718) wifi station: ESP_WIFI_MODE_STA[0m
+I (738) wifi:wifi driver task: 3ffc12c0, prio:23, stack:6656, core=0
+I (748) wifi:wifi firmware version: ccaebfa
+I (748) wifi:wifi certification version: v7.0
+I (748) wifi:config NVS flash: enabled
+I (748) wifi:config nano formating: disabled
+I (748) wifi:Init data frame dynamic rx buffer num: 32
+I (758) wifi:Init static rx mgmt buffer num: 5
+I (758) wifi:Init management short buffer num: 32
+I (768) wifi:Init dynamic tx buffer num: 32
+I (768) wifi:Init static rx buffer size: 1600
+I (768) wifi:Init static rx buffer num: 10
+I (778) wifi:Init dynamic rx buffer num: 32
+[0;32mI (778) wifi_init: rx ba win: 6[0m
+[0;32mI (788) wifi_init: accept mbox: 6[0m
+[0;32mI (788) wifi_init: tcpip mbox: 32[0m
+[0;32mI (788) wifi_init: udp mbox: 6[0m
+[0;32mI (798) wifi_init: tcp mbox: 6[0m
+[0;32mI (798) wifi_init: tcp tx win: 5760[0m
+[0;32mI (808) wifi_init: tcp rx win: 5760[0m
+[0;32mI (808) wifi_init: tcp mss: 1440[0m
+[0;32mI (808) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (818) wifi_init: WiFi RX IRAM OP enabled[0m
+W (818) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2
+[0;32mI (828) phy_init: phy_version 4830,54550f7,Jun 20 2024,14:22:08[0m
+I (908) wifi:mode : sta (8c:aa:b5:8c:5a:cc)
+I (908) wifi:enable tsf
+[0;32mI (908) wifi station: wifi_init_sta finished.[0m
+I (918) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:9, snd_ch_cfg:0x0
+I (918) wifi:state: init -> auth (0xb0)
+I (938) wifi:state: auth -> assoc (0x0)
+I (958) wifi:state: assoc -> run (0x10)
+I (978) wifi:connected with Starbux, aid = 1, channel 1, BW20, bssid = 2c:3a:fd:bf:5d:7c
+I (978) wifi:security: WPA2-PSK, phy: bgn, rssi: -68
+I (988) wifi:pm start, type: 1
+
+I (988) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (1008) wifi:<ba-add>idx:0 (ifx:0, 2c:3a:fd:bf:5d:7c), tid:0, ssn:0, winSize:64
+I (1018) wifi:AP's beacon interval = 102400 us, DTIM period = 1
+[0;32mI (1998) esp_netif_handlers: sta ip: 192.168.178.160, mask: 255.255.255.0, gw: 192.168.178.1[0m
+[0;32mI (1998) wifi station: got ip:192.168.178.160[0m
+[0;32mI (1998) wifi station: connected to ap SSID:Starbux password:RodePleinMoskou2019[0m
+[0;32mI (2008) wifi station: Initializing SNTP[0m
+[0;31mE (2008) esp_netif_sntp: sntp_init_api(61): Tried to configure SNTP server from DHCP, while disabled. Please enable CONFIG_LWIP_DHCP_GET_NTP_SRV[0m
+[0;31mE (2028) esp_netif_sntp: esp_netif_sntp_init(119): Failed initialize SNTP service[0m
+[0;32mI (2038) wifi station: Starting SNTP[0m
+Local time in Amsterdam: 01:00:02
+[0;32mI (2038) display: INTERFACE is i2c[0m
+[0;32mI (2048) display: CONFIG_SDA_GPIO=21[0m
+[0;32mI (2048) display: CONFIG_SCL_GPIO=22[0m
+[0;32mI (2058) display: CONFIG_RESET_GPIO=-1[0m
+[0;32mI (2058) SSD1306: Legacy i2c driver is used[0m
+[0;32mI (2058) SSD1306: HenkJan: .master.clk_speed = 400000[0m
+[0;33mW (2068) display: Flip upside down[0m
+[0;32mI (2068) display: Panel is 128x32[0m
+[0;32mI (2078) SSD1306: OLED configured successfully[0m
+[0;32mI (2168) display: t1=1456283 t2=1501925 dt=45642. [0m
+[0;32mI (2168) keyboard: Starting keyboard task...[0m
+[0;32mI (2168) keyboard: Keyboard task started...[0m
+[0;32mI (2178) light: Starting light task...[0m
+[0;32mI (2178) light: Light task started...[0m
+[0;32mI (2178) light: Create RMT TX channel[0m
+[0;32mI (2188) gpio: GPIO[23]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (2198) light: Install led strip encoder[0m
+[0;32mI (2198) light: Enable RMT TX channel[0m
+[0;32mI (2208) light: Start LED rainbow chase[0m
+[0;32mI (2208) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (2208) main: Main blip[0m
+[0;32mI (2278) display: Update clock due to minute change[0m
+[0;32mI (2328) display: t1=1610353 t2=1663689 dt=53336. [0m
+[0;32mI (2458) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (2708) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (2958) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (3208) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (3218) main: Main blip[0m
+[0;32mI (3458) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (3708) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (3958) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (4208) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (4218) main: Main blip[0m
+[0;32mI (4458) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (4708) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (4958) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (5048) keyboard: Left button filtered value 229[0m
+[0;32mI (5088) display: item received BTN_LEFT[0m
+[0;32mI (5148) display: t1=4419872 t2=4482423 dt=62551. [0m
+[0;32mI (5208) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (5218) main: Main blip[0m
+[0;32mI (5458) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (5708) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (5958) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (6208) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (6218) main: Main blip[0m
+[0;32mI (6458) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (6498) keyboard: Right button filtered value 449[0m
+[0;32mI (6498) display: item received BTN_RIGHT[0m
+[0;32mI (6498) display: Increase LED intensity[0m
+[0;32mI (6568) display: t1=5835252 t2=5899709 dt=64457. [0m
+[0;32mI (7098) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (7218) main: Main blip[0m
+[0;32mI (7348) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (7598) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (7848) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (8098) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (8218) main: Main blip[0m
+[0;32mI (8348) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (8598) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (8848) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (9098) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (9218) main: Main blip[0m
+[0;32mI (9318) keyboard: Right button filtered value 441[0m
+[0;32mI (9318) display: item received BTN_RIGHT[0m
+[0;32mI (9318) display: Increase LED intensity[0m
+[0;32mI (9378) display: t1=8655507 t2=8718430 dt=62923. [0m
+[0;32mI (9738) light: R: 6.320 G: 6.320 B: 6.320[0m
+[0;32mI (9988) light: R: 6.320 G: 6.320 B: 6.320[0m
+[0;32mI (10218) main: Main blip[0m
+[0;32mI (10238) light: R: 6.320 G: 6.320 B: 6.320[0m
+[0;32mI (10488) light: R: 6.320 G: 6.320 B: 6.320[0m
+[0;32mI (10738) light: R: 6.320 G: 6.320 B: 6.320[0m
+[0;32mI (10988) light: R: 6.320 G: 6.320 B: 6.320[0m
+[0;32mI (11218) main: Main blip[0m
+[0;32mI (11238) light: R: 6.320 G: 6.320 B: 6.320[0m
+[0;32mI (11488) light: R: 6.320 G: 6.320 B: 6.320[0m
+[0;32mI (11738) light: R: 6.320 G: 6.320 B: 6.320[0m
+[0;32mI (11988) light: R: 6.320 G: 6.320 B: 6.320[0m
+[0;32mI (12218) main: Main blip[0m
+[0;32mI (12238) light: R: 6.320 G: 6.320 B: 6.320[0m
+[0;32mI (12438) keyboard: Right button filtered value 105[0m
+[0;32mI (12438) display: item received BTN_RIGHT[0m
+[0;32mI (12438) display: Increase LED intensity[0m
+[0;32mI (12508) display: t1=11775613 t2=11841078 dt=65465. [0m
+[0;32mI (12868) light: R: 15.920 G: 15.920 B: 15.920[0m
+[0;32mI (13118) light: R: 15.920 G: 15.920 B: 15.920[0m
+[0;32mI (13218) main: Main blip[0m
+[0;32mI (13368) light: R: 15.920 G: 15.920 B: 15.920[0m
+[0;32mI (13518) keyboard: Right button filtered value 256[0m
+[0;32mI (13518) display: item received BTN_RIGHT[0m
+[0;32mI (13518) display: Increase LED intensity[0m
+[0;32mI (13578) display: t1=12855804 t2=12917801 dt=61997. [0m
+[0;32mI (14008) light: R: 40.000 G: 40.000 B: 40.000[0m
+[0;32mI (14218) main: Main blip[0m
+[0;32mI (14258) light: R: 40.000 G: 40.000 B: 40.000[0m
+[0;32mI (14508) light: R: 40.000 G: 40.000 B: 40.000[0m
+[0;32mI (14658) keyboard: Right button filtered value 209[0m
+[0;32mI (14688) display: item received BTN_RIGHT[0m
+[0;32mI (14688) display: Increase LED intensity[0m
+[0;32mI (14748) display: t1=14019926 t2=14084348 dt=64422. [0m
+[0;32mI (15148) light: R: 1.000 G: 1.000 B: 1.000[0m
+[0;32mI (15218) main: Main blip[0m
+[0;32mI (15398) light: R: 1.000 G: 1.000 B: 1.000[0m
+[0;32mI (15648) light: R: 1.000 G: 1.000 B: 1.000[0m
+[0;32mI (15898) light: R: 1.000 G: 1.000 B: 1.000[0m
+[0;32mI (16148) light: R: 1.000 G: 1.000 B: 1.000[0m
+[0;32mI (16218) keyboard: Right button filtered value 372[0m
+[0;32mI (16218) display: item received BTN_RIGHT[0m
+[0;32mI (16218) display: Increase LED intensity[0m
+[0;32mI (16218) main: Main blip[0m
+[0;32mI (16288) display: t1=15555820 t2=15623301 dt=67481. [0m
+[0;32mI (16778) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (17028) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (17218) main: Main blip[0m
+[0;32mI (17278) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (17528) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (17778) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (18028) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (18218) main: Main blip[0m
+[0;32mI (18278) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (18368) keyboard: Left button filtered value 316[0m
+[0;32mI (18378) display: item received BTN_LEFT[0m
+[0;32mI (18438) display: t1=17712036 t2=17776164 dt=64128. [0m
+[0;32mI (18528) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (18778) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (19028) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (19218) main: Main blip[0m
+[0;32mI (19278) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (19528) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (19778) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (19818) keyboard: Right button filtered value 386[0m
+[0;32mI (19848) display: item received BTN_RIGHT[0m
+[0;32mI (19848) display: Increase LED color[0m
+[0;32mI (19908) display: t1=19180101 t2=19243344 dt=63243. [0m
+[0;32mI (20218) main: Main blip[0m
+[0;32mI (20418) light: R: 2.971 G: 2.901 B: 1.688[0m
+[0;32mI (20668) light: R: 2.971 G: 2.901 B: 1.688[0m
+[0;32mI (20918) light: R: 2.971 G: 2.901 B: 1.688[0m
+[0;32mI (21168) light: R: 2.971 G: 2.901 B: 1.688[0m
+[0;32mI (21218) main: Main blip[0m
+[0;32mI (21418) light: R: 2.971 G: 2.901 B: 1.688[0m
+[0;32mI (21668) light: R: 2.971 G: 2.901 B: 1.688[0m
+[0;32mI (21918) light: R: 2.971 G: 2.901 B: 1.688[0m
+[0;32mI (22168) light: R: 2.971 G: 2.901 B: 1.688[0m
+[0;32mI (22218) keyboard: Right button filtered value 195[0m
+[0;32mI (22218) main: Main blip[0m
+[0;32mI (22218) display: item received BTN_RIGHT[0m
+[0;32mI (22218) display: Increase LED color[0m
+[0;32mI (22288) display: t1=21558779 t2=21620235 dt=61456. [0m
+[0;32mI (22798) light: R: 3.228 G: 2.495 B: 1.837[0m
+[0;32mI (23048) light: R: 3.228 G: 2.495 B: 1.837[0m
+[0;32mI (23218) main: Main blip[0m
+[0;32mI (23298) light: R: 3.228 G: 2.495 B: 1.837[0m
+[0;32mI (23548) light: R: 3.228 G: 2.495 B: 1.837[0m
+[0;32mI (23798) light: R: 3.228 G: 2.495 B: 1.837[0m
+[0;32mI (24048) light: R: 3.228 G: 2.495 B: 1.837[0m
+[0;32mI (24078) keyboard: Right button filtered value 154[0m
+[0;32mI (24078) display: item received BTN_RIGHT[0m
+[0;32mI (24078) display: Increase LED color[0m
+[0;32mI (24138) display: t1=23415370 t2=23478228 dt=62858. [0m
+[0;32mI (24218) main: Main blip[0m
+[0;32mI (24688) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (24938) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (25188) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (25218) main: Main blip[0m
+[0;32mI (25438) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (25688) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (25938) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (26188) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (26218) main: Main blip[0m
+[0;32mI (26438) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (26688) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (26938) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (27188) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (27218) main: Main blip[0m
+[0;32mI (27438) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (27688) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (27938) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (28188) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (28218) main: Main blip[0m
+[0;32mI (28438) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (28688) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (28938) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (29188) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (29218) main: Main blip[0m
+[0;32mI (29438) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (29688) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (29938) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (30188) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (30218) main: Main blip[0m
+[0;32mI (30438) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (30688) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (30938) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (31188) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (31218) main: Main blip[0m
+[0;32mI (31438) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (31688) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (31938) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (32188) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (32218) main: Main blip[0m
+[0;32mI (32438) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (32688) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (32938) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (33188) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (33218) main: Main blip[0m
+[0;32mI (33438) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (33688) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (33938) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (34188) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (34218) main: Main blip[0m
+[0;32mI (34438) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (34688) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (34948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (35198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (35218) main: Main blip[0m
+[0;32mI (35448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (35698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (35948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (36198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (36218) main: Main blip[0m
+[0;32mI (36448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (36698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (36948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (37198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (37218) main: Main blip[0m
+[0;32mI (37448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (37698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (37948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (38198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (38218) main: Main blip[0m
+[0;32mI (38448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (38698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (38948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (39198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (39218) main: Main blip[0m
+[0;32mI (39448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (39698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (39948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (40198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (40218) main: Main blip[0m
+[0;32mI (40448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (40698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (40948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (41198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (41218) main: Main blip[0m
+[0;32mI (41448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (41698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (41948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (42198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (42218) main: Main blip[0m
+[0;32mI (42448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (42698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (42948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (43198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (43218) main: Main blip[0m
+[0;32mI (43448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (43698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (43948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (44098) display: Display back to sleep[0m
+[0;32mI (44198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (44218) main: Main blip[0m
+[0;32mI (44448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (44698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (44948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (45198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (45218) main: Main blip[0m
+[0;32mI (45448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (45698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (45948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (46198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (46218) main: Main blip[0m
+[0;32mI (46448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (46698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (46948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (47198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (47218) main: Main blip[0m
+[0;32mI (47448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (47698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (47948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (48198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (48218) main: Main blip[0m
+[0;32mI (48448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (48698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (48948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (49198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (49218) main: Main blip[0m
+[0;32mI (49448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (49698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (49948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (50198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (50218) main: Main blip[0m
+[0;32mI (50448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (50698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (50948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (51198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (51218) main: Main blip[0m
+[0;32mI (51448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (51698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (51948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (52198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (52218) main: Main blip[0m
+[0;32mI (52448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (52698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (52948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (53198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (53218) main: Main blip[0m
+[0;32mI (53448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (53698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (53948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (54198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (54218) main: Main blip[0m
+[0;32mI (54448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (54698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (54948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (55198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (55218) main: Main blip[0m
+[0;32mI (55448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (55698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (55948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (56198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (56218) main: Main blip[0m
+[0;32mI (56448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (56698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (56948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (57198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (57218) main: Main blip[0m
+[0;32mI (57448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (57698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (57948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (58198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (58218) main: Main blip[0m
+[0;32mI (58448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (58698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (58948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (59198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (59218) main: Main blip[0m
+[0;32mI (59448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (59698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (59948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (60198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (60218) main: Main blip[0m
+[0;32mI (60448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (60698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (60948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (61198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (61218) main: Main blip[0m
+[0;32mI (61448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (61698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (61948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (62198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (62218) main: Main blip[0m
+[0;32mI (62448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (62698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (62948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (63198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (63218) main: Main blip[0m
+[0;32mI (63448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (63698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (63948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (64198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (64218) main: Main blip[0m
+[0;32mI (64448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (64698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (64948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (65198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (65218) main: Main blip[0m
+[0;32mI (65448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (65698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (65948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (66198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (66218) main: Main blip[0m
+[0;32mI (66448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (66698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (66948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (67198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (67218) main: Main blip[0m
+[0;32mI (67448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (67698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (67948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (68198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (68218) main: Main blip[0m
+[0;32mI (68448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (68698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (68948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (69198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (69218) main: Main blip[0m
+[0;32mI (69448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (69698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (69948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (70198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (70218) main: Main blip[0m
+[0;32mI (70448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (70698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (70948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (71198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (71218) main: Main blip[0m
+[0;32mI (71448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (71698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (71948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (72198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (72218) main: Main blip[0m
+[0;32mI (72448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (72698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (72948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (73198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (73218) main: Main blip[0m
+[0;32mI (73448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (73698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (73948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (74198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (74218) main: Main blip[0m
+[0;32mI (74448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (74698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (74948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (75198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (75218) main: Main blip[0m
+[0;32mI (75448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (75698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (75948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (76198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (76218) main: Main blip[0m
+[0;32mI (76448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (76698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (76948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (77198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (77218) main: Main blip[0m
+[0;32mI (77448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (77698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (77948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (78198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (78218) main: Main blip[0m
+[0;32mI (78448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (78698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (78948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (79198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (79218) main: Main blip[0m
+[0;32mI (79448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (79698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (79948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (80198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (80218) main: Main blip[0m
+[0;32mI (80448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (80698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (80948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (81198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (81218) main: Main blip[0m
+[0;32mI (81448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (81698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (81948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (82198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (82218) main: Main blip[0m
+[0;32mI (82448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (82698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (82948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (83198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (83218) main: Main blip[0m
+[0;32mI (83448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (83698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (83948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (84198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (84218) main: Main blip[0m
+[0;32mI (84448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (84698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (84948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (85198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (85218) main: Main blip[0m
+[0;32mI (85448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (85698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (85948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (86198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (86218) main: Main blip[0m
+[0;32mI (86448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (86698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (86948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (87198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (87218) main: Main blip[0m
+[0;32mI (87448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (87698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (87948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (88198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (88218) main: Main blip[0m
+[0;32mI (88448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (88698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (88948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (89198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (89218) main: Main blip[0m
+[0;32mI (89448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (89698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (89948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (90198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (90218) main: Main blip[0m
+[0;32mI (90448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (90698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (90948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (91198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (91218) main: Main blip[0m
+[0;32mI (91448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (91698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (91948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (92198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (92218) main: Main blip[0m
+[0;32mI (92448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (92698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (92948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (93198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (93218) main: Main blip[0m
+[0;32mI (93448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (93698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (93948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (94198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (94218) main: Main blip[0m
+[0;32mI (94448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (94698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (94948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (95198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (95218) main: Main blip[0m
+[0;32mI (95448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (95698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (95948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (96198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (96218) main: Main blip[0m
+[0;32mI (96448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (96698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (96948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (97198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (97218) main: Main blip[0m
+[0;32mI (97448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (97698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (97948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (98198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (98218) main: Main blip[0m
+[0;32mI (98448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (98698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (98948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (99198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (99218) main: Main blip[0m
+[0;32mI (99448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (99698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (99948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (100198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (100218) main: Main blip[0m
+[0;32mI (100448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (100698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (100948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (101198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (101218) main: Main blip[0m
+[0;32mI (101448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (101698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (101948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (102198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (102218) main: Main blip[0m
+[0;32mI (102448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (102698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (102948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (103198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (103218) main: Main blip[0m
+[0;32mI (103448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (103698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (103948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (104198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (104218) main: Main blip[0m
+[0;32mI (104448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (104698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (104948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (105198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (105218) main: Main blip[0m
+[0;32mI (105448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (105698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (105948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (106198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (106218) main: Main blip[0m
+[0;32mI (106448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (106698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (106948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (107198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (107218) main: Main blip[0m
+[0;32mI (107448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (107698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (107948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (108198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (108218) main: Main blip[0m
+[0;32mI (108448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (108698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (108948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (109198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (109218) main: Main blip[0m
+[0;32mI (109448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (109698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (109948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (110198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (110218) main: Main blip[0m
+[0;32mI (110448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (110698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (110948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (111198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (111218) main: Main blip[0m
+[0;32mI (111448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (111698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (111948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (112198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (112218) main: Main blip[0m
+[0;32mI (112448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (112698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (112948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (113198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (113218) main: Main blip[0m
+[0;32mI (113448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (113698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (113948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (114198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (114218) main: Main blip[0m
+[0;32mI (114448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (114698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (114948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (115198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (115218) main: Main blip[0m
+[0;32mI (115448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (115698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (115948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (116198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (116218) main: Main blip[0m
+[0;32mI (116448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (116698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (116948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (117198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (117218) main: Main blip[0m
+[0;32mI (117448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (117698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (117948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (118198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (118218) main: Main blip[0m
+[0;32mI (118448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (118698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (118948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (119198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (119218) main: Main blip[0m
+[0;32mI (119448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (119698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (119948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (120198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (120218) main: Main blip[0m
+[0;32mI (120448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (120698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (120948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (121198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (121218) main: Main blip[0m
+[0;32mI (121448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (121698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (121948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (122198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (122218) main: Main blip[0m
+[0;32mI (122448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (122698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (122948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (123198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (123218) main: Main blip[0m
+[0;32mI (123448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (123698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (123948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (124198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (124218) main: Main blip[0m
+[0;32mI (124448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (124698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (124948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (125198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (125218) main: Main blip[0m
+[0;32mI (125448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (125698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (125948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (126198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (126218) main: Main blip[0m
+[0;32mI (126448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (126698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (126948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (127198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (127218) main: Main blip[0m
+[0;32mI (127448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (127698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (127948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (128198) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (128218) main: Main blip[0m
+[0;32mI (128448) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (128698) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (128948) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (129208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (129218) main: Main blip[0m
+[0;32mI (129458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (129708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (129958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (130208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (130218) main: Main blip[0m
+[0;32mI (130458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (130708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (130958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (131208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (131218) main: Main blip[0m
+[0;32mI (131458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (131708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (131958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (132208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (132218) main: Main blip[0m
+[0;32mI (132458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (132708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (132958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (133208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (133218) main: Main blip[0m
+[0;32mI (133458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (133708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (133958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (134208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (134218) main: Main blip[0m
+[0;32mI (134458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (134708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (134958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (135208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (135218) main: Main blip[0m
+[0;32mI (135458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (135708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (135958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (136208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (136218) main: Main blip[0m
+[0;32mI (136458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (136708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (136958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (137208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (137218) main: Main blip[0m
+[0;32mI (137458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (137708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (137958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (138208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (138218) main: Main blip[0m
+[0;32mI (138458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (138708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (138958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (139208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (139218) main: Main blip[0m
+[0;32mI (139458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (139708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (139958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (140208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (140218) main: Main blip[0m
+[0;32mI (140458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (140708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (140958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (141208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (141218) main: Main blip[0m
+[0;32mI (141458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (141708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (141958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (142208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (142218) main: Main blip[0m
+[0;32mI (142458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (142708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (142958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (143208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (143218) main: Main blip[0m
+[0;32mI (143458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (143708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (143958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (144208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (144218) main: Main blip[0m
+[0;32mI (144458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (144708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (144958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (145208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (145218) main: Main blip[0m
+[0;32mI (145458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (145708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (145958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (146208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (146218) main: Main blip[0m
+[0;32mI (146458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (146708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (146958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (147208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (147218) main: Main blip[0m
+[0;32mI (147458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (147708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (147958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (148208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (148218) main: Main blip[0m
+[0;32mI (148458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (148708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (148958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (149208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (149218) main: Main blip[0m
+[0;32mI (149458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (149708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (149958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (150208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (150218) main: Main blip[0m
+[0;32mI (150458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (150708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (150958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (151208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (151218) main: Main blip[0m
+[0;32mI (151458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (151708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (151958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (152208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (152218) main: Main blip[0m
+[0;32mI (152458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (152708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (152958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (153208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (153218) main: Main blip[0m
+[0;32mI (153458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (153708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (153958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (154208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (154218) main: Main blip[0m
+[0;32mI (154458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (154708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (154958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (155208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (155218) main: Main blip[0m
+[0;32mI (155458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (155708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (155958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (156208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (156218) main: Main blip[0m
+[0;32mI (156458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (156708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (156958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (157208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (157218) main: Main blip[0m
+[0;32mI (157458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (157708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (157958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (158208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (158218) main: Main blip[0m
+[0;32mI (158458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (158708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (158958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (159208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (159218) main: Main blip[0m
+[0;32mI (159458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (159708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (159958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (160208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (160218) main: Main blip[0m
+[0;32mI (160458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (160708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (160958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (161208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (161218) main: Main blip[0m
+[0;32mI (161458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (161708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (161958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (162208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (162218) main: Main blip[0m
+[0;32mI (162458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (162708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (162958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (163208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (163218) main: Main blip[0m
+[0;32mI (163458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (163708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (163958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (164208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (164218) main: Main blip[0m
+[0;32mI (164458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (164708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (164958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (165208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (165218) main: Main blip[0m
+[0;32mI (165458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (165708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (165958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (166208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (166218) main: Main blip[0m
+[0;32mI (166458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (166708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (166958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (167208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (167218) main: Main blip[0m
+[0;32mI (167458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (167708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (167958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (168208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (168218) main: Main blip[0m
+[0;32mI (168458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (168708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (168958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (169208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (169218) main: Main blip[0m
+[0;32mI (169458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (169708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (169958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (170208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (170218) main: Main blip[0m
+[0;32mI (170458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (170708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (170958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (171208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (171218) main: Main blip[0m
+[0;32mI (171458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (171708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (171958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (172208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (172218) main: Main blip[0m
+[0;32mI (172458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (172708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (172958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (173208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (173218) main: Main blip[0m
+[0;32mI (173458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (173708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (173958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (174208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (174218) main: Main blip[0m
+[0;32mI (174458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (174708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (174958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (175208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (175218) main: Main blip[0m
+[0;32mI (175458) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (175708) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (175958) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (176208) light: R: 4.536 G: 1.512 B: 1.512[0m
+[0;32mI (176218) main: Main blip[0m
+[0;32mI (176408) keyboard: Top button filtered value 429[0m
+[0;32mI (176458) light: Light manually switched off[0m
+[0;32mI (176848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (177098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (177218) main: Main blip[0m
+[0;32mI (177348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (177598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (177848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (178098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (178218) main: Main blip[0m
+[0;32mI (178348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (178598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (178848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (179098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (179218) main: Main blip[0m
+[0;32mI (179348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (179598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (179848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (180098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (180218) main: Main blip[0m
+[0;32mI (180348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (180598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (180848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (181098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (181218) main: Main blip[0m
+[0;32mI (181348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (181598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (181848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (182098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (182218) main: Main blip[0m
+[0;32mI (182348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (182598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (182848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (183098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (183218) main: Main blip[0m
+[0;32mI (183348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (183598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (183848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (184098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (184218) main: Main blip[0m
+[0;32mI (184348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (184598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (184848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (185098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (185218) main: Main blip[0m
+[0;32mI (185348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (185598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (185848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (186098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (186218) main: Main blip[0m
+[0;32mI (186348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (186598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (186848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (187098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (187218) main: Main blip[0m
+[0;32mI (187348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (187598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (187848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (188098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (188218) main: Main blip[0m
+[0;32mI (188348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (188598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (188848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (189098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (189218) main: Main blip[0m
+[0;32mI (189348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (189598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (189848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (190098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (190218) main: Main blip[0m
+[0;32mI (190348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (190598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (190848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (191098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (191218) main: Main blip[0m
+[0;32mI (191348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (191598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (191848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (192098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (192218) main: Main blip[0m
+[0;32mI (192348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (192598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (192848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (193098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (193218) main: Main blip[0m
+[0;32mI (193348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (193598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (193848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (194098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (194218) main: Main blip[0m
+[0;32mI (194348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (194598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (194848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (195098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (195218) main: Main blip[0m
+[0;32mI (195348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (195598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (195848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (196098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (196218) main: Main blip[0m
+[0;32mI (196348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (196598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (196848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (197098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (197218) main: Main blip[0m
+[0;32mI (197348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (197598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (197848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (198098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (198218) main: Main blip[0m
+[0;32mI (198348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (198598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (198848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (199098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (199218) main: Main blip[0m
+[0;32mI (199348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (199598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (199848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (200098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (200218) main: Main blip[0m
+[0;32mI (200348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (200598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (200848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (201098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (201218) main: Main blip[0m
+[0;32mI (201348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (201598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (201848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (202098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (202218) main: Main blip[0m
+[0;32mI (202348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (202598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (202848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (203098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (203218) main: Main blip[0m
+[0;32mI (203348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (203598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (203848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (204098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (204218) main: Main blip[0m
+[0;32mI (204348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (204598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (204848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (205098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (205218) main: Main blip[0m
+[0;32mI (205348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (205598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (205848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (206098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (206218) main: Main blip[0m
+[0;32mI (206348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (206598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (206848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (207098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (207218) main: Main blip[0m
+[0;32mI (207348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (207598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (207848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (208098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (208218) main: Main blip[0m
+[0;32mI (208348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (208598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (208848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (209098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (209218) main: Main blip[0m
+[0;32mI (209348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (209598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (209848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (210098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (210218) main: Main blip[0m
+[0;32mI (210348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (210598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (210848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (211098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (211218) main: Main blip[0m
+[0;32mI (211348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (211598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (211848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (212098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (212218) main: Main blip[0m
+[0;32mI (212348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (212598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (212848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (213098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (213218) main: Main blip[0m
+[0;32mI (213348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (213598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (213848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (214098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (214218) main: Main blip[0m
+[0;32mI (214348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (214598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (214848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (215098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (215218) main: Main blip[0m
+[0;32mI (215348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (215598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (215848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (216098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (216218) main: Main blip[0m
+[0;32mI (216348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (216598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (216848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (217098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (217218) main: Main blip[0m
+[0;32mI (217348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (217598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (217848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (218098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (218218) main: Main blip[0m
+[0;32mI (218348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (218598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (218848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (219098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (219218) main: Main blip[0m
+[0;32mI (219348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (219598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (219848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (220098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (220218) main: Main blip[0m
+[0;32mI (220348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (220598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (220848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (221098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (221218) main: Main blip[0m
+[0;32mI (221348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (221598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (221848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (222098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (222218) main: Main blip[0m
+[0;32mI (222348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (222598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (222848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (223098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (223218) main: Main blip[0m
+[0;32mI (223348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (223598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (223848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (224098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (224218) main: Main blip[0m
+[0;32mI (224348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (224598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (224848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (225098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (225218) main: Main blip[0m
+[0;32mI (225348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (225598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (225848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (226098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (226218) main: Main blip[0m
+[0;32mI (226348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (226598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (226848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (227098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (227218) main: Main blip[0m
+[0;32mI (227348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (227598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (227848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (228098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (228218) main: Main blip[0m
+[0;32mI (228348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (228598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (228848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (229098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (229218) main: Main blip[0m
+[0;32mI (229348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (229598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (229848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (230098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (230218) main: Main blip[0m
+[0;32mI (230348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (230598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (230848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (231098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (231218) main: Main blip[0m
+[0;32mI (231348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (231598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (231848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (232098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (232218) main: Main blip[0m
+[0;32mI (232348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (232598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (232848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (233098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (233218) main: Main blip[0m
+[0;32mI (233348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (233598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (233848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (234098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (234218) main: Main blip[0m
+[0;32mI (234348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (234598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (234848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (235098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (235218) main: Main blip[0m
+[0;32mI (235348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (235598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (235848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (236098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (236218) main: Main blip[0m
+[0;32mI (236348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (236598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (236848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (237098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (237218) main: Main blip[0m
+[0;32mI (237348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (237598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (237848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (238098) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (238218) main: Main blip[0m
+[0;32mI (238348) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (238598) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (238848) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (239098) light: R: 0.000 G: 0.000 B: 0.000[0m

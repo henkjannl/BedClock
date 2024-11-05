@@ -1,0 +1,658 @@
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7176
+load:0x40078000,len:15564
+ho 0 tail 12 room 4
+load:0x40080400,len:4
+load:0x40080404,len:3904
+entry 0x40080638
+[0;32mI (30) boot: ESP-IDF 5.3.1 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Nov  5 2024 15:36:01[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (34) boot: chip revision: v1.0[0m
+[0;32mI (38) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (43) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (47) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (52) boot: Enabling RNG early entropy source...[0m
+[0;32mI (57) boot: Partition Table:[0m
+[0;32mI (61) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (68) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (76) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (83) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (91) boot: End of partition table[0m
+[0;32mI (95) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=23974h (145780) map[0m
+[0;32mI (153) esp_image: segment 1: paddr=0003399c vaddr=3ffb0000 size=04680h ( 18048) load[0m
+[0;32mI (160) esp_image: segment 2: paddr=00038024 vaddr=40080000 size=07ff4h ( 32756) load[0m
+[0;32mI (173) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=8ea30h (584240) map[0m
+[0;32mI (374) esp_image: segment 4: paddr=000cea58 vaddr=40087ff4 size=1162ch ( 71212) load[0m
+[0;32mI (414) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (415) boot: Disabling RNG early entropy source...[0m
+[0;32mI (427) cpu_start: Multicore app[0m
+[0;32mI (435) cpu_start: Pro cpu start user code[0m
+[0;32mI (435) cpu_start: cpu freq: 240000000 Hz[0m
+[0;32mI (435) app_init: Application information:[0m
+[0;32mI (438) app_init: Project name:     Bedclock_IDF_V10[0m
+[0;32mI (444) app_init: App version:      1[0m
+[0;32mI (448) app_init: Compile time:     Nov  5 2024 15:35:35[0m
+[0;32mI (454) app_init: ELF file SHA256:  08d0e3972...[0m
+[0;32mI (459) app_init: ESP-IDF:          5.3.1[0m
+[0;32mI (464) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (469) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (474) efuse_init: Chip rev:         v1.0[0m
+[0;32mI (479) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (486) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (492) heap_init: At 3FFB92B0 len 00026D50 (155 KiB): DRAM[0m
+[0;32mI (498) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (504) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (511) heap_init: At 40099620 len 000069E0 (26 KiB): IRAM[0m
+[0;32mI (518) spi_flash: detected chip: generic[0m
+[0;32mI (522) spi_flash: flash io: dio[0m
+[0;33mW (526) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (537) main_task: Started on CPU0[0m
+[0;32mI (547) main_task: Calling app_main()[0m
+[0;32mI (567) wifi station: ESP_WIFI_MODE_STA[0m
+I (587) wifi:wifi driver task: 3ffc12c0, prio:23, stack:6656, core=0
+I (597) wifi:wifi firmware version: ccaebfa
+I (597) wifi:wifi certification version: v7.0
+I (597) wifi:config NVS flash: enabled
+I (597) wifi:config nano formating: disabled
+I (597) wifi:Init data frame dynamic rx buffer num: 32
+I (607) wifi:Init static rx mgmt buffer num: 5
+I (607) wifi:Init management short buffer num: 32
+I (617) wifi:Init dynamic tx buffer num: 32
+I (617) wifi:Init static rx buffer size: 1600
+I (617) wifi:Init static rx buffer num: 10
+I (627) wifi:Init dynamic rx buffer num: 32
+[0;32mI (627) wifi_init: rx ba win: 6[0m
+[0;32mI (637) wifi_init: accept mbox: 6[0m
+[0;32mI (637) wifi_init: tcpip mbox: 32[0m
+[0;32mI (637) wifi_init: udp mbox: 6[0m
+[0;32mI (647) wifi_init: tcp mbox: 6[0m
+[0;32mI (647) wifi_init: tcp tx win: 5760[0m
+[0;32mI (657) wifi_init: tcp rx win: 5760[0m
+[0;32mI (657) wifi_init: tcp mss: 1440[0m
+[0;32mI (657) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (667) wifi_init: WiFi RX IRAM OP enabled[0m
+W (667) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2
+[0;32mI (677) phy_init: phy_version 4830,54550f7,Jun 20 2024,14:22:08[0m
+�ets Jun  8 2016 00:22:57
+
+rst:0x3 (SW_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7176
+load:0x40078000,len:15564
+ho 0 tail 12 room 4
+load:0x40080400,len:4
+load:0x40080404,len:3904
+entry 0x40080638
+[0;32mI (179) boot: ESP-IDF 5.3.1 2nd stage bootloader[0m
+[0;32mI (179) boot: compile time Nov  5 2024 15:36:01[0m
+[0;32mI (179) boot: Multicore bootloader[0m
+[0;32mI (184) boot: chip revision: v1.0[0m
+[0;32mI (188) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (193) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (198) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (202) boot: Enabling RNG early entropy source...[0m
+[0;32mI (208) boot: Partition Table:[0m
+[0;32mI (211) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (219) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (226) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (234) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (242) boot: End of partition table[0m
+[0;32mI (246) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=23974h (145780) map[0m
+[0;32mI (304) esp_image: segment 1: paddr=0003399c vaddr=3ffb0000 size=04680h ( 18048) load[0m
+[0;32mI (311) esp_image: segment 2: paddr=00038024 vaddr=40080000 size=07ff4h ( 32756) load[0m
+[0;32mI (324) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=8ea30h (584240) map[0m
+[0;32mI (525) esp_image: segment 4: paddr=000cea58 vaddr=40087ff4 size=1162ch ( 71212) load[0m
+[0;32mI (566) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (566) boot: Disabling RNG early entropy source...[0m
+[0;32mI (578) cpu_start: Multicore app[0m
+[0;32mI (586) cpu_start: Pro cpu start user code[0m
+[0;32mI (586) cpu_start: cpu freq: 240000000 Hz[0m
+[0;32mI (586) app_init: Application information:[0m
+[0;32mI (589) app_init: Project name:     Bedclock_IDF_V10[0m
+[0;32mI (595) app_init: App version:      1[0m
+[0;32mI (599) app_init: Compile time:     Nov  5 2024 15:35:35[0m
+[0;32mI (605) app_init: ELF file SHA256:  08d0e3972...[0m
+[0;32mI (610) app_init: ESP-IDF:          5.3.1[0m
+[0;32mI (615) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (620) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (625) efuse_init: Chip rev:         v1.0[0m
+[0;32mI (630) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (637) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (643) heap_init: At 3FFB92B0 len 00026D50 (155 KiB): DRAM[0m
+[0;32mI (649) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (655) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (662) heap_init: At 40099620 len 000069E0 (26 KiB): IRAM[0m
+[0;32mI (670) spi_flash: detected chip: generic[0m
+[0;32mI (673) spi_flash: flash io: dio[0m
+[0;33mW (677) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (688) main_task: Started on CPU0[0m
+[0;32mI (698) main_task: Calling app_main()[0m
+[0;32mI (718) wifi station: ESP_WIFI_MODE_STA[0m
+I (738) wifi:wifi driver task: 3ffc12c0, prio:23, stack:6656, core=0
+I (748) wifi:wifi firmware version: ccaebfa
+I (748) wifi:wifi certification version: v7.0
+I (748) wifi:config NVS flash: enabled
+I (748) wifi:config nano formating: disabled
+I (748) wifi:Init data frame dynamic rx buffer num: 32
+I (758) wifi:Init static rx mgmt buffer num: 5
+I (758) wifi:Init management short buffer num: 32
+I (768) wifi:Init dynamic tx buffer num: 32
+I (768) wifi:Init static rx buffer size: 1600
+I (768) wifi:Init static rx buffer num: 10
+I (778) wifi:Init dynamic rx buffer num: 32
+[0;32mI (778) wifi_init: rx ba win: 6[0m
+[0;32mI (788) wifi_init: accept mbox: 6[0m
+[0;32mI (788) wifi_init: tcpip mbox: 32[0m
+[0;32mI (788) wifi_init: udp mbox: 6[0m
+[0;32mI (798) wifi_init: tcp mbox: 6[0m
+[0;32mI (798) wifi_init: tcp tx win: 5760[0m
+[0;32mI (808) wifi_init: tcp rx win: 5760[0m
+[0;32mI (808) wifi_init: tcp mss: 1440[0m
+[0;32mI (808) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (818) wifi_init: WiFi RX IRAM OP enabled[0m
+W (818) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2
+[0;32mI (828) phy_init: phy_version 4830,54550f7,Jun 20 2024,14:22:08[0m
+I (908) wifi:mode : sta (8c:aa:b5:8c:5a:cc)
+I (908) wifi:enable tsf
+[0;32mI (908) wifi station: wifi_init_sta finished.[0m
+I (918) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:9, snd_ch_cfg:0x0
+I (918) wifi:state: init -> auth (0xb0)
+I (938) wifi:state: auth -> assoc (0x0)
+I (948) wifi:state: assoc -> run (0x10)
+I (988) wifi:connected with Starbux, aid = 2, channel 1, BW20, bssid = dc:15:c8:50:7c:5c
+I (988) wifi:security: WPA2-PSK, phy: bgn, rssi: -60
+I (988) wifi:pm start, type: 1
+
+I (988) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (1008) wifi:<ba-add>idx:0 (ifx:0, dc:15:c8:50:7c:5c), tid:6, ssn:2, winSize:64
+I (1078) wifi:AP's beacon interval = 102400 us, DTIM period = 1
+[0;32mI (1998) esp_netif_handlers: sta ip: 192.168.178.160, mask: 255.255.255.0, gw: 192.168.178.1[0m
+[0;32mI (1998) wifi station: got ip:192.168.178.160[0m
+[0;32mI (1998) wifi station: connected to ap SSID:Starbux password:RodePleinMoskou2019[0m
+[0;32mI (2008) wifi station: Initializing SNTP[0m
+[0;31mE (2008) esp_netif_sntp: sntp_init_api(61): Tried to configure SNTP server from DHCP, while disabled. Please enable CONFIG_LWIP_DHCP_GET_NTP_SRV[0m
+[0;31mE (2028) esp_netif_sntp: esp_netif_sntp_init(119): Failed initialize SNTP service[0m
+[0;32mI (2038) wifi station: Starting SNTP[0m
+Local time in Amsterdam: 01:00:02
+[0;32mI (2038) display: INTERFACE is i2c[0m
+[0;32mI (2048) display: CONFIG_SDA_GPIO=21[0m
+[0;32mI (2048) display: CONFIG_SCL_GPIO=22[0m
+I (2048) wifi:<ba-add>idx:1 (ifx:0, dc:15:c8:50:7c:5c), tid:0, ssn:0, winSize:64
+[0;32mI (2058) display: CONFIG_RESET_GPIO=-1[0m
+[0;32mI (2068) SSD1306: Legacy i2c driver is used[0m
+[0;32mI (2068) SSD1306: HenkJan: .master.clk_speed = 400000[0m
+[0;33mW (2078) display: Flip upside down[0m
+[0;32mI (2078) display: Panel is 128x32[0m
+[0;32mI (2088) SSD1306: OLED configured successfully[0m
+[0;32mI (2168) display: t1=1466211 t2=1508137 dt=41926. [0m
+[0;32mI (2168) keyboard: Starting keyboard task...[0m
+[0;32mI (2168) keyboard: Keyboard task started...[0m
+[0;32mI (2188) light: Starting light task...[0m
+[0;32mI (2188) light: Light task started...[0m
+[0;32mI (2188) light: Create RMT TX channel[0m
+[0;32mI (2188) gpio: GPIO[23]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (2198) light: Install led strip encoder[0m
+[0;32mI (2208) light: Enable RMT TX channel[0m
+[0;32mI (2208) light: Start LED rainbow chase[0m
+[0;32mI (2218) main: Main blip[0m
+[0;32mI (2288) display: Update clock due to minute change[0m
+[0;32mI (2338) display: t1=1620127 t2=1674506 dt=54379. [0m
+[0;32mI (3218) main: Main blip[0m
+[0;32mI (4228) main: Main blip[0m
+[0;32mI (5228) main: Main blip[0m
+[0;32mI (6228) main: Main blip[0m
+[0;32mI (7228) main: Main blip[0m
+[0;32mI (8228) main: Main blip[0m
+[0;32mI (9228) main: Main blip[0m
+[0;32mI (10228) main: Main blip[0m
+[0;32mI (11228) main: Main blip[0m
+[0;32mI (12228) main: Main blip[0m
+[0;32mI (13228) main: Main blip[0m
+[0;32mI (14228) main: Main blip[0m
+[0;32mI (15228) main: Main blip[0m
+[0;32mI (16228) main: Main blip[0m
+[0;32mI (17228) main: Main blip[0m
+[0;32mI (18228) main: Main blip[0m
+[0;32mI (19228) main: Main blip[0m
+[0;32mI (20228) main: Main blip[0m
+[0;32mI (21228) main: Main blip[0m
+[0;32mI (22228) main: Main blip[0m
+[0;32mI (22298) display: Display back to sleep[0m
+[0;32mI (23228) main: Main blip[0m
+[0;32mI (24228) main: Main blip[0m
+[0;32mI (25228) main: Main blip[0m
+[0;32mI (26228) main: Main blip[0m
+[0;32mI (27228) main: Main blip[0m
+[0;32mI (28228) main: Main blip[0m
+[0;32mI (29228) main: Main blip[0m
+[0;32mI (30228) main: Main blip[0m
+[0;32mI (31228) main: Main blip[0m
+[0;32mI (32228) main: Main blip[0m
+[0;32mI (33228) main: Main blip[0m
+[0;32mI (34228) main: Main blip[0m
+[0;32mI (35228) main: Main blip[0m
+[0;32mI (36228) main: Main blip[0m
+[0;32mI (37228) main: Main blip[0m
+[0;32mI (38228) main: Main blip[0m
+[0;32mI (39228) main: Main blip[0m
+[0;32mI (40228) main: Main blip[0m
+[0;32mI (41228) main: Main blip[0m
+[0;32mI (42228) main: Main blip[0m
+[0;32mI (43228) main: Main blip[0m
+[0;32mI (44228) main: Main blip[0m
+[0;32mI (45228) main: Main blip[0m
+[0;32mI (46228) main: Main blip[0m
+[0;32mI (47228) main: Main blip[0m
+[0;32mI (48228) main: Main blip[0m
+[0;32mI (49228) main: Main blip[0m
+[0;32mI (50228) main: Main blip[0m
+[0;32mI (51228) main: Main blip[0m
+[0;32mI (52228) main: Main blip[0m
+[0;32mI (53228) main: Main blip[0m
+[0;32mI (54228) main: Main blip[0m
+[0;32mI (55228) main: Main blip[0m
+[0;32mI (56228) main: Main blip[0m
+[0;32mI (57228) main: Main blip[0m
+[0;32mI (58228) main: Main blip[0m
+[0;32mI (59228) main: Main blip[0m
+[0;32mI (60228) main: Main blip[0m
+[0;32mI (61228) main: Main blip[0m
+[0;32mI (62228) main: Main blip[0m
+[0;32mI (63228) main: Main blip[0m
+[0;32mI (64228) main: Main blip[0m
+[0;32mI (65228) main: Main blip[0m
+[0;32mI (66228) main: Main blip[0m
+[0;32mI (67228) main: Main blip[0m
+[0;32mI (68228) main: Main blip[0m
+[0;32mI (69228) main: Main blip[0m
+[0;32mI (70228) main: Main blip[0m
+[0;32mI (71178) keyboard: Top button filtered value 274[0m
+[0;32mI (71218) light: Light manually switched on[0m
+[0;32mI (71218) light: R: 1.000 G: 1.000 B: 1.000[0m
+[0;32mI (71228) main: Main blip[0m
+[0;32mI (71268) display: t1=70551363 t2=70608452 dt=57089. [0m
+[0;32mI (72228) main: Main blip[0m
+[0;32mI (73228) main: Main blip[0m
+[0;32mI (73578) keyboard: Top button filtered value 400[0m
+[0;32mI (73608) light: Light manually switched off[0m
+[0;32mI (73608) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (73658) display: t1=72940932 t2=72994646 dt=53714. [0m
+[0;32mI (74228) main: Main blip[0m
+[0;32mI (75228) main: Main blip[0m
+[0;32mI (76228) main: Main blip[0m
+[0;32mI (76578) keyboard: Top button filtered value 358[0m
+[0;32mI (76738) light: Light manually switched on[0m
+[0;32mI (76738) light: R: 1.000 G: 1.000 B: 1.000[0m
+[0;32mI (76788) display: t1=76071321 t2=76127815 dt=56494. [0m
+[0;32mI (77228) main: Main blip[0m
+[0;32mI (78228) main: Main blip[0m
+[0;32mI (78438) keyboard: Left button filtered value 357[0m
+[0;32mI (78448) display: item received BTN_LEFT[0m
+[0;32mI (78508) display: t1=77782152 t2=77845669 dt=63517. [0m
+[0;32mI (79228) main: Main blip[0m
+[0;32mI (79348) keyboard: Right button filtered value 154[0m
+[0;32mI (79348) display: item received BTN_RIGHT[0m
+[0;32mI (79348) display: Increase LED intensity[0m
+[0;32mI (79378) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (79418) display: t1=78685777 t2=78750590 dt=64813. [0m
+[0;32mI (80228) main: Main blip[0m
+[0;32mI (80488) keyboard: Right button filtered value 316[0m
+[0;32mI (80518) display: item received BTN_RIGHT[0m
+[0;32mI (80518) display: Increase LED intensity[0m
+[0;32mI (80578) display: t1=79849993 t2=79912329 dt=62336. [0m
+[0;32mI (80768) light: R: 6.320 G: 6.320 B: 6.320[0m
+[0;32mI (81228) main: Main blip[0m
+[0;32mI (82228) main: Main blip[0m
+[0;32mI (83228) main: Main blip[0m
+[0;32mI (84228) main: Main blip[0m
+[0;32mI (84628) keyboard: Right button filtered value 16[0m
+[0;32mI (84628) display: item received BTN_RIGHT[0m
+[0;32mI (84628) display: Increase LED intensity[0m
+[0;32mI (84658) light: R: 15.920 G: 15.920 B: 15.920[0m
+[0;32mI (84698) display: t1=83965547 t2=84032084 dt=66537. [0m
+[0;32mI (85168) keyboard: Right button filtered value 376[0m
+[0;32mI (85198) display: item received BTN_RIGHT[0m
+[0;32mI (85198) display: Increase LED intensity[0m
+[0;32mI (85228) main: Main blip[0m
+[0;32mI (85258) display: t1=84530064 t2=84594750 dt=64686. [0m
+[0;32mI (85298) light: R: 40.000 G: 40.000 B: 40.000[0m
+[0;32mI (85648) keyboard: Right button filtered value 37[0m
+[0;32mI (85648) display: item received BTN_RIGHT[0m
+[0;32mI (85648) display: Increase LED intensity[0m
+[0;32mI (85658) light: R: 1.000 G: 1.000 B: 1.000[0m
+[0;32mI (85718) display: t1=84985521 t2=85053320 dt=67799. [0m
+[0;32mI (86228) main: Main blip[0m
+[0;32mI (87198) keyboard: Left button filtered value 349[0m
+[0;32mI (87208) display: item received BTN_LEFT[0m
+[0;32mI (87228) main: Main blip[0m
+[0;32mI (87268) display: t1=86542282 t2=86601661 dt=59379. [0m
+[0;32mI (88228) main: Main blip[0m
+[0;32mI (88288) keyboard: Right button filtered value 334[0m
+[0;32mI (88288) display: item received BTN_RIGHT[0m
+[0;32mI (88288) display: Increase LED color[0m
+[0;32mI (88348) display: t1=87625128 t2=87686776 dt=61648. [0m
+[0;32mI (88538) light: R: 1.179 G: 1.151 B: 0.670[0m
+[0;32mI (89228) main: Main blip[0m
+[0;32mI (89848) keyboard: Right button filtered value 395[0m
+[0;32mI (89848) display: item received BTN_RIGHT[0m
+[0;32mI (89848) display: Increase LED color[0m
+[0;32mI (89908) display: t1=89185345 t2=89247044 dt=61699. [0m
+[0;32mI (89918) light: R: 1.281 G: 0.990 B: 0.729[0m
+[0;32mI (90228) main: Main blip[0m
+[0;32mI (91228) main: Main blip[0m
+[0;32mI (91528) keyboard: Right button filtered value 385[0m
+[0;32mI (91528) display: item received BTN_RIGHT[0m
+[0;32mI (91528) display: Increase LED color[0m
+[0;32mI (91548) light: R: 1.800 G: 0.600 B: 0.600[0m
+[0;32mI (91588) display: t1=90865432 t2=90925995 dt=60563. [0m
+[0;32mI (92228) main: Main blip[0m
+[0;32mI (93228) main: Main blip[0m
+[0;32mI (93328) keyboard: Right button filtered value 218[0m
+[0;32mI (93328) display: item received BTN_RIGHT[0m
+[0;32mI (93328) display: Increase LED color[0m
+[0;32mI (93388) display: t1=92665147 t2=92726760 dt=61613. [0m
+[0;32mI (93428) light: R: 1.000 G: 1.000 B: 1.000[0m
+[0;32mI (94228) main: Main blip[0m
+[0;32mI (95228) main: Main blip[0m
+[0;32mI (96228) main: Main blip[0m
+[0;32mI (97228) main: Main blip[0m
+[0;32mI (98228) main: Main blip[0m
+[0;32mI (98368) keyboard: Right button filtered value 383[0m
+[0;32mI (98398) display: item received BTN_RIGHT[0m
+[0;32mI (98398) display: Increase LED color[0m
+[0;32mI (98448) display: t1=97730072 t2=97789322 dt=59250. [0m
+[0;32mI (98568) light: R: 1.179 G: 1.151 B: 0.670[0m
+[0;32mI (99228) main: Main blip[0m
+[0;32mI (100228) main: Main blip[0m
+[0;32mI (101228) main: Main blip[0m
+[0;32mI (102228) main: Main blip[0m
+[0;32mI (103228) main: Main blip[0m
+[0;32mI (104228) main: Main blip[0m
+[0;32mI (105228) main: Main blip[0m
+[0;32mI (106228) main: Main blip[0m
+[0;32mI (107228) main: Main blip[0m
+[0;32mI (108228) main: Main blip[0m
+[0;32mI (109228) main: Main blip[0m
+[0;32mI (110228) main: Main blip[0m
+[0;32mI (111228) main: Main blip[0m
+[0;32mI (112228) main: Main blip[0m
+[0;32mI (113228) main: Main blip[0m
+[0;32mI (114228) main: Main blip[0m
+[0;32mI (115228) main: Main blip[0m
+[0;32mI (116228) main: Main blip[0m
+[0;32mI (117228) main: Main blip[0m
+[0;32mI (118228) main: Main blip[0m
+[0;32mI (118418) display: Display back to sleep[0m
+[0;32mI (119228) main: Main blip[0m
+[0;32mI (120228) main: Main blip[0m
+[0;32mI (121228) main: Main blip[0m
+[0;32mI (122228) main: Main blip[0m
+[0;32mI (123228) main: Main blip[0m
+[0;32mI (124228) main: Main blip[0m
+[0;32mI (125228) main: Main blip[0m
+[0;32mI (126228) main: Main blip[0m
+[0;32mI (127228) main: Main blip[0m
+[0;32mI (128228) main: Main blip[0m
+[0;32mI (129228) main: Main blip[0m
+[0;32mI (130228) main: Main blip[0m
+[0;32mI (131228) main: Main blip[0m
+[0;32mI (132228) main: Main blip[0m
+[0;32mI (133228) main: Main blip[0m
+[0;32mI (134228) main: Main blip[0m
+[0;32mI (135228) main: Main blip[0m
+[0;32mI (136228) main: Main blip[0m
+[0;32mI (137228) main: Main blip[0m
+[0;32mI (138228) main: Main blip[0m
+[0;32mI (139228) main: Main blip[0m
+[0;32mI (140228) main: Main blip[0m
+[0;32mI (141228) main: Main blip[0m
+[0;32mI (142228) main: Main blip[0m
+[0;32mI (143228) main: Main blip[0m
+[0;32mI (144228) main: Main blip[0m
+[0;32mI (145228) main: Main blip[0m
+[0;32mI (146228) main: Main blip[0m
+[0;32mI (147228) main: Main blip[0m
+[0;32mI (148228) main: Main blip[0m
+[0;32mI (149228) main: Main blip[0m
+[0;32mI (150228) main: Main blip[0m
+[0;32mI (151228) main: Main blip[0m
+[0;32mI (152228) main: Main blip[0m
+[0;32mI (153228) main: Main blip[0m
+[0;32mI (154228) main: Main blip[0m
+[0;32mI (155228) main: Main blip[0m
+[0;32mI (156228) main: Main blip[0m
+[0;32mI (157228) main: Main blip[0m
+[0;32mI (158228) main: Main blip[0m
+[0;32mI (159228) main: Main blip[0m
+[0;32mI (160228) main: Main blip[0m
+[0;32mI (161228) main: Main blip[0m
+[0;32mI (162228) main: Main blip[0m
+[0;32mI (163228) main: Main blip[0m
+[0;32mI (164228) main: Main blip[0m
+[0;32mI (165228) main: Main blip[0m
+[0;32mI (166228) main: Main blip[0m
+[0;32mI (167228) main: Main blip[0m
+[0;32mI (168228) main: Main blip[0m
+[0;32mI (169228) main: Main blip[0m
+[0;32mI (170228) main: Main blip[0m
+[0;32mI (171228) main: Main blip[0m
+[0;32mI (172228) main: Main blip[0m
+[0;32mI (173228) main: Main blip[0m
+[0;32mI (174228) main: Main blip[0m
+[0;32mI (175228) main: Main blip[0m
+[0;32mI (176228) main: Main blip[0m
+[0;32mI (177228) main: Main blip[0m
+[0;32mI (178228) main: Main blip[0m
+[0;32mI (179228) main: Main blip[0m
+[0;32mI (180228) main: Main blip[0m
+[0;32mI (181228) main: Main blip[0m
+[0;32mI (182228) main: Main blip[0m
+[0;32mI (183228) main: Main blip[0m
+[0;32mI (184228) main: Main blip[0m
+[0;32mI (185228) main: Main blip[0m
+[0;32mI (186228) main: Main blip[0m
+[0;32mI (187228) main: Main blip[0m
+[0;32mI (188228) main: Main blip[0m
+[0;32mI (189228) main: Main blip[0m
+[0;32mI (190228) main: Main blip[0m
+[0;32mI (191228) main: Main blip[0m
+[0;32mI (192228) main: Main blip[0m
+[0;32mI (193228) main: Main blip[0m
+[0;32mI (194228) main: Main blip[0m
+[0;32mI (195228) main: Main blip[0m
+[0;32mI (196228) main: Main blip[0m
+[0;32mI (197228) main: Main blip[0m
+[0;32mI (198228) main: Main blip[0m
+[0;32mI (199228) main: Main blip[0m
+[0;32mI (200228) main: Main blip[0m
+[0;32mI (201228) main: Main blip[0m
+[0;32mI (202228) main: Main blip[0m
+[0;32mI (203228) main: Main blip[0m
+[0;32mI (204228) main: Main blip[0m
+[0;32mI (205228) main: Main blip[0m
+[0;32mI (206228) main: Main blip[0m
+[0;32mI (207228) main: Main blip[0m
+[0;32mI (208228) main: Main blip[0m
+[0;32mI (209228) main: Main blip[0m
+[0;32mI (210228) main: Main blip[0m
+[0;32mI (211228) main: Main blip[0m
+[0;32mI (212228) main: Main blip[0m
+[0;32mI (213228) main: Main blip[0m
+[0;32mI (214228) main: Main blip[0m
+[0;32mI (215228) main: Main blip[0m
+[0;32mI (216228) main: Main blip[0m
+[0;32mI (217228) main: Main blip[0m
+[0;32mI (218228) main: Main blip[0m
+[0;32mI (219228) main: Main blip[0m
+[0;32mI (220228) main: Main blip[0m
+[0;32mI (221228) main: Main blip[0m
+[0;32mI (222228) main: Main blip[0m
+[0;32mI (223228) main: Main blip[0m
+[0;32mI (224228) main: Main blip[0m
+[0;32mI (225228) main: Main blip[0m
+[0;32mI (226228) main: Main blip[0m
+[0;32mI (227228) main: Main blip[0m
+[0;32mI (228228) main: Main blip[0m
+[0;32mI (229228) main: Main blip[0m
+[0;32mI (230228) main: Main blip[0m
+[0;32mI (231228) main: Main blip[0m
+[0;32mI (232228) main: Main blip[0m
+[0;32mI (233228) main: Main blip[0m
+[0;32mI (234228) main: Main blip[0m
+[0;32mI (235228) main: Main blip[0m
+[0;32mI (236228) main: Main blip[0m
+[0;32mI (237228) main: Main blip[0m
+[0;32mI (238228) main: Main blip[0m
+[0;32mI (239228) main: Main blip[0m
+[0;32mI (240228) main: Main blip[0m
+[0;32mI (241228) main: Main blip[0m
+[0;32mI (242228) main: Main blip[0m
+[0;32mI (243228) main: Main blip[0m
+[0;32mI (244228) main: Main blip[0m
+[0;32mI (245228) main: Main blip[0m
+[0;32mI (246228) main: Main blip[0m
+[0;32mI (247228) main: Main blip[0m
+[0;32mI (248228) main: Main blip[0m
+[0;32mI (249228) main: Main blip[0m
+[0;32mI (250228) main: Main blip[0m
+[0;32mI (251228) main: Main blip[0m
+[0;32mI (252228) main: Main blip[0m
+[0;32mI (253228) main: Main blip[0m
+[0;32mI (254228) main: Main blip[0m
+[0;32mI (255228) main: Main blip[0m
+[0;32mI (256228) main: Main blip[0m
+[0;32mI (257228) main: Main blip[0m
+[0;32mI (258228) main: Main blip[0m
+[0;32mI (259228) main: Main blip[0m
+[0;32mI (260228) main: Main blip[0m
+[0;32mI (261228) main: Main blip[0m
+[0;32mI (262228) main: Main blip[0m
+[0;32mI (263228) main: Main blip[0m
+[0;32mI (264228) main: Main blip[0m
+[0;32mI (265228) main: Main blip[0m
+[0;32mI (266228) main: Main blip[0m
+[0;32mI (267228) main: Main blip[0m
+[0;32mI (268228) main: Main blip[0m
+[0;32mI (269228) main: Main blip[0m
+[0;32mI (270228) main: Main blip[0m
+[0;32mI (271228) main: Main blip[0m
+[0;32mI (272228) main: Main blip[0m
+[0;32mI (273228) main: Main blip[0m
+[0;32mI (274228) main: Main blip[0m
+[0;32mI (275228) main: Main blip[0m
+[0;32mI (276228) main: Main blip[0m
+[0;32mI (277228) main: Main blip[0m
+[0;32mI (278228) main: Main blip[0m
+[0;32mI (279228) main: Main blip[0m
+[0;32mI (280228) main: Main blip[0m
+[0;32mI (281228) main: Main blip[0m
+[0;32mI (282228) main: Main blip[0m
+[0;32mI (283228) main: Main blip[0m
+[0;32mI (284228) main: Main blip[0m
+[0;32mI (285228) main: Main blip[0m
+[0;32mI (286228) main: Main blip[0m
+[0;32mI (287228) main: Main blip[0m
+[0;32mI (288228) main: Main blip[0m
+[0;32mI (289228) main: Main blip[0m
+[0;32mI (290228) main: Main blip[0m
+[0;32mI (291228) main: Main blip[0m
+[0;32mI (292228) main: Main blip[0m
+[0;32mI (293228) main: Main blip[0m
+[0;32mI (294228) main: Main blip[0m
+[0;32mI (295228) main: Main blip[0m
+[0;32mI (296228) main: Main blip[0m
+[0;32mI (297228) main: Main blip[0m
+[0;32mI (298228) main: Main blip[0m
+[0;32mI (299228) main: Main blip[0m
+[0;32mI (300228) main: Main blip[0m
+[0;32mI (301228) main: Main blip[0m
+[0;32mI (302228) main: Main blip[0m
+[0;32mI (303228) main: Main blip[0m
+[0;32mI (304228) main: Main blip[0m
+[0;32mI (305228) main: Main blip[0m
+[0;32mI (306228) main: Main blip[0m
+[0;32mI (307228) main: Main blip[0m
+[0;32mI (308228) main: Main blip[0m
+[0;32mI (309228) main: Main blip[0m
+[0;32mI (310228) main: Main blip[0m
+[0;32mI (311228) main: Main blip[0m
+[0;32mI (312228) main: Main blip[0m
+[0;32mI (313228) main: Main blip[0m
+[0;32mI (314228) main: Main blip[0m
+[0;32mI (315228) main: Main blip[0m
+[0;32mI (316228) main: Main blip[0m
+[0;32mI (317228) main: Main blip[0m
+[0;32mI (318228) main: Main blip[0m
+[0;32mI (319228) main: Main blip[0m
+[0;32mI (320228) main: Main blip[0m
+[0;32mI (321228) main: Main blip[0m
+[0;32mI (322228) main: Main blip[0m
+[0;32mI (323228) main: Main blip[0m
+[0;32mI (324228) main: Main blip[0m
+[0;32mI (325228) main: Main blip[0m
+[0;32mI (326228) main: Main blip[0m
+[0;32mI (327228) main: Main blip[0m
+[0;32mI (328228) main: Main blip[0m
+[0;32mI (329228) main: Main blip[0m
+[0;32mI (330228) main: Main blip[0m
+[0;32mI (331228) main: Main blip[0m
+[0;32mI (332228) main: Main blip[0m
+[0;32mI (333228) main: Main blip[0m
+[0;32mI (334228) main: Main blip[0m
+[0;32mI (335228) main: Main blip[0m
+[0;32mI (336228) main: Main blip[0m
+[0;32mI (337228) main: Main blip[0m
+[0;32mI (338228) main: Main blip[0m
+[0;32mI (339228) main: Main blip[0m
+[0;32mI (340228) main: Main blip[0m
+[0;32mI (341228) main: Main blip[0m
+[0;32mI (342228) main: Main blip[0m
+[0;32mI (343228) main: Main blip[0m
+[0;32mI (344228) main: Main blip[0m
+[0;32mI (345228) main: Main blip[0m
+[0;32mI (346228) main: Main blip[0m
+[0;32mI (347228) main: Main blip[0m
+[0;32mI (348228) main: Main blip[0m
+[0;32mI (349228) main: Main blip[0m
+[0;32mI (350228) main: Main blip[0m
+[0;32mI (351228) main: Main blip[0m
+[0;32mI (352228) main: Main blip[0m
+[0;32mI (353228) main: Main blip[0m
+[0;32mI (354228) main: Main blip[0m
+[0;32mI (355228) main: Main blip[0m
+[0;32mI (356228) main: Main blip[0m
+[0;32mI (357228) main: Main blip[0m
+[0;32mI (358228) main: Main blip[0m
+[0;32mI (359228) main: Main blip[0m
+[0;32mI (360228) main: Main blip[0m
+[0;32mI (361228) main: Main blip[0m
+[0;32mI (362228) main: Main blip[0m
+[0;32mI (363228) main: Main blip[0m
+[0;32mI (364228) main: Main blip[0m
+[0;32mI (365228) main: Main blip[0m
+[0;32mI (366228) main: Main blip[0m
+[0;32mI (367228) main: Main blip[0m
+[0;32mI (368228) main: Main blip[0m
+[0;32mI (369228) main: Main blip[0m
+[0;32mI (370228) main: Main blip[0m
+[0;32mI (371228) main: Main blip[0m
+[0;32mI (372228) main: Main blip[0m
+[0;32mI (373228) main: Main blip[0m
+[0;32mI (374228) main: Main blip[0m
+[0;32mI (375228) main: Main blip[0m
+[0;32mI (376228) main: Main blip[0m
+[0;32mI (377228) main: Main blip[0m
+[0;32mI (378228) main: Main blip[0m
+[0;32mI (379228) main: Main blip[0m
+[0;32mI (380228) main: Main blip[0m
+[0;32mI (381228) main: Main blip[0m
+[0;32mI (382228) main: Main blip[0m
+[0;32mI (383228) main: Main blip[0m

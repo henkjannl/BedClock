@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "Bedclock_IDF_V10",
+			"path": "../Bedclock_IDF_V10"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"i2c.h": "c"
+		}
+	}
+}

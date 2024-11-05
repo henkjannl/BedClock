@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdio.h>
+#include <stdlib.h> 
 
 /* Selected item:
   0: Sleep mode
@@ -11,11 +12,11 @@
   5: Modify display intensity
 */
 
-#define COMMON_MAX_LED_INTENSITY 4
-#define COMMON_MAX_LED_COLOR 4
-#define COMMON_MAX_LED_TIMER 4
-#define COMMON_MAX_DISPLAY_INTENSITY 4
-#define COMMON_MAX_SELECTED_ITEM 5
+#define COMMON_MAX_LED_INTENSITY      4
+#define COMMON_MAX_LED_COLOR          3
+#define COMMON_MAX_LED_TIMER          4
+#define COMMON_MAX_DISPLAY_INTENSITY  4
+#define COMMON_MAX_SELECTED_ITEM      5
 
 // ### TYPE DEFINITIONS ###
 typedef enum {
@@ -23,7 +24,8 @@ typedef enum {
   CMD_BTN_LEFT_PRESSED,
   CMD_BTN_TOP_PRESSED,
   CMD_BTN_RIGHT_PRESSED,
-  CMD_SETTINGS_CHANGED
+  CMD_SETTINGS_CHANGED,
+  CMD_LIGHT_SWITCHED_ON
 } common_command_t;
 
 typedef struct {
@@ -37,10 +39,17 @@ typedef struct {
 // ### GLOBAL TYPES ##
 
 // Must be protected by a semaphore
+// Default values are defined here
 common_settings_t common_settings = {
     .led_intensity=0,
     .led_color = 0,
     .led_timer = 3,
     .display_intensity = COMMON_MAX_DISPLAY_INTENSITY,
     .selected_item = 1
+};
+
+
+// Function to create a random number between 0 and 1
+float random_float() {
+   return (float)rand() / (float)RAND_MAX;
 };

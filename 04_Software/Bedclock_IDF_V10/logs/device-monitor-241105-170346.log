@@ -1,0 +1,571 @@
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7176
+load:0x40078000,len:15564
+ho 0 tail 12 room 4
+load:0x40080400,len:4
+load:0x40080404,len:3904
+entry 0x40080638
+[0;32mI (30) boot: ESP-IDF 5.3.1 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Nov  5 2024 15:36:01[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (34) boot: chip revision: v1.0[0m
+[0;32mI (38) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (43) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (47) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (52) boot: Enabling RNG early entropy source...[0m
+[0;32mI (57) boot: Partition Table:[0m
+[0;32mI (61) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (68) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (75) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (83) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (90) boot: End of partition table[0m
+[0;32mI (95) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=23a14h (145940) map[0m
+[0;32mI (153) esp_image: segment 1: paddr=00033a3c vaddr=3ffb0000 size=04680h ( 18048) load[0m
+[0;32mI (160) esp_image: segment 2: paddr=000380c4 vaddr=40080000 size=07f54h ( 32596) load[0m
+[0;32mI (173) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=8eadch (584412) map[0m
+[0;32mI (374) esp_image: segment 4: paddr=000ceb04 vaddr=40087f54 size=116cch ( 71372) load[0m
+[0;32mI (415) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (415) boot: Disabling RNG early entropy source...[0m
+[0;32mI (427) cpu_start: Multicore app[0m
+[0;32mI (435) cpu_start: Pro cpu start user code[0m
+[0;32mI (435) cpu_start: cpu freq: 240000000 Hz[0m
+[0;32mI (435) app_init: Application information:[0m
+[0;32mI (438) app_init: Project name:     Bedclock_IDF_V10[0m
+[0;32mI (444) app_init: App version:      1[0m
+[0;32mI (448) app_init: Compile time:     Nov  5 2024 15:35:35[0m
+[0;32mI (454) app_init: ELF file SHA256:  a77e62b9c...[0m
+[0;32mI (459) app_init: ESP-IDF:          5.3.1[0m
+[0;32mI (464) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (469) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (474) efuse_init: Chip rev:         v1.0[0m
+[0;32mI (479) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (486) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (492) heap_init: At 3FFB92B0 len 00026D50 (155 KiB): DRAM[0m
+[0;32mI (498) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (504) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (511) heap_init: At 40099620 len 000069E0 (26 KiB): IRAM[0m
+[0;32mI (518) spi_flash: detected chip: generic[0m
+[0;32mI (522) spi_flash: flash io: dio[0m
+[0;33mW (526) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (537) main_task: Started on CPU0[0m
+[0;32mI (547) main_task: Calling app_main()[0m
+[0;32mI (567) wifi station: ESP_WIFI_MODE_STA[0m
+I (587) wifi:wifi driver task: 3ffc12c0, prio:23, stack:6656, core=0
+I (597) wifi:wifi firmware version: ccaebfa
+I (597) wifi:wifi certification version: v7.0
+I (597) wifi:config NVS flash: enabled
+I (597) wifi:config nano formating: disabled
+I (597) wifi:Init data frame dynamic rx buffer num: 32
+I (607) wifi:Init static rx mgmt buffer num: 5
+I (607) wifi:Init management short buffer num: 32
+I (617) wifi:Init dynamic tx buffer num: 32
+I (617) wifi:Init static rx buffer size: 1600
+I (617) wifi:Init static rx buffer num: 10
+I (627) wifi:Init dynamic rx buffer num: 32
+[0;32mI (627) wifi_init: rx ba win: 6[0m
+[0;32mI (637) wifi_init: accept mbox: 6[0m
+[0;32mI (637) wifi_init: tcpip mbox: 32[0m
+[0;32mI (637) wifi_init: udp mbox: 6[0m
+[0;32mI (647) wifi_init: tcp mbox: 6[0m
+[0;32mI (647) wifi_init: tcp tx win: 5760[0m
+[0;32mI (657) wifi_init: tcp rx win: 5760[0m
+[0;32mI (657) wifi_init: tcp mss: 1440[0m
+[0;32mI (657) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (667) wifi_init: WiFi RX IRAM OP enabled[0m
+W (667) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2
+[0;32mI (677) phy_init: phy_version 4830,54550f7,Jun 20 2024,14:22:08[0m
+�ets Jun  8 2016 00:22:57
+
+rst:0x3 (SW_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7176
+load:0x40078000,len:15564
+ho 0 tail 12 room 4
+load:0x40080400,len:4
+load:0x40080404,len:3904
+entry 0x40080638
+[0;32mI (179) boot: ESP-IDF 5.3.1 2nd stage bootloader[0m
+[0;32mI (179) boot: compile time Nov  5 2024 15:36:01[0m
+[0;32mI (179) boot: Multicore bootloader[0m
+[0;32mI (184) boot: chip revision: v1.0[0m
+[0;32mI (188) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (193) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (198) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (202) boot: Enabling RNG early entropy source...[0m
+[0;32mI (208) boot: Partition Table:[0m
+[0;32mI (211) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (219) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (226) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (234) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (242) boot: End of partition table[0m
+[0;32mI (246) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=23a14h (145940) map[0m
+[0;32mI (304) esp_image: segment 1: paddr=00033a3c vaddr=3ffb0000 size=04680h ( 18048) load[0m
+[0;32mI (311) esp_image: segment 2: paddr=000380c4 vaddr=40080000 size=07f54h ( 32596) load[0m
+[0;32mI (324) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=8eadch (584412) map[0m
+[0;32mI (525) esp_image: segment 4: paddr=000ceb04 vaddr=40087f54 size=116cch ( 71372) load[0m
+[0;32mI (566) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (566) boot: Disabling RNG early entropy source...[0m
+[0;32mI (578) cpu_start: Multicore app[0m
+[0;32mI (586) cpu_start: Pro cpu start user code[0m
+[0;32mI (586) cpu_start: cpu freq: 240000000 Hz[0m
+[0;32mI (586) app_init: Application information:[0m
+[0;32mI (589) app_init: Project name:     Bedclock_IDF_V10[0m
+[0;32mI (595) app_init: App version:      1[0m
+[0;32mI (599) app_init: Compile time:     Nov  5 2024 15:35:35[0m
+[0;32mI (605) app_init: ELF file SHA256:  a77e62b9c...[0m
+[0;32mI (611) app_init: ESP-IDF:          5.3.1[0m
+[0;32mI (615) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (620) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (625) efuse_init: Chip rev:         v1.0[0m
+[0;32mI (630) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (637) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (643) heap_init: At 3FFB92B0 len 00026D50 (155 KiB): DRAM[0m
+[0;32mI (649) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (656) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (662) heap_init: At 40099620 len 000069E0 (26 KiB): IRAM[0m
+[0;32mI (670) spi_flash: detected chip: generic[0m
+[0;32mI (673) spi_flash: flash io: dio[0m
+[0;33mW (677) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (688) main_task: Started on CPU0[0m
+[0;32mI (698) main_task: Calling app_main()[0m
+[0;32mI (718) wifi station: ESP_WIFI_MODE_STA[0m
+I (738) wifi:wifi driver task: 3ffc12c0, prio:23, stack:6656, core=0
+I (748) wifi:wifi firmware version: ccaebfa
+I (748) wifi:wifi certification version: v7.0
+I (748) wifi:config NVS flash: enabled
+I (748) wifi:config nano formating: disabled
+I (748) wifi:Init data frame dynamic rx buffer num: 32
+I (758) wifi:Init static rx mgmt buffer num: 5
+I (758) wifi:Init management short buffer num: 32
+I (768) wifi:Init dynamic tx buffer num: 32
+I (768) wifi:Init static rx buffer size: 1600
+I (768) wifi:Init static rx buffer num: 10
+I (778) wifi:Init dynamic rx buffer num: 32
+[0;32mI (778) wifi_init: rx ba win: 6[0m
+[0;32mI (788) wifi_init: accept mbox: 6[0m
+[0;32mI (788) wifi_init: tcpip mbox: 32[0m
+[0;32mI (788) wifi_init: udp mbox: 6[0m
+[0;32mI (798) wifi_init: tcp mbox: 6[0m
+[0;32mI (798) wifi_init: tcp tx win: 5760[0m
+[0;32mI (808) wifi_init: tcp rx win: 5760[0m
+[0;32mI (808) wifi_init: tcp mss: 1440[0m
+[0;32mI (808) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (818) wifi_init: WiFi RX IRAM OP enabled[0m
+W (818) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2
+[0;32mI (828) phy_init: phy_version 4830,54550f7,Jun 20 2024,14:22:08[0m
+I (908) wifi:mode : sta (8c:aa:b5:8c:5a:cc)
+I (908) wifi:enable tsf
+[0;32mI (908) wifi station: wifi_init_sta finished.[0m
+I (918) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:9, snd_ch_cfg:0x0
+I (918) wifi:state: init -> auth (0xb0)
+I (938) wifi:state: auth -> assoc (0x0)
+I (948) wifi:state: assoc -> run (0x10)
+I (978) wifi:connected with Starbux, aid = 1, channel 1, BW20, bssid = 2c:3a:fd:bf:5d:7c
+I (978) wifi:security: WPA2-PSK, phy: bgn, rssi: -66
+I (978) wifi:pm start, type: 1
+
+I (978) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (1008) wifi:<ba-add>idx:0 (ifx:0, 2c:3a:fd:bf:5d:7c), tid:0, ssn:0, winSize:64
+I (1118) wifi:AP's beacon interval = 102400 us, DTIM period = 1
+[0;32mI (1988) esp_netif_handlers: sta ip: 192.168.178.160, mask: 255.255.255.0, gw: 192.168.178.1[0m
+[0;32mI (1988) wifi station: got ip:192.168.178.160[0m
+[0;32mI (1988) wifi station: connected to ap SSID:Starbux password:RodePleinMoskou2019[0m
+[0;32mI (1998) wifi station: Initializing SNTP[0m
+[0;31mE (1998) esp_netif_sntp: sntp_init_api(61): Tried to configure SNTP server from DHCP, while disabled. Please enable CONFIG_LWIP_DHCP_GET_NTP_SRV[0m
+[0;31mE (2018) esp_netif_sntp: esp_netif_sntp_init(119): Failed initialize SNTP service[0m
+[0;32mI (2028) wifi station: Starting SNTP[0m
+Local time in Amsterdam: 01:00:02
+[0;32mI (2028) display: INTERFACE is i2c[0m
+[0;32mI (2038) display: CONFIG_SDA_GPIO=21[0m
+[0;32mI (2038) display: CONFIG_SCL_GPIO=22[0m
+[0;32mI (2038) display: CONFIG_RESET_GPIO=-1[0m
+[0;32mI (2048) SSD1306: Legacy i2c driver is used[0m
+[0;32mI (2048) SSD1306: HenkJan: .master.clk_speed = 400000[0m
+[0;33mW (2058) display: Flip upside down[0m
+[0;32mI (2058) display: Panel is 128x32[0m
+[0;32mI (2068) SSD1306: OLED configured successfully[0m
+[0;32mI (2158) display: t1=1449373 t2=1492594 dt=43221. [0m
+[0;32mI (2158) keyboard: Starting keyboard task...[0m
+[0;32mI (2158) keyboard: Keyboard task started...[0m
+[0;32mI (2168) light: Starting light task...[0m
+[0;32mI (2168) light: Light task started...[0m
+[0;32mI (2168) light: Create RMT TX channel[0m
+[0;32mI (2178) gpio: GPIO[23]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (2188) light: Install led strip encoder[0m
+[0;32mI (2188) light: Enable RMT TX channel[0m
+[0;32mI (2198) light: Start LED rainbow chase[0m
+[0;32mI (2198) main: Main blip[0m
+[0;32mI (2268) display: Update clock due to minute change[0m
+[0;32mI (2318) display: t1=1600362 t2=1653752 dt=53390. [0m
+[0;32mI (3198) main: Main blip[0m
+[0;32mI (4208) main: Main blip[0m
+[0;32mI (5208) main: Main blip[0m
+[0;32mI (6118) keyboard: Left button filtered value 470[0m
+[0;32mI (6128) display: item received BTN_LEFT[0m
+[0;32mI (6188) display: t1=5462230 t2=5525896 dt=63666. [0m
+[0;32mI (6208) main: Main blip[0m
+[0;32mI (7208) main: Main blip[0m
+[0;32mI (8208) main: Main blip[0m
+[0;32mI (8588) keyboard: Right button filtered value 300[0m
+[0;32mI (8588) display: item received BTN_RIGHT[0m
+[0;32mI (8588) display: Increase LED intensity[0m
+[0;32mI (8648) display: t1=7925932 t2=7987877 dt=61945. [0m
+[0;32mI (8698) light: R: 0.000 G: 0.000 B: 0.000[0m
+[0;32mI (8698) light: Red int 0.000 fraction 0.000[0m
+[0;32mI (8698) light: Green int 0.000 fraction 0.000[0m
+[0;32mI (8698) light: Blue int 0.000 fraction 0.000[0m
+[0;32mI (9208) main: Main blip[0m
+[0;32mI (9548) keyboard: Top button filtered value 321[0m
+[0;32mI (9558) light: Light manually switched on[0m
+[0;32mI (9558) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (9558) light: Red int 2.000 fraction 0.520[0m
+[0;32mI (9558) light: Green int 2.000 fraction 0.520[0m
+[0;32mI (9568) light: Blue int 2.000 fraction 0.520[0m
+[0;32mI (9638) display: t1=8907306 t2=8973459 dt=66153. [0m
+[0;32mI (10208) main: Main blip[0m
+[0;32mI (11208) main: Main blip[0m
+[0;32mI (12208) main: Main blip[0m
+[0;32mI (12508) keyboard: Right button filtered value 59[0m
+[0;32mI (12538) display: item received BTN_RIGHT[0m
+[0;32mI (12538) display: Increase LED intensity[0m
+[0;32mI (12598) display: t1=11869988 t2=11934491 dt=64503. [0m
+[0;32mI (12698) light: R: 6.320 G: 6.320 B: 6.320[0m
+[0;32mI (12698) light: Red int 6.000 fraction 0.320[0m
+[0;32mI (12698) light: Green int 6.000 fraction 0.320[0m
+[0;32mI (12698) light: Blue int 6.000 fraction 0.320[0m
+[0;32mI (13208) main: Main blip[0m
+[0;32mI (13528) keyboard: Right button filtered value 154[0m
+[0;32mI (13558) display: item received BTN_RIGHT[0m
+[0;32mI (13558) display: Increase LED intensity[0m
+[0;32mI (13588) light: R: 15.920 G: 15.920 B: 15.920[0m
+[0;32mI (13588) light: Red int 15.000 fraction 0.920[0m
+[0;32mI (13588) light: Green int 15.000 fraction 0.920[0m
+[0;32mI (13588) light: Blue int 15.000 fraction 0.920[0m
+[0;32mI (13628) display: t1=12889981 t2=12964756 dt=74775. [0m
+[0;32mI (14208) main: Main blip[0m
+[0;32mI (14258) keyboard: Right button filtered value 457[0m
+[0;32mI (14288) display: item received BTN_RIGHT[0m
+[0;32mI (14288) display: Increase LED intensity[0m
+[0;32mI (14348) display: t1=13619977 t2=13683277 dt=63300. [0m
+[0;32mI (14478) light: R: 40.000 G: 40.000 B: 40.000[0m
+[0;32mI (14478) light: Red int 40.000 fraction 0.000[0m
+[0;32mI (14478) light: Green int 40.000 fraction 0.000[0m
+[0;32mI (14478) light: Blue int 40.000 fraction 0.000[0m
+[0;32mI (14918) keyboard: Right button filtered value 459[0m
+[0;32mI (14918) display: item received BTN_RIGHT[0m
+[0;32mI (14918) display: Increase LED intensity[0m
+[0;32mI (14988) display: t1=14255766 t2=14320400 dt=64634. [0m
+[0;32mI (15128) light: R: 1.000 G: 1.000 B: 1.000[0m
+[0;32mI (15128) light: Red int 1.000 fraction 0.000[0m
+[0;32mI (15128) light: Green int 1.000 fraction 0.000[0m
+[0;32mI (15128) light: Blue int 1.000 fraction 0.000[0m
+[0;32mI (15218) main: Main blip[0m
+[0;32mI (16218) main: Main blip[0m
+[0;32mI (16838) keyboard: Right button filtered value 366[0m
+[0;32mI (16838) display: item received BTN_RIGHT[0m
+[0;32mI (16838) display: Increase LED intensity[0m
+[0;32mI (16898) display: t1=16175713 t2=16239124 dt=63411. [0m
+[0;32mI (17028) light: R: 2.520 G: 2.520 B: 2.520[0m
+[0;32mI (17028) light: Red int 2.000 fraction 0.520[0m
+[0;32mI (17028) light: Green int 2.000 fraction 0.520[0m
+[0;32mI (17028) light: Blue int 2.000 fraction 0.520[0m
+[0;32mI (17218) main: Main blip[0m
+[0;32mI (18218) main: Main blip[0m
+[0;32mI (18938) keyboard: Right button filtered value 450[0m
+[0;32mI (18938) display: item received BTN_RIGHT[0m
+[0;32mI (18938) display: Increase LED intensity[0m
+[0;32mI (18998) display: t1=18275864 t2=18337849 dt=61985. [0m
+[0;32mI (19168) light: R: 6.320 G: 6.320 B: 6.320[0m
+[0;32mI (19168) light: Red int 6.000 fraction 0.320[0m
+[0;32mI (19168) light: Green int 6.000 fraction 0.320[0m
+[0;32mI (19168) light: Blue int 6.000 fraction 0.320[0m
+[0;32mI (19218) main: Main blip[0m
+[0;32mI (19428) keyboard: Right button filtered value 84[0m
+[0;32mI (19428) display: item received BTN_RIGHT[0m
+[0;32mI (19428) display: Increase LED intensity[0m
+[0;32mI (19438) light: R: 15.920 G: 15.920 B: 15.920[0m
+[0;32mI (19438) light: Red int 15.000 fraction 0.920[0m
+[0;32mI (19438) light: Green int 15.000 fraction 0.920[0m
+[0;32mI (19448) light: Blue int 15.000 fraction 0.920[0m
+[0;32mI (19508) display: t1=18765587 t2=18846761 dt=81174. [0m
+[0;32mI (19968) keyboard: Right button filtered value 130[0m
+[0;32mI (19968) display: item received BTN_RIGHT[0m
+[0;32mI (19968) display: Increase LED intensity[0m
+[0;32mI (20028) display: t1=19305933 t2=19368118 dt=62185. [0m
+[0;32mI (20078) light: R: 40.000 G: 40.000 B: 40.000[0m
+[0;32mI (20078) light: Red int 40.000 fraction 0.000[0m
+[0;32mI (20078) light: Green int 40.000 fraction 0.000[0m
+[0;32mI (20078) light: Blue int 40.000 fraction 0.000[0m
+[0;32mI (20218) main: Main blip[0m
+[0;32mI (20458) keyboard: Right button filtered value 425[0m
+[0;32mI (20458) display: item received BTN_RIGHT[0m
+[0;32mI (20458) display: Increase LED intensity[0m
+[0;32mI (20468) light: R: 1.000 G: 1.000 B: 1.000[0m
+[0;32mI (20468) light: Red int 1.000 fraction 0.000[0m
+[0;32mI (20468) light: Green int 1.000 fraction 0.000[0m
+[0;32mI (20478) light: Blue int 1.000 fraction 0.000[0m
+[0;32mI (20538) display: t1=19796723 t2=19877058 dt=80335. [0m
+[0;32mI (21218) main: Main blip[0m
+[0;32mI (22218) main: Main blip[0m
+[0;32mI (22248) keyboard: Left button filtered value 355[0m
+[0;32mI (22258) display: item received BTN_LEFT[0m
+[0;32mI (22318) display: t1=21591720 t2=21653556 dt=61836. [0m
+[0;32mI (23158) keyboard: Right button filtered value 323[0m
+[0;32mI (23158) display: item received BTN_RIGHT[0m
+[0;32mI (23158) display: Increase LED color[0m
+[0;32mI (23218) main: Main blip[0m
+[0;32mI (23218) display: t1=22495544 t2=22556793 dt=61249. [0m
+[0;32mI (23358) light: R: 1.179 G: 1.151 B: 0.670[0m
+[0;32mI (23358) light: Red int 1.000 fraction 0.179[0m
+[0;32mI (23358) light: Green int 1.000 fraction 0.151[0m
+[0;32mI (23358) light: Blue int 0.000 fraction 0.670[0m
+[0;32mI (24218) main: Main blip[0m
+[0;32mI (24538) keyboard: Right button filtered value 254[0m
+[0;32mI (24538) display: item received BTN_RIGHT[0m
+[0;32mI (24538) display: Increase LED color[0m
+[0;32mI (24598) display: t1=23875313 t2=23937106 dt=61793. [0m
+[0;32mI (24758) light: R: 1.281 G: 0.990 B: 0.729[0m
+[0;32mI (24758) light: Red int 1.000 fraction 0.281[0m
+[0;32mI (24758) light: Green int 0.000 fraction 0.990[0m
+[0;32mI (24758) light: Blue int 0.000 fraction 0.729[0m
+[0;32mI (25218) main: Main blip[0m
+[0;32mI (26218) main: Main blip[0m
+[0;32mI (27218) main: Main blip[0m
+[0;32mI (27298) keyboard: Right button filtered value 262[0m
+[0;32mI (27298) display: item received BTN_RIGHT[0m
+[0;32mI (27298) display: Increase LED color[0m
+[0;32mI (27358) display: t1=26635087 t2=26696765 dt=61678. [0m
+[0;32mI (27408) light: R: 1.800 G: 0.600 B: 0.600[0m
+[0;32mI (27408) light: Red int 1.000 fraction 0.800[0m
+[0;32mI (27408) light: Green int 0.000 fraction 0.600[0m
+[0;32mI (27408) light: Blue int 0.000 fraction 0.600[0m
+[0;32mI (28218) main: Main blip[0m
+[0;32mI (29218) main: Main blip[0m
+[0;32mI (30218) main: Main blip[0m
+[0;32mI (30598) keyboard: Right button filtered value 239[0m
+[0;32mI (30598) display: item received BTN_RIGHT[0m
+[0;32mI (30598) display: Increase LED color[0m
+[0;32mI (30658) display: t1=29935392 t2=29994705 dt=59313. [0m
+[0;32mI (30798) light: R: 1.000 G: 1.000 B: 1.000[0m
+[0;32mI (30798) light: Red int 1.000 fraction 0.000[0m
+[0;32mI (30798) light: Green int 1.000 fraction 0.000[0m
+[0;32mI (30798) light: Blue int 1.000 fraction 0.000[0m
+[0;32mI (31218) main: Main blip[0m
+[0;32mI (32158) keyboard: Right button filtered value 59[0m
+[0;32mI (32158) display: item received BTN_RIGHT[0m
+[0;32mI (32158) display: Increase LED color[0m
+[0;32mI (32198) light: R: 1.179 G: 1.151 B: 0.670[0m
+[0;32mI (32198) light: Red int 1.000 fraction 0.179[0m
+[0;32mI (32198) light: Green int 1.000 fraction 0.151[0m
+[0;32mI (32198) light: Blue int 0.000 fraction 0.670[0m
+[0;32mI (32218) main: Main blip[0m
+[0;32mI (32228) display: t1=31495454 t2=31568225 dt=72771. [0m
+[0;32mI (33218) main: Main blip[0m
+[0;32mI (34218) main: Main blip[0m
+[0;32mI (35218) main: Main blip[0m
+[0;32mI (35938) keyboard: Right button filtered value 74[0m
+[0;32mI (35938) display: item received BTN_RIGHT[0m
+[0;32mI (35938) display: Increase LED color[0m
+[0;32mI (35998) display: t1=35275425 t2=35334621 dt=59196. [0m
+[0;32mI (36098) light: R: 1.281 G: 0.990 B: 0.729[0m
+[0;32mI (36098) light: Red int 1.000 fraction 0.281[0m
+[0;32mI (36098) light: Green int 0.000 fraction 0.990[0m
+[0;32mI (36098) light: Blue int 0.000 fraction 0.729[0m
+[0;32mI (36218) main: Main blip[0m
+[0;32mI (37218) main: Main blip[0m
+[0;32mI (37498) keyboard: Right button filtered value 104[0m
+[0;32mI (37498) display: item received BTN_RIGHT[0m
+[0;32mI (37498) display: Increase LED color[0m
+[0;32mI (37558) display: t1=36835462 t2=36895977 dt=60515. [0m
+[0;32mI (37748) light: R: 1.800 G: 0.600 B: 0.600[0m
+[0;32mI (37748) light: Red int 1.000 fraction 0.800[0m
+[0;32mI (37748) light: Green int 0.000 fraction 0.600[0m
+[0;32mI (37748) light: Blue int 0.000 fraction 0.600[0m
+[0;32mI (38218) main: Main blip[0m
+[0;32mI (39218) main: Main blip[0m
+[0;32mI (39718) keyboard: Right button filtered value 457[0m
+[0;32mI (39718) display: item received BTN_RIGHT[0m
+[0;32mI (39718) display: Increase LED color[0m
+[0;32mI (39778) display: t1=39055504 t2=39114775 dt=59271. [0m
+[0;32mI (39888) light: R: 1.000 G: 1.000 B: 1.000[0m
+[0;32mI (39888) light: Red int 1.000 fraction 0.000[0m
+[0;32mI (39888) light: Green int 1.000 fraction 0.000[0m
+[0;32mI (39888) light: Blue int 1.000 fraction 0.000[0m
+[0;32mI (40218) main: Main blip[0m
+[0;32mI (41228) main: Main blip[0m
+[0;32mI (42228) main: Main blip[0m
+[0;32mI (42248) keyboard: Right button filtered value 300[0m
+[0;32mI (42248) display: item received BTN_RIGHT[0m
+[0;32mI (42248) display: Increase LED color[0m
+[0;32mI (42288) light: R: 1.179 G: 1.151 B: 0.670[0m
+[0;32mI (42288) light: Red int 1.000 fraction 0.179[0m
+[0;32mI (42288) light: Green int 1.000 fraction 0.151[0m
+[0;32mI (42288) light: Blue int 0.000 fraction 0.670[0m
+[0;32mI (42318) display: t1=41585006 t2=41657163 dt=72157. [0m
+[0;32mI (42728) keyboard: Right button filtered value 410[0m
+[0;32mI (42728) display: item received BTN_RIGHT[0m
+[0;32mI (42728) display: Increase LED color[0m
+[0;32mI (42788) display: t1=42065800 t2=42127440 dt=61640. [0m
+[0;32mI (42938) light: R: 1.281 G: 0.990 B: 0.729[0m
+[0;32mI (42938) light: Red int 1.000 fraction 0.281[0m
+[0;32mI (42938) light: Green int 0.000 fraction 0.990[0m
+[0;32mI (42938) light: Blue int 0.000 fraction 0.729[0m
+[0;32mI (43228) main: Main blip[0m
+[0;32mI (44228) main: Main blip[0m
+[0;32mI (44818) keyboard: Left button filtered value 221[0m
+[0;32mI (44828) display: item received BTN_LEFT[0m
+[0;32mI (44888) display: t1=44162195 t2=44221872 dt=59677. [0m
+[0;32mI (45228) main: Main blip[0m
+[0;32mI (46228) main: Main blip[0m
+[0;32mI (46678) keyboard: Left button filtered value 165[0m
+[0;32mI (46688) display: item received BTN_LEFT[0m
+[0;32mI (46748) display: t1=46022184 t2=46083450 dt=61266. [0m
+[0;32mI (47228) main: Main blip[0m
+[0;32mI (48058) keyboard: Left button filtered value 114[0m
+[0;32mI (48068) display: item received BTN_LEFT[0m
+[0;32mI (48108) display: t1=47402082 t2=47446199 dt=44117. [0m
+[0;32mI (48228) main: Main blip[0m
+[0;32mI (49228) main: Main blip[0m
+[0;32mI (49918) keyboard: Left button filtered value 58[0m
+[0;32mI (49958) display: item received BTN_LEFT[0m
+[0;32mI (50018) display: t1=49290195 t2=49352413 dt=62218. [0m
+[0;32mI (50228) main: Main blip[0m
+[0;32mI (50708) keyboard: Right button filtered value 123[0m
+[0;32mI (50708) display: item received BTN_RIGHT[0m
+[0;32mI (50708) display: Increase LED intensity[0m
+[0;32mI (50778) display: t1=50045708 t2=50110880 dt=65172. [0m
+[0;32mI (50838) light: R: 3.228 G: 2.495 B: 1.837[0m
+[0;32mI (50838) light: Red int 3.000 fraction 0.228[0m
+[0;32mI (50838) light: Green int 2.000 fraction 0.495[0m
+[0;32mI (50838) light: Blue int 1.000 fraction 0.837[0m
+[0;32mI (51228) main: Main blip[0m
+[0;32mI (52228) main: Main blip[0m
+[0;32mI (52498) keyboard: Left button filtered value 18[0m
+[0;32mI (52508) display: item received BTN_LEFT[0m
+[0;32mI (52568) display: t1=51842142 t2=51901278 dt=59136. [0m
+[0;32mI (53038) keyboard: Left button filtered value 20[0m
+[0;32mI (53078) display: item received BTN_LEFT[0m
+[0;32mI (53138) display: t1=52409901 t2=52470337 dt=60436. [0m
+[0;32mI (53228) main: Main blip[0m
+[0;32mI (53578) keyboard: Left button filtered value 108[0m
+[0;32mI (53588) display: item received BTN_LEFT[0m
+[0;32mI (53648) display: t1=52921969 t2=52985346 dt=63377. [0m
+[0;32mI (54228) main: Main blip[0m
+[0;32mI (55228) main: Main blip[0m
+[0;32mI (56228) main: Main blip[0m
+[0;32mI (57228) main: Main blip[0m
+[0;32mI (58228) main: Main blip[0m
+[0;32mI (59228) main: Main blip[0m
+[0;32mI (60228) main: Main blip[0m
+[0;32mI (61228) main: Main blip[0m
+[0;32mI (62228) main: Main blip[0m
+[0;32mI (63228) main: Main blip[0m
+[0;32mI (64228) main: Main blip[0m
+[0;32mI (65228) main: Main blip[0m
+[0;32mI (66228) main: Main blip[0m
+[0;32mI (67228) main: Main blip[0m
+[0;32mI (68228) main: Main blip[0m
+[0;32mI (69228) main: Main blip[0m
+[0;32mI (70228) main: Main blip[0m
+[0;32mI (71228) main: Main blip[0m
+[0;32mI (72228) main: Main blip[0m
+[0;32mI (73228) main: Main blip[0m
+[0;32mI (73608) display: Display back to sleep[0m
+[0;32mI (74228) main: Main blip[0m
+[0;32mI (75228) main: Main blip[0m
+[0;32mI (76228) main: Main blip[0m
+[0;32mI (77228) main: Main blip[0m
+[0;32mI (78228) main: Main blip[0m
+[0;32mI (79228) main: Main blip[0m
+[0;32mI (80228) main: Main blip[0m
+[0;32mI (81228) main: Main blip[0m
+[0;32mI (82228) main: Main blip[0m
+[0;32mI (83228) main: Main blip[0m
+[0;32mI (84228) main: Main blip[0m
+[0;32mI (85228) main: Main blip[0m
+[0;32mI (86228) main: Main blip[0m
+[0;32mI (87228) main: Main blip[0m
+[0;32mI (88228) main: Main blip[0m
+[0;32mI (89228) main: Main blip[0m
+[0;32mI (90228) main: Main blip[0m
+[0;32mI (91228) main: Main blip[0m
+[0;32mI (92228) main: Main blip[0m
+[0;32mI (93228) main: Main blip[0m
+[0;32mI (94228) main: Main blip[0m
+[0;32mI (95228) main: Main blip[0m
+[0;32mI (96228) main: Main blip[0m
+[0;32mI (97228) main: Main blip[0m
+[0;32mI (98228) main: Main blip[0m
+[0;32mI (99228) main: Main blip[0m
+[0;32mI (100228) main: Main blip[0m
+[0;32mI (101228) main: Main blip[0m
+[0;32mI (102228) main: Main blip[0m
+[0;32mI (103228) main: Main blip[0m
+[0;32mI (104228) main: Main blip[0m
+[0;32mI (105228) main: Main blip[0m
+[0;32mI (106228) main: Main blip[0m
+[0;32mI (107228) main: Main blip[0m
+[0;32mI (108228) main: Main blip[0m
+[0;32mI (109228) main: Main blip[0m
+[0;32mI (110228) main: Main blip[0m
+[0;32mI (111228) main: Main blip[0m
+[0;32mI (112228) main: Main blip[0m
+[0;32mI (113228) main: Main blip[0m
+[0;32mI (114228) main: Main blip[0m
+[0;32mI (115228) main: Main blip[0m
+[0;32mI (116228) main: Main blip[0m
+[0;32mI (117228) main: Main blip[0m
+[0;32mI (118228) main: Main blip[0m
+[0;32mI (119228) main: Main blip[0m
+[0;32mI (120228) main: Main blip[0m
+[0;32mI (121228) main: Main blip[0m
+[0;32mI (122228) main: Main blip[0m
+[0;32mI (123228) main: Main blip[0m
+[0;32mI (124228) main: Main blip[0m
+[0;32mI (125228) main: Main blip[0m
+[0;32mI (126228) main: Main blip[0m
+[0;32mI (127228) main: Main blip[0m
+[0;32mI (128228) main: Main blip[0m
+[0;32mI (129228) main: Main blip[0m
+[0;32mI (130228) main: Main blip[0m
+[0;32mI (131228) main: Main blip[0m
+[0;32mI (132228) main: Main blip[0m
+[0;32mI (133228) main: Main blip[0m
+[0;32mI (134228) main: Main blip[0m
+[0;32mI (135228) main: Main blip[0m
+[0;32mI (136228) main: Main blip[0m
+[0;32mI (137228) main: Main blip[0m
+[0;32mI (138228) main: Main blip[0m
+[0;32mI (139228) main: Main blip[0m
+[0;32mI (140228) main: Main blip[0m
+[0;32mI (141228) main: Main blip[0m
+[0;32mI (142228) main: Main blip[0m
+[0;32mI (143228) main: Main blip[0m
+[0;32mI (144228) main: Main blip[0m
+[0;32mI (145228) main: Main blip[0m
+[0;32mI (146228) main: Main blip[0m
+[0;32mI (147228) main: Main blip[0m
+[0;32mI (148228) main: Main blip[0m
+[0;32mI (149228) main: Main blip[0m
+[0;32mI (150228) main: Main blip[0m
+[0;32mI (151228) main: Main blip[0m
+[0;32mI (152228) main: Main blip[0m
+[0;32mI (153228) main: Main blip[0m
+[0;32mI (154228) main: Main blip[0m
+[0;32mI (155228) main: Main blip[0m
+[0;32mI (156228) main: Main blip[0m
+[0;32mI (157228) main: Main blip[0m
+[0;32mI (158228) main: Main blip[0m
+[0;32mI (159228) main: Main blip[0m
+[0;32mI (160228) main: Main blip[0m
+[0;32mI (161228) main: Main blip[0m
+[0;32mI (162228) main: Main blip[0m
+[0;32mI (163228) main: Main blip[0m
+[0;32mI (164228) main: Main blip[0m

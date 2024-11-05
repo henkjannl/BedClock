@@ -1,0 +1,2589 @@
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7176
+load:0x40078000,len:15564
+ho 0 tail 12 room 4
+load:0x40080400,len:4
+load:0x40080404,len:3904
+entry 0x40080638
+[0;32mI (30) boot: ESP-IDF 5.3.1 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Nov  5 2024 12:55:28[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (34) boot: chip revision: v1.0[0m
+[0;32mI (38) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (43) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (47) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (52) boot: Enabling RNG early entropy source...[0m
+[0;32mI (57) boot: Partition Table:[0m
+[0;32mI (61) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (68) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (76) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (83) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (91) boot: End of partition table[0m
+[0;32mI (95) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=0b3f0h ( 46064) map[0m
+[0;32mI (119) esp_image: segment 1: paddr=0001b418 vaddr=3ffb0000 size=02378h (  9080) load[0m
+[0;32mI (123) esp_image: segment 2: paddr=0001d798 vaddr=40080000 size=02880h ( 10368) load[0m
+[0;32mI (129) esp_image: segment 3: paddr=00020020 vaddr=400d0020 size=168bch ( 92348) map[0m
+[0;32mI (165) esp_image: segment 4: paddr=000368e4 vaddr=40082880 size=0b628h ( 46632) load[0m
+[0;32mI (190) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (191) boot: Disabling RNG early entropy source...[0m
+[0;32mI (202) cpu_start: Multicore app[0m
+[0;32mI (211) cpu_start: Pro cpu start user code[0m
+[0;32mI (211) cpu_start: cpu freq: 240000000 Hz[0m
+[0;32mI (211) app_init: Application information:[0m
+[0;32mI (214) app_init: Project name:     Bedclock_IDF_V11[0m
+[0;32mI (219) app_init: App version:      1[0m
+[0;32mI (224) app_init: Compile time:     Nov  5 2024 12:54:46[0m
+[0;32mI (230) app_init: ELF file SHA256:  91c7437b6...[0m
+[0;32mI (235) app_init: ESP-IDF:          5.3.1[0m
+[0;32mI (240) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (244) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (249) efuse_init: Chip rev:         v1.0[0m
+[0;32mI (254) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (262) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (268) heap_init: At 3FFB2C20 len 0002D3E0 (180 KiB): DRAM[0m
+[0;32mI (274) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (280) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (287) heap_init: At 4008DEA8 len 00012158 (72 KiB): IRAM[0m
+[0;32mI (294) spi_flash: detected chip: generic[0m
+[0;32mI (297) spi_flash: flash io: dio[0m
+[0;33mW (301) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (312) main_task: Started on CPU0[0m
+[0;32mI (322) main_task: Calling app_main()[0m
+[0;32mI (492) main: i=0 byte=1 j=0[0m
+[0;32mI (1502) main: i=0 byte=1 j=1[0m
+[0;32mI (1652) main: i=0 byte=1 j=2[0m
+[0;32mI (1802) main: i=0 byte=1 j=3[0m
+[0;32mI (1952) main: i=0 byte=1 j=4[0m
+[0;32mI (2102) main: i=0 byte=1 j=5[0m
+[0;32mI (2252) main: i=0 byte=1 j=6[0m
+[0;32mI (2402) main: i=0 byte=1 j=7[0m
+[0;32mI (2552) main: i=1 byte=2 j=0[0m
+[0;32mI (2702) main: i=1 byte=2 j=1[0m
+[0;32mI (2852) main: i=1 byte=2 j=2[0m
+[0;32mI (3002) main: i=1 byte=2 j=3[0m
+[0;32mI (3152) main: i=1 byte=2 j=4[0m
+[0;32mI (3302) main: i=1 byte=2 j=5[0m
+[0;32mI (3452) main: i=1 byte=2 j=6[0m
+[0;32mI (3602) main: i=1 byte=2 j=7[0m
+[0;32mI (3752) main: i=2 byte=4 j=0[0m
+[0;32mI (3902) main: i=2 byte=4 j=1[0m
+[0;32mI (4052) main: i=2 byte=4 j=2[0m
+[0;32mI (4202) main: i=2 byte=4 j=3[0m
+[0;32mI (4352) main: i=2 byte=4 j=4[0m
+[0;32mI (4502) main: i=2 byte=4 j=5[0m
+[0;32mI (4652) main: i=2 byte=4 j=6[0m
+[0;32mI (4802) main: i=2 byte=4 j=7[0m
+[0;32mI (4952) main: i=3 byte=8 j=0[0m
+[0;32mI (5102) main: i=3 byte=8 j=1[0m
+[0;32mI (5252) main: i=3 byte=8 j=2[0m
+[0;32mI (5402) main: i=3 byte=8 j=3[0m
+[0;32mI (5552) main: i=3 byte=8 j=4[0m
+[0;32mI (5702) main: i=3 byte=8 j=5[0m
+[0;32mI (5852) main: i=3 byte=8 j=6[0m
+[0;32mI (6002) main: i=3 byte=8 j=7[0m
+[0;32mI (6152) main: i=4 byte=16 j=0[0m
+[0;32mI (6302) main: i=4 byte=16 j=1[0m
+[0;32mI (6452) main: i=4 byte=16 j=2[0m
+[0;32mI (6602) main: i=4 byte=16 j=3[0m
+[0;32mI (6752) main: i=4 byte=16 j=4[0m
+[0;32mI (6902) main: i=4 byte=16 j=5[0m
+[0;32mI (7052) main: i=4 byte=16 j=6[0m
+[0;32mI (7202) main: i=4 byte=16 j=7[0m
+[0;32mI (7352) main: i=5 byte=32 j=0[0m
+[0;32mI (7502) main: i=5 byte=32 j=1[0m
+[0;32mI (7652) main: i=5 byte=32 j=2[0m
+[0;32mI (7802) main: i=5 byte=32 j=3[0m
+[0;32mI (7952) main: i=5 byte=32 j=4[0m
+[0;32mI (8102) main: i=5 byte=32 j=5[0m
+[0;32mI (8252) main: i=5 byte=32 j=6[0m
+[0;32mI (8402) main: i=5 byte=32 j=7[0m
+[0;32mI (8552) main: i=6 byte=64 j=0[0m
+[0;32mI (8702) main: i=6 byte=64 j=1[0m
+[0;32mI (8852) main: i=6 byte=64 j=2[0m
+[0;32mI (9002) main: i=6 byte=64 j=3[0m
+[0;32mI (9152) main: i=6 byte=64 j=4[0m
+[0;32mI (9302) main: i=6 byte=64 j=5[0m
+[0;32mI (9452) main: i=6 byte=64 j=6[0m
+[0;32mI (9602) main: i=6 byte=64 j=7[0m
+[0;32mI (9752) main: i=7 byte=128 j=0[0m
+[0;32mI (9902) main: i=7 byte=128 j=1[0m
+[0;32mI (10052) main: i=7 byte=128 j=2[0m
+[0;32mI (10202) main: i=7 byte=128 j=3[0m
+[0;32mI (10352) main: i=7 byte=128 j=4[0m
+[0;32mI (10502) main: i=7 byte=128 j=5[0m
+[0;32mI (10652) main: i=7 byte=128 j=6[0m
+[0;32mI (10802) main: i=7 byte=128 j=7[0m
+[0;32mI (10952) main: i=0 byte=1 j=0[0m
+[0;32mI (11952) main: i=0 byte=1 j=1[0m
+[0;32mI (12102) main: i=0 byte=1 j=2[0m
+[0;32mI (12252) main: i=0 byte=1 j=3[0m
+[0;32mI (12402) main: i=0 byte=1 j=4[0m
+[0;32mI (12552) main: i=0 byte=1 j=5[0m
+[0;32mI (12702) main: i=0 byte=1 j=6[0m
+[0;32mI (12852) main: i=0 byte=1 j=7[0m
+[0;32mI (13002) main: i=1 byte=2 j=0[0m
+[0;32mI (13152) main: i=1 byte=2 j=1[0m
+[0;32mI (13302) main: i=1 byte=2 j=2[0m
+[0;32mI (13452) main: i=1 byte=2 j=3[0m
+[0;32mI (13602) main: i=1 byte=2 j=4[0m
+[0;32mI (13752) main: i=1 byte=2 j=5[0m
+[0;32mI (13902) main: i=1 byte=2 j=6[0m
+[0;32mI (14052) main: i=1 byte=2 j=7[0m
+[0;32mI (14202) main: i=2 byte=4 j=0[0m
+[0;32mI (14352) main: i=2 byte=4 j=1[0m
+[0;32mI (14502) main: i=2 byte=4 j=2[0m
+[0;32mI (14652) main: i=2 byte=4 j=3[0m
+[0;32mI (14802) main: i=2 byte=4 j=4[0m
+[0;32mI (14952) main: i=2 byte=4 j=5[0m
+[0;32mI (15102) main: i=2 byte=4 j=6[0m
+[0;32mI (15252) main: i=2 byte=4 j=7[0m
+[0;32mI (15402) main: i=3 byte=8 j=0[0m
+[0;32mI (15552) main: i=3 byte=8 j=1[0m
+[0;32mI (15702) main: i=3 byte=8 j=2[0m
+[0;32mI (15852) main: i=3 byte=8 j=3[0m
+[0;32mI (16002) main: i=3 byte=8 j=4[0m
+[0;32mI (16152) main: i=3 byte=8 j=5[0m
+[0;32mI (16302) main: i=3 byte=8 j=6[0m
+[0;32mI (16452) main: i=3 byte=8 j=7[0m
+[0;32mI (16602) main: i=4 byte=16 j=0[0m
+[0;32mI (16752) main: i=4 byte=16 j=1[0m
+[0;32mI (16902) main: i=4 byte=16 j=2[0m
+[0;32mI (17052) main: i=4 byte=16 j=3[0m
+[0;32mI (17202) main: i=4 byte=16 j=4[0m
+[0;32mI (17352) main: i=4 byte=16 j=5[0m
+[0;32mI (17502) main: i=4 byte=16 j=6[0m
+[0;32mI (17652) main: i=4 byte=16 j=7[0m
+[0;32mI (17802) main: i=5 byte=32 j=0[0m
+[0;32mI (17952) main: i=5 byte=32 j=1[0m
+[0;32mI (18102) main: i=5 byte=32 j=2[0m
+[0;32mI (18252) main: i=5 byte=32 j=3[0m
+[0;32mI (18402) main: i=5 byte=32 j=4[0m
+[0;32mI (18552) main: i=5 byte=32 j=5[0m
+[0;32mI (18702) main: i=5 byte=32 j=6[0m
+[0;32mI (18852) main: i=5 byte=32 j=7[0m
+[0;32mI (19002) main: i=6 byte=64 j=0[0m
+[0;32mI (19152) main: i=6 byte=64 j=1[0m
+[0;32mI (19302) main: i=6 byte=64 j=2[0m
+[0;32mI (19452) main: i=6 byte=64 j=3[0m
+[0;32mI (19602) main: i=6 byte=64 j=4[0m
+[0;32mI (19752) main: i=6 byte=64 j=5[0m
+[0;32mI (19902) main: i=6 byte=64 j=6[0m
+[0;32mI (20052) main: i=6 byte=64 j=7[0m
+[0;32mI (20202) main: i=7 byte=128 j=0[0m
+[0;32mI (20352) main: i=7 byte=128 j=1[0m
+[0;32mI (20502) main: i=7 byte=128 j=2[0m
+[0;32mI (20652) main: i=7 byte=128 j=3[0m
+[0;32mI (20802) main: i=7 byte=128 j=4[0m
+[0;32mI (20952) main: i=7 byte=128 j=5[0m
+[0;32mI (21102) main: i=7 byte=128 j=6[0m
+[0;32mI (21252) main: i=7 byte=128 j=7[0m
+[0;32mI (21402) main: i=0 byte=1 j=0[0m
+[0;32mI (22402) main: i=0 byte=1 j=1[0m
+[0;32mI (22552) main: i=0 byte=1 j=2[0m
+[0;32mI (22702) main: i=0 byte=1 j=3[0m
+[0;32mI (22852) main: i=0 byte=1 j=4[0m
+[0;32mI (23002) main: i=0 byte=1 j=5[0m
+[0;32mI (23152) main: i=0 byte=1 j=6[0m
+[0;32mI (23302) main: i=0 byte=1 j=7[0m
+[0;32mI (23452) main: i=1 byte=2 j=0[0m
+[0;32mI (23602) main: i=1 byte=2 j=1[0m
+[0;32mI (23752) main: i=1 byte=2 j=2[0m
+[0;32mI (23902) main: i=1 byte=2 j=3[0m
+[0;32mI (24052) main: i=1 byte=2 j=4[0m
+[0;32mI (24202) main: i=1 byte=2 j=5[0m
+[0;32mI (24352) main: i=1 byte=2 j=6[0m
+[0;32mI (24502) main: i=1 byte=2 j=7[0m
+[0;32mI (24652) main: i=2 byte=4 j=0[0m
+[0;32mI (24802) main: i=2 byte=4 j=1[0m
+[0;32mI (24952) main: i=2 byte=4 j=2[0m
+[0;32mI (25102) main: i=2 byte=4 j=3[0m
+[0;32mI (25252) main: i=2 byte=4 j=4[0m
+[0;32mI (25402) main: i=2 byte=4 j=5[0m
+[0;32mI (25552) main: i=2 byte=4 j=6[0m
+[0;32mI (25702) main: i=2 byte=4 j=7[0m
+[0;32mI (25852) main: i=3 byte=8 j=0[0m
+[0;32mI (26002) main: i=3 byte=8 j=1[0m
+[0;32mI (26152) main: i=3 byte=8 j=2[0m
+[0;32mI (26302) main: i=3 byte=8 j=3[0m
+[0;32mI (26452) main: i=3 byte=8 j=4[0m
+[0;32mI (26602) main: i=3 byte=8 j=5[0m
+[0;32mI (26752) main: i=3 byte=8 j=6[0m
+[0;32mI (26902) main: i=3 byte=8 j=7[0m
+[0;32mI (27052) main: i=4 byte=16 j=0[0m
+[0;32mI (27202) main: i=4 byte=16 j=1[0m
+[0;32mI (27352) main: i=4 byte=16 j=2[0m
+[0;32mI (27502) main: i=4 byte=16 j=3[0m
+[0;32mI (27652) main: i=4 byte=16 j=4[0m
+[0;32mI (27802) main: i=4 byte=16 j=5[0m
+[0;32mI (27952) main: i=4 byte=16 j=6[0m
+[0;32mI (28102) main: i=4 byte=16 j=7[0m
+[0;32mI (28252) main: i=5 byte=32 j=0[0m
+[0;32mI (28402) main: i=5 byte=32 j=1[0m
+[0;32mI (28552) main: i=5 byte=32 j=2[0m
+[0;32mI (28702) main: i=5 byte=32 j=3[0m
+[0;32mI (28852) main: i=5 byte=32 j=4[0m
+[0;32mI (29002) main: i=5 byte=32 j=5[0m
+[0;32mI (29152) main: i=5 byte=32 j=6[0m
+[0;32mI (29302) main: i=5 byte=32 j=7[0m
+[0;32mI (29452) main: i=6 byte=64 j=0[0m
+[0;32mI (29602) main: i=6 byte=64 j=1[0m
+[0;32mI (29752) main: i=6 byte=64 j=2[0m
+[0;32mI (29902) main: i=6 byte=64 j=3[0m
+[0;32mI (30052) main: i=6 byte=64 j=4[0m
+[0;32mI (30202) main: i=6 byte=64 j=5[0m
+[0;32mI (30352) main: i=6 byte=64 j=6[0m
+[0;32mI (30502) main: i=6 byte=64 j=7[0m
+[0;32mI (30652) main: i=7 byte=128 j=0[0m
+[0;32mI (30802) main: i=7 byte=128 j=1[0m
+[0;32mI (30952) main: i=7 byte=128 j=2[0m
+[0;32mI (31102) main: i=7 byte=128 j=3[0m
+[0;32mI (31252) main: i=7 byte=128 j=4[0m
+[0;32mI (31402) main: i=7 byte=128 j=5[0m
+[0;32mI (31552) main: i=7 byte=128 j=6[0m
+[0;32mI (31702) main: i=7 byte=128 j=7[0m
+[0;32mI (31852) main: i=0 byte=1 j=0[0m
+[0;32mI (32852) main: i=0 byte=1 j=1[0m
+[0;32mI (33002) main: i=0 byte=1 j=2[0m
+[0;32mI (33152) main: i=0 byte=1 j=3[0m
+[0;32mI (33302) main: i=0 byte=1 j=4[0m
+[0;32mI (33452) main: i=0 byte=1 j=5[0m
+[0;32mI (33602) main: i=0 byte=1 j=6[0m
+[0;32mI (33752) main: i=0 byte=1 j=7[0m
+[0;32mI (33902) main: i=1 byte=2 j=0[0m
+[0;32mI (34052) main: i=1 byte=2 j=1[0m
+[0;32mI (34202) main: i=1 byte=2 j=2[0m
+[0;32mI (34352) main: i=1 byte=2 j=3[0m
+[0;32mI (34502) main: i=1 byte=2 j=4[0m
+[0;32mI (34652) main: i=1 byte=2 j=5[0m
+[0;32mI (34802) main: i=1 byte=2 j=6[0m
+[0;32mI (34952) main: i=1 byte=2 j=7[0m
+[0;32mI (35102) main: i=2 byte=4 j=0[0m
+[0;32mI (35252) main: i=2 byte=4 j=1[0m
+[0;32mI (35402) main: i=2 byte=4 j=2[0m
+[0;32mI (35552) main: i=2 byte=4 j=3[0m
+[0;32mI (35702) main: i=2 byte=4 j=4[0m
+[0;32mI (35852) main: i=2 byte=4 j=5[0m
+[0;32mI (36002) main: i=2 byte=4 j=6[0m
+[0;32mI (36152) main: i=2 byte=4 j=7[0m
+[0;32mI (36302) main: i=3 byte=8 j=0[0m
+[0;32mI (36452) main: i=3 byte=8 j=1[0m
+[0;32mI (36602) main: i=3 byte=8 j=2[0m
+[0;32mI (36752) main: i=3 byte=8 j=3[0m
+[0;32mI (36902) main: i=3 byte=8 j=4[0m
+[0;32mI (37052) main: i=3 byte=8 j=5[0m
+[0;32mI (37202) main: i=3 byte=8 j=6[0m
+[0;32mI (37352) main: i=3 byte=8 j=7[0m
+[0;32mI (37502) main: i=4 byte=16 j=0[0m
+[0;32mI (37652) main: i=4 byte=16 j=1[0m
+[0;32mI (37802) main: i=4 byte=16 j=2[0m
+[0;32mI (37952) main: i=4 byte=16 j=3[0m
+[0;32mI (38102) main: i=4 byte=16 j=4[0m
+[0;32mI (38252) main: i=4 byte=16 j=5[0m
+[0;32mI (38402) main: i=4 byte=16 j=6[0m
+[0;32mI (38552) main: i=4 byte=16 j=7[0m
+[0;32mI (38702) main: i=5 byte=32 j=0[0m
+[0;32mI (38852) main: i=5 byte=32 j=1[0m
+[0;32mI (39002) main: i=5 byte=32 j=2[0m
+[0;32mI (39152) main: i=5 byte=32 j=3[0m
+[0;32mI (39302) main: i=5 byte=32 j=4[0m
+[0;32mI (39452) main: i=5 byte=32 j=5[0m
+[0;32mI (39602) main: i=5 byte=32 j=6[0m
+[0;32mI (39752) main: i=5 byte=32 j=7[0m
+[0;32mI (39902) main: i=6 byte=64 j=0[0m
+[0;32mI (40052) main: i=6 byte=64 j=1[0m
+[0;32mI (40202) main: i=6 byte=64 j=2[0m
+[0;32mI (40352) main: i=6 byte=64 j=3[0m
+[0;32mI (40502) main: i=6 byte=64 j=4[0m
+[0;32mI (40652) main: i=6 byte=64 j=5[0m
+[0;32mI (40802) main: i=6 byte=64 j=6[0m
+[0;32mI (40952) main: i=6 byte=64 j=7[0m
+[0;32mI (41102) main: i=7 byte=128 j=0[0m
+[0;32mI (41252) main: i=7 byte=128 j=1[0m
+[0;32mI (41402) main: i=7 byte=128 j=2[0m
+[0;32mI (41552) main: i=7 byte=128 j=3[0m
+[0;32mI (41702) main: i=7 byte=128 j=4[0m
+[0;32mI (41852) main: i=7 byte=128 j=5[0m
+[0;32mI (42002) main: i=7 byte=128 j=6[0m
+[0;32mI (42152) main: i=7 byte=128 j=7[0m
+[0;32mI (42302) main: i=0 byte=1 j=0[0m
+[0;32mI (43302) main: i=0 byte=1 j=1[0m
+[0;32mI (43452) main: i=0 byte=1 j=2[0m
+[0;32mI (43602) main: i=0 byte=1 j=3[0m
+[0;32mI (43752) main: i=0 byte=1 j=4[0m
+[0;32mI (43902) main: i=0 byte=1 j=5[0m
+[0;32mI (44052) main: i=0 byte=1 j=6[0m
+[0;32mI (44202) main: i=0 byte=1 j=7[0m
+[0;32mI (44352) main: i=1 byte=2 j=0[0m
+[0;32mI (44502) main: i=1 byte=2 j=1[0m
+[0;32mI (44652) main: i=1 byte=2 j=2[0m
+[0;32mI (44802) main: i=1 byte=2 j=3[0m
+[0;32mI (44952) main: i=1 byte=2 j=4[0m
+[0;32mI (45102) main: i=1 byte=2 j=5[0m
+[0;32mI (45252) main: i=1 byte=2 j=6[0m
+[0;32mI (45402) main: i=1 byte=2 j=7[0m
+[0;32mI (45552) main: i=2 byte=4 j=0[0m
+[0;32mI (45702) main: i=2 byte=4 j=1[0m
+[0;32mI (45852) main: i=2 byte=4 j=2[0m
+[0;32mI (46002) main: i=2 byte=4 j=3[0m
+[0;32mI (46152) main: i=2 byte=4 j=4[0m
+[0;32mI (46302) main: i=2 byte=4 j=5[0m
+[0;32mI (46452) main: i=2 byte=4 j=6[0m
+[0;32mI (46602) main: i=2 byte=4 j=7[0m
+[0;32mI (46752) main: i=3 byte=8 j=0[0m
+[0;32mI (46902) main: i=3 byte=8 j=1[0m
+[0;32mI (47052) main: i=3 byte=8 j=2[0m
+[0;32mI (47202) main: i=3 byte=8 j=3[0m
+[0;32mI (47352) main: i=3 byte=8 j=4[0m
+[0;32mI (47502) main: i=3 byte=8 j=5[0m
+[0;32mI (47652) main: i=3 byte=8 j=6[0m
+[0;32mI (47802) main: i=3 byte=8 j=7[0m
+[0;32mI (47952) main: i=4 byte=16 j=0[0m
+[0;32mI (48102) main: i=4 byte=16 j=1[0m
+[0;32mI (48252) main: i=4 byte=16 j=2[0m
+[0;32mI (48402) main: i=4 byte=16 j=3[0m
+[0;32mI (48552) main: i=4 byte=16 j=4[0m
+[0;32mI (48702) main: i=4 byte=16 j=5[0m
+[0;32mI (48852) main: i=4 byte=16 j=6[0m
+[0;32mI (49002) main: i=4 byte=16 j=7[0m
+[0;32mI (49152) main: i=5 byte=32 j=0[0m
+[0;32mI (49302) main: i=5 byte=32 j=1[0m
+[0;32mI (49452) main: i=5 byte=32 j=2[0m
+[0;32mI (49602) main: i=5 byte=32 j=3[0m
+[0;32mI (49752) main: i=5 byte=32 j=4[0m
+[0;32mI (49902) main: i=5 byte=32 j=5[0m
+[0;32mI (50052) main: i=5 byte=32 j=6[0m
+[0;32mI (50202) main: i=5 byte=32 j=7[0m
+[0;32mI (50352) main: i=6 byte=64 j=0[0m
+[0;32mI (50502) main: i=6 byte=64 j=1[0m
+[0;32mI (50652) main: i=6 byte=64 j=2[0m
+[0;32mI (50802) main: i=6 byte=64 j=3[0m
+[0;32mI (50952) main: i=6 byte=64 j=4[0m
+[0;32mI (51102) main: i=6 byte=64 j=5[0m
+[0;32mI (51252) main: i=6 byte=64 j=6[0m
+[0;32mI (51402) main: i=6 byte=64 j=7[0m
+[0;32mI (51552) main: i=7 byte=128 j=0[0m
+[0;32mI (51702) main: i=7 byte=128 j=1[0m
+[0;32mI (51852) main: i=7 byte=128 j=2[0m
+[0;32mI (52002) main: i=7 byte=128 j=3[0m
+[0;32mI (52152) main: i=7 byte=128 j=4[0m
+[0;32mI (52302) main: i=7 byte=128 j=5[0m
+[0;32mI (52452) main: i=7 byte=128 j=6[0m
+[0;32mI (52602) main: i=7 byte=128 j=7[0m
+[0;32mI (52752) main: i=0 byte=1 j=0[0m
+[0;32mI (53752) main: i=0 byte=1 j=1[0m
+[0;32mI (53902) main: i=0 byte=1 j=2[0m
+[0;32mI (54052) main: i=0 byte=1 j=3[0m
+[0;32mI (54202) main: i=0 byte=1 j=4[0m
+[0;32mI (54352) main: i=0 byte=1 j=5[0m
+[0;32mI (54502) main: i=0 byte=1 j=6[0m
+[0;32mI (54652) main: i=0 byte=1 j=7[0m
+[0;32mI (54802) main: i=1 byte=2 j=0[0m
+[0;32mI (54952) main: i=1 byte=2 j=1[0m
+[0;32mI (55102) main: i=1 byte=2 j=2[0m
+[0;32mI (55252) main: i=1 byte=2 j=3[0m
+[0;32mI (55402) main: i=1 byte=2 j=4[0m
+[0;32mI (55552) main: i=1 byte=2 j=5[0m
+[0;32mI (55702) main: i=1 byte=2 j=6[0m
+[0;32mI (55852) main: i=1 byte=2 j=7[0m
+[0;32mI (56002) main: i=2 byte=4 j=0[0m
+[0;32mI (56152) main: i=2 byte=4 j=1[0m
+[0;32mI (56302) main: i=2 byte=4 j=2[0m
+[0;32mI (56452) main: i=2 byte=4 j=3[0m
+[0;32mI (56602) main: i=2 byte=4 j=4[0m
+[0;32mI (56752) main: i=2 byte=4 j=5[0m
+[0;32mI (56902) main: i=2 byte=4 j=6[0m
+[0;32mI (57052) main: i=2 byte=4 j=7[0m
+[0;32mI (57202) main: i=3 byte=8 j=0[0m
+[0;32mI (57352) main: i=3 byte=8 j=1[0m
+[0;32mI (57502) main: i=3 byte=8 j=2[0m
+[0;32mI (57652) main: i=3 byte=8 j=3[0m
+[0;32mI (57802) main: i=3 byte=8 j=4[0m
+[0;32mI (57952) main: i=3 byte=8 j=5[0m
+[0;32mI (58102) main: i=3 byte=8 j=6[0m
+[0;32mI (58252) main: i=3 byte=8 j=7[0m
+[0;32mI (58402) main: i=4 byte=16 j=0[0m
+[0;32mI (58552) main: i=4 byte=16 j=1[0m
+[0;32mI (58702) main: i=4 byte=16 j=2[0m
+[0;32mI (58852) main: i=4 byte=16 j=3[0m
+[0;32mI (59002) main: i=4 byte=16 j=4[0m
+[0;32mI (59152) main: i=4 byte=16 j=5[0m
+[0;32mI (59302) main: i=4 byte=16 j=6[0m
+[0;32mI (59452) main: i=4 byte=16 j=7[0m
+[0;32mI (59602) main: i=5 byte=32 j=0[0m
+[0;32mI (59752) main: i=5 byte=32 j=1[0m
+[0;32mI (59902) main: i=5 byte=32 j=2[0m
+[0;32mI (60052) main: i=5 byte=32 j=3[0m
+[0;32mI (60202) main: i=5 byte=32 j=4[0m
+[0;32mI (60352) main: i=5 byte=32 j=5[0m
+[0;32mI (60502) main: i=5 byte=32 j=6[0m
+[0;32mI (60652) main: i=5 byte=32 j=7[0m
+[0;32mI (60802) main: i=6 byte=64 j=0[0m
+[0;32mI (60952) main: i=6 byte=64 j=1[0m
+[0;32mI (61102) main: i=6 byte=64 j=2[0m
+[0;32mI (61252) main: i=6 byte=64 j=3[0m
+[0;32mI (61402) main: i=6 byte=64 j=4[0m
+[0;32mI (61552) main: i=6 byte=64 j=5[0m
+[0;32mI (61702) main: i=6 byte=64 j=6[0m
+[0;32mI (61852) main: i=6 byte=64 j=7[0m
+[0;32mI (62002) main: i=7 byte=128 j=0[0m
+[0;32mI (62152) main: i=7 byte=128 j=1[0m
+[0;32mI (62302) main: i=7 byte=128 j=2[0m
+[0;32mI (62452) main: i=7 byte=128 j=3[0m
+[0;32mI (62602) main: i=7 byte=128 j=4[0m
+[0;32mI (62752) main: i=7 byte=128 j=5[0m
+[0;32mI (62902) main: i=7 byte=128 j=6[0m
+[0;32mI (63052) main: i=7 byte=128 j=7[0m
+[0;32mI (63202) main: i=0 byte=1 j=0[0m
+[0;32mI (64202) main: i=0 byte=1 j=1[0m
+[0;32mI (64352) main: i=0 byte=1 j=2[0m
+[0;32mI (64502) main: i=0 byte=1 j=3[0m
+[0;32mI (64652) main: i=0 byte=1 j=4[0m
+[0;32mI (64802) main: i=0 byte=1 j=5[0m
+[0;32mI (64952) main: i=0 byte=1 j=6[0m
+[0;32mI (65102) main: i=0 byte=1 j=7[0m
+[0;32mI (65252) main: i=1 byte=2 j=0[0m
+[0;32mI (65402) main: i=1 byte=2 j=1[0m
+[0;32mI (65552) main: i=1 byte=2 j=2[0m
+[0;32mI (65702) main: i=1 byte=2 j=3[0m
+[0;32mI (65852) main: i=1 byte=2 j=4[0m
+[0;32mI (66002) main: i=1 byte=2 j=5[0m
+[0;32mI (66152) main: i=1 byte=2 j=6[0m
+[0;32mI (66302) main: i=1 byte=2 j=7[0m
+[0;32mI (66452) main: i=2 byte=4 j=0[0m
+[0;32mI (66602) main: i=2 byte=4 j=1[0m
+[0;32mI (66752) main: i=2 byte=4 j=2[0m
+[0;32mI (66902) main: i=2 byte=4 j=3[0m
+[0;32mI (67052) main: i=2 byte=4 j=4[0m
+[0;32mI (67202) main: i=2 byte=4 j=5[0m
+[0;32mI (67352) main: i=2 byte=4 j=6[0m
+[0;32mI (67502) main: i=2 byte=4 j=7[0m
+[0;32mI (67652) main: i=3 byte=8 j=0[0m
+[0;32mI (67802) main: i=3 byte=8 j=1[0m
+[0;32mI (67952) main: i=3 byte=8 j=2[0m
+[0;32mI (68102) main: i=3 byte=8 j=3[0m
+[0;32mI (68252) main: i=3 byte=8 j=4[0m
+[0;32mI (68402) main: i=3 byte=8 j=5[0m
+[0;32mI (68552) main: i=3 byte=8 j=6[0m
+[0;32mI (68702) main: i=3 byte=8 j=7[0m
+[0;32mI (68852) main: i=4 byte=16 j=0[0m
+[0;32mI (69002) main: i=4 byte=16 j=1[0m
+[0;32mI (69152) main: i=4 byte=16 j=2[0m
+[0;32mI (69302) main: i=4 byte=16 j=3[0m
+[0;32mI (69452) main: i=4 byte=16 j=4[0m
+[0;32mI (69602) main: i=4 byte=16 j=5[0m
+[0;32mI (69752) main: i=4 byte=16 j=6[0m
+[0;32mI (69902) main: i=4 byte=16 j=7[0m
+[0;32mI (70052) main: i=5 byte=32 j=0[0m
+[0;32mI (70202) main: i=5 byte=32 j=1[0m
+[0;32mI (70352) main: i=5 byte=32 j=2[0m
+[0;32mI (70502) main: i=5 byte=32 j=3[0m
+[0;32mI (70652) main: i=5 byte=32 j=4[0m
+[0;32mI (70802) main: i=5 byte=32 j=5[0m
+[0;32mI (70952) main: i=5 byte=32 j=6[0m
+[0;32mI (71102) main: i=5 byte=32 j=7[0m
+[0;32mI (71252) main: i=6 byte=64 j=0[0m
+[0;32mI (71402) main: i=6 byte=64 j=1[0m
+[0;32mI (71552) main: i=6 byte=64 j=2[0m
+[0;32mI (71702) main: i=6 byte=64 j=3[0m
+[0;32mI (71852) main: i=6 byte=64 j=4[0m
+[0;32mI (72002) main: i=6 byte=64 j=5[0m
+[0;32mI (72152) main: i=6 byte=64 j=6[0m
+[0;32mI (72302) main: i=6 byte=64 j=7[0m
+[0;32mI (72452) main: i=7 byte=128 j=0[0m
+[0;32mI (72602) main: i=7 byte=128 j=1[0m
+[0;32mI (72752) main: i=7 byte=128 j=2[0m
+[0;32mI (72902) main: i=7 byte=128 j=3[0m
+[0;32mI (73052) main: i=7 byte=128 j=4[0m
+[0;32mI (73202) main: i=7 byte=128 j=5[0m
+[0;32mI (73352) main: i=7 byte=128 j=6[0m
+[0;32mI (73502) main: i=7 byte=128 j=7[0m
+[0;32mI (73652) main: i=0 byte=1 j=0[0m
+[0;32mI (74652) main: i=0 byte=1 j=1[0m
+[0;32mI (74802) main: i=0 byte=1 j=2[0m
+[0;32mI (74952) main: i=0 byte=1 j=3[0m
+[0;32mI (75102) main: i=0 byte=1 j=4[0m
+[0;32mI (75252) main: i=0 byte=1 j=5[0m
+[0;32mI (75402) main: i=0 byte=1 j=6[0m
+[0;32mI (75552) main: i=0 byte=1 j=7[0m
+[0;32mI (75702) main: i=1 byte=2 j=0[0m
+[0;32mI (75852) main: i=1 byte=2 j=1[0m
+[0;32mI (76002) main: i=1 byte=2 j=2[0m
+[0;32mI (76152) main: i=1 byte=2 j=3[0m
+[0;32mI (76302) main: i=1 byte=2 j=4[0m
+[0;32mI (76452) main: i=1 byte=2 j=5[0m
+[0;32mI (76602) main: i=1 byte=2 j=6[0m
+[0;32mI (76752) main: i=1 byte=2 j=7[0m
+[0;32mI (76902) main: i=2 byte=4 j=0[0m
+[0;32mI (77052) main: i=2 byte=4 j=1[0m
+[0;32mI (77202) main: i=2 byte=4 j=2[0m
+[0;32mI (77352) main: i=2 byte=4 j=3[0m
+[0;32mI (77502) main: i=2 byte=4 j=4[0m
+[0;32mI (77652) main: i=2 byte=4 j=5[0m
+[0;32mI (77802) main: i=2 byte=4 j=6[0m
+[0;32mI (77952) main: i=2 byte=4 j=7[0m
+[0;32mI (78102) main: i=3 byte=8 j=0[0m
+[0;32mI (78252) main: i=3 byte=8 j=1[0m
+[0;32mI (78402) main: i=3 byte=8 j=2[0m
+[0;32mI (78552) main: i=3 byte=8 j=3[0m
+[0;32mI (78702) main: i=3 byte=8 j=4[0m
+[0;32mI (78852) main: i=3 byte=8 j=5[0m
+[0;32mI (79002) main: i=3 byte=8 j=6[0m
+[0;32mI (79152) main: i=3 byte=8 j=7[0m
+[0;32mI (79302) main: i=4 byte=16 j=0[0m
+[0;32mI (79452) main: i=4 byte=16 j=1[0m
+[0;32mI (79602) main: i=4 byte=16 j=2[0m
+[0;32mI (79752) main: i=4 byte=16 j=3[0m
+[0;32mI (79902) main: i=4 byte=16 j=4[0m
+[0;32mI (80052) main: i=4 byte=16 j=5[0m
+[0;32mI (80202) main: i=4 byte=16 j=6[0m
+[0;32mI (80352) main: i=4 byte=16 j=7[0m
+[0;32mI (80502) main: i=5 byte=32 j=0[0m
+[0;32mI (80652) main: i=5 byte=32 j=1[0m
+[0;32mI (80802) main: i=5 byte=32 j=2[0m
+[0;32mI (80952) main: i=5 byte=32 j=3[0m
+[0;32mI (81102) main: i=5 byte=32 j=4[0m
+[0;32mI (81252) main: i=5 byte=32 j=5[0m
+[0;32mI (81402) main: i=5 byte=32 j=6[0m
+[0;32mI (81552) main: i=5 byte=32 j=7[0m
+[0;32mI (81702) main: i=6 byte=64 j=0[0m
+[0;32mI (81852) main: i=6 byte=64 j=1[0m
+[0;32mI (82002) main: i=6 byte=64 j=2[0m
+[0;32mI (82152) main: i=6 byte=64 j=3[0m
+[0;32mI (82302) main: i=6 byte=64 j=4[0m
+[0;32mI (82452) main: i=6 byte=64 j=5[0m
+[0;32mI (82602) main: i=6 byte=64 j=6[0m
+[0;32mI (82752) main: i=6 byte=64 j=7[0m
+[0;32mI (82902) main: i=7 byte=128 j=0[0m
+[0;32mI (83052) main: i=7 byte=128 j=1[0m
+[0;32mI (83202) main: i=7 byte=128 j=2[0m
+[0;32mI (83352) main: i=7 byte=128 j=3[0m
+[0;32mI (83502) main: i=7 byte=128 j=4[0m
+[0;32mI (83652) main: i=7 byte=128 j=5[0m
+[0;32mI (83802) main: i=7 byte=128 j=6[0m
+[0;32mI (83952) main: i=7 byte=128 j=7[0m
+[0;32mI (84102) main: i=0 byte=1 j=0[0m
+[0;32mI (85102) main: i=0 byte=1 j=1[0m
+[0;32mI (85252) main: i=0 byte=1 j=2[0m
+[0;32mI (85402) main: i=0 byte=1 j=3[0m
+[0;32mI (85552) main: i=0 byte=1 j=4[0m
+[0;32mI (85702) main: i=0 byte=1 j=5[0m
+[0;32mI (85852) main: i=0 byte=1 j=6[0m
+[0;32mI (86002) main: i=0 byte=1 j=7[0m
+[0;32mI (86152) main: i=1 byte=2 j=0[0m
+[0;32mI (86302) main: i=1 byte=2 j=1[0m
+[0;32mI (86452) main: i=1 byte=2 j=2[0m
+[0;32mI (86602) main: i=1 byte=2 j=3[0m
+[0;32mI (86752) main: i=1 byte=2 j=4[0m
+[0;32mI (86902) main: i=1 byte=2 j=5[0m
+[0;32mI (87052) main: i=1 byte=2 j=6[0m
+[0;32mI (87202) main: i=1 byte=2 j=7[0m
+[0;32mI (87352) main: i=2 byte=4 j=0[0m
+[0;32mI (87502) main: i=2 byte=4 j=1[0m
+[0;32mI (87652) main: i=2 byte=4 j=2[0m
+[0;32mI (87802) main: i=2 byte=4 j=3[0m
+[0;32mI (87952) main: i=2 byte=4 j=4[0m
+[0;32mI (88102) main: i=2 byte=4 j=5[0m
+[0;32mI (88252) main: i=2 byte=4 j=6[0m
+[0;32mI (88402) main: i=2 byte=4 j=7[0m
+[0;32mI (88552) main: i=3 byte=8 j=0[0m
+[0;32mI (88702) main: i=3 byte=8 j=1[0m
+[0;32mI (88852) main: i=3 byte=8 j=2[0m
+[0;32mI (89002) main: i=3 byte=8 j=3[0m
+[0;32mI (89152) main: i=3 byte=8 j=4[0m
+[0;32mI (89302) main: i=3 byte=8 j=5[0m
+[0;32mI (89452) main: i=3 byte=8 j=6[0m
+[0;32mI (89602) main: i=3 byte=8 j=7[0m
+[0;32mI (89752) main: i=4 byte=16 j=0[0m
+[0;32mI (89902) main: i=4 byte=16 j=1[0m
+[0;32mI (90052) main: i=4 byte=16 j=2[0m
+[0;32mI (90202) main: i=4 byte=16 j=3[0m
+[0;32mI (90352) main: i=4 byte=16 j=4[0m
+[0;32mI (90502) main: i=4 byte=16 j=5[0m
+[0;32mI (90652) main: i=4 byte=16 j=6[0m
+[0;32mI (90802) main: i=4 byte=16 j=7[0m
+[0;32mI (90952) main: i=5 byte=32 j=0[0m
+[0;32mI (91102) main: i=5 byte=32 j=1[0m
+[0;32mI (91252) main: i=5 byte=32 j=2[0m
+[0;32mI (91402) main: i=5 byte=32 j=3[0m
+[0;32mI (91552) main: i=5 byte=32 j=4[0m
+[0;32mI (91702) main: i=5 byte=32 j=5[0m
+[0;32mI (91852) main: i=5 byte=32 j=6[0m
+[0;32mI (92002) main: i=5 byte=32 j=7[0m
+[0;32mI (92152) main: i=6 byte=64 j=0[0m
+[0;32mI (92302) main: i=6 byte=64 j=1[0m
+[0;32mI (92452) main: i=6 byte=64 j=2[0m
+[0;32mI (92602) main: i=6 byte=64 j=3[0m
+[0;32mI (92752) main: i=6 byte=64 j=4[0m
+[0;32mI (92902) main: i=6 byte=64 j=5[0m
+[0;32mI (93052) main: i=6 byte=64 j=6[0m
+[0;32mI (93202) main: i=6 byte=64 j=7[0m
+[0;32mI (93352) main: i=7 byte=128 j=0[0m
+[0;32mI (93502) main: i=7 byte=128 j=1[0m
+[0;32mI (93652) main: i=7 byte=128 j=2[0m
+[0;32mI (93802) main: i=7 byte=128 j=3[0m
+[0;32mI (93952) main: i=7 byte=128 j=4[0m
+[0;32mI (94102) main: i=7 byte=128 j=5[0m
+[0;32mI (94252) main: i=7 byte=128 j=6[0m
+[0;32mI (94402) main: i=7 byte=128 j=7[0m
+[0;32mI (94552) main: i=0 byte=1 j=0[0m
+[0;32mI (95552) main: i=0 byte=1 j=1[0m
+[0;32mI (95702) main: i=0 byte=1 j=2[0m
+[0;32mI (95852) main: i=0 byte=1 j=3[0m
+[0;32mI (96002) main: i=0 byte=1 j=4[0m
+[0;32mI (96152) main: i=0 byte=1 j=5[0m
+[0;32mI (96302) main: i=0 byte=1 j=6[0m
+[0;32mI (96452) main: i=0 byte=1 j=7[0m
+[0;32mI (96602) main: i=1 byte=2 j=0[0m
+[0;32mI (96752) main: i=1 byte=2 j=1[0m
+[0;32mI (96902) main: i=1 byte=2 j=2[0m
+[0;32mI (97052) main: i=1 byte=2 j=3[0m
+[0;32mI (97202) main: i=1 byte=2 j=4[0m
+[0;32mI (97352) main: i=1 byte=2 j=5[0m
+[0;32mI (97502) main: i=1 byte=2 j=6[0m
+[0;32mI (97652) main: i=1 byte=2 j=7[0m
+[0;32mI (97802) main: i=2 byte=4 j=0[0m
+[0;32mI (97952) main: i=2 byte=4 j=1[0m
+[0;32mI (98102) main: i=2 byte=4 j=2[0m
+[0;32mI (98252) main: i=2 byte=4 j=3[0m
+[0;32mI (98402) main: i=2 byte=4 j=4[0m
+[0;32mI (98552) main: i=2 byte=4 j=5[0m
+[0;32mI (98702) main: i=2 byte=4 j=6[0m
+[0;32mI (98852) main: i=2 byte=4 j=7[0m
+[0;32mI (99002) main: i=3 byte=8 j=0[0m
+[0;32mI (99152) main: i=3 byte=8 j=1[0m
+[0;32mI (99302) main: i=3 byte=8 j=2[0m
+[0;32mI (99452) main: i=3 byte=8 j=3[0m
+[0;32mI (99602) main: i=3 byte=8 j=4[0m
+[0;32mI (99752) main: i=3 byte=8 j=5[0m
+[0;32mI (99902) main: i=3 byte=8 j=6[0m
+[0;32mI (100052) main: i=3 byte=8 j=7[0m
+[0;32mI (100202) main: i=4 byte=16 j=0[0m
+[0;32mI (100352) main: i=4 byte=16 j=1[0m
+[0;32mI (100502) main: i=4 byte=16 j=2[0m
+[0;32mI (100652) main: i=4 byte=16 j=3[0m
+[0;32mI (100802) main: i=4 byte=16 j=4[0m
+[0;32mI (100952) main: i=4 byte=16 j=5[0m
+[0;32mI (101102) main: i=4 byte=16 j=6[0m
+[0;32mI (101252) main: i=4 byte=16 j=7[0m
+[0;32mI (101402) main: i=5 byte=32 j=0[0m
+[0;32mI (101552) main: i=5 byte=32 j=1[0m
+[0;32mI (101702) main: i=5 byte=32 j=2[0m
+[0;32mI (101852) main: i=5 byte=32 j=3[0m
+[0;32mI (102002) main: i=5 byte=32 j=4[0m
+[0;32mI (102152) main: i=5 byte=32 j=5[0m
+[0;32mI (102302) main: i=5 byte=32 j=6[0m
+[0;32mI (102452) main: i=5 byte=32 j=7[0m
+[0;32mI (102602) main: i=6 byte=64 j=0[0m
+[0;32mI (102752) main: i=6 byte=64 j=1[0m
+[0;32mI (102902) main: i=6 byte=64 j=2[0m
+[0;32mI (103052) main: i=6 byte=64 j=3[0m
+[0;32mI (103202) main: i=6 byte=64 j=4[0m
+[0;32mI (103352) main: i=6 byte=64 j=5[0m
+[0;32mI (103502) main: i=6 byte=64 j=6[0m
+[0;32mI (103652) main: i=6 byte=64 j=7[0m
+[0;32mI (103802) main: i=7 byte=128 j=0[0m
+[0;32mI (103952) main: i=7 byte=128 j=1[0m
+[0;32mI (104102) main: i=7 byte=128 j=2[0m
+[0;32mI (104252) main: i=7 byte=128 j=3[0m
+[0;32mI (104402) main: i=7 byte=128 j=4[0m
+[0;32mI (104552) main: i=7 byte=128 j=5[0m
+[0;32mI (104702) main: i=7 byte=128 j=6[0m
+[0;32mI (104852) main: i=7 byte=128 j=7[0m
+[0;32mI (105002) main: i=0 byte=1 j=0[0m
+[0;32mI (106002) main: i=0 byte=1 j=1[0m
+[0;32mI (106152) main: i=0 byte=1 j=2[0m
+[0;32mI (106302) main: i=0 byte=1 j=3[0m
+[0;32mI (106452) main: i=0 byte=1 j=4[0m
+[0;32mI (106602) main: i=0 byte=1 j=5[0m
+[0;32mI (106752) main: i=0 byte=1 j=6[0m
+[0;32mI (106902) main: i=0 byte=1 j=7[0m
+[0;32mI (107052) main: i=1 byte=2 j=0[0m
+[0;32mI (107202) main: i=1 byte=2 j=1[0m
+[0;32mI (107352) main: i=1 byte=2 j=2[0m
+[0;32mI (107502) main: i=1 byte=2 j=3[0m
+[0;32mI (107652) main: i=1 byte=2 j=4[0m
+[0;32mI (107802) main: i=1 byte=2 j=5[0m
+[0;32mI (107952) main: i=1 byte=2 j=6[0m
+[0;32mI (108102) main: i=1 byte=2 j=7[0m
+[0;32mI (108252) main: i=2 byte=4 j=0[0m
+[0;32mI (108402) main: i=2 byte=4 j=1[0m
+[0;32mI (108552) main: i=2 byte=4 j=2[0m
+[0;32mI (108702) main: i=2 byte=4 j=3[0m
+[0;32mI (108852) main: i=2 byte=4 j=4[0m
+[0;32mI (109002) main: i=2 byte=4 j=5[0m
+[0;32mI (109152) main: i=2 byte=4 j=6[0m
+[0;32mI (109302) main: i=2 byte=4 j=7[0m
+[0;32mI (109452) main: i=3 byte=8 j=0[0m
+[0;32mI (109602) main: i=3 byte=8 j=1[0m
+[0;32mI (109752) main: i=3 byte=8 j=2[0m
+[0;32mI (109902) main: i=3 byte=8 j=3[0m
+[0;32mI (110052) main: i=3 byte=8 j=4[0m
+[0;32mI (110202) main: i=3 byte=8 j=5[0m
+[0;32mI (110352) main: i=3 byte=8 j=6[0m
+[0;32mI (110502) main: i=3 byte=8 j=7[0m
+[0;32mI (110652) main: i=4 byte=16 j=0[0m
+[0;32mI (110802) main: i=4 byte=16 j=1[0m
+[0;32mI (110952) main: i=4 byte=16 j=2[0m
+[0;32mI (111102) main: i=4 byte=16 j=3[0m
+[0;32mI (111252) main: i=4 byte=16 j=4[0m
+[0;32mI (111402) main: i=4 byte=16 j=5[0m
+[0;32mI (111552) main: i=4 byte=16 j=6[0m
+[0;32mI (111702) main: i=4 byte=16 j=7[0m
+[0;32mI (111852) main: i=5 byte=32 j=0[0m
+[0;32mI (112002) main: i=5 byte=32 j=1[0m
+[0;32mI (112152) main: i=5 byte=32 j=2[0m
+[0;32mI (112302) main: i=5 byte=32 j=3[0m
+[0;32mI (112452) main: i=5 byte=32 j=4[0m
+[0;32mI (112602) main: i=5 byte=32 j=5[0m
+[0;32mI (112752) main: i=5 byte=32 j=6[0m
+[0;32mI (112902) main: i=5 byte=32 j=7[0m
+[0;32mI (113052) main: i=6 byte=64 j=0[0m
+[0;32mI (113202) main: i=6 byte=64 j=1[0m
+[0;32mI (113352) main: i=6 byte=64 j=2[0m
+[0;32mI (113502) main: i=6 byte=64 j=3[0m
+[0;32mI (113652) main: i=6 byte=64 j=4[0m
+[0;32mI (113802) main: i=6 byte=64 j=5[0m
+[0;32mI (113952) main: i=6 byte=64 j=6[0m
+[0;32mI (114102) main: i=6 byte=64 j=7[0m
+[0;32mI (114252) main: i=7 byte=128 j=0[0m
+[0;32mI (114402) main: i=7 byte=128 j=1[0m
+[0;32mI (114552) main: i=7 byte=128 j=2[0m
+[0;32mI (114702) main: i=7 byte=128 j=3[0m
+[0;32mI (114852) main: i=7 byte=128 j=4[0m
+[0;32mI (115002) main: i=7 byte=128 j=5[0m
+[0;32mI (115152) main: i=7 byte=128 j=6[0m
+[0;32mI (115302) main: i=7 byte=128 j=7[0m
+[0;32mI (115452) main: i=0 byte=1 j=0[0m
+[0;32mI (116452) main: i=0 byte=1 j=1[0m
+[0;32mI (116602) main: i=0 byte=1 j=2[0m
+[0;32mI (116752) main: i=0 byte=1 j=3[0m
+[0;32mI (116902) main: i=0 byte=1 j=4[0m
+[0;32mI (117052) main: i=0 byte=1 j=5[0m
+[0;32mI (117202) main: i=0 byte=1 j=6[0m
+[0;32mI (117352) main: i=0 byte=1 j=7[0m
+[0;32mI (117502) main: i=1 byte=2 j=0[0m
+[0;32mI (117652) main: i=1 byte=2 j=1[0m
+[0;32mI (117802) main: i=1 byte=2 j=2[0m
+[0;32mI (117952) main: i=1 byte=2 j=3[0m
+[0;32mI (118102) main: i=1 byte=2 j=4[0m
+[0;32mI (118252) main: i=1 byte=2 j=5[0m
+[0;32mI (118402) main: i=1 byte=2 j=6[0m
+[0;32mI (118552) main: i=1 byte=2 j=7[0m
+[0;32mI (118702) main: i=2 byte=4 j=0[0m
+[0;32mI (118852) main: i=2 byte=4 j=1[0m
+[0;32mI (119002) main: i=2 byte=4 j=2[0m
+[0;32mI (119152) main: i=2 byte=4 j=3[0m
+[0;32mI (119302) main: i=2 byte=4 j=4[0m
+[0;32mI (119452) main: i=2 byte=4 j=5[0m
+[0;32mI (119602) main: i=2 byte=4 j=6[0m
+[0;32mI (119752) main: i=2 byte=4 j=7[0m
+[0;32mI (119902) main: i=3 byte=8 j=0[0m
+[0;32mI (120052) main: i=3 byte=8 j=1[0m
+[0;32mI (120202) main: i=3 byte=8 j=2[0m
+[0;32mI (120352) main: i=3 byte=8 j=3[0m
+[0;32mI (120502) main: i=3 byte=8 j=4[0m
+[0;32mI (120652) main: i=3 byte=8 j=5[0m
+[0;32mI (120802) main: i=3 byte=8 j=6[0m
+[0;32mI (120952) main: i=3 byte=8 j=7[0m
+[0;32mI (121102) main: i=4 byte=16 j=0[0m
+[0;32mI (121252) main: i=4 byte=16 j=1[0m
+[0;32mI (121402) main: i=4 byte=16 j=2[0m
+[0;32mI (121552) main: i=4 byte=16 j=3[0m
+[0;32mI (121702) main: i=4 byte=16 j=4[0m
+[0;32mI (121852) main: i=4 byte=16 j=5[0m
+[0;32mI (122002) main: i=4 byte=16 j=6[0m
+[0;32mI (122152) main: i=4 byte=16 j=7[0m
+[0;32mI (122302) main: i=5 byte=32 j=0[0m
+[0;32mI (122452) main: i=5 byte=32 j=1[0m
+[0;32mI (122602) main: i=5 byte=32 j=2[0m
+[0;32mI (122752) main: i=5 byte=32 j=3[0m
+[0;32mI (122902) main: i=5 byte=32 j=4[0m
+[0;32mI (123052) main: i=5 byte=32 j=5[0m
+[0;32mI (123202) main: i=5 byte=32 j=6[0m
+[0;32mI (123352) main: i=5 byte=32 j=7[0m
+[0;32mI (123502) main: i=6 byte=64 j=0[0m
+[0;32mI (123652) main: i=6 byte=64 j=1[0m
+[0;32mI (123802) main: i=6 byte=64 j=2[0m
+[0;32mI (123952) main: i=6 byte=64 j=3[0m
+[0;32mI (124102) main: i=6 byte=64 j=4[0m
+[0;32mI (124252) main: i=6 byte=64 j=5[0m
+[0;32mI (124402) main: i=6 byte=64 j=6[0m
+[0;32mI (124552) main: i=6 byte=64 j=7[0m
+[0;32mI (124702) main: i=7 byte=128 j=0[0m
+[0;32mI (124852) main: i=7 byte=128 j=1[0m
+[0;32mI (125002) main: i=7 byte=128 j=2[0m
+[0;32mI (125152) main: i=7 byte=128 j=3[0m
+[0;32mI (125302) main: i=7 byte=128 j=4[0m
+[0;32mI (125452) main: i=7 byte=128 j=5[0m
+[0;32mI (125602) main: i=7 byte=128 j=6[0m
+[0;32mI (125752) main: i=7 byte=128 j=7[0m
+[0;32mI (125902) main: i=0 byte=1 j=0[0m
+[0;32mI (126902) main: i=0 byte=1 j=1[0m
+[0;32mI (127052) main: i=0 byte=1 j=2[0m
+[0;32mI (127202) main: i=0 byte=1 j=3[0m
+[0;32mI (127352) main: i=0 byte=1 j=4[0m
+[0;32mI (127502) main: i=0 byte=1 j=5[0m
+[0;32mI (127652) main: i=0 byte=1 j=6[0m
+[0;32mI (127802) main: i=0 byte=1 j=7[0m
+[0;32mI (127952) main: i=1 byte=2 j=0[0m
+[0;32mI (128102) main: i=1 byte=2 j=1[0m
+[0;32mI (128252) main: i=1 byte=2 j=2[0m
+[0;32mI (128402) main: i=1 byte=2 j=3[0m
+[0;32mI (128552) main: i=1 byte=2 j=4[0m
+[0;32mI (128702) main: i=1 byte=2 j=5[0m
+[0;32mI (128852) main: i=1 byte=2 j=6[0m
+[0;32mI (129002) main: i=1 byte=2 j=7[0m
+[0;32mI (129152) main: i=2 byte=4 j=0[0m
+[0;32mI (129302) main: i=2 byte=4 j=1[0m
+[0;32mI (129452) main: i=2 byte=4 j=2[0m
+[0;32mI (129602) main: i=2 byte=4 j=3[0m
+[0;32mI (129752) main: i=2 byte=4 j=4[0m
+[0;32mI (129902) main: i=2 byte=4 j=5[0m
+[0;32mI (130052) main: i=2 byte=4 j=6[0m
+[0;32mI (130202) main: i=2 byte=4 j=7[0m
+[0;32mI (130352) main: i=3 byte=8 j=0[0m
+[0;32mI (130502) main: i=3 byte=8 j=1[0m
+[0;32mI (130652) main: i=3 byte=8 j=2[0m
+[0;32mI (130802) main: i=3 byte=8 j=3[0m
+[0;32mI (130952) main: i=3 byte=8 j=4[0m
+[0;32mI (131102) main: i=3 byte=8 j=5[0m
+[0;32mI (131252) main: i=3 byte=8 j=6[0m
+[0;32mI (131402) main: i=3 byte=8 j=7[0m
+[0;32mI (131552) main: i=4 byte=16 j=0[0m
+[0;32mI (131702) main: i=4 byte=16 j=1[0m
+[0;32mI (131852) main: i=4 byte=16 j=2[0m
+[0;32mI (132002) main: i=4 byte=16 j=3[0m
+[0;32mI (132152) main: i=4 byte=16 j=4[0m
+[0;32mI (132302) main: i=4 byte=16 j=5[0m
+[0;32mI (132452) main: i=4 byte=16 j=6[0m
+[0;32mI (132602) main: i=4 byte=16 j=7[0m
+[0;32mI (132752) main: i=5 byte=32 j=0[0m
+[0;32mI (132902) main: i=5 byte=32 j=1[0m
+[0;32mI (133052) main: i=5 byte=32 j=2[0m
+[0;32mI (133202) main: i=5 byte=32 j=3[0m
+[0;32mI (133352) main: i=5 byte=32 j=4[0m
+[0;32mI (133502) main: i=5 byte=32 j=5[0m
+[0;32mI (133652) main: i=5 byte=32 j=6[0m
+[0;32mI (133802) main: i=5 byte=32 j=7[0m
+[0;32mI (133952) main: i=6 byte=64 j=0[0m
+[0;32mI (134102) main: i=6 byte=64 j=1[0m
+[0;32mI (134252) main: i=6 byte=64 j=2[0m
+[0;32mI (134402) main: i=6 byte=64 j=3[0m
+[0;32mI (134552) main: i=6 byte=64 j=4[0m
+[0;32mI (134702) main: i=6 byte=64 j=5[0m
+[0;32mI (134852) main: i=6 byte=64 j=6[0m
+[0;32mI (135002) main: i=6 byte=64 j=7[0m
+[0;32mI (135152) main: i=7 byte=128 j=0[0m
+[0;32mI (135302) main: i=7 byte=128 j=1[0m
+[0;32mI (135452) main: i=7 byte=128 j=2[0m
+[0;32mI (135602) main: i=7 byte=128 j=3[0m
+[0;32mI (135752) main: i=7 byte=128 j=4[0m
+[0;32mI (135902) main: i=7 byte=128 j=5[0m
+[0;32mI (136052) main: i=7 byte=128 j=6[0m
+[0;32mI (136202) main: i=7 byte=128 j=7[0m
+[0;32mI (136352) main: i=0 byte=1 j=0[0m
+[0;32mI (137352) main: i=0 byte=1 j=1[0m
+[0;32mI (137502) main: i=0 byte=1 j=2[0m
+[0;32mI (137652) main: i=0 byte=1 j=3[0m
+[0;32mI (137802) main: i=0 byte=1 j=4[0m
+[0;32mI (137952) main: i=0 byte=1 j=5[0m
+[0;32mI (138102) main: i=0 byte=1 j=6[0m
+[0;32mI (138252) main: i=0 byte=1 j=7[0m
+[0;32mI (138402) main: i=1 byte=2 j=0[0m
+[0;32mI (138552) main: i=1 byte=2 j=1[0m
+[0;32mI (138702) main: i=1 byte=2 j=2[0m
+[0;32mI (138852) main: i=1 byte=2 j=3[0m
+[0;32mI (139002) main: i=1 byte=2 j=4[0m
+[0;32mI (139152) main: i=1 byte=2 j=5[0m
+[0;32mI (139302) main: i=1 byte=2 j=6[0m
+[0;32mI (139452) main: i=1 byte=2 j=7[0m
+[0;32mI (139602) main: i=2 byte=4 j=0[0m
+[0;32mI (139752) main: i=2 byte=4 j=1[0m
+[0;32mI (139902) main: i=2 byte=4 j=2[0m
+[0;32mI (140052) main: i=2 byte=4 j=3[0m
+[0;32mI (140202) main: i=2 byte=4 j=4[0m
+[0;32mI (140352) main: i=2 byte=4 j=5[0m
+[0;32mI (140502) main: i=2 byte=4 j=6[0m
+[0;32mI (140652) main: i=2 byte=4 j=7[0m
+[0;32mI (140802) main: i=3 byte=8 j=0[0m
+[0;32mI (140952) main: i=3 byte=8 j=1[0m
+[0;32mI (141102) main: i=3 byte=8 j=2[0m
+[0;32mI (141252) main: i=3 byte=8 j=3[0m
+[0;32mI (141402) main: i=3 byte=8 j=4[0m
+[0;32mI (141552) main: i=3 byte=8 j=5[0m
+[0;32mI (141702) main: i=3 byte=8 j=6[0m
+[0;32mI (141852) main: i=3 byte=8 j=7[0m
+[0;32mI (142002) main: i=4 byte=16 j=0[0m
+[0;32mI (142152) main: i=4 byte=16 j=1[0m
+[0;32mI (142302) main: i=4 byte=16 j=2[0m
+[0;32mI (142452) main: i=4 byte=16 j=3[0m
+[0;32mI (142602) main: i=4 byte=16 j=4[0m
+[0;32mI (142752) main: i=4 byte=16 j=5[0m
+[0;32mI (142902) main: i=4 byte=16 j=6[0m
+[0;32mI (143052) main: i=4 byte=16 j=7[0m
+[0;32mI (143202) main: i=5 byte=32 j=0[0m
+[0;32mI (143352) main: i=5 byte=32 j=1[0m
+[0;32mI (143502) main: i=5 byte=32 j=2[0m
+[0;32mI (143652) main: i=5 byte=32 j=3[0m
+[0;32mI (143802) main: i=5 byte=32 j=4[0m
+[0;32mI (143952) main: i=5 byte=32 j=5[0m
+[0;32mI (144102) main: i=5 byte=32 j=6[0m
+[0;32mI (144252) main: i=5 byte=32 j=7[0m
+[0;32mI (144402) main: i=6 byte=64 j=0[0m
+[0;32mI (144552) main: i=6 byte=64 j=1[0m
+[0;32mI (144702) main: i=6 byte=64 j=2[0m
+[0;32mI (144852) main: i=6 byte=64 j=3[0m
+[0;32mI (145002) main: i=6 byte=64 j=4[0m
+[0;32mI (145152) main: i=6 byte=64 j=5[0m
+[0;32mI (145302) main: i=6 byte=64 j=6[0m
+[0;32mI (145452) main: i=6 byte=64 j=7[0m
+[0;32mI (145602) main: i=7 byte=128 j=0[0m
+[0;32mI (145752) main: i=7 byte=128 j=1[0m
+[0;32mI (145902) main: i=7 byte=128 j=2[0m
+[0;32mI (146052) main: i=7 byte=128 j=3[0m
+[0;32mI (146202) main: i=7 byte=128 j=4[0m
+[0;32mI (146352) main: i=7 byte=128 j=5[0m
+[0;32mI (146502) main: i=7 byte=128 j=6[0m
+[0;32mI (146652) main: i=7 byte=128 j=7[0m
+[0;32mI (146802) main: i=0 byte=1 j=0[0m
+[0;32mI (147802) main: i=0 byte=1 j=1[0m
+[0;32mI (147952) main: i=0 byte=1 j=2[0m
+[0;32mI (148102) main: i=0 byte=1 j=3[0m
+[0;32mI (148252) main: i=0 byte=1 j=4[0m
+[0;32mI (148402) main: i=0 byte=1 j=5[0m
+[0;32mI (148552) main: i=0 byte=1 j=6[0m
+[0;32mI (148702) main: i=0 byte=1 j=7[0m
+[0;32mI (148852) main: i=1 byte=2 j=0[0m
+[0;32mI (149002) main: i=1 byte=2 j=1[0m
+[0;32mI (149152) main: i=1 byte=2 j=2[0m
+[0;32mI (149302) main: i=1 byte=2 j=3[0m
+[0;32mI (149452) main: i=1 byte=2 j=4[0m
+[0;32mI (149602) main: i=1 byte=2 j=5[0m
+[0;32mI (149752) main: i=1 byte=2 j=6[0m
+[0;32mI (149902) main: i=1 byte=2 j=7[0m
+[0;32mI (150052) main: i=2 byte=4 j=0[0m
+[0;32mI (150202) main: i=2 byte=4 j=1[0m
+[0;32mI (150352) main: i=2 byte=4 j=2[0m
+[0;32mI (150502) main: i=2 byte=4 j=3[0m
+[0;32mI (150652) main: i=2 byte=4 j=4[0m
+[0;32mI (150802) main: i=2 byte=4 j=5[0m
+[0;32mI (150952) main: i=2 byte=4 j=6[0m
+[0;32mI (151102) main: i=2 byte=4 j=7[0m
+[0;32mI (151252) main: i=3 byte=8 j=0[0m
+[0;32mI (151402) main: i=3 byte=8 j=1[0m
+[0;32mI (151552) main: i=3 byte=8 j=2[0m
+[0;32mI (151702) main: i=3 byte=8 j=3[0m
+[0;32mI (151852) main: i=3 byte=8 j=4[0m
+[0;32mI (152002) main: i=3 byte=8 j=5[0m
+[0;32mI (152152) main: i=3 byte=8 j=6[0m
+[0;32mI (152302) main: i=3 byte=8 j=7[0m
+[0;32mI (152452) main: i=4 byte=16 j=0[0m
+[0;32mI (152602) main: i=4 byte=16 j=1[0m
+[0;32mI (152752) main: i=4 byte=16 j=2[0m
+[0;32mI (152902) main: i=4 byte=16 j=3[0m
+[0;32mI (153052) main: i=4 byte=16 j=4[0m
+[0;32mI (153202) main: i=4 byte=16 j=5[0m
+[0;32mI (153352) main: i=4 byte=16 j=6[0m
+[0;32mI (153502) main: i=4 byte=16 j=7[0m
+[0;32mI (153652) main: i=5 byte=32 j=0[0m
+[0;32mI (153802) main: i=5 byte=32 j=1[0m
+[0;32mI (153952) main: i=5 byte=32 j=2[0m
+[0;32mI (154102) main: i=5 byte=32 j=3[0m
+[0;32mI (154252) main: i=5 byte=32 j=4[0m
+[0;32mI (154402) main: i=5 byte=32 j=5[0m
+[0;32mI (154552) main: i=5 byte=32 j=6[0m
+[0;32mI (154702) main: i=5 byte=32 j=7[0m
+[0;32mI (154852) main: i=6 byte=64 j=0[0m
+[0;32mI (155002) main: i=6 byte=64 j=1[0m
+[0;32mI (155152) main: i=6 byte=64 j=2[0m
+[0;32mI (155302) main: i=6 byte=64 j=3[0m
+[0;32mI (155452) main: i=6 byte=64 j=4[0m
+[0;32mI (155602) main: i=6 byte=64 j=5[0m
+[0;32mI (155752) main: i=6 byte=64 j=6[0m
+[0;32mI (155902) main: i=6 byte=64 j=7[0m
+[0;32mI (156052) main: i=7 byte=128 j=0[0m
+[0;32mI (156202) main: i=7 byte=128 j=1[0m
+[0;32mI (156352) main: i=7 byte=128 j=2[0m
+[0;32mI (156502) main: i=7 byte=128 j=3[0m
+[0;32mI (156652) main: i=7 byte=128 j=4[0m
+[0;32mI (156802) main: i=7 byte=128 j=5[0m
+[0;32mI (156952) main: i=7 byte=128 j=6[0m
+[0;32mI (157102) main: i=7 byte=128 j=7[0m
+[0;32mI (157252) main: i=0 byte=1 j=0[0m
+[0;32mI (158252) main: i=0 byte=1 j=1[0m
+[0;32mI (158402) main: i=0 byte=1 j=2[0m
+[0;32mI (158552) main: i=0 byte=1 j=3[0m
+[0;32mI (158702) main: i=0 byte=1 j=4[0m
+[0;32mI (158852) main: i=0 byte=1 j=5[0m
+[0;32mI (159002) main: i=0 byte=1 j=6[0m
+[0;32mI (159152) main: i=0 byte=1 j=7[0m
+[0;32mI (159302) main: i=1 byte=2 j=0[0m
+[0;32mI (159452) main: i=1 byte=2 j=1[0m
+[0;32mI (159602) main: i=1 byte=2 j=2[0m
+[0;32mI (159752) main: i=1 byte=2 j=3[0m
+[0;32mI (159902) main: i=1 byte=2 j=4[0m
+[0;32mI (160052) main: i=1 byte=2 j=5[0m
+[0;32mI (160202) main: i=1 byte=2 j=6[0m
+[0;32mI (160352) main: i=1 byte=2 j=7[0m
+[0;32mI (160502) main: i=2 byte=4 j=0[0m
+[0;32mI (160652) main: i=2 byte=4 j=1[0m
+[0;32mI (160802) main: i=2 byte=4 j=2[0m
+[0;32mI (160952) main: i=2 byte=4 j=3[0m
+[0;32mI (161102) main: i=2 byte=4 j=4[0m
+[0;32mI (161252) main: i=2 byte=4 j=5[0m
+[0;32mI (161402) main: i=2 byte=4 j=6[0m
+[0;32mI (161552) main: i=2 byte=4 j=7[0m
+[0;32mI (161702) main: i=3 byte=8 j=0[0m
+[0;32mI (161852) main: i=3 byte=8 j=1[0m
+[0;32mI (162002) main: i=3 byte=8 j=2[0m
+[0;32mI (162152) main: i=3 byte=8 j=3[0m
+[0;32mI (162302) main: i=3 byte=8 j=4[0m
+[0;32mI (162452) main: i=3 byte=8 j=5[0m
+[0;32mI (162602) main: i=3 byte=8 j=6[0m
+[0;32mI (162752) main: i=3 byte=8 j=7[0m
+[0;32mI (162902) main: i=4 byte=16 j=0[0m
+[0;32mI (163052) main: i=4 byte=16 j=1[0m
+[0;32mI (163202) main: i=4 byte=16 j=2[0m
+[0;32mI (163352) main: i=4 byte=16 j=3[0m
+[0;32mI (163502) main: i=4 byte=16 j=4[0m
+[0;32mI (163652) main: i=4 byte=16 j=5[0m
+[0;32mI (163802) main: i=4 byte=16 j=6[0m
+[0;32mI (163952) main: i=4 byte=16 j=7[0m
+[0;32mI (164102) main: i=5 byte=32 j=0[0m
+[0;32mI (164252) main: i=5 byte=32 j=1[0m
+[0;32mI (164402) main: i=5 byte=32 j=2[0m
+[0;32mI (164552) main: i=5 byte=32 j=3[0m
+[0;32mI (164702) main: i=5 byte=32 j=4[0m
+[0;32mI (164852) main: i=5 byte=32 j=5[0m
+[0;31mE (165852) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (165852) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (166852) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (166852) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (167852) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (167852) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (168852) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (168852) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (169852) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (169852) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (170852) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (170852) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (171852) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (171852) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (172852) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (172852) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (173852) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (173852) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (174852) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (174852) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (175852) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (175852) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (176852) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (176852) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (177852) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (177852) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (178852) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (178852) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (179852) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (179852) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (180852) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (180852) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;32mI (181002) main: i=5 byte=32 j=6[0m
+[0;31mE (182002) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (182002) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (183002) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (183002) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (184002) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (184002) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (185002) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (185002) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (186002) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (186002) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (187002) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (187002) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (188002) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (188002) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (189002) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (189002) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (190002) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (190002) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (191002) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (191002) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (192002) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (192002) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (193002) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (193002) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (194002) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (194002) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (195002) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (195002) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (196002) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (196002) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (197002) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (197002) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;32mI (197152) main: i=5 byte=32 j=7[0m
+[0;31mE (198152) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (198152) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (199152) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (199152) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (200152) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (200152) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (201152) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (201152) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (202152) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (202152) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (203152) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (203152) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (204152) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (204152) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (205152) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (205152) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (206152) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (206152) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (207152) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (207152) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (208152) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (208152) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (209152) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (209152) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (210152) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (210152) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (211152) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (211152) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (212152) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (212152) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (213152) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (213152) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;32mI (213302) main: i=6 byte=64 j=0[0m
+[0;31mE (214302) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (214302) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (215302) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (215302) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (216302) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (216302) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (217302) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (217302) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (218302) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (218302) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (219302) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (219302) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (220302) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (220302) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (221302) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (221302) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (222302) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (222302) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (223302) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (223302) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (224302) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (224302) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (225302) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (225302) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (226302) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (226302) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (227302) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (227302) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (228302) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (228302) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (229302) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (229302) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;32mI (229452) main: i=6 byte=64 j=1[0m
+[0;31mE (230452) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (230452) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (231452) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (231452) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (232452) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (232452) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (233452) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (233452) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (234452) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (234452) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (235452) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (235452) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (236452) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (236452) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (237452) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (237452) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (238452) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (238452) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (239452) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (239452) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (240452) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (240452) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (241452) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (241452) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (242452) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (242452) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (243452) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (243452) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (244452) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (244452) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (245452) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (245452) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;32mI (245602) main: i=6 byte=64 j=2[0m
+[0;31mE (246602) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (246602) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (247602) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (247602) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (248602) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (248602) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (249602) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (249602) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (250602) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (250602) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (251602) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (251602) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (252602) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (252602) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (253602) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (253602) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (254602) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (254602) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (255602) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (255602) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (256602) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (256602) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (257602) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (257602) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (258602) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (258602) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (258792) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (258792) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (258802) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (258812) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (258822) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (258832) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;32mI (258992) main: i=6 byte=64 j=3[0m
+[0;31mE (258992) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (258992) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (259002) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (259002) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (259022) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (259022) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (259032) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (259042) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (259052) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (259062) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (259072) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (259082) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (259092) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (259102) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (259112) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (259122) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (259132) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (259142) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (259152) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (259152) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (259162) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (259172) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (259182) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (259192) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (259202) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (259212) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (259222) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (259232) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (259242) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (259252) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (259262) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (259272) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;32mI (259432) main: i=6 byte=64 j=4[0m
+[0;31mE (259432) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (259432) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;31mE (259442) lcd_panel.io.i2c: panel_io_i2c_tx_buffer(177): i2c transaction failed[0m
+[0;31mE (259442) lcd_panel.ssd1306: panel_ssd1306_draw_bitmap(192): io tx param SSD1306_CMD_SET_COLUMN_RANGE failed[0m
+[0;32mI (259612) main: i=6 byte=64 j=5[0m
+[0;32mI (259762) main: i=6 byte=64 j=6[0m
+[0;32mI (259912) main: i=6 byte=64 j=7[0m
+[0;32mI (260062) main: i=7 byte=128 j=0[0m
+[0;32mI (260212) main: i=7 byte=128 j=1[0m
+[0;32mI (260362) main: i=7 byte=128 j=2[0m
+[0;32mI (260512) main: i=7 byte=128 j=3[0m
+[0;32mI (260662) main: i=7 byte=128 j=4[0m
+[0;32mI (260812) main: i=7 byte=128 j=5[0m
+[0;32mI (260962) main: i=7 byte=128 j=6[0m
+[0;32mI (261112) main: i=7 byte=128 j=7[0m
+[0;32mI (261262) main: i=0 byte=1 j=0[0m
+[0;32mI (262262) main: i=0 byte=1 j=1[0m
+[0;32mI (262412) main: i=0 byte=1 j=2[0m
+[0;32mI (262562) main: i=0 byte=1 j=3[0m
+[0;32mI (262712) main: i=0 byte=1 j=4[0m
+[0;32mI (262862) main: i=0 byte=1 j=5[0m
+[0;32mI (263012) main: i=0 byte=1 j=6[0m
+[0;32mI (263162) main: i=0 byte=1 j=7[0m
+[0;32mI (263312) main: i=1 byte=2 j=0[0m
+[0;32mI (263462) main: i=1 byte=2 j=1[0m
+[0;32mI (263612) main: i=1 byte=2 j=2[0m
+[0;32mI (263762) main: i=1 byte=2 j=3[0m
+[0;32mI (263912) main: i=1 byte=2 j=4[0m
+[0;32mI (264062) main: i=1 byte=2 j=5[0m
+[0;32mI (264212) main: i=1 byte=2 j=6[0m
+[0;32mI (264362) main: i=1 byte=2 j=7[0m
+[0;32mI (264512) main: i=2 byte=4 j=0[0m
+[0;32mI (264662) main: i=2 byte=4 j=1[0m
+[0;32mI (264812) main: i=2 byte=4 j=2[0m
+[0;32mI (264962) main: i=2 byte=4 j=3[0m
+[0;32mI (265112) main: i=2 byte=4 j=4[0m
+[0;32mI (265262) main: i=2 byte=4 j=5[0m
+[0;32mI (265412) main: i=2 byte=4 j=6[0m
+[0;32mI (265562) main: i=2 byte=4 j=7[0m
+[0;32mI (265712) main: i=3 byte=8 j=0[0m
+[0;32mI (265862) main: i=3 byte=8 j=1[0m
+[0;32mI (266012) main: i=3 byte=8 j=2[0m
+[0;32mI (266162) main: i=3 byte=8 j=3[0m
+[0;32mI (266312) main: i=3 byte=8 j=4[0m
+[0;32mI (266462) main: i=3 byte=8 j=5[0m
+[0;32mI (266612) main: i=3 byte=8 j=6[0m
+[0;32mI (266762) main: i=3 byte=8 j=7[0m
+[0;32mI (266912) main: i=4 byte=16 j=0[0m
+[0;32mI (267062) main: i=4 byte=16 j=1[0m
+[0;32mI (267212) main: i=4 byte=16 j=2[0m
+[0;32mI (267362) main: i=4 byte=16 j=3[0m
+[0;32mI (267512) main: i=4 byte=16 j=4[0m
+[0;32mI (267662) main: i=4 byte=16 j=5[0m
+[0;32mI (267812) main: i=4 byte=16 j=6[0m
+[0;32mI (267962) main: i=4 byte=16 j=7[0m
+[0;32mI (268112) main: i=5 byte=32 j=0[0m
+[0;32mI (268262) main: i=5 byte=32 j=1[0m
+[0;32mI (268412) main: i=5 byte=32 j=2[0m
+[0;32mI (268562) main: i=5 byte=32 j=3[0m
+[0;32mI (268712) main: i=5 byte=32 j=4[0m
+[0;32mI (268862) main: i=5 byte=32 j=5[0m
+[0;32mI (269012) main: i=5 byte=32 j=6[0m
+[0;32mI (269162) main: i=5 byte=32 j=7[0m
+[0;32mI (269312) main: i=6 byte=64 j=0[0m
+[0;32mI (269462) main: i=6 byte=64 j=1[0m
+[0;32mI (269612) main: i=6 byte=64 j=2[0m
+[0;32mI (269762) main: i=6 byte=64 j=3[0m
+[0;32mI (269912) main: i=6 byte=64 j=4[0m
+[0;32mI (270062) main: i=6 byte=64 j=5[0m
+[0;32mI (270212) main: i=6 byte=64 j=6[0m
+[0;32mI (270362) main: i=6 byte=64 j=7[0m
+[0;32mI (270512) main: i=7 byte=128 j=0[0m
+[0;32mI (270662) main: i=7 byte=128 j=1[0m
+[0;32mI (270812) main: i=7 byte=128 j=2[0m
+[0;32mI (270962) main: i=7 byte=128 j=3[0m
+[0;32mI (271112) main: i=7 byte=128 j=4[0m
+[0;32mI (271262) main: i=7 byte=128 j=5[0m
+[0;32mI (271412) main: i=7 byte=128 j=6[0m
+[0;32mI (271562) main: i=7 byte=128 j=7[0m
+[0;32mI (271712) main: i=0 byte=1 j=0[0m
+[0;32mI (272712) main: i=0 byte=1 j=1[0m
+[0;32mI (272862) main: i=0 byte=1 j=2[0m
+[0;32mI (273012) main: i=0 byte=1 j=3[0m
+[0;32mI (273162) main: i=0 byte=1 j=4[0m
+[0;32mI (273312) main: i=0 byte=1 j=5[0m
+[0;32mI (273462) main: i=0 byte=1 j=6[0m
+[0;32mI (273612) main: i=0 byte=1 j=7[0m
+[0;32mI (273762) main: i=1 byte=2 j=0[0m
+[0;32mI (273912) main: i=1 byte=2 j=1[0m
+[0;32mI (274062) main: i=1 byte=2 j=2[0m
+[0;32mI (274212) main: i=1 byte=2 j=3[0m
+[0;32mI (274362) main: i=1 byte=2 j=4[0m
+[0;32mI (274512) main: i=1 byte=2 j=5[0m
+[0;32mI (274662) main: i=1 byte=2 j=6[0m
+[0;32mI (274812) main: i=1 byte=2 j=7[0m
+[0;32mI (274962) main: i=2 byte=4 j=0[0m
+[0;32mI (275112) main: i=2 byte=4 j=1[0m
+[0;32mI (275262) main: i=2 byte=4 j=2[0m
+[0;32mI (275412) main: i=2 byte=4 j=3[0m
+[0;32mI (275562) main: i=2 byte=4 j=4[0m
+[0;32mI (275712) main: i=2 byte=4 j=5[0m
+[0;32mI (275862) main: i=2 byte=4 j=6[0m
+[0;32mI (276012) main: i=2 byte=4 j=7[0m
+[0;32mI (276162) main: i=3 byte=8 j=0[0m
+[0;32mI (276312) main: i=3 byte=8 j=1[0m
+[0;32mI (276462) main: i=3 byte=8 j=2[0m
+[0;32mI (276612) main: i=3 byte=8 j=3[0m
+[0;32mI (276762) main: i=3 byte=8 j=4[0m
+[0;32mI (276912) main: i=3 byte=8 j=5[0m
+[0;32mI (277062) main: i=3 byte=8 j=6[0m
+[0;32mI (277212) main: i=3 byte=8 j=7[0m
+[0;32mI (277362) main: i=4 byte=16 j=0[0m
+[0;32mI (277512) main: i=4 byte=16 j=1[0m
+[0;32mI (277662) main: i=4 byte=16 j=2[0m
+[0;32mI (277812) main: i=4 byte=16 j=3[0m
+[0;32mI (277962) main: i=4 byte=16 j=4[0m
+[0;32mI (278112) main: i=4 byte=16 j=5[0m
+[0;32mI (278262) main: i=4 byte=16 j=6[0m
+[0;32mI (278412) main: i=4 byte=16 j=7[0m
+[0;32mI (278562) main: i=5 byte=32 j=0[0m
+[0;32mI (278712) main: i=5 byte=32 j=1[0m
+[0;32mI (278862) main: i=5 byte=32 j=2[0m
+[0;32mI (279012) main: i=5 byte=32 j=3[0m
+[0;32mI (279162) main: i=5 byte=32 j=4[0m
+[0;32mI (279312) main: i=5 byte=32 j=5[0m
+[0;32mI (279462) main: i=5 byte=32 j=6[0m
+[0;32mI (279612) main: i=5 byte=32 j=7[0m
+[0;32mI (279762) main: i=6 byte=64 j=0[0m
+[0;32mI (279912) main: i=6 byte=64 j=1[0m
+[0;32mI (280062) main: i=6 byte=64 j=2[0m
+[0;32mI (280212) main: i=6 byte=64 j=3[0m
+[0;32mI (280362) main: i=6 byte=64 j=4[0m
+[0;32mI (280512) main: i=6 byte=64 j=5[0m
+[0;32mI (280662) main: i=6 byte=64 j=6[0m
+[0;32mI (280812) main: i=6 byte=64 j=7[0m
+[0;32mI (280962) main: i=7 byte=128 j=0[0m
+[0;32mI (281112) main: i=7 byte=128 j=1[0m
+[0;32mI (281262) main: i=7 byte=128 j=2[0m
+[0;32mI (281412) main: i=7 byte=128 j=3[0m
+[0;32mI (281562) main: i=7 byte=128 j=4[0m
+[0;32mI (281712) main: i=7 byte=128 j=5[0m
+[0;32mI (281862) main: i=7 byte=128 j=6[0m
+[0;32mI (282012) main: i=7 byte=128 j=7[0m
+[0;32mI (282162) main: i=0 byte=1 j=0[0m
+[0;32mI (283162) main: i=0 byte=1 j=1[0m
+[0;32mI (283312) main: i=0 byte=1 j=2[0m
+[0;32mI (283462) main: i=0 byte=1 j=3[0m
+[0;32mI (283612) main: i=0 byte=1 j=4[0m
+[0;32mI (283762) main: i=0 byte=1 j=5[0m
+[0;32mI (283912) main: i=0 byte=1 j=6[0m
+[0;32mI (284062) main: i=0 byte=1 j=7[0m
+[0;32mI (284212) main: i=1 byte=2 j=0[0m
+[0;32mI (284362) main: i=1 byte=2 j=1[0m
+[0;32mI (284512) main: i=1 byte=2 j=2[0m
+[0;32mI (284662) main: i=1 byte=2 j=3[0m
+[0;32mI (284812) main: i=1 byte=2 j=4[0m
+[0;32mI (284962) main: i=1 byte=2 j=5[0m
+[0;32mI (285112) main: i=1 byte=2 j=6[0m
+[0;32mI (285262) main: i=1 byte=2 j=7[0m
+[0;32mI (285412) main: i=2 byte=4 j=0[0m
+[0;32mI (285562) main: i=2 byte=4 j=1[0m
+[0;32mI (285712) main: i=2 byte=4 j=2[0m
+[0;32mI (285862) main: i=2 byte=4 j=3[0m
+[0;32mI (286012) main: i=2 byte=4 j=4[0m
+[0;32mI (286162) main: i=2 byte=4 j=5[0m
+[0;32mI (286312) main: i=2 byte=4 j=6[0m
+[0;32mI (286462) main: i=2 byte=4 j=7[0m
+[0;32mI (286612) main: i=3 byte=8 j=0[0m
+[0;32mI (286762) main: i=3 byte=8 j=1[0m
+[0;32mI (286912) main: i=3 byte=8 j=2[0m
+[0;32mI (287062) main: i=3 byte=8 j=3[0m
+[0;32mI (287212) main: i=3 byte=8 j=4[0m
+[0;32mI (287362) main: i=3 byte=8 j=5[0m
+[0;32mI (287512) main: i=3 byte=8 j=6[0m
+[0;32mI (287662) main: i=3 byte=8 j=7[0m
+[0;32mI (287812) main: i=4 byte=16 j=0[0m
+[0;32mI (287962) main: i=4 byte=16 j=1[0m
+[0;32mI (288112) main: i=4 byte=16 j=2[0m
+[0;32mI (288262) main: i=4 byte=16 j=3[0m
+[0;32mI (288412) main: i=4 byte=16 j=4[0m
+[0;32mI (288562) main: i=4 byte=16 j=5[0m
+[0;32mI (288712) main: i=4 byte=16 j=6[0m
+[0;32mI (288862) main: i=4 byte=16 j=7[0m
+[0;32mI (289012) main: i=5 byte=32 j=0[0m
+[0;32mI (289162) main: i=5 byte=32 j=1[0m
+[0;32mI (289312) main: i=5 byte=32 j=2[0m
+[0;32mI (289462) main: i=5 byte=32 j=3[0m
+[0;32mI (289612) main: i=5 byte=32 j=4[0m
+[0;32mI (289762) main: i=5 byte=32 j=5[0m
+[0;32mI (289912) main: i=5 byte=32 j=6[0m
+[0;32mI (290062) main: i=5 byte=32 j=7[0m
+[0;32mI (290212) main: i=6 byte=64 j=0[0m
+[0;32mI (290362) main: i=6 byte=64 j=1[0m
+[0;32mI (290512) main: i=6 byte=64 j=2[0m
+[0;32mI (290662) main: i=6 byte=64 j=3[0m
+[0;32mI (290812) main: i=6 byte=64 j=4[0m
+[0;32mI (290962) main: i=6 byte=64 j=5[0m
+[0;32mI (291112) main: i=6 byte=64 j=6[0m
+[0;32mI (291262) main: i=6 byte=64 j=7[0m
+[0;32mI (291412) main: i=7 byte=128 j=0[0m
+[0;32mI (291562) main: i=7 byte=128 j=1[0m
+[0;32mI (291712) main: i=7 byte=128 j=2[0m
+[0;32mI (291862) main: i=7 byte=128 j=3[0m
+[0;32mI (292012) main: i=7 byte=128 j=4[0m
+[0;32mI (292162) main: i=7 byte=128 j=5[0m
+[0;32mI (292312) main: i=7 byte=128 j=6[0m
+[0;32mI (292462) main: i=7 byte=128 j=7[0m
+[0;32mI (292612) main: i=0 byte=1 j=0[0m
+[0;32mI (293612) main: i=0 byte=1 j=1[0m
+[0;32mI (293762) main: i=0 byte=1 j=2[0m
+[0;32mI (293912) main: i=0 byte=1 j=3[0m
+[0;32mI (294062) main: i=0 byte=1 j=4[0m
+[0;32mI (294212) main: i=0 byte=1 j=5[0m
+[0;32mI (294362) main: i=0 byte=1 j=6[0m
+[0;32mI (294512) main: i=0 byte=1 j=7[0m
+[0;32mI (294662) main: i=1 byte=2 j=0[0m
+[0;32mI (294812) main: i=1 byte=2 j=1[0m
+[0;32mI (294962) main: i=1 byte=2 j=2[0m
+[0;32mI (295112) main: i=1 byte=2 j=3[0m
+[0;32mI (295262) main: i=1 byte=2 j=4[0m
+[0;32mI (295412) main: i=1 byte=2 j=5[0m
+[0;32mI (295562) main: i=1 byte=2 j=6[0m
+[0;32mI (295712) main: i=1 byte=2 j=7[0m
+[0;32mI (295862) main: i=2 byte=4 j=0[0m
+[0;32mI (296012) main: i=2 byte=4 j=1[0m
+[0;32mI (296162) main: i=2 byte=4 j=2[0m
+[0;32mI (296312) main: i=2 byte=4 j=3[0m
+[0;32mI (296462) main: i=2 byte=4 j=4[0m
+[0;32mI (296612) main: i=2 byte=4 j=5[0m
+[0;32mI (296762) main: i=2 byte=4 j=6[0m
+[0;32mI (296912) main: i=2 byte=4 j=7[0m
+[0;32mI (297062) main: i=3 byte=8 j=0[0m
+[0;32mI (297212) main: i=3 byte=8 j=1[0m
+[0;32mI (297362) main: i=3 byte=8 j=2[0m
+[0;32mI (297512) main: i=3 byte=8 j=3[0m
+[0;32mI (297662) main: i=3 byte=8 j=4[0m
+[0;32mI (297812) main: i=3 byte=8 j=5[0m
+[0;32mI (297962) main: i=3 byte=8 j=6[0m
+[0;32mI (298112) main: i=3 byte=8 j=7[0m
+[0;32mI (298262) main: i=4 byte=16 j=0[0m
+[0;32mI (298412) main: i=4 byte=16 j=1[0m
+[0;32mI (298562) main: i=4 byte=16 j=2[0m
+[0;32mI (298712) main: i=4 byte=16 j=3[0m
+[0;32mI (298862) main: i=4 byte=16 j=4[0m
+[0;32mI (299012) main: i=4 byte=16 j=5[0m
+[0;32mI (299162) main: i=4 byte=16 j=6[0m
+[0;32mI (299312) main: i=4 byte=16 j=7[0m
+[0;32mI (299462) main: i=5 byte=32 j=0[0m
+[0;32mI (299612) main: i=5 byte=32 j=1[0m
+[0;32mI (299762) main: i=5 byte=32 j=2[0m
+[0;32mI (299912) main: i=5 byte=32 j=3[0m
+[0;32mI (300062) main: i=5 byte=32 j=4[0m
+[0;32mI (300212) main: i=5 byte=32 j=5[0m
+[0;32mI (300362) main: i=5 byte=32 j=6[0m
+[0;32mI (300512) main: i=5 byte=32 j=7[0m
+[0;32mI (300662) main: i=6 byte=64 j=0[0m
+[0;32mI (300812) main: i=6 byte=64 j=1[0m
+[0;32mI (300962) main: i=6 byte=64 j=2[0m
+[0;32mI (301112) main: i=6 byte=64 j=3[0m
+[0;32mI (301262) main: i=6 byte=64 j=4[0m
+[0;32mI (301412) main: i=6 byte=64 j=5[0m
+[0;32mI (301562) main: i=6 byte=64 j=6[0m
+[0;32mI (301712) main: i=6 byte=64 j=7[0m
+[0;32mI (301862) main: i=7 byte=128 j=0[0m
+[0;32mI (302012) main: i=7 byte=128 j=1[0m
+[0;32mI (302162) main: i=7 byte=128 j=2[0m
+[0;32mI (302312) main: i=7 byte=128 j=3[0m
+[0;32mI (302462) main: i=7 byte=128 j=4[0m
+[0;32mI (302612) main: i=7 byte=128 j=5[0m
+[0;32mI (302762) main: i=7 byte=128 j=6[0m
+[0;32mI (302912) main: i=7 byte=128 j=7[0m
+[0;32mI (303062) main: i=0 byte=1 j=0[0m
+[0;32mI (304062) main: i=0 byte=1 j=1[0m
+[0;32mI (304212) main: i=0 byte=1 j=2[0m
+[0;32mI (304362) main: i=0 byte=1 j=3[0m
+[0;32mI (304512) main: i=0 byte=1 j=4[0m
+[0;32mI (304662) main: i=0 byte=1 j=5[0m
+[0;32mI (304812) main: i=0 byte=1 j=6[0m
+[0;32mI (304962) main: i=0 byte=1 j=7[0m
+[0;32mI (305112) main: i=1 byte=2 j=0[0m
+[0;32mI (305262) main: i=1 byte=2 j=1[0m
+[0;32mI (305412) main: i=1 byte=2 j=2[0m
+[0;32mI (305562) main: i=1 byte=2 j=3[0m
+[0;32mI (305712) main: i=1 byte=2 j=4[0m
+[0;32mI (305862) main: i=1 byte=2 j=5[0m
+[0;32mI (306012) main: i=1 byte=2 j=6[0m
+[0;32mI (306162) main: i=1 byte=2 j=7[0m
+[0;32mI (306312) main: i=2 byte=4 j=0[0m
+[0;32mI (306462) main: i=2 byte=4 j=1[0m
+[0;32mI (306612) main: i=2 byte=4 j=2[0m
+[0;32mI (306762) main: i=2 byte=4 j=3[0m
+[0;32mI (306912) main: i=2 byte=4 j=4[0m
+[0;32mI (307062) main: i=2 byte=4 j=5[0m
+[0;32mI (307212) main: i=2 byte=4 j=6[0m
+[0;32mI (307362) main: i=2 byte=4 j=7[0m
+[0;32mI (307512) main: i=3 byte=8 j=0[0m
+[0;32mI (307662) main: i=3 byte=8 j=1[0m
+[0;32mI (307812) main: i=3 byte=8 j=2[0m
+[0;32mI (307962) main: i=3 byte=8 j=3[0m
+[0;32mI (308112) main: i=3 byte=8 j=4[0m
+[0;32mI (308262) main: i=3 byte=8 j=5[0m
+[0;32mI (308412) main: i=3 byte=8 j=6[0m
+[0;32mI (308562) main: i=3 byte=8 j=7[0m
+[0;32mI (308712) main: i=4 byte=16 j=0[0m
+[0;32mI (308862) main: i=4 byte=16 j=1[0m
+[0;32mI (309012) main: i=4 byte=16 j=2[0m
+[0;32mI (309162) main: i=4 byte=16 j=3[0m
+[0;32mI (309312) main: i=4 byte=16 j=4[0m
+[0;32mI (309462) main: i=4 byte=16 j=5[0m
+[0;32mI (309612) main: i=4 byte=16 j=6[0m
+[0;32mI (309762) main: i=4 byte=16 j=7[0m
+[0;32mI (309912) main: i=5 byte=32 j=0[0m
+[0;32mI (310062) main: i=5 byte=32 j=1[0m
+[0;32mI (310212) main: i=5 byte=32 j=2[0m
+[0;32mI (310362) main: i=5 byte=32 j=3[0m
+[0;32mI (310512) main: i=5 byte=32 j=4[0m
+[0;32mI (310662) main: i=5 byte=32 j=5[0m
+[0;32mI (310812) main: i=5 byte=32 j=6[0m
+[0;32mI (310962) main: i=5 byte=32 j=7[0m
+[0;32mI (311112) main: i=6 byte=64 j=0[0m
+[0;32mI (311262) main: i=6 byte=64 j=1[0m
+[0;32mI (311412) main: i=6 byte=64 j=2[0m
+[0;32mI (311562) main: i=6 byte=64 j=3[0m
+[0;32mI (311712) main: i=6 byte=64 j=4[0m
+[0;32mI (311862) main: i=6 byte=64 j=5[0m
+[0;32mI (312012) main: i=6 byte=64 j=6[0m
+[0;32mI (312162) main: i=6 byte=64 j=7[0m
+[0;32mI (312312) main: i=7 byte=128 j=0[0m
+[0;32mI (312462) main: i=7 byte=128 j=1[0m
+[0;32mI (312612) main: i=7 byte=128 j=2[0m
+[0;32mI (312762) main: i=7 byte=128 j=3[0m
+[0;32mI (312912) main: i=7 byte=128 j=4[0m
+[0;32mI (313062) main: i=7 byte=128 j=5[0m
+[0;32mI (313212) main: i=7 byte=128 j=6[0m
+[0;32mI (313362) main: i=7 byte=128 j=7[0m
+[0;32mI (313512) main: i=0 byte=1 j=0[0m
+[0;32mI (314512) main: i=0 byte=1 j=1[0m
+[0;32mI (314662) main: i=0 byte=1 j=2[0m
+[0;32mI (314812) main: i=0 byte=1 j=3[0m
+[0;32mI (314962) main: i=0 byte=1 j=4[0m
+[0;32mI (315112) main: i=0 byte=1 j=5[0m
+[0;32mI (315262) main: i=0 byte=1 j=6[0m
+[0;32mI (315412) main: i=0 byte=1 j=7[0m
+[0;32mI (315562) main: i=1 byte=2 j=0[0m
+[0;32mI (315712) main: i=1 byte=2 j=1[0m
+[0;32mI (315862) main: i=1 byte=2 j=2[0m
+[0;32mI (316012) main: i=1 byte=2 j=3[0m
+[0;32mI (316162) main: i=1 byte=2 j=4[0m
+[0;32mI (316312) main: i=1 byte=2 j=5[0m
+[0;32mI (316462) main: i=1 byte=2 j=6[0m
+[0;32mI (316612) main: i=1 byte=2 j=7[0m
+[0;32mI (316762) main: i=2 byte=4 j=0[0m
+[0;32mI (316912) main: i=2 byte=4 j=1[0m
+[0;32mI (317062) main: i=2 byte=4 j=2[0m
+[0;32mI (317212) main: i=2 byte=4 j=3[0m
+[0;32mI (317362) main: i=2 byte=4 j=4[0m
+[0;32mI (317512) main: i=2 byte=4 j=5[0m
+[0;32mI (317662) main: i=2 byte=4 j=6[0m
+[0;32mI (317812) main: i=2 byte=4 j=7[0m
+[0;32mI (317962) main: i=3 byte=8 j=0[0m
+[0;32mI (318112) main: i=3 byte=8 j=1[0m
+[0;32mI (318262) main: i=3 byte=8 j=2[0m
+[0;32mI (318412) main: i=3 byte=8 j=3[0m
+[0;32mI (318562) main: i=3 byte=8 j=4[0m
+[0;32mI (318712) main: i=3 byte=8 j=5[0m
+[0;32mI (318862) main: i=3 byte=8 j=6[0m
+[0;32mI (319012) main: i=3 byte=8 j=7[0m
+[0;32mI (319162) main: i=4 byte=16 j=0[0m
+[0;32mI (319312) main: i=4 byte=16 j=1[0m
+[0;32mI (319462) main: i=4 byte=16 j=2[0m
+[0;32mI (319612) main: i=4 byte=16 j=3[0m
+[0;32mI (319762) main: i=4 byte=16 j=4[0m
+[0;32mI (319912) main: i=4 byte=16 j=5[0m
+[0;32mI (320062) main: i=4 byte=16 j=6[0m
+[0;32mI (320212) main: i=4 byte=16 j=7[0m
+[0;32mI (320362) main: i=5 byte=32 j=0[0m
+[0;32mI (320512) main: i=5 byte=32 j=1[0m
+[0;32mI (320662) main: i=5 byte=32 j=2[0m
+[0;32mI (320812) main: i=5 byte=32 j=3[0m
+[0;32mI (320962) main: i=5 byte=32 j=4[0m
+[0;32mI (321112) main: i=5 byte=32 j=5[0m
+[0;32mI (321262) main: i=5 byte=32 j=6[0m
+[0;32mI (321412) main: i=5 byte=32 j=7[0m
+[0;32mI (321562) main: i=6 byte=64 j=0[0m
+[0;32mI (321712) main: i=6 byte=64 j=1[0m
+[0;32mI (321862) main: i=6 byte=64 j=2[0m
+[0;32mI (322012) main: i=6 byte=64 j=3[0m
+[0;32mI (322162) main: i=6 byte=64 j=4[0m
+[0;32mI (322312) main: i=6 byte=64 j=5[0m
+[0;32mI (322462) main: i=6 byte=64 j=6[0m
+[0;32mI (322612) main: i=6 byte=64 j=7[0m
+[0;32mI (322762) main: i=7 byte=128 j=0[0m
+[0;32mI (322912) main: i=7 byte=128 j=1[0m
+[0;32mI (323062) main: i=7 byte=128 j=2[0m
+[0;32mI (323212) main: i=7 byte=128 j=3[0m
+[0;32mI (323362) main: i=7 byte=128 j=4[0m
+[0;32mI (323512) main: i=7 byte=128 j=5[0m
+[0;32mI (323662) main: i=7 byte=128 j=6[0m
+[0;32mI (323812) main: i=7 byte=128 j=7[0m
+[0;32mI (323962) main: i=0 byte=1 j=0[0m
+[0;32mI (324962) main: i=0 byte=1 j=1[0m
+[0;32mI (325112) main: i=0 byte=1 j=2[0m
+[0;32mI (325262) main: i=0 byte=1 j=3[0m
+[0;32mI (325412) main: i=0 byte=1 j=4[0m
+[0;32mI (325562) main: i=0 byte=1 j=5[0m
+[0;32mI (325712) main: i=0 byte=1 j=6[0m
+[0;32mI (325862) main: i=0 byte=1 j=7[0m
+[0;32mI (326012) main: i=1 byte=2 j=0[0m
+[0;32mI (326162) main: i=1 byte=2 j=1[0m
+[0;32mI (326312) main: i=1 byte=2 j=2[0m
+[0;32mI (326462) main: i=1 byte=2 j=3[0m
+[0;32mI (326612) main: i=1 byte=2 j=4[0m
+[0;32mI (326762) main: i=1 byte=2 j=5[0m
+[0;32mI (326912) main: i=1 byte=2 j=6[0m
+[0;32mI (327062) main: i=1 byte=2 j=7[0m
+[0;32mI (327212) main: i=2 byte=4 j=0[0m
+[0;32mI (327362) main: i=2 byte=4 j=1[0m
+[0;32mI (327512) main: i=2 byte=4 j=2[0m
+[0;32mI (327662) main: i=2 byte=4 j=3[0m
+[0;32mI (327812) main: i=2 byte=4 j=4[0m
+[0;32mI (327962) main: i=2 byte=4 j=5[0m
+[0;32mI (328112) main: i=2 byte=4 j=6[0m
+[0;32mI (328262) main: i=2 byte=4 j=7[0m
+[0;32mI (328412) main: i=3 byte=8 j=0[0m
+[0;32mI (328562) main: i=3 byte=8 j=1[0m
+[0;32mI (328712) main: i=3 byte=8 j=2[0m
+[0;32mI (328862) main: i=3 byte=8 j=3[0m
+[0;32mI (329012) main: i=3 byte=8 j=4[0m
+[0;32mI (329162) main: i=3 byte=8 j=5[0m
+[0;32mI (329312) main: i=3 byte=8 j=6[0m
+[0;32mI (329462) main: i=3 byte=8 j=7[0m
+[0;32mI (329612) main: i=4 byte=16 j=0[0m
+[0;32mI (329762) main: i=4 byte=16 j=1[0m
+[0;32mI (329912) main: i=4 byte=16 j=2[0m
+[0;32mI (330062) main: i=4 byte=16 j=3[0m
+[0;32mI (330212) main: i=4 byte=16 j=4[0m
+[0;32mI (330362) main: i=4 byte=16 j=5[0m
+[0;32mI (330512) main: i=4 byte=16 j=6[0m
+[0;32mI (330662) main: i=4 byte=16 j=7[0m
+[0;32mI (330812) main: i=5 byte=32 j=0[0m
+[0;32mI (330962) main: i=5 byte=32 j=1[0m
+[0;32mI (331112) main: i=5 byte=32 j=2[0m
+[0;32mI (331262) main: i=5 byte=32 j=3[0m
+[0;32mI (331412) main: i=5 byte=32 j=4[0m
+[0;32mI (331562) main: i=5 byte=32 j=5[0m
+[0;32mI (331712) main: i=5 byte=32 j=6[0m
+[0;32mI (331862) main: i=5 byte=32 j=7[0m
+[0;32mI (332012) main: i=6 byte=64 j=0[0m
+[0;32mI (332162) main: i=6 byte=64 j=1[0m
+[0;32mI (332312) main: i=6 byte=64 j=2[0m
+[0;32mI (332462) main: i=6 byte=64 j=3[0m
+[0;32mI (332612) main: i=6 byte=64 j=4[0m
+[0;32mI (332762) main: i=6 byte=64 j=5[0m
+[0;32mI (332912) main: i=6 byte=64 j=6[0m
+[0;32mI (333062) main: i=6 byte=64 j=7[0m
+[0;32mI (333212) main: i=7 byte=128 j=0[0m
+[0;32mI (333362) main: i=7 byte=128 j=1[0m
+[0;32mI (333512) main: i=7 byte=128 j=2[0m
+[0;32mI (333662) main: i=7 byte=128 j=3[0m
+[0;32mI (333812) main: i=7 byte=128 j=4[0m
+[0;32mI (333962) main: i=7 byte=128 j=5[0m
+[0;32mI (334112) main: i=7 byte=128 j=6[0m
+[0;32mI (334262) main: i=7 byte=128 j=7[0m
+[0;32mI (334412) main: i=0 byte=1 j=0[0m
+[0;32mI (335412) main: i=0 byte=1 j=1[0m
+[0;32mI (335562) main: i=0 byte=1 j=2[0m
+[0;32mI (335712) main: i=0 byte=1 j=3[0m
+[0;32mI (335862) main: i=0 byte=1 j=4[0m
+[0;32mI (336012) main: i=0 byte=1 j=5[0m
+[0;32mI (336162) main: i=0 byte=1 j=6[0m
+[0;32mI (336312) main: i=0 byte=1 j=7[0m
+[0;32mI (336462) main: i=1 byte=2 j=0[0m
+[0;32mI (336612) main: i=1 byte=2 j=1[0m
+[0;32mI (336762) main: i=1 byte=2 j=2[0m
+[0;32mI (336912) main: i=1 byte=2 j=3[0m
+[0;32mI (337062) main: i=1 byte=2 j=4[0m
+[0;32mI (337212) main: i=1 byte=2 j=5[0m
+[0;32mI (337362) main: i=1 byte=2 j=6[0m
+[0;32mI (337512) main: i=1 byte=2 j=7[0m
+[0;32mI (337662) main: i=2 byte=4 j=0[0m
+[0;32mI (337812) main: i=2 byte=4 j=1[0m
+[0;32mI (337962) main: i=2 byte=4 j=2[0m
+[0;32mI (338112) main: i=2 byte=4 j=3[0m
+[0;32mI (338262) main: i=2 byte=4 j=4[0m
+[0;32mI (338412) main: i=2 byte=4 j=5[0m
+[0;32mI (338562) main: i=2 byte=4 j=6[0m
+[0;32mI (338712) main: i=2 byte=4 j=7[0m
+[0;32mI (338862) main: i=3 byte=8 j=0[0m
+[0;32mI (339012) main: i=3 byte=8 j=1[0m
+[0;32mI (339162) main: i=3 byte=8 j=2[0m
+[0;32mI (339312) main: i=3 byte=8 j=3[0m
+[0;32mI (339462) main: i=3 byte=8 j=4[0m
+[0;32mI (339612) main: i=3 byte=8 j=5[0m
+[0;32mI (339762) main: i=3 byte=8 j=6[0m
+[0;32mI (339912) main: i=3 byte=8 j=7[0m
+[0;32mI (340062) main: i=4 byte=16 j=0[0m
+[0;32mI (340212) main: i=4 byte=16 j=1[0m
+[0;32mI (340362) main: i=4 byte=16 j=2[0m
+[0;32mI (340512) main: i=4 byte=16 j=3[0m
+[0;32mI (340662) main: i=4 byte=16 j=4[0m
+[0;32mI (340812) main: i=4 byte=16 j=5[0m
+[0;32mI (340962) main: i=4 byte=16 j=6[0m
+[0;32mI (341112) main: i=4 byte=16 j=7[0m
+[0;32mI (341262) main: i=5 byte=32 j=0[0m
+[0;32mI (341412) main: i=5 byte=32 j=1[0m
+[0;32mI (341562) main: i=5 byte=32 j=2[0m
+[0;32mI (341712) main: i=5 byte=32 j=3[0m
+[0;32mI (341862) main: i=5 byte=32 j=4[0m
+[0;32mI (342012) main: i=5 byte=32 j=5[0m
+[0;32mI (342162) main: i=5 byte=32 j=6[0m
+[0;32mI (342312) main: i=5 byte=32 j=7[0m
+[0;32mI (342462) main: i=6 byte=64 j=0[0m
+[0;32mI (342612) main: i=6 byte=64 j=1[0m
+[0;32mI (342762) main: i=6 byte=64 j=2[0m
+[0;32mI (342912) main: i=6 byte=64 j=3[0m
+[0;32mI (343062) main: i=6 byte=64 j=4[0m
+[0;32mI (343212) main: i=6 byte=64 j=5[0m
+[0;32mI (343362) main: i=6 byte=64 j=6[0m
+[0;32mI (343512) main: i=6 byte=64 j=7[0m
+[0;32mI (343662) main: i=7 byte=128 j=0[0m
+[0;32mI (343812) main: i=7 byte=128 j=1[0m
+[0;32mI (343962) main: i=7 byte=128 j=2[0m
+[0;32mI (344112) main: i=7 byte=128 j=3[0m
+[0;32mI (344262) main: i=7 byte=128 j=4[0m
+[0;32mI (344412) main: i=7 byte=128 j=5[0m
+[0;32mI (344562) main: i=7 byte=128 j=6[0m
+[0;32mI (344712) main: i=7 byte=128 j=7[0m
+[0;32mI (344862) main: i=0 byte=1 j=0[0m
+[0;32mI (345862) main: i=0 byte=1 j=1[0m
+[0;32mI (346012) main: i=0 byte=1 j=2[0m
+[0;32mI (346162) main: i=0 byte=1 j=3[0m
+[0;32mI (346312) main: i=0 byte=1 j=4[0m
+[0;32mI (346462) main: i=0 byte=1 j=5[0m
+[0;32mI (346612) main: i=0 byte=1 j=6[0m
+[0;32mI (346762) main: i=0 byte=1 j=7[0m
+[0;32mI (346912) main: i=1 byte=2 j=0[0m
+[0;32mI (347062) main: i=1 byte=2 j=1[0m
+[0;32mI (347212) main: i=1 byte=2 j=2[0m
+[0;32mI (347362) main: i=1 byte=2 j=3[0m
+[0;32mI (347512) main: i=1 byte=2 j=4[0m
+[0;32mI (347662) main: i=1 byte=2 j=5[0m
+[0;32mI (347812) main: i=1 byte=2 j=6[0m
+[0;32mI (347962) main: i=1 byte=2 j=7[0m
+[0;32mI (348112) main: i=2 byte=4 j=0[0m
+[0;32mI (348262) main: i=2 byte=4 j=1[0m
+[0;32mI (348412) main: i=2 byte=4 j=2[0m
+[0;32mI (348562) main: i=2 byte=4 j=3[0m
+[0;32mI (348712) main: i=2 byte=4 j=4[0m
+[0;32mI (348862) main: i=2 byte=4 j=5[0m
+[0;32mI (349012) main: i=2 byte=4 j=6[0m
+[0;32mI (349162) main: i=2 byte=4 j=7[0m
+[0;32mI (349312) main: i=3 byte=8 j=0[0m
+[0;32mI (349462) main: i=3 byte=8 j=1[0m
+[0;32mI (349612) main: i=3 byte=8 j=2[0m
+[0;32mI (349762) main: i=3 byte=8 j=3[0m
+[0;32mI (349912) main: i=3 byte=8 j=4[0m
+[0;32mI (350062) main: i=3 byte=8 j=5[0m
+[0;32mI (350212) main: i=3 byte=8 j=6[0m
+[0;32mI (350362) main: i=3 byte=8 j=7[0m
+[0;32mI (350512) main: i=4 byte=16 j=0[0m
+[0;32mI (350662) main: i=4 byte=16 j=1[0m
+[0;32mI (350812) main: i=4 byte=16 j=2[0m
+[0;32mI (350962) main: i=4 byte=16 j=3[0m
+[0;32mI (351112) main: i=4 byte=16 j=4[0m
+[0;32mI (351262) main: i=4 byte=16 j=5[0m
+[0;32mI (351412) main: i=4 byte=16 j=6[0m
+[0;32mI (351562) main: i=4 byte=16 j=7[0m
+[0;32mI (351712) main: i=5 byte=32 j=0[0m
+[0;32mI (351862) main: i=5 byte=32 j=1[0m
+[0;32mI (352012) main: i=5 byte=32 j=2[0m
+[0;32mI (352162) main: i=5 byte=32 j=3[0m
+[0;32mI (352312) main: i=5 byte=32 j=4[0m
+[0;32mI (352462) main: i=5 byte=32 j=5[0m
+[0;32mI (352612) main: i=5 byte=32 j=6[0m
+[0;32mI (352762) main: i=5 byte=32 j=7[0m
+[0;32mI (352912) main: i=6 byte=64 j=0[0m
+[0;32mI (353062) main: i=6 byte=64 j=1[0m
+[0;32mI (353212) main: i=6 byte=64 j=2[0m
+[0;32mI (353362) main: i=6 byte=64 j=3[0m
+[0;32mI (353512) main: i=6 byte=64 j=4[0m
+[0;32mI (353662) main: i=6 byte=64 j=5[0m
+[0;32mI (353812) main: i=6 byte=64 j=6[0m
+[0;32mI (353962) main: i=6 byte=64 j=7[0m
+[0;32mI (354112) main: i=7 byte=128 j=0[0m
+[0;32mI (354262) main: i=7 byte=128 j=1[0m
+[0;32mI (354412) main: i=7 byte=128 j=2[0m
+[0;32mI (354562) main: i=7 byte=128 j=3[0m
+[0;32mI (354712) main: i=7 byte=128 j=4[0m
+[0;32mI (354862) main: i=7 byte=128 j=5[0m
+[0;32mI (355012) main: i=7 byte=128 j=6[0m
+[0;32mI (355162) main: i=7 byte=128 j=7[0m
+[0;32mI (355312) main: i=0 byte=1 j=0[0m
+[0;32mI (356312) main: i=0 byte=1 j=1[0m
+[0;32mI (356462) main: i=0 byte=1 j=2[0m
+[0;32mI (356612) main: i=0 byte=1 j=3[0m
+[0;32mI (356762) main: i=0 byte=1 j=4[0m
+[0;32mI (356912) main: i=0 byte=1 j=5[0m
+[0;32mI (357062) main: i=0 byte=1 j=6[0m
+[0;32mI (357212) main: i=0 byte=1 j=7[0m
+[0;32mI (357362) main: i=1 byte=2 j=0[0m
+[0;32mI (357512) main: i=1 byte=2 j=1[0m
+[0;32mI (357662) main: i=1 byte=2 j=2[0m
+[0;32mI (357812) main: i=1 byte=2 j=3[0m
+[0;32mI (357962) main: i=1 byte=2 j=4[0m
+[0;32mI (358112) main: i=1 byte=2 j=5[0m
+[0;32mI (358262) main: i=1 byte=2 j=6[0m
+[0;32mI (358412) main: i=1 byte=2 j=7[0m
+[0;32mI (358562) main: i=2 byte=4 j=0[0m
+[0;32mI (358712) main: i=2 byte=4 j=1[0m
+[0;32mI (358862) main: i=2 byte=4 j=2[0m
+[0;32mI (359012) main: i=2 byte=4 j=3[0m
+[0;32mI (359162) main: i=2 byte=4 j=4[0m
+[0;32mI (359312) main: i=2 byte=4 j=5[0m
+[0;32mI (359462) main: i=2 byte=4 j=6[0m
+[0;32mI (359612) main: i=2 byte=4 j=7[0m
+[0;32mI (359762) main: i=3 byte=8 j=0[0m
+[0;32mI (359912) main: i=3 byte=8 j=1[0m
+[0;32mI (360062) main: i=3 byte=8 j=2[0m
+[0;32mI (360212) main: i=3 byte=8 j=3[0m
+[0;32mI (360362) main: i=3 byte=8 j=4[0m
+[0;32mI (360512) main: i=3 byte=8 j=5[0m
+[0;32mI (360662) main: i=3 byte=8 j=6[0m
+[0;32mI (360812) main: i=3 byte=8 j=7[0m
+[0;32mI (360962) main: i=4 byte=16 j=0[0m
+[0;32mI (361112) main: i=4 byte=16 j=1[0m
+[0;32mI (361262) main: i=4 byte=16 j=2[0m
+[0;32mI (361412) main: i=4 byte=16 j=3[0m
+[0;32mI (361562) main: i=4 byte=16 j=4[0m
+[0;32mI (361712) main: i=4 byte=16 j=5[0m
+[0;32mI (361862) main: i=4 byte=16 j=6[0m
+[0;32mI (362012) main: i=4 byte=16 j=7[0m
+[0;32mI (362162) main: i=5 byte=32 j=0[0m
+[0;32mI (362312) main: i=5 byte=32 j=1[0m
+[0;32mI (362462) main: i=5 byte=32 j=2[0m
+[0;32mI (362612) main: i=5 byte=32 j=3[0m
+[0;32mI (362762) main: i=5 byte=32 j=4[0m
+[0;32mI (362912) main: i=5 byte=32 j=5[0m
+[0;32mI (363062) main: i=5 byte=32 j=6[0m
+[0;32mI (363212) main: i=5 byte=32 j=7[0m
+[0;32mI (363362) main: i=6 byte=64 j=0[0m
+[0;32mI (363512) main: i=6 byte=64 j=1[0m
+[0;32mI (363662) main: i=6 byte=64 j=2[0m
+[0;32mI (363812) main: i=6 byte=64 j=3[0m
+[0;32mI (363962) main: i=6 byte=64 j=4[0m
+[0;32mI (364112) main: i=6 byte=64 j=5[0m
+[0;32mI (364262) main: i=6 byte=64 j=6[0m
+[0;32mI (364412) main: i=6 byte=64 j=7[0m
+[0;32mI (364562) main: i=7 byte=128 j=0[0m
+[0;32mI (364712) main: i=7 byte=128 j=1[0m
+[0;32mI (364862) main: i=7 byte=128 j=2[0m
+[0;32mI (365012) main: i=7 byte=128 j=3[0m
+[0;32mI (365162) main: i=7 byte=128 j=4[0m
+[0;32mI (365312) main: i=7 byte=128 j=5[0m
+[0;32mI (365462) main: i=7 byte=128 j=6[0m
+[0;32mI (365612) main: i=7 byte=128 j=7[0m
+[0;32mI (365762) main: i=0 byte=1 j=0[0m
+[0;32mI (366762) main: i=0 byte=1 j=1[0m
+[0;32mI (366912) main: i=0 byte=1 j=2[0m
+[0;32mI (367062) main: i=0 byte=1 j=3[0m
+[0;32mI (367212) main: i=0 byte=1 j=4[0m
+[0;32mI (367362) main: i=0 byte=1 j=5[0m
+[0;32mI (367512) main: i=0 byte=1 j=6[0m
+[0;32mI (367662) main: i=0 byte=1 j=7[0m
+[0;32mI (367812) main: i=1 byte=2 j=0[0m
+[0;32mI (367962) main: i=1 byte=2 j=1[0m
+[0;32mI (368112) main: i=1 byte=2 j=2[0m
+[0;32mI (368262) main: i=1 byte=2 j=3[0m
+[0;32mI (368412) main: i=1 byte=2 j=4[0m
+[0;32mI (368562) main: i=1 byte=2 j=5[0m
+[0;32mI (368712) main: i=1 byte=2 j=6[0m
+[0;32mI (368862) main: i=1 byte=2 j=7[0m
+[0;32mI (369012) main: i=2 byte=4 j=0[0m
+[0;32mI (369162) main: i=2 byte=4 j=1[0m
+[0;32mI (369312) main: i=2 byte=4 j=2[0m
+[0;32mI (369462) main: i=2 byte=4 j=3[0m
+[0;32mI (369612) main: i=2 byte=4 j=4[0m
+[0;32mI (369762) main: i=2 byte=4 j=5[0m
+[0;32mI (369912) main: i=2 byte=4 j=6[0m
+[0;32mI (370062) main: i=2 byte=4 j=7[0m
+[0;32mI (370212) main: i=3 byte=8 j=0[0m
+[0;32mI (370362) main: i=3 byte=8 j=1[0m
+[0;32mI (370512) main: i=3 byte=8 j=2[0m
+[0;32mI (370662) main: i=3 byte=8 j=3[0m
+[0;32mI (370812) main: i=3 byte=8 j=4[0m
+[0;32mI (370962) main: i=3 byte=8 j=5[0m
+[0;32mI (371112) main: i=3 byte=8 j=6[0m
+[0;32mI (371262) main: i=3 byte=8 j=7[0m
+[0;32mI (371412) main: i=4 byte=16 j=0[0m
+[0;32mI (371562) main: i=4 byte=16 j=1[0m
+[0;32mI (371712) main: i=4 byte=16 j=2[0m
+[0;32mI (371862) main: i=4 byte=16 j=3[0m
+[0;32mI (372012) main: i=4 byte=16 j=4[0m
+[0;32mI (372162) main: i=4 byte=16 j=5[0m
+[0;32mI (372312) main: i=4 byte=16 j=6[0m
+[0;32mI (372462) main: i=4 byte=16 j=7[0m
+[0;32mI (372612) main: i=5 byte=32 j=0[0m
+[0;32mI (372762) main: i=5 byte=32 j=1[0m
+[0;32mI (372912) main: i=5 byte=32 j=2[0m
+[0;32mI (373062) main: i=5 byte=32 j=3[0m
+[0;32mI (373212) main: i=5 byte=32 j=4[0m
+[0;32mI (373362) main: i=5 byte=32 j=5[0m
+[0;32mI (373512) main: i=5 byte=32 j=6[0m
+[0;32mI (373662) main: i=5 byte=32 j=7[0m
+[0;32mI (373812) main: i=6 byte=64 j=0[0m
+[0;32mI (373962) main: i=6 byte=64 j=1[0m
+[0;32mI (374112) main: i=6 byte=64 j=2[0m
+[0;32mI (374262) main: i=6 byte=64 j=3[0m
+[0;32mI (374412) main: i=6 byte=64 j=4[0m
+[0;32mI (374562) main: i=6 byte=64 j=5[0m
+[0;32mI (374712) main: i=6 byte=64 j=6[0m
+[0;32mI (374862) main: i=6 byte=64 j=7[0m
+[0;32mI (375012) main: i=7 byte=128 j=0[0m
+[0;32mI (375162) main: i=7 byte=128 j=1[0m
+[0;32mI (375312) main: i=7 byte=128 j=2[0m
+[0;32mI (375462) main: i=7 byte=128 j=3[0m
+[0;32mI (375612) main: i=7 byte=128 j=4[0m
+[0;32mI (375762) main: i=7 byte=128 j=5[0m
+[0;32mI (375912) main: i=7 byte=128 j=6[0m
+[0;32mI (376062) main: i=7 byte=128 j=7[0m
+[0;32mI (376212) main: i=0 byte=1 j=0[0m
+[0;32mI (377212) main: i=0 byte=1 j=1[0m
+[0;32mI (377362) main: i=0 byte=1 j=2[0m
+[0;32mI (377512) main: i=0 byte=1 j=3[0m
+[0;32mI (377662) main: i=0 byte=1 j=4[0m
+[0;32mI (377812) main: i=0 byte=1 j=5[0m
+[0;32mI (377962) main: i=0 byte=1 j=6[0m
+[0;32mI (378112) main: i=0 byte=1 j=7[0m
+[0;32mI (378262) main: i=1 byte=2 j=0[0m
+[0;32mI (378412) main: i=1 byte=2 j=1[0m
+[0;32mI (378562) main: i=1 byte=2 j=2[0m
+[0;32mI (378712) main: i=1 byte=2 j=3[0m
+[0;32mI (378862) main: i=1 byte=2 j=4[0m
+[0;32mI (379012) main: i=1 byte=2 j=5[0m
+[0;32mI (379162) main: i=1 byte=2 j=6[0m
+[0;32mI (379312) main: i=1 byte=2 j=7[0m
+[0;32mI (379462) main: i=2 byte=4 j=0[0m
+[0;32mI (379612) main: i=2 byte=4 j=1[0m
+[0;32mI (379762) main: i=2 byte=4 j=2[0m
+[0;32mI (379912) main: i=2 byte=4 j=3[0m
+[0;32mI (380062) main: i=2 byte=4 j=4[0m
+[0;32mI (380212) main: i=2 byte=4 j=5[0m
+[0;32mI (380362) main: i=2 byte=4 j=6[0m
+[0;32mI (380512) main: i=2 byte=4 j=7[0m
+[0;32mI (380662) main: i=3 byte=8 j=0[0m
+[0;32mI (380812) main: i=3 byte=8 j=1[0m
+[0;32mI (380962) main: i=3 byte=8 j=2[0m
+[0;32mI (381112) main: i=3 byte=8 j=3[0m
+[0;32mI (381262) main: i=3 byte=8 j=4[0m
+[0;32mI (381412) main: i=3 byte=8 j=5[0m
+[0;32mI (381562) main: i=3 byte=8 j=6[0m
+[0;32mI (381712) main: i=3 byte=8 j=7[0m
+[0;32mI (381862) main: i=4 byte=16 j=0[0m
+[0;32mI (382012) main: i=4 byte=16 j=1[0m
+[0;32mI (382162) main: i=4 byte=16 j=2[0m
+[0;32mI (382312) main: i=4 byte=16 j=3[0m
+[0;32mI (382462) main: i=4 byte=16 j=4[0m
+[0;32mI (382612) main: i=4 byte=16 j=5[0m
+[0;32mI (382762) main: i=4 byte=16 j=6[0m
+[0;32mI (382912) main: i=4 byte=16 j=7[0m
+[0;32mI (383062) main: i=5 byte=32 j=0[0m
+[0;32mI (383212) main: i=5 byte=32 j=1[0m
+[0;32mI (383362) main: i=5 byte=32 j=2[0m
+[0;32mI (383512) main: i=5 byte=32 j=3[0m
+[0;32mI (383662) main: i=5 byte=32 j=4[0m
+[0;32mI (383812) main: i=5 byte=32 j=5[0m
+[0;32mI (383962) main: i=5 byte=32 j=6[0m
+[0;32mI (384112) main: i=5 byte=32 j=7[0m
+[0;32mI (384262) main: i=6 byte=64 j=0[0m
+[0;32mI (384412) main: i=6 byte=64 j=1[0m
+[0;32mI (384562) main: i=6 byte=64 j=2[0m
+[0;32mI (384712) main: i=6 byte=64 j=3[0m
+[0;32mI (384862) main: i=6 byte=64 j=4[0m
+[0;32mI (385012) main: i=6 byte=64 j=5[0m
+[0;32mI (385162) main: i=6 byte=64 j=6[0m
+[0;32mI (385312) main: i=6 byte=64 j=7[0m
+[0;32mI (385462) main: i=7 byte=128 j=0[0m
+[0;32mI (385612) main: i=7 byte=128 j=1[0m
+[0;32mI (385762) main: i=7 byte=128 j=2[0m
+[0;32mI (385912) main: i=7 byte=128 j=3[0m
+[0;32mI (386062) main: i=7 byte=128 j=4[0m
+[0;32mI (386212) main: i=7 byte=128 j=5[0m
+[0;32mI (386362) main: i=7 byte=128 j=6[0m
+[0;32mI (386512) main: i=7 byte=128 j=7[0m
+[0;32mI (386662) main: i=0 byte=1 j=0[0m
+[0;32mI (387662) main: i=0 byte=1 j=1[0m
+[0;32mI (387812) main: i=0 byte=1 j=2[0m
+[0;32mI (387962) main: i=0 byte=1 j=3[0m
+[0;32mI (388112) main: i=0 byte=1 j=4[0m
+[0;32mI (388262) main: i=0 byte=1 j=5[0m
+[0;32mI (388412) main: i=0 byte=1 j=6[0m
+[0;32mI (388562) main: i=0 byte=1 j=7[0m
+[0;32mI (388712) main: i=1 byte=2 j=0[0m
+[0;32mI (388862) main: i=1 byte=2 j=1[0m
+[0;32mI (389012) main: i=1 byte=2 j=2[0m
+[0;32mI (389162) main: i=1 byte=2 j=3[0m
+[0;32mI (389312) main: i=1 byte=2 j=4[0m
+[0;32mI (389462) main: i=1 byte=2 j=5[0m
+[0;32mI (389612) main: i=1 byte=2 j=6[0m
+[0;32mI (389762) main: i=1 byte=2 j=7[0m
+[0;32mI (389912) main: i=2 byte=4 j=0[0m
+[0;32mI (390062) main: i=2 byte=4 j=1[0m
+[0;32mI (390212) main: i=2 byte=4 j=2[0m
+[0;32mI (390362) main: i=2 byte=4 j=3[0m
+[0;32mI (390512) main: i=2 byte=4 j=4[0m
+[0;32mI (390662) main: i=2 byte=4 j=5[0m
+[0;32mI (390812) main: i=2 byte=4 j=6[0m
+[0;32mI (390962) main: i=2 byte=4 j=7[0m
+[0;32mI (391112) main: i=3 byte=8 j=0[0m
+[0;32mI (391262) main: i=3 byte=8 j=1[0m
+[0;32mI (391412) main: i=3 byte=8 j=2[0m
+[0;32mI (391562) main: i=3 byte=8 j=3[0m
+[0;32mI (391712) main: i=3 byte=8 j=4[0m
+[0;32mI (391862) main: i=3 byte=8 j=5[0m
+[0;32mI (392012) main: i=3 byte=8 j=6[0m
+[0;32mI (392162) main: i=3 byte=8 j=7[0m
+[0;32mI (392312) main: i=4 byte=16 j=0[0m
+[0;32mI (392462) main: i=4 byte=16 j=1[0m
+[0;32mI (392612) main: i=4 byte=16 j=2[0m
+[0;32mI (392762) main: i=4 byte=16 j=3[0m
+[0;32mI (392912) main: i=4 byte=16 j=4[0m
+[0;32mI (393062) main: i=4 byte=16 j=5[0m
+[0;32mI (393212) main: i=4 byte=16 j=6[0m
+[0;32mI (393362) main: i=4 byte=16 j=7[0m
+[0;32mI (393512) main: i=5 byte=32 j=0[0m
+[0;32mI (393662) main: i=5 byte=32 j=1[0m
+[0;32mI (393812) main: i=5 byte=32 j=2[0m
+[0;32mI (393962) main: i=5 byte=32 j=3[0m
+[0;32mI (394112) main: i=5 byte=32 j=4[0m
+[0;32mI (394262) main: i=5 byte=32 j=5[0m
+[0;32mI (394412) main: i=5 byte=32 j=6[0m
+[0;32mI (394562) main: i=5 byte=32 j=7[0m
+[0;32mI (394712) main: i=6 byte=64 j=0[0m
+[0;32mI (394862) main: i=6 byte=64 j=1[0m
+[0;32mI (395012) main: i=6 byte=64 j=2[0m
+[0;32mI (395162) main: i=6 byte=64 j=3[0m
+[0;32mI (395312) main: i=6 byte=64 j=4[0m
+[0;32mI (395462) main: i=6 byte=64 j=5[0m
+[0;32mI (395612) main: i=6 byte=64 j=6[0m
+[0;32mI (395762) main: i=6 byte=64 j=7[0m
+[0;32mI (395912) main: i=7 byte=128 j=0[0m
+[0;32mI (396062) main: i=7 byte=128 j=1[0m
+[0;32mI (396212) main: i=7 byte=128 j=2[0m
+[0;32mI (396362) main: i=7 byte=128 j=3[0m
+[0;32mI (396512) main: i=7 byte=128 j=4[0m
+[0;32mI (396662) main: i=7 byte=128 j=5[0m
+[0;32mI (396812) main: i=7 byte=128 j=6[0m
+[0;32mI (396962) main: i=7 byte=128 j=7[0m
+[0;32mI (397112) main: i=0 byte=1 j=0[0m
+[0;32mI (398112) main: i=0 byte=1 j=1[0m
+[0;32mI (398262) main: i=0 byte=1 j=2[0m
+[0;32mI (398412) main: i=0 byte=1 j=3[0m
+[0;32mI (398562) main: i=0 byte=1 j=4[0m
+[0;32mI (398712) main: i=0 byte=1 j=5[0m
+[0;32mI (398862) main: i=0 byte=1 j=6[0m
+[0;32mI (399012) main: i=0 byte=1 j=7[0m
+[0;32mI (399162) main: i=1 byte=2 j=0[0m
+[0;32mI (399312) main: i=1 byte=2 j=1[0m
+[0;32mI (399462) main: i=1 byte=2 j=2[0m
+[0;32mI (399612) main: i=1 byte=2 j=3[0m
+[0;32mI (399762) main: i=1 byte=2 j=4[0m
+[0;32mI (399912) main: i=1 byte=2 j=5[0m
+[0;32mI (400062) main: i=1 byte=2 j=6[0m
+[0;32mI (400212) main: i=1 byte=2 j=7[0m
+[0;32mI (400362) main: i=2 byte=4 j=0[0m
+[0;32mI (400512) main: i=2 byte=4 j=1[0m
+[0;32mI (400662) main: i=2 byte=4 j=2[0m
+[0;32mI (400812) main: i=2 byte=4 j=3[0m
+[0;32mI (400962) main: i=2 byte=4 j=4[0m
+[0;32mI (401112) main: i=2 byte=4 j=5[0m
+[0;32mI (401262) main: i=2 byte=4 j=6[0m
+[0;32mI (401412) main: i=2 byte=4 j=7[0m
+[0;32mI (401562) main: i=3 byte=8 j=0[0m
+[0;32mI (401712) main: i=3 byte=8 j=1[0m
+[0;32mI (401862) main: i=3 byte=8 j=2[0m
+[0;32mI (402012) main: i=3 byte=8 j=3[0m
+[0;32mI (402162) main: i=3 byte=8 j=4[0m
+[0;32mI (402312) main: i=3 byte=8 j=5[0m
+[0;32mI (402462) main: i=3 byte=8 j=6[0m
+[0;32mI (402612) main: i=3 byte=8 j=7[0m
+[0;32mI (402762) main: i=4 byte=16 j=0[0m
+[0;32mI (402912) main: i=4 byte=16 j=1[0m
+[0;32mI (403062) main: i=4 byte=16 j=2[0m
+[0;32mI (403212) main: i=4 byte=16 j=3[0m
+[0;32mI (403362) main: i=4 byte=16 j=4[0m
+[0;32mI (403512) main: i=4 byte=16 j=5[0m
+[0;32mI (403662) main: i=4 byte=16 j=6[0m
+[0;32mI (403812) main: i=4 byte=16 j=7[0m
+[0;32mI (403962) main: i=5 byte=32 j=0[0m
+[0;32mI (404112) main: i=5 byte=32 j=1[0m
+[0;32mI (404262) main: i=5 byte=32 j=2[0m
+[0;32mI (404412) main: i=5 byte=32 j=3[0m
+[0;32mI (404562) main: i=5 byte=32 j=4[0m
+[0;32mI (404712) main: i=5 byte=32 j=5[0m
+[0;32mI (404862) main: i=5 byte=32 j=6[0m
+[0;32mI (405012) main: i=5 byte=32 j=7[0m
+[0;32mI (405162) main: i=6 byte=64 j=0[0m
+[0;32mI (405312) main: i=6 byte=64 j=1[0m
+[0;32mI (405462) main: i=6 byte=64 j=2[0m
+[0;32mI (405612) main: i=6 byte=64 j=3[0m
+[0;32mI (405762) main: i=6 byte=64 j=4[0m
+[0;32mI (405912) main: i=6 byte=64 j=5[0m
+[0;32mI (406062) main: i=6 byte=64 j=6[0m
+[0;32mI (406212) main: i=6 byte=64 j=7[0m
+[0;32mI (406362) main: i=7 byte=128 j=0[0m
+[0;32mI (406512) main: i=7 byte=128 j=1[0m
+[0;32mI (406662) main: i=7 byte=128 j=2[0m
+[0;32mI (406812) main: i=7 byte=128 j=3[0m
+[0;32mI (406962) main: i=7 byte=128 j=4[0m
+[0;32mI (407112) main: i=7 byte=128 j=5[0m
+[0;32mI (407262) main: i=7 byte=128 j=6[0m
+[0;32mI (407412) main: i=7 byte=128 j=7[0m
+[0;32mI (407562) main: i=0 byte=1 j=0[0m
+[0;32mI (408562) main: i=0 byte=1 j=1[0m
+[0;32mI (408712) main: i=0 byte=1 j=2[0m
+[0;32mI (408862) main: i=0 byte=1 j=3[0m
+[0;32mI (409012) main: i=0 byte=1 j=4[0m
+[0;32mI (409162) main: i=0 byte=1 j=5[0m
+[0;32mI (409312) main: i=0 byte=1 j=6[0m
+[0;32mI (409462) main: i=0 byte=1 j=7[0m
+[0;32mI (409612) main: i=1 byte=2 j=0[0m
+[0;32mI (409762) main: i=1 byte=2 j=1[0m
+[0;32mI (409912) main: i=1 byte=2 j=2[0m
+[0;32mI (410062) main: i=1 byte=2 j=3[0m
+[0;32mI (410212) main: i=1 byte=2 j=4[0m
+[0;32mI (410362) main: i=1 byte=2 j=5[0m
+[0;32mI (410512) main: i=1 byte=2 j=6[0m
+[0;32mI (410662) main: i=1 byte=2 j=7[0m
+[0;32mI (410812) main: i=2 byte=4 j=0[0m
+[0;32mI (410962) main: i=2 byte=4 j=1[0m
+[0;32mI (411112) main: i=2 byte=4 j=2[0m
+[0;32mI (411262) main: i=2 byte=4 j=3[0m
+[0;32mI (411412) main: i=2 byte=4 j=4[0m
+[0;32mI (411562) main: i=2 byte=4 j=5[0m
+[0;32mI (411712) main: i=2 byte=4 j=6[0m
+[0;32mI (411862) main: i=2 byte=4 j=7[0m
+[0;32mI (412012) main: i=3 byte=8 j=0[0m
+[0;32mI (412162) main: i=3 byte=8 j=1[0m
+[0;32mI (412312) main: i=3 byte=8 j=2[0m
+[0;32mI (412462) main: i=3 byte=8 j=3[0m
+[0;32mI (412612) main: i=3 byte=8 j=4[0m
+[0;32mI (412762) main: i=3 byte=8 j=5[0m
+[0;32mI (412912) main: i=3 byte=8 j=6[0m
+[0;32mI (413062) main: i=3 byte=8 j=7[0m
+[0;32mI (413212) main: i=4 byte=16 j=0[0m
+[0;32mI (413362) main: i=4 byte=16 j=1[0m
+[0;32mI (413512) main: i=4 byte=16 j=2[0m
+[0;32mI (413662) main: i=4 byte=16 j=3[0m
+[0;32mI (413812) main: i=4 byte=16 j=4[0m
+[0;32mI (413962) main: i=4 byte=16 j=5[0m
+[0;32mI (414112) main: i=4 byte=16 j=6[0m
+[0;32mI (414262) main: i=4 byte=16 j=7[0m
+[0;32mI (414412) main: i=5 byte=32 j=0[0m
+[0;32mI (414562) main: i=5 byte=32 j=1[0m
+[0;32mI (414712) main: i=5 byte=32 j=2[0m
+[0;32mI (414862) main: i=5 byte=32 j=3[0m
+[0;32mI (415012) main: i=5 byte=32 j=4[0m
+[0;32mI (415162) main: i=5 byte=32 j=5[0m
+[0;32mI (415312) main: i=5 byte=32 j=6[0m
+[0;32mI (415462) main: i=5 byte=32 j=7[0m
+[0;32mI (415612) main: i=6 byte=64 j=0[0m
+[0;32mI (415762) main: i=6 byte=64 j=1[0m
+[0;32mI (415912) main: i=6 byte=64 j=2[0m
+[0;32mI (416062) main: i=6 byte=64 j=3[0m
+[0;32mI (416212) main: i=6 byte=64 j=4[0m
+[0;32mI (416362) main: i=6 byte=64 j=5[0m
+[0;32mI (416512) main: i=6 byte=64 j=6[0m
+[0;32mI (416662) main: i=6 byte=64 j=7[0m
+[0;32mI (416812) main: i=7 byte=128 j=0[0m
+[0;32mI (416962) main: i=7 byte=128 j=1[0m
+[0;32mI (417112) main: i=7 byte=128 j=2[0m
+[0;32mI (417262) main: i=7 byte=128 j=3[0m
+[0;32mI (417412) main: i=7 byte=128 j=4[0m
+[0;32mI (417562) main: i=7 byte=128 j=5[0m
+[0;32mI (417712) main: i=7 byte=128 j=6[0m
+[0;32mI (417862) main: i=7 byte=128 j=7[0m
+[0;32mI (418012) main: i=0 byte=1 j=0[0m
+[0;32mI (419012) main: i=0 byte=1 j=1[0m
+[0;32mI (419162) main: i=0 byte=1 j=2[0m
+[0;32mI (419312) main: i=0 byte=1 j=3[0m
+[0;32mI (419462) main: i=0 byte=1 j=4[0m
+[0;32mI (419612) main: i=0 byte=1 j=5[0m
+[0;32mI (419762) main: i=0 byte=1 j=6[0m
+[0;32mI (419912) main: i=0 byte=1 j=7[0m
+[0;32mI (420062) main: i=1 byte=2 j=0[0m
+[0;32mI (420212) main: i=1 byte=2 j=1[0m
+[0;32mI (420362) main: i=1 byte=2 j=2[0m
+[0;32mI (420512) main: i=1 byte=2 j=3[0m
+[0;32mI (420662) main: i=1 byte=2 j=4[0m
+[0;32mI (420812) main: i=1 byte=2 j=5[0m
+[0;32mI (420962) main: i=1 byte=2 j=6[0m
+[0;32mI (421112) main: i=1 byte=2 j=7[0m
+[0;32mI (421262) main: i=2 byte=4 j=0[0m
+[0;32mI (421412) main: i=2 byte=4 j=1[0m
+[0;32mI (421562) main: i=2 byte=4 j=2[0m
+[0;32mI (421712) main: i=2 byte=4 j=3[0m
+[0;32mI (421862) main: i=2 byte=4 j=4[0m
+[0;32mI (422012) main: i=2 byte=4 j=5[0m
+[0;32mI (422162) main: i=2 byte=4 j=6[0m
+[0;32mI (422312) main: i=2 byte=4 j=7[0m
+[0;32mI (422462) main: i=3 byte=8 j=0[0m
+[0;32mI (422612) main: i=3 byte=8 j=1[0m
+[0;32mI (422762) main: i=3 byte=8 j=2[0m
+[0;32mI (422912) main: i=3 byte=8 j=3[0m
+[0;32mI (423062) main: i=3 byte=8 j=4[0m
+[0;32mI (423212) main: i=3 byte=8 j=5[0m
+[0;32mI (423362) main: i=3 byte=8 j=6[0m
+[0;32mI (423512) main: i=3 byte=8 j=7[0m
+[0;32mI (423662) main: i=4 byte=16 j=0[0m
+[0;32mI (423812) main: i=4 byte=16 j=1[0m
+[0;32mI (423962) main: i=4 byte=16 j=2[0m
+[0;32mI (424112) main: i=4 byte=16 j=3[0m
+[0;32mI (424262) main: i=4 byte=16 j=4[0m
+[0;32mI (424412) main: i=4 byte=16 j=5[0m
+[0;32mI (424562) main: i=4 byte=16 j=6[0m
+[0;32mI (424712) main: i=4 byte=16 j=7[0m
+[0;32mI (424862) main: i=5 byte=32 j=0[0m
+[0;32mI (425012) main: i=5 byte=32 j=1[0m
+[0;32mI (425162) main: i=5 byte=32 j=2[0m
+[0;32mI (425312) main: i=5 byte=32 j=3[0m
+[0;32mI (425462) main: i=5 byte=32 j=4[0m
+[0;32mI (425612) main: i=5 byte=32 j=5[0m
+[0;32mI (425762) main: i=5 byte=32 j=6[0m
+[0;32mI (425912) main: i=5 byte=32 j=7[0m
+[0;32mI (426062) main: i=6 byte=64 j=0[0m
+[0;32mI (426212) main: i=6 byte=64 j=1[0m
+[0;32mI (426362) main: i=6 byte=64 j=2[0m
+[0;32mI (426512) main: i=6 byte=64 j=3[0m
+[0;32mI (426662) main: i=6 byte=64 j=4[0m
+[0;32mI (426812) main: i=6 byte=64 j=5[0m
+[0;32mI (426962) main: i=6 byte=64 j=6[0m
+[0;32mI (427112) main: i=6 byte=64 j=7[0m
+[0;32mI (427262) main: i=7 byte=128 j=0[0m
+[0;32mI (427412) main: i=7 byte=128 j=1[0m
+[0;32mI (427562) main: i=7 byte=128 j=2[0m
+[0;32mI (427712) main: i=7 byte=128 j=3[0m
+[0;32mI (427862) main: i=7 byte=128 j=4[0m
+[0;32mI (428012) main: i=7 byte=128 j=5[0m
+[0;32mI (428162) main: i=7 byte=128 j=6[0m
+[0;32mI (428312) main: i=7 byte=128 j=7[0m
+[0;32mI (428462) main: i=0 byte=1 j=0[0m
+[0;32mI (429462) main: i=0 byte=1 j=1[0m
+[0;32mI (429612) main: i=0 byte=1 j=2[0m
+[0;32mI (429762) main: i=0 byte=1 j=3[0m
+[0;32mI (429912) main: i=0 byte=1 j=4[0m
+[0;32mI (430062) main: i=0 byte=1 j=5[0m
+[0;32mI (430212) main: i=0 byte=1 j=6[0m
+[0;32mI (430362) main: i=0 byte=1 j=7[0m
+[0;32mI (430512) main: i=1 byte=2 j=0[0m
+[0;32mI (430662) main: i=1 byte=2 j=1[0m
+[0;32mI (430812) main: i=1 byte=2 j=2[0m
+[0;32mI (430962) main: i=1 byte=2 j=3[0m
+[0;32mI (431112) main: i=1 byte=2 j=4[0m
+[0;32mI (431262) main: i=1 byte=2 j=5[0m
+[0;32mI (431412) main: i=1 byte=2 j=6[0m
+[0;32mI (431562) main: i=1 byte=2 j=7[0m
+[0;32mI (431712) main: i=2 byte=4 j=0[0m
+[0;32mI (431862) main: i=2 byte=4 j=1[0m
+[0;32mI (432012) main: i=2 byte=4 j=2[0m
+[0;32mI (432162) main: i=2 byte=4 j=3[0m
+[0;32mI (432312) main: i=2 byte=4 j=4[0m
+[0;32mI (432462) main: i=2 byte=4 j=5[0m
+[0;32mI (432612) main: i=2 byte=4 j=6[0m
+[0;32mI (432762) main: i=2 byte=4 j=7[0m
+[0;32mI (432912) main: i=3 byte=8 j=0[0m
+[0;32mI (433062) main: i=3 byte=8 j=1[0m
+[0;32mI (433212) main: i=3 byte=8 j=2[0m
+[0;32mI (433362) main: i=3 byte=8 j=3[0m
+[0;32mI (433512) main: i=3 byte=8 j=4[0m
+[0;32mI (433662) main: i=3 byte=8 j=5[0m
+[0;32mI (433812) main: i=3 byte=8 j=6[0m
+[0;32mI (433962) main: i=3 byte=8 j=7[0m
+[0;32mI (434112) main: i=4 byte=16 j=0[0m
+[0;32mI (434262) main: i=4 byte=16 j=1[0m
+[0;32mI (434412) main: i=4 byte=16 j=2[0m
+[0;32mI (434562) main: i=4 byte=16 j=3[0m
+[0;32mI (434712) main: i=4 byte=16 j=4[0m
+[0;32mI (434862) main: i=4 byte=16 j=5[0m
+[0;32mI (435012) main: i=4 byte=16 j=6[0m
+[0;32mI (435162) main: i=4 byte=16 j=7[0m
+[0;32mI (435312) main: i=5 byte=32 j=0[0m
+[0;32mI (435462) main: i=5 byte=32 j=1[0m
+[0;32mI (435612) main: i=5 byte=32 j=2[0m
+[0;32mI (435762) main: i=5 byte=32 j=3[0m
+[0;32mI (435912) main: i=5 byte=32 j=4[0m
+[0;32mI (436062) main: i=5 byte=32 j=5[0m
+[0;32mI (436212) main: i=5 byte=32 j=6[0m
+[0;32mI (436362) main: i=5 byte=32 j=7[0m
+[0;32mI (436512) main: i=6 byte=64 j=0[0m
+[0;32mI (436662) main: i=6 byte=64 j=1[0m
+[0;32mI (436812) main: i=6 byte=64 j=2[0m
+[0;32mI (436962) main: i=6 byte=64 j=3[0m
+[0;32mI (437112) main: i=6 byte=64 j=4[0m
+[0;32mI (437262) main: i=6 byte=64 j=5[0m
+[0;32mI (437412) main: i=6 byte=64 j=6[0m
+[0;32mI (437562) main: i=6 byte=64 j=7[0m
+[0;32mI (437712) main: i=7 byte=128 j=0[0m
+[0;32mI (437862) main: i=7 byte=128 j=1[0m
+[0;32mI (438012) main: i=7 byte=128 j=2[0m
+[0;32mI (438162) main: i=7 byte=128 j=3[0m
+[0;32mI (438312) main: i=7 byte=128 j=4[0m
+[0;32mI (438462) main: i=7 byte=128 j=5[0m
+[0;32mI (438612) main: i=7 byte=128 j=6[0m
+[0;32mI (438762) main: i=7 byte=128 j=7[0m
+[0;32mI (438912) main: i=0 byte=1 j=0[0m
+[0;32mI (439912) main: i=0 byte=1 j=1[0m
+[0;32mI (440062) main: i=0 byte=1 j=2[0m
+[0;32mI (440212) main: i=0 byte=1 j=3[0m
+[0;32mI (440362) main: i=0 byte=1 j=4[0m
+[0;32mI (440512) main: i=0 byte=1 j=5[0m
+[0;32mI (440662) main: i=0 byte=1 j=6[0m
+[0;32mI (440812) main: i=0 byte=1 j=7[0m
+[0;32mI (440962) main: i=1 byte=2 j=0[0m
+[0;32mI (441112) main: i=1 byte=2 j=1[0m
+[0;32mI (441262) main: i=1 byte=2 j=2[0m
+[0;32mI (441412) main: i=1 byte=2 j=3[0m
+[0;32mI (441562) main: i=1 byte=2 j=4[0m
+[0;32mI (441712) main: i=1 byte=2 j=5[0m
+[0;32mI (441862) main: i=1 byte=2 j=6[0m
+[0;32mI (442012) main: i=1 byte=2 j=7[0m
+[0;32mI (442162) main: i=2 byte=4 j=0[0m
+[0;32mI (442312) main: i=2 byte=4 j=1[0m
+[0;32mI (442462) main: i=2 byte=4 j=2[0m
+[0;32mI (442612) main: i=2 byte=4 j=3[0m
+[0;32mI (442762) main: i=2 byte=4 j=4[0m
+[0;32mI (442912) main: i=2 byte=4 j=5[0m
+[0;32mI (443062) main: i=2 byte=4 j=6[0m
+[0;32mI (443212) main: i=2 byte=4 j=7[0m
+[0;32mI (443362) main: i=3 byte=8 j=0[0m
+[0;32mI (443512) main: i=3 byte=8 j=1[0m
+[0;32mI (443662) main: i=3 byte=8 j=2[0m
+[0;32mI (443812) main: i=3 byte=8 j=3[0m
+[0;32mI (443962) main: i=3 byte=8 j=4[0m
+[0;32mI (444112) main: i=3 byte=8 j=5[0m
+[0;32mI (444262) main: i=3 byte=8 j=6[0m
+[0;32mI (444412) main: i=3 byte=8 j=7[0m
+[0;32mI (444562) main: i=4 byte=16 j=0[0m
+[0;32mI (444712) main: i=4 byte=16 j=1[0m
+[0;32mI (444862) main: i=4 byte=16 j=2[0m
+[0;32mI (445012) main: i=4 byte=16 j=3[0m
+[0;32mI (445162) main: i=4 byte=16 j=4[0m
+[0;32mI (445312) main: i=4 byte=16 j=5[0m
+[0;32mI (445462) main: i=4 byte=16 j=6[0m
+[0;32mI (445612) main: i=4 byte=16 j=7[0m
+[0;32mI (445762) main: i=5 byte=32 j=0[0m
+[0;32mI (445912) main: i=5 byte=32 j=1[0m
+[0;32mI (446062) main: i=5 byte=32 j=2[0m
+[0;32mI (446212) main: i=5 byte=32 j=3[0m
+[0;32mI (446362) main: i=5 byte=32 j=4[0m
+[0;32mI (446512) main: i=5 byte=32 j=5[0m
+[0;32mI (446662) main: i=5 byte=32 j=6[0m
+[0;32mI (446812) main: i=5 byte=32 j=7[0m
+[0;32mI (446962) main: i=6 byte=64 j=0[0m
+[0;32mI (447112) main: i=6 byte=64 j=1[0m
+[0;32mI (447262) main: i=6 byte=64 j=2[0m
+[0;32mI (447412) main: i=6 byte=64 j=3[0m
+[0;32mI (447562) main: i=6 byte=64 j=4[0m
+[0;32mI (447712) main: i=6 byte=64 j=5[0m
+[0;32mI (447862) main: i=6 byte=64 j=6[0m
+[0;32mI (448012) main: i=6 byte=64 j=7[0m
+[0;32mI (448162) main: i=7 byte=128 j=0[0m
+[0;32mI (448312) main: i=7 byte=128 j=1[0m
+[0;32mI (448462) main: i=7 byte=128 j=2[0m
+[0;32mI (448612) main: i=7 byte=128 j=3[0m
+[0;32mI (448762) main: i=7 byte=128 j=4[0m
+[0;32mI (448912) main: i=7 byte=128 j=5[0m
+[0;32mI (449062) main: i=7 byte=128 j=6[0m
+[0;32mI (449212) main: i=7 byte=128 j=7[0m
+[0;32mI (449362) main: i=0 byte=1 j=0[0m
+[0;32mI (450362) main: i=0 byte=1 j=1[0m
+[0;32mI (450512) main: i=0 byte=1 j=2[0m
+[0;32mI (450662) main: i=0 byte=1 j=3[0m
+[0;32mI (450812) main: i=0 byte=1 j=4[0m
+[0;32mI (450962) main: i=0 byte=1 j=5[0m
+[0;32mI (451112) main: i=0 byte=1 j=6[0m
+[0;32mI (451262) main: i=0 byte=1 j=7[0m
+[0;32mI (451412) main: i=1 byte=2 j=0[0m
+[0;32mI (451562) main: i=1 byte=2 j=1[0m
+[0;32mI (451712) main: i=1 byte=2 j=2[0m
+[0;32mI (451862) main: i=1 byte=2 j=3[0m
+[0;32mI (452012) main: i=1 byte=2 j=4[0m
+[0;32mI (452162) main: i=1 byte=2 j=5[0m
+[0;32mI (452312) main: i=1 byte=2 j=6[0m
+[0;32mI (452462) main: i=1 byte=2 j=7[0m
+[0;32mI (452612) main: i=2 byte=4 j=0[0m
+[0;32mI (452762) main: i=2 byte=4 j=1[0m
+[0;32mI (452912) main: i=2 byte=4 j=2[0m
+[0;32mI (453062) main: i=2 byte=4 j=3[0m
+[0;32mI (453212) main: i=2 byte=4 j=4[0m
+[0;32mI (453362) main: i=2 byte=4 j=5[0m
+[0;32mI (453512) main: i=2 byte=4 j=6[0m
+[0;32mI (453662) main: i=2 byte=4 j=7[0m
+[0;32mI (453812) main: i=3 byte=8 j=0[0m
+[0;32mI (453962) main: i=3 byte=8 j=1[0m
+[0;32mI (454112) main: i=3 byte=8 j=2[0m
+[0;32mI (454262) main: i=3 byte=8 j=3[0m
+[0;32mI (454412) main: i=3 byte=8 j=4[0m
+[0;32mI (454562) main: i=3 byte=8 j=5[0m
+[0;32mI (454712) main: i=3 byte=8 j=6[0m
+[0;32mI (454862) main: i=3 byte=8 j=7[0m
+[0;32mI (455012) main: i=4 byte=16 j=0[0m
+[0;32mI (455162) main: i=4 byte=16 j=1[0m
+[0;32mI (455312) main: i=4 byte=16 j=2[0m
+[0;32mI (455462) main: i=4 byte=16 j=3[0m
+[0;32mI (455612) main: i=4 byte=16 j=4[0m
+[0;32mI (455762) main: i=4 byte=16 j=5[0m
+[0;32mI (455912) main: i=4 byte=16 j=6[0m
+[0;32mI (456062) main: i=4 byte=16 j=7[0m
+[0;32mI (456212) main: i=5 byte=32 j=0[0m
+[0;32mI (456362) main: i=5 byte=32 j=1[0m
+[0;32mI (456512) main: i=5 byte=32 j=2[0m
+[0;32mI (456662) main: i=5 byte=32 j=3[0m
+[0;32mI (456812) main: i=5 byte=32 j=4[0m
+[0;32mI (456962) main: i=5 byte=32 j=5[0m
+[0;32mI (457112) main: i=5 byte=32 j=6[0m
+[0;32mI (457262) main: i=5 byte=32 j=7[0m
+[0;32mI (457412) main: i=6 byte=64 j=0[0m
+[0;32mI (457562) main: i=6 byte=64 j=1[0m
+[0;32mI (457712) main: i=6 byte=64 j=2[0m
+[0;32mI (457862) main: i=6 byte=64 j=3[0m
+[0;32mI (458012) main: i=6 byte=64 j=4[0m
+[0;32mI (458162) main: i=6 byte=64 j=5[0m
+[0;32mI (458312) main: i=6 byte=64 j=6[0m
+[0;32mI (458462) main: i=6 byte=64 j=7[0m
+[0;32mI (458612) main: i=7 byte=128 j=0[0m
+[0;32mI (458762) main: i=7 byte=128 j=1[0m
+[0;32mI (458912) main: i=7 byte=128 j=2[0m
+[0;32mI (459062) main: i=7 byte=128 j=3[0m
+[0;32mI (459212) main: i=7 byte=128 j=4[0m
+[0;32mI (459362) main: i=7 byte=128 j=5[0m
+[0;32mI (459512) main: i=7 byte=128 j=6[0m
+[0;32mI (459662) main: i=7 byte=128 j=7[0m
+[0;32mI (459812) main: i=0 byte=1 j=0[0m
+[0;32mI (460812) main: i=0 byte=1 j=1[0m
+[0;32mI (460962) main: i=0 byte=1 j=2[0m
+[0;32mI (461112) main: i=0 byte=1 j=3[0m
+[0;32mI (461262) main: i=0 byte=1 j=4[0m
+[0;32mI (461412) main: i=0 byte=1 j=5[0m
+[0;32mI (461562) main: i=0 byte=1 j=6[0m
+[0;32mI (461712) main: i=0 byte=1 j=7[0m
+[0;32mI (461862) main: i=1 byte=2 j=0[0m
+[0;32mI (462012) main: i=1 byte=2 j=1[0m
+[0;32mI (462162) main: i=1 byte=2 j=2[0m
+[0;32mI (462312) main: i=1 byte=2 j=3[0m
+[0;32mI (462462) main: i=1 byte=2 j=4[0m
+[0;32mI (462612) main: i=1 byte=2 j=5[0m
+[0;32mI (462762) main: i=1 byte=2 j=6[0m
+[0;32mI (462912) main: i=1 byte=2 j=7[0m
+[0;32mI (463062) main: i=2 byte=4 j=0[0m
+[0;32mI (463212) main: i=2 byte=4 j=1[0m
+[0;32mI (463362) main: i=2 byte=4 j=2[0m
+[0;32mI (463512) main: i=2 byte=4 j=3[0m
+[0;32mI (463662) main: i=2 byte=4 j=4[0m
+[0;32mI (463812) main: i=2 byte=4 j=5[0m
+[0;32mI (463962) main: i=2 byte=4 j=6[0m
+[0;32mI (464112) main: i=2 byte=4 j=7[0m
+[0;32mI (464262) main: i=3 byte=8 j=0[0m
+[0;32mI (464412) main: i=3 byte=8 j=1[0m
+[0;32mI (464562) main: i=3 byte=8 j=2[0m
+[0;32mI (464712) main: i=3 byte=8 j=3[0m
+[0;32mI (464862) main: i=3 byte=8 j=4[0m
+[0;32mI (465012) main: i=3 byte=8 j=5[0m
+[0;32mI (465162) main: i=3 byte=8 j=6[0m
+[0;32mI (465312) main: i=3 byte=8 j=7[0m
+[0;32mI (465462) main: i=4 byte=16 j=0[0m
+[0;32mI (465612) main: i=4 byte=16 j=1[0m
+[0;32mI (465762) main: i=4 byte=16 j=2[0m
+[0;32mI (465912) main: i=4 byte=16 j=3[0m
+[0;32mI (466062) main: i=4 byte=16 j=4[0m
+[0;32mI (466212) main: i=4 byte=16 j=5[0m
+[0;32mI (466362) main: i=4 byte=16 j=6[0m
+[0;32mI (466512) main: i=4 byte=16 j=7[0m
+[0;32mI (466662) main: i=5 byte=32 j=0[0m
+[0;32mI (466812) main: i=5 byte=32 j=1[0m
+[0;32mI (466962) main: i=5 byte=32 j=2[0m
+[0;32mI (467112) main: i=5 byte=32 j=3[0m
+[0;32mI (467262) main: i=5 byte=32 j=4[0m
+[0;32mI (467412) main: i=5 byte=32 j=5[0m
+[0;32mI (467562) main: i=5 byte=32 j=6[0m
+[0;32mI (467712) main: i=5 byte=32 j=7[0m
+[0;32mI (467862) main: i=6 byte=64 j=0[0m
+[0;32mI (468012) main: i=6 byte=64 j=1[0m
+[0;32mI (468162) main: i=6 byte=64 j=2[0m
+[0;32mI (468312) main: i=6 byte=64 j=3[0m
+[0;32mI (468462) main: i=6 byte=64 j=4[0m
+[0;32mI (468612) main: i=6 byte=64 j=5[0m
+[0;32mI (468762) main: i=6 byte=64 j=6[0m
+[0;32mI (468912) main: i=6 byte=64 j=7[0m
+[0;32mI (469062) main: i=7 byte=128 j=0[0m
+[0;32mI (469212) main: i=7 byte=128 j=1[0m
+[0;32mI (469362) main: i=7 byte=128 j=2[0m
+[0;32mI (469512) main: i=7 byte=128 j=3[0m
+[0;32mI (469662) main: i=7 byte=128 j=4[0m
+[0;32mI (469812) main: i=7 byte=128 j=5[0m
+[0;32mI (469962) main: i=7 byte=128 j=6[0m
+[0;32mI (470112) main: i=7 byte=128 j=7[0m
+[0;32mI (470262) main: i=0 byte=1 j=0[0m

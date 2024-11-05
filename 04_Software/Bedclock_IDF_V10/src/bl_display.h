@@ -9,10 +9,12 @@
 #include <esp_timer.h>
 
 #include <stdio.h>
+#include <string.h>
 
 #include "ssd1306.h"
 
 #include "bl_queues.h"
+#include "bl_characters.h"
 #include "hp_timer.h"
 
 #define MAX_DISPLAY_ITEM 6
@@ -36,6 +38,22 @@ const screen_items_t screenitems[] = {
 };
 
 
+uint8_t display_get_string_width(const char* time) {
+    uint8_t width = 0;
+    size_t length = strlen(time);
+    for(int i=0; i<length; i++) width+=character(time[i]).width;
+    return width;
+}
+
+void display_time(const char* time, uint8_t x, uint8_t y) {
+    size_t length = strlen(time);
+    for(int i=0; i<length; i++) {
+        character_t c = character(time[i]);
+        ssd1306_bitmaps(&display, x, y, c.bytes, c.width, c.height, false);
+        x+=c.width;
+    }
+}
+
 void display_refresh() {
 
     uint8_t num_chars;
@@ -58,27 +76,38 @@ void display_refresh() {
     sprintf(buffer, "%02d:%02d", timeinfo.tm_hour, timeinfo.tm_min);
     ssd1306_display_text(&display, 1, buffer, 5, false);
 
-    switch(common_settings.selected_item) {
+    // Attempt to print graphics
+    // uint8_t x = ( 128-display_get_string_width(buffer) )/2; 
+    // uint8_t y=0;
+    // display_time(buffer, x, y);
+
+    // Copy settings to a temporary struct
+    common_settings_t copy_of_settings;
+    if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
+        copy_of_settings = common_settings;
+        xSemaphoreGive(mutex_change_settings);
+    }
+
+    switch(copy_of_settings.selected_item) {
         case 2:
           // Show intensity setting
           num_chars = sprintf(buffer, "Intensity %s%s%s%s%s",
-            common_settings.led_intensity==0 ? "O" : ".",
-            common_settings.led_intensity==1 ? "O" : ".",
-            common_settings.led_intensity==2 ? "O" : ".",
-            common_settings.led_intensity==3 ? "O" : ".",
-            common_settings.led_intensity==4 ? "O" : "."
+            copy_of_settings.led_intensity==0 ? "O" : ".",
+            copy_of_settings.led_intensity==1 ? "O" : ".",
+            copy_of_settings.led_intensity==2 ? "O" : ".",
+            copy_of_settings.led_intensity==3 ? "O" : ".",
+            copy_of_settings.led_intensity==4 ? "O" : "."
           );
           ssd1306_display_text(&display, 3, buffer, num_chars, false);
         break;
 
         case 3:
           // Show color
-          num_chars = sprintf(buffer, "LED color %s%s%s%s%s", 
-            common_settings.led_color==0 ? "O" : ".",
-            common_settings.led_color==1 ? "O" : ".",
-            common_settings.led_color==2 ? "O" : ".",
-            common_settings.led_color==3 ? "O" : ".",
-            common_settings.led_color==4 ? "O" : "."
+          num_chars = sprintf(buffer, "Color %s%s%s%s", 
+            copy_of_settings.led_color==0 ? "O" : ".",
+            copy_of_settings.led_color==1 ? "O" : ".",
+            copy_of_settings.led_color==2 ? "O" : ".",
+            copy_of_settings.led_color==3 ? "O" : "."
           );
           ssd1306_display_text(&display, 3, buffer, num_chars, false);
         break;
@@ -86,11 +115,11 @@ void display_refresh() {
         case 4:
           // Show timer
           num_chars = sprintf(buffer, "Timer %s%s%s%s%s", 
-            common_settings.led_timer==0 ? "O" : ".",
-            common_settings.led_timer==1 ? "O" : ".",
-            common_settings.led_timer==2 ? "O" : ".",
-            common_settings.led_timer==3 ? "O" : ".",
-            common_settings.led_timer==4 ? "O" : "."
+            copy_of_settings.led_timer==0 ? "O" : ".",
+            copy_of_settings.led_timer==1 ? "O" : ".",
+            copy_of_settings.led_timer==2 ? "O" : ".",
+            copy_of_settings.led_timer==3 ? "O" : ".",
+            copy_of_settings.led_timer==4 ? "O" : "."
           );
           ssd1306_display_text(&display, 3, buffer, num_chars, false);
         break;
@@ -98,10 +127,10 @@ void display_refresh() {
         case 5:
           // Show display intensity
           num_chars = sprintf(buffer, "Display %s%s%s%s%s", 
-            common_settings.display_intensity==0 ? "O" : ".",
-            common_settings.display_intensity==1 ? "O" : ".",
-            common_settings.display_intensity==2 ? "O" : ".",
-            common_settings.display_intensity==3 ? "O" : ".",
+            copy_of_settings.display_intensity==0 ? "O" : ".",
+            copy_of_settings.display_intensity==1 ? "O" : ".",
+            copy_of_settings.display_intensity==2 ? "O" : ".",
+            copy_of_settings.display_intensity==3 ? "O" : ".",
             common_settings.display_intensity==4 ? "O" : "."
           );
           ssd1306_display_text(&display, 3, buffer, num_chars, false);
@@ -124,7 +153,7 @@ void task_display(void *z)
     bool refresh_display = true;
 
     while(true) {
-        if (xQueueReceive(keyboard_to_display_queue, &cmd, pdMS_TO_TICKS(100)) == true) {
+        if (xQueueReceive(display_queue, &cmd, pdMS_TO_TICKS(100)) == true) {
             switch(cmd) {
                 case CMD_BTN_LEFT_PRESSED:
                     ESP_LOGI(dp_tag, "item received BTN_LEFT"); 
@@ -154,7 +183,7 @@ void task_display(void *z)
                             }
 
                             // Report to the light that settings were changed
-                            queue_send_message(keyboard_to_light_queue, CMD_SETTINGS_CHANGED);
+                            queue_send_message(light_queue, CMD_SETTINGS_CHANGED);
 
                             refresh_display = true;
                         break;
@@ -168,7 +197,7 @@ void task_display(void *z)
                                 xSemaphoreGive(mutex_change_settings);
                             }
                             // Report to the light that settings were changed
-                            queue_send_message(keyboard_to_light_queue, CMD_SETTINGS_CHANGED);
+                            queue_send_message(light_queue, CMD_SETTINGS_CHANGED);
 
                             refresh_display = true;
                         break;
@@ -183,7 +212,7 @@ void task_display(void *z)
                             }
 
                             // Report to the light that settings were changed
-                            queue_send_message(keyboard_to_light_queue, CMD_SETTINGS_CHANGED);
+                            queue_send_message(light_queue, CMD_SETTINGS_CHANGED);
 
                             refresh_display = true;
                         break;
@@ -198,7 +227,7 @@ void task_display(void *z)
                             }
 
                             // Report to the light that settings were changed
-                            queue_send_message(keyboard_to_light_queue, CMD_SETTINGS_CHANGED);
+                            queue_send_message(light_queue, CMD_SETTINGS_CHANGED);
 
                             refresh_display = true;
                         break;
@@ -208,10 +237,19 @@ void task_display(void *z)
                     } // case CMD_BTN_RIGHT_PRESSED -> switch(common_settings.selected_item) {
                 break;
 
+                case CMD_LIGHT_SWITCHED_ON:
+                    // If the user switches the light on, the clock will also be displayed
+                    if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
+                        if(common_settings.selected_item==0) common_settings.selected_item=1;
+                        xSemaphoreGive(mutex_change_settings);
+                    }
+                    refresh_display = true;
+                break;
+
                 default:
                     ESP_LOGI(dp_tag, "Received unknown button"); 
             } // switch(cmd) {
-        } // if (xQueueReceive(keyboard_to_display_queue
+        } // if (xQueueReceive(display_queue
 
         if(hp_timer_lapsed(&sleep_timer)) {
             ESP_LOGI(dp_tag, "Display back to sleep"); 
