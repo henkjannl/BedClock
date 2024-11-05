@@ -71,6 +71,23 @@ To produce non-integer intensities, a fraction of the 16 LEDs switch to the next
 
 static uint8_t led_strip_pixels[LED_NUM_LEDS * 3];
 
+// This function determines the intensity of the LEDs
+uint8_t led_value(double value) {
+
+    // Ensure the light goes off when supposed to
+    if(value<0.01) return 0;
+
+    // Round value
+    uint8_t i= (int) value;  
+
+    // The fraction produces a chance that we should increase the value of the LED
+    // this should average out to the desired value, the number of LEDs is high
+    if (rand() < RAND_MAX*(value - i)) i++;
+
+    return i;
+};
+                    
+
 void task_light(void *arg)
 {
     ESP_LOGI(lt_tag, "Light task started...");
@@ -108,9 +125,6 @@ void task_light(void *arg)
     hp_stepping_float_t red   = HP_STEPPING_FLOAT_INIT;
     hp_stepping_float_t green = HP_STEPPING_FLOAT_INIT;
     hp_stepping_float_t blue  = HP_STEPPING_FLOAT_INIT;
-
-    double in;
-    double fr;
 
     common_settings_t copy_of_settings;
 
@@ -173,12 +187,8 @@ void task_light(void *arg)
                 hp_stepping_float_target(&blue,  0, 500);
             }
             ESP_LOGI(lt_tag, "R: %.3f G: %.3f B: %.3f", red.target, green.target, blue.target);                     
-
-            // Order of color channels in WS2812B is GRB
-            fr = modf(red.target,   &in); ESP_LOGI(lt_tag, "Red int %.3f fraction %.3f", in, fr);
-            fr = modf(green.target, &in); ESP_LOGI(lt_tag, "Green int %.3f fraction %.3f", in, fr);                     
-            fr = modf(blue.target,  &in); ESP_LOGI(lt_tag, "Blue int %.3f fraction %.3f", in, fr);                     
-
+            for(int i=0; i<20; i++)
+                ESP_LOGI(lt_tag, "R: %d G: %d B: %d", led_value(red.target), led_value(green.target), led_value(blue.target));                     
 
             // Reset the timer to switch off the LEDs
             hp_set_interval_ms(&led_off_timer, LED_TIMER_MS[copy_of_settings.led_timer]);
@@ -194,9 +204,9 @@ void task_light(void *arg)
             for (int i = 0; i < 3; i++) {
                 for (int j = i; j < LED_NUM_LEDS; j += 3) {
                     // Order of color channels in WS2812B is GRB
-                    fr = modf(red.value,   &in); led_strip_pixels[j * 3 + 1] = (random_float() >= fr) ? (int) in : (int) in+1;
-                    fr = modf(green.value, &in); led_strip_pixels[j * 3 + 0] = (random_float() >= fr) ? (int) in : (int) in+1;
-                    fr = modf(blue.value,  &in); led_strip_pixels[j * 3 + 2] = (random_float() >= fr) ? (int) in : (int) in+1;
+                    led_strip_pixels[j * 3 + 1] = led_value(red.value  );
+                    led_strip_pixels[j * 3 + 0] = led_value(green.value);
+                    led_strip_pixels[j * 3 + 2] = led_value(blue.value );
 
                     hp_stepping_float_step(&red);
                     hp_stepping_float_step(&green);

@@ -49,7 +49,3 @@ common_settings_t common_settings = {
 };
 
 
-// Function to create a random number between 0 and 1
-float random_float() {
-   return (float)rand() / (float)RAND_MAX;
-};
