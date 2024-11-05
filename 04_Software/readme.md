@@ -1,4 +1,6 @@
 ### Readme
+`Bedclock` is the software for the Arduino environment.
+
 Different projects were created to port the Arduino version to ESP-IDF:
 * `Bedclock_IDF_V01` : Test WS2812 led chain 
 * `Bedclock_IDF_V02` : Test SSD1306 OLED screen 
