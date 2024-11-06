@@ -1,0 +1,84 @@
+menu "UI"
+	config ROBUSTO_UI
+		bool "UI"
+    if ROBUSTO_UI
+
+        config ROBUSTO_UI_BANNER
+            string "Startup banner"
+            default "-=ROBUSTO=-"
+            help
+                The text that appears.
+        choice ROBUSTO_UI_LVGL_LCD_CONTROLLER
+            bool "Display controller"
+            default ROBUSTO_UI_LVGL_LCD_CONTROLLER_SSD1306
+            help
+                Choose a display controller
+            config ROBUSTO_UI_LVGL_LCD_CONTROLLER_SSD1306
+                bool "SSD1306"
+            config ROBUSTO_UI_LVGL_LCD_CONTROLLER_SH1106
+                bool "SH1106"
+            config ROBUSTO_UI_LVGL_LCD_CONTROLLER_SH1107
+                bool "SH1107"
+        endchoice
+        choice ROBUSTO_UI_LVGL_ROTATION
+            bool "Rotation"
+            default ROBUSTO_UI_LVGL_ROTATION_NONE
+            help
+                Choose a display controller
+            config ROBUSTO_UI_LVGL_ROTATION_NONE
+                bool "No rotation"
+            config ROBUSTO_UI_LVGL_ROTATION_90
+                bool "Rotate 90 degrees"
+            config ROBUSTO_UI_LVGL_ROTATION_180
+                bool "Rotate 180 degrees"
+            config ROBUSTO_UI_LVGL_ROTATION_270
+                bool "Rotate 270 degrees"
+        endchoice
+
+        config ROBUSTO_UI_LCD_H_RES
+            int "Horizontal resolution"
+            default 128
+        config ROBUSTO_UI_LCD_V_RES
+            int "Vertical resolution"
+            default 64
+    
+        config ROBUSTO_UI_I2C_PORT
+            int "Minimal UI I2C port"
+            default 1
+
+            help
+                The I2C reset GPIO of the screen
+        config ROBUSTO_UI_GPIO_RST
+            int "Minimal UI SDA Reset GPIO"
+            default -1
+            help
+                The I2C reset GPIO of the screen
+        config ROBUSTO_UI_I2C_HW_ADDR
+            hex "I2C address of screen"
+            default 0x3c
+        config ROBUSTO_UI_INIT_I2C
+            bool "Initialize I2C"
+            help 
+                Sometimes, other parts of the system may already have initiated the I2C port.
+                So to not break functionality (and avoid errors here), we may want to avoid doing that.
+            default true   
+        if ROBUSTO_UI_INIT_I2C
+            config ROBUSTO_UI_GPIO_SDA
+                int "Minimal UI SDA GPIO"
+                default 4
+                help
+                    The I2C SDA GPIO of the screen
+            config ROBUSTO_UI_GPIO_SCL
+                int "Minimal UI SCL GPIO"
+                default 15
+                help
+                    The I2C SCL GPIO of the screen
+            config ROBUSTO_UI_I2C_FREQ_HZ 
+                int "Minimal UI I2C frequency"
+                default 400000
+                help
+                    The I2C frequency of the screen
+
+        endif
+    endif
+endmenu

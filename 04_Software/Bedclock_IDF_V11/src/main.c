@@ -11,8 +11,8 @@
 #define tag "main"
 
 #define MN_LCD_H_RES          128
-// #define MN_LCD_V_RES          32
-#define MN_LCD_V_RES          64
+#define MN_LCD_V_RES          32
+// #define MN_LCD_V_RES          64
 #define MN_I2C_HOST_ID        I2C_NUM_0
 #define MN_I2C_SDA_GPIO       21
 #define MN_I2C_SCL_GPIO       22
@@ -47,9 +47,15 @@ void app_main() {
     esp_lcd_new_panel_io_i2c( (esp_lcd_i2c_bus_handle_t)MN_I2C_HOST_ID, &io_config, &io_handle);
 
     esp_lcd_panel_handle_t panel_handle = NULL;
+
+    esp_lcd_panel_ssd1306_config_t esp_lcd_panel_ssd1306_config = {
+        .height = 32,
+    };
+
     esp_lcd_panel_dev_config_t panel_config = {
         .bits_per_pixel = 1,
         .reset_gpio_num = -1,
+        .vendor_config = &esp_lcd_panel_ssd1306_config,
     };
 
     esp_lcd_new_panel_ssd1306(io_handle, &panel_config, &panel_handle);
@@ -63,6 +69,7 @@ void app_main() {
 
     // Clear the screen
     for(int i=0; i<8; i++) bitmap[i]=0;
+
     for(x=0; x<128; x+=8)
         for(y=0; y<64;y+=8)
             esp_lcd_panel_draw_bitmap(panel_handle,  x, y, x+8, y+8, bitmap);
@@ -74,13 +81,13 @@ void app_main() {
                 for(uint8_t k=0; k<8; k++) {
                     bitmap[k] = (j==k) ? 0xFF : byte;
                 } // for k
-                
+
             ESP_LOGI(tag, "i=%d byte=%d j=%d", i, byte, j);
             for(uint8_t j=0; j<8; j++) {
                 x=8*j; y=0;   esp_lcd_panel_draw_bitmap(panel_handle,  x, y, x+8, y+8, bitmap);
                 x=8*j; y=8*j; esp_lcd_panel_draw_bitmap(panel_handle,  x, y, x+8, y+8, bitmap);
             }
-            
+
             vTaskDelay(pdMS_TO_TICKS(((i==0) && (j==0)) ? 1000 : 150));
             } // for j
         } // for i

@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "i2c.h": "c"
+        "i2c.h": "c",
+        "esp_lcd_panel_vendor.h": "c",
+        "esp_lcd_panel_ssd1306.h": "c"
     }
 }

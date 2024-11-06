@@ -15,61 +15,56 @@
 #include "esp_lvgl_port.h"
 #include "lvgl.h"
 
+/*
+
+The purpose of this sample project is to demonstrate that LVGL is working
+on the SSD1306 OLED display.
+
+    Bedclock_IDF_V01 : Test WS2812 led chain
+    Bedclock_IDF_V02 : Test SSD1306 OLED screen
+    Bedclock_IDF_V03 : Test capacitive touch sensors
+    Bedclock_IDF_V04 : Test WiFi
+    Bedclock_IDF_V05 : Test time sync with timeserver
+    Bedclock_IDF_V06 : Port timer object using esp_timer_get_time() / 1000;
+    Bedclock_IDF_V07 : Test FreeRTOS
+    Bedclock_IDF_V08 : Implement multiple parallel processes
+    Bedclock_IDF_V09 : Internal Espressif SSD1306 driver including LVGL
+    Bedclock_IDF_V10 : First working version
+    Bedclock_IDF_V11 : Try using ESP-IDF driver for SSD1306
+*/
+
+#if CONFIG_EXAMPLE_LCD_CONTROLLER_SH1107
+#include "esp_lcd_sh1107.h"
+#else
 #include "esp_lcd_panel_vendor.h"
+#endif
 
-// #include "ui_font_Bahnschrit24.h"
-#include "ui_font_Bahnschrift48.h"
+static const char *TAG = "example";
 
-static const char *TAG = "ssd1306";
+#define I2C_BUS_PORT  0
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////// Please update the following configuration according to your LCD spec //////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#define EXAMPLE_LCD_PIXEL_CLOCK_HZ    (400 * 1000)
+#define EXAMPLE_PIN_NUM_SDA           21
+#define EXAMPLE_PIN_NUM_SCL           22
+#define EXAMPLE_PIN_NUM_RST           -1
+#define EXAMPLE_I2C_HW_ADDR           0x3C
 
 // The pixel number in horizontal and vertical
+#if CONFIG_EXAMPLE_LCD_CONTROLLER_SSD1306
 #define EXAMPLE_LCD_H_RES              128
-#define EXAMPLE_LCD_V_RES              32
+#define EXAMPLE_LCD_V_RES              CONFIG_EXAMPLE_SSD1306_HEIGHT
+#elif CONFIG_EXAMPLE_LCD_CONTROLLER_SH1107
+#define EXAMPLE_LCD_H_RES              64
+#define EXAMPLE_LCD_V_RES              128
+#endif
+// Bit number used to represent command and parameter
+#define EXAMPLE_LCD_CMD_BITS           8
+#define EXAMPLE_LCD_PARAM_BITS         8
 
-// LV_FONT_DECLARE(ui_font_Bahnschrit24);
-
-void example_lvgl_demo_ui(lv_disp_t *disp)
-{
-    lv_obj_t *scr = lv_disp_get_scr_act(disp);
-
-    // lv_obj_t *panel = lv_obj_create(scr);
-    // lv_obj_set_width(panel, 158);
-    // lv_obj_set_height(panel, 327);
-    // lv_obj_set_x(panel, 0);
-    // lv_obj_set_y(panel, 135);
-    // lv_obj_set_align(panel, LV_ALIGN_CENTER);
-    // lv_obj_set_flex_flow(panel, LV_FLEX_FLOW_COLUMN);
-    // lv_obj_set_flex_align(panel, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_START);
-    // lv_obj_clear_flag(panel, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    // printf("panel x %d y %d width %d height %d\n", lv_obj_get_x(panel), lv_obj_get_y(panel), lv_obj_get_width(panel), lv_obj_get_height(panel) );
-
-    lv_obj_t *label = lv_label_create(scr);
-    // lv_label_set_long_mode(label, LV_LABEL_LONG_SCROLL_CIRCULAR); /* Circular scroll */
-    lv_obj_set_style_text_font(label, &ui_font_Bahnschrift48, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_width(label, 128);
-    lv_obj_set_height(label, 48);
-    lv_label_set_text(label, "12:34");
-    /* Size of the screen (if you use rotation 90 or 270, please set disp->driver->ver_res) */
-    // lv_obj_set_width(label, disp->driver->hor_res);
-    lv_obj_align(label, LV_ALIGN_TOP_MID, 0, 0);
-    printf("label x %d y %d width %d height %d\n", lv_obj_get_x(label), lv_obj_get_y(label), lv_obj_get_width(label), lv_obj_get_height(label) );
-
-    lv_obj_t *option = lv_label_create(scr);
-    // lv_label_set_long_mode(label, LV_LABEL_LONG_SCROLL_CIRCULAR); /* Circular scroll */
-    lv_obj_set_style_text_font(option, &lv_font_montserrat_14, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_width(label, 128);
-    lv_obj_set_height(label, 10);
-    lv_label_set_text(option, "Refresh");
-    /* Size of the screen (if you use rotation 90 or 270, please set disp->driver->ver_res) */
-    // lv_obj_set_width(option, disp->driver->hor_res);
-    lv_obj_align(option, LV_ALIGN_TOP_LEFT, 0, 48);
-    printf("option x %d y %d width %d height %d\n", lv_obj_get_x(option), lv_obj_get_y(option), lv_obj_get_width(option), lv_obj_get_height(option) );
-}
-
+extern void example_lvgl_demo_ui(lv_disp_t *disp);
 
 void app_main(void)
 {
@@ -78,9 +73,9 @@ void app_main(void)
     i2c_master_bus_config_t bus_config = {
         .clk_source = I2C_CLK_SRC_DEFAULT,
         .glitch_ignore_cnt = 7,
-        .i2c_port = 0,
-        .sda_io_num = 21,
-        .scl_io_num = 22,
+        .i2c_port = I2C_BUS_PORT,
+        .sda_io_num = EXAMPLE_PIN_NUM_SDA,
+        .scl_io_num = EXAMPLE_PIN_NUM_SCL,
         .flags.enable_internal_pullup = true,
     };
     ESP_ERROR_CHECK(i2c_new_master_bus(&bus_config, &i2c_bus));
@@ -88,12 +83,20 @@ void app_main(void)
     ESP_LOGI(TAG, "Install panel IO");
     esp_lcd_panel_io_handle_t io_handle = NULL;
     esp_lcd_panel_io_i2c_config_t io_config = {
-        .dev_addr = 0x3C,
-        .scl_speed_hz = (400 * 1000),
-        .control_phase_bytes = 1,  // According to SSD1306 datasheet
-        .lcd_cmd_bits = 8,         // According to SSD1306 datasheet
-        .lcd_param_bits = 8,       // According to SSD1306 datasheet
-        .dc_bit_offset = 0,        // According to SSD1306 datasheet
+        .dev_addr = EXAMPLE_I2C_HW_ADDR,
+        .scl_speed_hz = EXAMPLE_LCD_PIXEL_CLOCK_HZ,
+        .control_phase_bytes = 1,               // According to SSD1306 datasheet
+        .lcd_cmd_bits = EXAMPLE_LCD_CMD_BITS,   // According to SSD1306 datasheet
+        .lcd_param_bits = EXAMPLE_LCD_CMD_BITS, // According to SSD1306 datasheet
+#if CONFIG_EXAMPLE_LCD_CONTROLLER_SSD1306
+        .dc_bit_offset = 6,                     // According to SSD1306 datasheet
+#elif CONFIG_EXAMPLE_LCD_CONTROLLER_SH1107
+        .dc_bit_offset = 0,                     // According to SH1107 datasheet
+        .flags =
+        {
+            .disable_control_phase = 1,
+        }
+#endif
     };
     ESP_ERROR_CHECK(esp_lcd_new_panel_io_i2c(i2c_bus, &io_config, &io_handle));
 
@@ -101,13 +104,25 @@ void app_main(void)
     esp_lcd_panel_handle_t panel_handle = NULL;
     esp_lcd_panel_dev_config_t panel_config = {
         .bits_per_pixel = 1,
-        .reset_gpio_num = -1,
+        .reset_gpio_num = EXAMPLE_PIN_NUM_RST,
     };
+#if CONFIG_EXAMPLE_LCD_CONTROLLER_SSD1306
+    esp_lcd_panel_ssd1306_config_t ssd1306_config = {
+        .height = EXAMPLE_LCD_V_RES,
+    };
+    panel_config.vendor_config = &ssd1306_config;
     ESP_ERROR_CHECK(esp_lcd_new_panel_ssd1306(io_handle, &panel_config, &panel_handle));
+#elif CONFIG_EXAMPLE_LCD_CONTROLLER_SH1107
+    ESP_ERROR_CHECK(esp_lcd_new_panel_sh1107(io_handle, &panel_config, &panel_handle));
+#endif
 
     ESP_ERROR_CHECK(esp_lcd_panel_reset(panel_handle));
     ESP_ERROR_CHECK(esp_lcd_panel_init(panel_handle));
     ESP_ERROR_CHECK(esp_lcd_panel_disp_on_off(panel_handle, true));
+
+#if CONFIG_EXAMPLE_LCD_CONTROLLER_SH1107
+    ESP_ERROR_CHECK(esp_lcd_panel_invert_color(panel_handle, true));
+#endif
 
     ESP_LOGI(TAG, "Initialize LVGL");
     const lvgl_port_cfg_t lvgl_cfg = ESP_LVGL_PORT_INIT_CONFIG();
@@ -132,7 +147,7 @@ void app_main(void)
     /* Rotation of the screen */
     lv_disp_set_rotation(disp, LV_DISP_ROT_NONE);
 
-    ESP_LOGI(TAG, "LVGL Demo");
+    ESP_LOGI(TAG, "Display LVGL Scroll Text");
     // Lock the mutex due to the LVGL APIs are not thread-safe
     if (lvgl_port_lock(0)) {
         example_lvgl_demo_ui(disp);

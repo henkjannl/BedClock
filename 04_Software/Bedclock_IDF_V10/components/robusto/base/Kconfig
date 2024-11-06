@@ -1,0 +1,63 @@
+# Kconfig file for Robusto v0.1.0
+
+menu "Base system configuration"
+    config ROBUSTO_SLEEP
+        bool "Sleep functionality"  
+        help
+            The Robusto sleeping functionality.
+            This is a setting as the sleep functionality uses some of the very scarce RTC memory.
+
+    choice ROB_LOG_DEFAULT_LEVEL
+        prompt "Default log level"
+        default ROB_LOG_LEVEL_INFO
+        help
+            Select the maximum log level, nothing below this will be sent to output.
+        config ROB_LOG_LEVEL_NONE
+            bool "NONE"
+            help
+                No log output will be written.
+                I will also change the logging to use empty dummy implementations for logging in general, minimizing memory usage. 
+        config ROB_LOG_LEVEL_ERROR
+            bool "ERROR"
+            help
+                Only write critical errors, that the system can not recover from.
+        config ROB_LOG_LEVEL_WARN
+            bool "WARN"
+            help
+                Report warnings, that something has gone wrong but has been handled, or might get worse.
+        config ROB_LOG_LEVEL_INFO
+            bool "INFO"
+            help
+                Write information messages which describe normal flow of events. 
+        config ROB_LOG_LEVEL_DEBUG
+            bool "DEBUG"
+            help
+                Write debugging information, useful when troubleshooting and debugging
+        config ROB_LOG_LEVEL_VERBOSE
+            bool "VERBOSE"
+            help
+                Even more detailed debugging information, often with memory dumps and large amounts of information. 
+    endchoice                                        
+
+    config ROB_LOG_MAXIMUM_LEVEL
+        int
+        default 0 if ROB_LOG_LEVEL_NONE
+        default 1 if ROB_LOG_LEVEL_ERROR
+        default 2 if ROB_LOG_LEVEL_WARN
+        default 3 if ROB_LOG_LEVEL_INFO
+        default 4 if ROB_LOG_LEVEL_DEBUG
+        default 5 if ROB_LOG_LEVEL_VERBOSE
+
+    config ROB_BLINK_GPIO
+        int "GPIO of a blink LED"
+        default -1
+        help
+            If > -1, the GPIO of a LED that can be used as an indicator.
+    if IDF_TARGET_ESP32 || IDF_TARGET_ESP32S2 || IDF_TARGET_ESP32S3
+    config ROBUSTO_HEAP_TRACING
+        bool "Enable heap tracing"  
+        help
+            The Robusto sleeping functionality.
+            This is a setting as the sleep functionality uses some of the very scarce RTC memory.
+    endif
+endmenu                    
