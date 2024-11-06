@@ -42,21 +42,21 @@ typedef struct {
 } led_color_t;
 
 // Average of all channels is 1
-const led_color_t LED_COLORS[] = { 
+const led_color_t LED_COLORS[] = {
   { .r = 1.000,  .g = 1.000,  .b = 1.000 },    // 0 = White
   { .r = 1.179,  .g = 1.151,  .b = 0.670 },    // 1 = Yellow
   { .r = 1.281,  .g = 0.990,  .b = 0.729 },    // 2 = Orange
   { .r = 1.800,  .g = 0.600,  .b = 0.600 },    // 3 = Red
 };
 
-/* 
+/*
 LED algorithm
 
 example:
 - LEDs are currently off
 - maximum brightness is 40
 - target intensity is 2 (=0.16)
-- target color is 2 (orange: r=1.333 g=1.000 b=0.667) 
+- target color is 2 (orange: r=1.333 g=1.000 b=0.667)
 - light switches on in 20 steps
 
   red channel is stepping from 0 to 0.16*1.333*40 = 8.433 with steps of 0.422
@@ -65,28 +65,30 @@ green channel is stepping from 0 to 0.16*1.000*40 = 6.325 with steps of 0.316
 
 Values of the red channel: 0.00, 0.42, 0.84, 1.26, 1.69, 2.11, 2.53, 2.95, 3.37, etc.
 
-To produce non-integer intensities, a fraction of the 16 LEDs switch to the next value 
+To produce non-integer intensities, a fraction of the 16 LEDs switch to the next value
 */
 
 
-static uint8_t led_strip_pixels[LED_NUM_LEDS * 3];
-
 // This function determines the intensity of the LEDs
-uint8_t led_value(double value) {
+uint8_t led_value(double value, uint16_t mask_bit) {
 
     // Ensure the light goes off when supposed to
     if(value<0.01) return 0;
 
-    // Round value
-    uint8_t i= (int) value;  
+    // The order in which the LEDs in the 4x4 grid are switched on
+    const uint16_t SUB_BRIGHTNESS[] = {0x0000, 0x0008, 0x0208, 0x020A, 0x0A0A, 0x2A0A, 0x2A8A, 0x2AAA, 0xAAAA,
+        0xAABA, 0xABBA, 0xABBE, 0xEBBE, 0xEBBF, 0xFBBF, 0xFBFF };
 
-    // The fraction produces a chance that we should increase the value of the LED
-    // this should average out to the desired value, the number of LEDs is high
-    if (rand() < RAND_MAX*(value - i)) i++;
+    // Round value used as the intensity of the LED
+    uint8_t i= (int) value;
+
+    // The fraction determines if the LEDs intensity is increased
+    // to approximate the requested average intensity of the panel
+    uint8_t remainder = (uint8_t) 16*(value-i);
+    if( SUB_BRIGHTNESS[remainder] & mask_bit ) i++;
 
     return i;
 };
-                    
 
 void task_light(void *arg)
 {
@@ -137,7 +139,7 @@ void task_light(void *arg)
             switch(cmd) {
                 case CMD_BTN_TOP_PRESSED:
                     led_on = !led_on;
-                    ESP_LOGI(lt_tag, "Light manually switched %s", led_on ? "on" : "off");                     
+                    ESP_LOGI(lt_tag, "Light manually switched %s", led_on ? "on" : "off");
                     hp_timer_reset(&led_off_timer);
 
                     // Notify the screen so the clock is displayed
@@ -148,15 +150,15 @@ void task_light(void *arg)
                 case CMD_SETTINGS_CHANGED:
                     hp_timer_reset(&led_off_timer);
                     update_light = true;
-                break; 
+                break;
 
                 default:
-                    ESP_LOGI(lt_tag, "Command not recognized");                     
+                    ESP_LOGI(lt_tag, "Command not recognized");
             }
         }
 
         if(hp_timer_lapsed(&led_off_timer)) {
-            ESP_LOGI(lt_tag, "Light switched off by timer");                     
+            ESP_LOGI(lt_tag, "Light switched off by timer");
             led_on = false;
             update_light = true;
         }
@@ -186,32 +188,34 @@ void task_light(void *arg)
                 hp_stepping_float_target(&green, 0, 500);
                 hp_stepping_float_target(&blue,  0, 500);
             }
-            ESP_LOGI(lt_tag, "R: %.3f G: %.3f B: %.3f", red.target, green.target, blue.target);                     
-            for(int i=0; i<20; i++)
-                ESP_LOGI(lt_tag, "R: %d G: %d B: %d", led_value(red.target), led_value(green.target), led_value(blue.target));                     
+            // ESP_LOGI(lt_tag, "R: %.3f G: %.3f B: %.3f", red.target, green.target, blue.target);
+            // for(int i=0; i<20; i++)
+            //     ESP_LOGI(lt_tag, "R: %d G: %d B: %d", led_value(red.target), led_value(green.target), led_value(blue.target));
 
             // Reset the timer to switch off the LEDs
             hp_set_interval_ms(&led_off_timer, LED_TIMER_MS[copy_of_settings.led_timer]);
 
             update_light=false;
-        } // if(update_light) 
+        } // if(update_light)
 
         if( red.finished ) {
-            // ESP_LOGI(lt_tag, "R: %.3f G: %.3f B: %.3f", red.value, green.value, blue.value);        
+            // ESP_LOGI(lt_tag, "R: %.3f G: %.3f B: %.3f", red.value, green.value, blue.value);
             vTaskDelay(pdMS_TO_TICKS(250));
         } else {
+            uint16_t mask_bit = 0x01;
+            uint8_t led_strip_pixels[LED_NUM_LEDS * 3];
 
-            for (int i = 0; i < 3; i++) {
-                for (int j = i; j < LED_NUM_LEDS; j += 3) {
-                    // Order of color channels in WS2812B is GRB
-                    led_strip_pixels[j * 3 + 1] = led_value(red.value  );
-                    led_strip_pixels[j * 3 + 0] = led_value(green.value);
-                    led_strip_pixels[j * 3 + 2] = led_value(blue.value );
+            for (int i = 0; i < 3*LED_NUM_LEDS; i+=3) {
+                // Order of color channels in WS2812B is GRB
+                led_strip_pixels[i + 1] = led_value(red.value  , mask_bit);
+                led_strip_pixels[i + 0] = led_value(green.value, mask_bit);
+                led_strip_pixels[i + 2] = led_value(blue.value , mask_bit);
 
-                    hp_stepping_float_step(&red);
-                    hp_stepping_float_step(&green);
-                    hp_stepping_float_step(&blue);
-                } // j
+                hp_stepping_float_step(&red);
+                hp_stepping_float_step(&green);
+                hp_stepping_float_step(&blue);
+
+                mask_bit = mask_bit << 1;
             } // i
 
             // Flush RGB values to LEDs
@@ -220,7 +224,7 @@ void task_light(void *arg)
             vTaskDelay(pdMS_TO_TICKS(15));
 
         }  // if( !red.finished ) {
-        
+
     }  // while true
 }  // task_light(void *arg)
 

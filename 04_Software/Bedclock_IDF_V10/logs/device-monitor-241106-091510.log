@@ -21,41 +21,41 @@ entry 0x40080638
 [0;32mI (57) boot: Partition Table:[0m
 [0;32mI (61) boot: ## Label            Usage          Type ST Offset   Length[0m
 [0;32mI (68) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
-[0;32mI (75) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (76) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
 [0;32mI (83) boot:  2 factory          factory app      00 00 00010000 00100000[0m
-[0;32mI (90) boot: End of partition table[0m
-[0;32mI (95) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=23944h (145732) map[0m
-[0;32mI (153) esp_image: segment 1: paddr=0003396c vaddr=3ffb0000 size=04680h ( 18048) load[0m
-[0;32mI (160) esp_image: segment 2: paddr=00037ff4 vaddr=40080000 size=08024h ( 32804) load[0m
-[0;32mI (173) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=8e9d0h (584144) map[0m
-[0;32mI (373) esp_image: segment 4: paddr=000ce9f8 vaddr=40088024 size=115fch ( 71164) load[0m
+[0;32mI (91) boot: End of partition table[0m
+[0;32mI (95) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=239f4h (145908) map[0m
+[0;32mI (153) esp_image: segment 1: paddr=00033a1c vaddr=3ffb0000 size=04680h ( 18048) load[0m
+[0;32mI (160) esp_image: segment 2: paddr=000380a4 vaddr=40080000 size=07f74h ( 32628) load[0m
+[0;32mI (173) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=8e95ch (584028) map[0m
+[0;32mI (373) esp_image: segment 4: paddr=000ce984 vaddr=40087f74 size=116ach ( 71340) load[0m
 [0;32mI (414) boot: Loaded app from partition at offset 0x10000[0m
-[0;32mI (414) boot: Disabling RNG early entropy source...[0m
-[0;32mI (426) cpu_start: Multicore app[0m
+[0;32mI (415) boot: Disabling RNG early entropy source...[0m
+[0;32mI (427) cpu_start: Multicore app[0m
 [0;32mI (435) cpu_start: Pro cpu start user code[0m
 [0;32mI (435) cpu_start: cpu freq: 240000000 Hz[0m
 [0;32mI (435) app_init: Application information:[0m
 [0;32mI (438) app_init: Project name:     Bedclock_IDF_V10[0m
-[0;32mI (443) app_init: App version:      1[0m
+[0;32mI (444) app_init: App version:      1[0m
 [0;32mI (448) app_init: Compile time:     Nov  5 2024 15:35:35[0m
-[0;32mI (454) app_init: ELF file SHA256:  d47629cc8...[0m
+[0;32mI (454) app_init: ELF file SHA256:  640a11a4f...[0m
 [0;32mI (459) app_init: ESP-IDF:          5.3.1[0m
 [0;32mI (464) efuse_init: Min chip rev:     v0.0[0m
 [0;32mI (469) efuse_init: Max chip rev:     v3.99 [0m
 [0;32mI (474) efuse_init: Chip rev:         v1.0[0m
 [0;32mI (479) heap_init: Initializing. RAM available for dynamic allocation:[0m
 [0;32mI (486) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
-[0;32mI (492) heap_init: At 3FFB92B0 len 00026D50 (155 KiB): DRAM[0m
+[0;32mI (492) heap_init: At 3FFB9280 len 00026D80 (155 KiB): DRAM[0m
 [0;32mI (498) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
 [0;32mI (504) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
 [0;32mI (511) heap_init: At 40099620 len 000069E0 (26 KiB): IRAM[0m
 [0;32mI (518) spi_flash: detected chip: generic[0m
-[0;32mI (521) spi_flash: flash io: dio[0m
+[0;32mI (522) spi_flash: flash io: dio[0m
 [0;33mW (526) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
 [0;32mI (537) main_task: Started on CPU0[0m
 [0;32mI (547) main_task: Calling app_main()[0m
 [0;32mI (567) wifi station: ESP_WIFI_MODE_STA[0m
-I (587) wifi:wifi driver task: 3ffc12c0, prio:23, stack:6656, core=0
+I (587) wifi:wifi driver task: 3ffc1290, prio:23, stack:6656, core=0
 I (597) wifi:wifi firmware version: ccaebfa
 I (597) wifi:wifi certification version: v7.0
 I (597) wifi:config NVS flash: enabled
@@ -105,11 +105,11 @@ entry 0x40080638
 [0;32mI (226) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
 [0;32mI (234) boot:  2 factory          factory app      00 00 00010000 00100000[0m
 [0;32mI (242) boot: End of partition table[0m
-[0;32mI (246) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=23944h (145732) map[0m
-[0;32mI (304) esp_image: segment 1: paddr=0003396c vaddr=3ffb0000 size=04680h ( 18048) load[0m
-[0;32mI (311) esp_image: segment 2: paddr=00037ff4 vaddr=40080000 size=08024h ( 32804) load[0m
-[0;32mI (324) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=8e9d0h (584144) map[0m
-[0;32mI (525) esp_image: segment 4: paddr=000ce9f8 vaddr=40088024 size=115fch ( 71164) load[0m
+[0;32mI (246) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=239f4h (145908) map[0m
+[0;32mI (304) esp_image: segment 1: paddr=00033a1c vaddr=3ffb0000 size=04680h ( 18048) load[0m
+[0;32mI (311) esp_image: segment 2: paddr=000380a4 vaddr=40080000 size=07f74h ( 32628) load[0m
+[0;32mI (324) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=8e95ch (584028) map[0m
+[0;32mI (525) esp_image: segment 4: paddr=000ce984 vaddr=40087f74 size=116ach ( 71340) load[0m
 [0;32mI (566) boot: Loaded app from partition at offset 0x10000[0m
 [0;32mI (566) boot: Disabling RNG early entropy source...[0m
 [0;32mI (578) cpu_start: Multicore app[0m
@@ -119,14 +119,14 @@ entry 0x40080638
 [0;32mI (589) app_init: Project name:     Bedclock_IDF_V10[0m
 [0;32mI (595) app_init: App version:      1[0m
 [0;32mI (599) app_init: Compile time:     Nov  5 2024 15:35:35[0m
-[0;32mI (605) app_init: ELF file SHA256:  d47629cc8...[0m
+[0;32mI (605) app_init: ELF file SHA256:  640a11a4f...[0m
 [0;32mI (610) app_init: ESP-IDF:          5.3.1[0m
 [0;32mI (615) efuse_init: Min chip rev:     v0.0[0m
 [0;32mI (620) efuse_init: Max chip rev:     v3.99 [0m
 [0;32mI (625) efuse_init: Chip rev:         v1.0[0m
 [0;32mI (630) heap_init: Initializing. RAM available for dynamic allocation:[0m
 [0;32mI (637) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
-[0;32mI (643) heap_init: At 3FFB92B0 len 00026D50 (155 KiB): DRAM[0m
+[0;32mI (643) heap_init: At 3FFB9280 len 00026D80 (155 KiB): DRAM[0m
 [0;32mI (649) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
 [0;32mI (655) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
 [0;32mI (662) heap_init: At 40099620 len 000069E0 (26 KiB): IRAM[0m
@@ -136,7 +136,7 @@ entry 0x40080638
 [0;32mI (688) main_task: Started on CPU0[0m
 [0;32mI (698) main_task: Calling app_main()[0m
 [0;32mI (718) wifi station: ESP_WIFI_MODE_STA[0m
-I (738) wifi:wifi driver task: 3ffc12c0, prio:23, stack:6656, core=0
+I (738) wifi:wifi driver task: 3ffc1290, prio:23, stack:6656, core=0
 I (748) wifi:wifi firmware version: ccaebfa
 I (748) wifi:wifi certification version: v7.0
 I (748) wifi:config NVS flash: enabled
@@ -160,20 +160,20 @@ I (778) wifi:Init dynamic rx buffer num: 32
 [0;32mI (818) wifi_init: WiFi RX IRAM OP enabled[0m
 W (818) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2
 [0;32mI (828) phy_init: phy_version 4830,54550f7,Jun 20 2024,14:22:08[0m
-I (908) wifi:mode : sta (8c:aa:b5:8c:5a:cc)
+I (898) wifi:mode : sta (8c:aa:b5:8c:5a:cc)
 I (908) wifi:enable tsf
 [0;32mI (908) wifi station: wifi_init_sta finished.[0m
 I (918) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:9, snd_ch_cfg:0x0
 I (918) wifi:state: init -> auth (0xb0)
-I (928) wifi:state: auth -> assoc (0x0)
-I (938) wifi:state: assoc -> run (0x10)
-I (998) wifi:connected with Starbux, aid = 1, channel 1, BW20, bssid = 2c:3a:fd:bf:5d:7c
-I (998) wifi:security: WPA2-PSK, phy: bgn, rssi: -71
+I (948) wifi:state: auth -> assoc (0x0)
+I (958) wifi:state: assoc -> run (0x10)
+I (998) wifi:connected with Starbux, aid = 1, channel 1, BW20, bssid = f0:b0:14:79:b5:1b
+I (998) wifi:security: WPA2-PSK, phy: bgn, rssi: -83
 I (1008) wifi:pm start, type: 1
 
 I (1008) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
-I (1018) wifi:<ba-add>idx:0 (ifx:0, 2c:3a:fd:bf:5d:7c), tid:0, ssn:0, winSize:64
-I (1088) wifi:AP's beacon interval = 102400 us, DTIM period = 1
+I (1038) wifi:<ba-add>idx:0 (ifx:0, f0:b0:14:79:b5:1b), tid:0, ssn:0, winSize:64
+I (1038) wifi:AP's beacon interval = 102400 us, DTIM period = 1
 [0;32mI (2018) esp_netif_handlers: sta ip: 192.168.178.160, mask: 255.255.255.0, gw: 192.168.178.1[0m
 [0;32mI (2018) wifi station: got ip:192.168.178.160[0m
 [0;32mI (2018) wifi station: connected to ap SSID:Starbux password:RodePleinMoskou2019[0m
@@ -191,7 +191,7 @@ Local time in Amsterdam: 01:00:02
 [0;33mW (2088) display: Flip upside down[0m
 [0;32mI (2088) display: Panel is 128x32[0m
 [0;32mI (2098) SSD1306: OLED configured successfully[0m
-[0;32mI (2188) display: t1=1478159 t2=1520765 dt=42606. [0m
+[0;32mI (2188) display: t1=1477328 t2=1521914 dt=44586. [0m
 [0;32mI (2188) keyboard: Starting keyboard task...[0m
 [0;32mI (2188) keyboard: Keyboard task started...[0m
 [0;32mI (2198) light: Starting light task...[0m
@@ -200,266 +200,244 @@ Local time in Amsterdam: 01:00:02
 [0;32mI (2208) gpio: GPIO[23]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
 [0;32mI (2218) light: Install led strip encoder[0m
 [0;32mI (2218) light: Enable RMT TX channel[0m
-[0;32mI (2218) light: Start LED rainbow chase[0m
+[0;32mI (2228) light: Start LED rainbow chase[0m
 [0;32mI (2228) main: Main blip[0m
 [0;32mI (2298) display: Update clock due to minute change[0m
-[0;32mI (2348) display: t1=1630162 t2=1684691 dt=54529. [0m
+[0;31mE (2318) SSD1306: Image command failed. code: 0xFFFFFFFF[0m
+[0;32mI (2348) display: t1=1630347 t2=1684716 dt=54369. [0m
 [0;32mI (3228) main: Main blip[0m
 [0;32mI (4238) main: Main blip[0m
 [0;32mI (5238) main: Main blip[0m
+[0;32mI (5238) main: Auto restart timer 4564884[0m
 [0;32mI (6238) main: Main blip[0m
 [0;32mI (7238) main: Main blip[0m
+[0;32mI (7238) main: Single shot timer[0m
 [0;32mI (8238) main: Main blip[0m
+[0;32mI (8238) main: Auto restart timer 7564884[0m
 [0;32mI (9238) main: Main blip[0m
 [0;32mI (10238) main: Main blip[0m
 [0;32mI (11238) main: Main blip[0m
+[0;32mI (11238) main: Auto restart timer 10564884[0m
 [0;32mI (12238) main: Main blip[0m
 [0;32mI (13238) main: Main blip[0m
 [0;32mI (14238) main: Main blip[0m
+[0;32mI (14238) main: Auto restart timer 13564884[0m
 [0;32mI (15238) main: Main blip[0m
 [0;32mI (16238) main: Main blip[0m
 [0;32mI (17238) main: Main blip[0m
+[0;32mI (17238) main: Auto restart timer 16564884[0m
 [0;32mI (18238) main: Main blip[0m
 [0;32mI (19238) main: Main blip[0m
 [0;32mI (20238) main: Main blip[0m
+[0;32mI (20238) main: Auto restart timer 19564884[0m
 [0;32mI (21238) main: Main blip[0m
 [0;32mI (22238) main: Main blip[0m
 [0;32mI (22308) display: Display back to sleep[0m
 [0;32mI (23238) main: Main blip[0m
+[0;32mI (23238) main: Auto restart timer 22564884[0m
 [0;32mI (24238) main: Main blip[0m
-[0;32mI (24328) keyboard: Top button filtered value 374[0m
-[0;32mI (24478) light: Light manually switched on[0m
-[0;32mI (24538) display: t1=23820081 t2=23876382 dt=56301. [0m
 [0;32mI (25238) main: Main blip[0m
 [0;32mI (26238) main: Main blip[0m
+[0;32mI (26238) main: Auto restart timer 25564884[0m
 [0;32mI (27238) main: Main blip[0m
 [0;32mI (28238) main: Main blip[0m
 [0;32mI (29238) main: Main blip[0m
+[0;32mI (29238) main: Auto restart timer 28564884[0m
 [0;32mI (30238) main: Main blip[0m
 [0;32mI (31238) main: Main blip[0m
 [0;32mI (32238) main: Main blip[0m
+[0;32mI (32238) main: Auto restart timer 31564884[0m
 [0;32mI (33238) main: Main blip[0m
 [0;32mI (34238) main: Main blip[0m
-[0;32mI (34888) keyboard: Left button filtered value 422[0m
-[0;32mI (34898) display: item received BTN_LEFT[0m
-[0;32mI (34958) display: t1=34232184 t2=34295469 dt=63285. [0m
 [0;32mI (35238) main: Main blip[0m
-[0;32mI (36158) keyboard: Right button filtered value 337[0m
-[0;32mI (36158) display: item received BTN_RIGHT[0m
-[0;32mI (36158) display: Increase LED intensity[0m
-[0;32mI (36228) display: t1=35495685 t2=35560397 dt=64712. [0m
+[0;32mI (35238) main: Auto restart timer 34564884[0m
 [0;32mI (36238) main: Main blip[0m
 [0;32mI (37238) main: Main blip[0m
 [0;32mI (38238) main: Main blip[0m
-[0;32mI (38438) keyboard: Right button filtered value 467[0m
-[0;32mI (38438) display: item received BTN_RIGHT[0m
-[0;32mI (38438) display: Increase LED intensity[0m
-[0;32mI (38498) display: t1=37775640 t2=37839554 dt=63914. [0m
+[0;32mI (38238) main: Auto restart timer 37564884[0m
 [0;32mI (39238) main: Main blip[0m
-[0;32mI (39578) keyboard: Right button filtered value 494[0m
-[0;32mI (39608) display: item received BTN_RIGHT[0m
-[0;32mI (39608) display: Increase LED intensity[0m
-[0;32mI (39668) display: t1=38940098 t2=39005618 dt=65520. [0m
 [0;32mI (40238) main: Main blip[0m
-[0;32mI (40478) keyboard: Right button filtered value 526[0m
-[0;32mI (40478) display: item received BTN_RIGHT[0m
-[0;32mI (40478) display: Increase LED intensity[0m
-[0;32mI (40548) display: t1=39815538 t2=39880893 dt=65355. [0m
 [0;32mI (41238) main: Main blip[0m
-[0;32mI (42038) keyboard: Right button filtered value 407[0m
-[0;32mI (42038) display: item received BTN_RIGHT[0m
-[0;32mI (42038) display: Increase LED intensity[0m
-[0;32mI (42098) display: t1=41375911 t2=41438134 dt=62223. [0m
+[0;32mI (41238) main: Auto restart timer 40564884[0m
 [0;32mI (42238) main: Main blip[0m
 [0;32mI (43238) main: Main blip[0m
 [0;32mI (44238) main: Main blip[0m
+[0;32mI (44238) main: Auto restart timer 43564884[0m
 [0;32mI (45238) main: Main blip[0m
 [0;32mI (46238) main: Main blip[0m
-[0;32mI (46288) keyboard: Left button filtered value 381[0m
-[0;32mI (46298) display: item received BTN_LEFT[0m
-[0;32mI (46358) display: t1=45631738 t2=45693499 dt=61761. [0m
 [0;32mI (47238) main: Main blip[0m
+[0;32mI (47238) main: Auto restart timer 46564884[0m
 [0;32mI (48238) main: Main blip[0m
 [0;32mI (49238) main: Main blip[0m
 [0;32mI (50238) main: Main blip[0m
-[0;32mI (50678) keyboard: Right button filtered value 332[0m
-[0;32mI (50678) display: item received BTN_RIGHT[0m
-[0;32mI (50678) display: Increase LED color[0m
-[0;32mI (50738) display: t1=50015427 t2=50077551 dt=62124. [0m
+[0;32mI (50238) main: Auto restart timer 49564884[0m
 [0;32mI (51238) main: Main blip[0m
 [0;32mI (52238) main: Main blip[0m
-[0;32mI (52418) keyboard: Right button filtered value 509[0m
-[0;32mI (52448) display: item received BTN_RIGHT[0m
-[0;32mI (52448) display: Increase LED color[0m
-[0;32mI (52508) display: t1=51779996 t2=51841690 dt=61694. [0m
 [0;32mI (53238) main: Main blip[0m
+[0;32mI (53238) main: Auto restart timer 52564884[0m
 [0;32mI (54238) main: Main blip[0m
-[0;32mI (54458) keyboard: Right button filtered value 447[0m
-[0;32mI (54458) display: item received BTN_RIGHT[0m
-[0;32mI (54458) display: Increase LED color[0m
-[0;32mI (54518) display: t1=53795442 t2=53855919 dt=60477. [0m
 [0;32mI (55238) main: Main blip[0m
 [0;32mI (56238) main: Main blip[0m
-[0;32mI (56618) keyboard: Right button filtered value 444[0m
-[0;32mI (56618) display: item received BTN_RIGHT[0m
-[0;32mI (56618) display: Increase LED color[0m
-[0;32mI (56678) display: t1=55955359 t2=56017126 dt=61767. [0m
+[0;32mI (56238) main: Auto restart timer 55564884[0m
 [0;32mI (57238) main: Main blip[0m
 [0;32mI (58238) main: Main blip[0m
-[0;32mI (58898) keyboard: Right button filtered value 444[0m
-[0;32mI (58898) display: item received BTN_RIGHT[0m
-[0;32mI (58898) display: Increase LED color[0m
-[0;32mI (58958) display: t1=58235299 t2=58296770 dt=61471. [0m
 [0;32mI (59238) main: Main blip[0m
-[0;32mI (59798) keyboard: Right button filtered value 252[0m
-[0;32mI (59798) display: item received BTN_RIGHT[0m
-[0;32mI (59798) display: Increase LED color[0m
-[0;32mI (59858) display: t1=59135358 t2=59197140 dt=61782. [0m
+[0;32mI (59238) main: Auto restart timer 58564884[0m
 [0;32mI (60238) main: Main blip[0m
-[0;32mI (61118) keyboard: Right button filtered value 408[0m
-[0;32mI (61118) display: item received BTN_RIGHT[0m
-[0;32mI (61118) display: Increase LED color[0m
-[0;32mI (61178) display: t1=60455466 t2=60517144 dt=61678. [0m
 [0;32mI (61238) main: Main blip[0m
 [0;32mI (62238) main: Main blip[0m
-[0;32mI (62978) keyboard: Right button filtered value 410[0m
-[0;32mI (62978) display: item received BTN_RIGHT[0m
-[0;32mI (62978) display: Increase LED color[0m
-[0;32mI (63038) display: t1=62315217 t2=62377118 dt=61901. [0m
+[0;32mI (62238) main: Auto restart timer 61564884[0m
 [0;32mI (63238) main: Main blip[0m
-[0;32mI (63638) keyboard: Right button filtered value 475[0m
-[0;32mI (63638) display: item received BTN_RIGHT[0m
-[0;32mI (63638) display: Increase LED color[0m
-[0;32mI (63698) display: t1=62975464 t2=63034599 dt=59135. [0m
-[0;32mI (64058) keyboard: Right button filtered value 350[0m
-[0;32mI (64058) display: item received BTN_RIGHT[0m
-[0;32mI (64058) display: Increase LED color[0m
-[0;32mI (64118) display: t1=63395511 t2=63455259 dt=59748. [0m
 [0;32mI (64238) main: Main blip[0m
 [0;32mI (65238) main: Main blip[0m
-[0;32mI (65608) keyboard: Left button filtered value 359[0m
-[0;32mI (65618) display: item received BTN_LEFT[0m
-[0;32mI (65678) display: t1=64952125 t2=65013262 dt=61137. [0m
+[0;32mI (65238) main: Auto restart timer 64564884[0m
 [0;32mI (66238) main: Main blip[0m
-[0;32mI (66388) keyboard: Left button filtered value 360[0m
-[0;32mI (66398) display: item received BTN_LEFT[0m
-[0;32mI (66458) display: t1=65732477 t2=65793437 dt=60960. [0m
-[0;32mI (67228) keyboard: Left button filtered value 367[0m
 [0;32mI (67238) main: Main blip[0m
-[0;32mI (67268) display: item received BTN_LEFT[0m
-[0;32mI (67318) display: t1=66599891 t2=66655397 dt=55506. [0m
-[0;32mI (68068) keyboard: Left button filtered value 346[0m
-[0;32mI (68078) display: item received BTN_LEFT[0m
-[0;32mI (68138) display: t1=67412136 t2=67476751 dt=64615. [0m
 [0;32mI (68238) main: Main blip[0m
+[0;32mI (68238) main: Auto restart timer 67564884[0m
 [0;32mI (69238) main: Main blip[0m
-[0;32mI (70118) keyboard: Right button filtered value 137[0m
-[0;32mI (70148) display: item received BTN_RIGHT[0m
-[0;32mI (70148) display: Increase LED intensity[0m
-[0;32mI (70208) display: t1=69479995 t2=69544005 dt=64010. [0m
 [0;32mI (70238) main: Main blip[0m
 [0;32mI (71238) main: Main blip[0m
-[0;32mI (71438) keyboard: Right button filtered value 369[0m
-[0;32mI (71468) display: item received BTN_RIGHT[0m
-[0;32mI (71468) display: Increase LED intensity[0m
-[0;32mI (71528) display: t1=70799991 t2=70863257 dt=63266. [0m
+[0;32mI (71238) main: Auto restart timer 70564884[0m
 [0;32mI (72238) main: Main blip[0m
 [0;32mI (73238) main: Main blip[0m
 [0;32mI (74238) main: Main blip[0m
+[0;32mI (74238) main: Auto restart timer 73564884[0m
 [0;32mI (75238) main: Main blip[0m
 [0;32mI (76238) main: Main blip[0m
 [0;32mI (77238) main: Main blip[0m
-[0;32mI (77668) keyboard: Left button filtered value 283[0m
-[0;32mI (77678) display: item received BTN_LEFT[0m
-[0;32mI (77738) display: t1=77012121 t2=77071650 dt=59529. [0m
+[0;32mI (77238) main: Auto restart timer 76564884[0m
 [0;32mI (78238) main: Main blip[0m
-[0;32mI (79058) keyboard: Right button filtered value 393[0m
-[0;32mI (79058) display: item received BTN_RIGHT[0m
-[0;32mI (79058) display: Increase LED color[0m
-[0;32mI (79118) display: t1=78395303 t2=78456773 dt=61470. [0m
 [0;32mI (79238) main: Main blip[0m
 [0;32mI (80238) main: Main blip[0m
-[0;32mI (80438) keyboard: Right button filtered value 364[0m
-[0;32mI (80438) display: item received BTN_RIGHT[0m
-[0;32mI (80438) display: Increase LED color[0m
-[0;32mI (80498) display: t1=79775403 t2=79835853 dt=60450. [0m
+[0;32mI (80238) main: Auto restart timer 79564884[0m
 [0;32mI (81238) main: Main blip[0m
-[0;32mI (81818) keyboard: Right button filtered value 412[0m
-[0;32mI (81818) display: item received BTN_RIGHT[0m
-[0;32mI (81818) display: Increase LED color[0m
-[0;32mI (81878) display: t1=81155402 t2=81217138 dt=61736. [0m
 [0;32mI (82238) main: Main blip[0m
 [0;32mI (83238) main: Main blip[0m
-[0;32mI (83258) keyboard: Right button filtered value 360[0m
-[0;32mI (83288) display: item received BTN_RIGHT[0m
-[0;32mI (83288) display: Increase LED color[0m
-[0;32mI (83338) display: t1=82620306 t2=82679509 dt=59203. [0m
+[0;32mI (83238) main: Auto restart timer 82564884[0m
 [0;32mI (84238) main: Main blip[0m
-[0;32mI (85058) keyboard: Right button filtered value 403[0m
-[0;32mI (85058) display: item received BTN_RIGHT[0m
-[0;32mI (85058) display: Increase LED color[0m
-[0;32mI (85118) display: t1=84395340 t2=84455656 dt=60316. [0m
 [0;32mI (85238) main: Main blip[0m
 [0;32mI (86238) main: Main blip[0m
-[0;32mI (86978) keyboard: Right button filtered value 491[0m
-[0;32mI (86978) display: item received BTN_RIGHT[0m
-[0;32mI (86978) display: Increase LED color[0m
-[0;32mI (87038) display: t1=86315443 t2=86374623 dt=59180. [0m
+[0;32mI (86238) main: Auto restart timer 85564884[0m
 [0;32mI (87238) main: Main blip[0m
 [0;32mI (88238) main: Main blip[0m
 [0;32mI (89238) main: Main blip[0m
+[0;32mI (89238) main: Auto restart timer 88564884[0m
 [0;32mI (90238) main: Main blip[0m
 [0;32mI (91238) main: Main blip[0m
 [0;32mI (92238) main: Main blip[0m
+[0;32mI (92238) main: Auto restart timer 91564884[0m
 [0;32mI (93238) main: Main blip[0m
 [0;32mI (94238) main: Main blip[0m
 [0;32mI (95238) main: Main blip[0m
+[0;32mI (95238) main: Auto restart timer 94564884[0m
 [0;32mI (96238) main: Main blip[0m
 [0;32mI (97238) main: Main blip[0m
 [0;32mI (98238) main: Main blip[0m
+[0;32mI (98238) main: Auto restart timer 97564884[0m
 [0;32mI (99238) main: Main blip[0m
 [0;32mI (100238) main: Main blip[0m
 [0;32mI (101238) main: Main blip[0m
+[0;32mI (101238) main: Auto restart timer 100564884[0m
 [0;32mI (102238) main: Main blip[0m
 [0;32mI (103238) main: Main blip[0m
 [0;32mI (104238) main: Main blip[0m
+[0;32mI (104238) main: Auto restart timer 103564884[0m
 [0;32mI (105238) main: Main blip[0m
 [0;32mI (106238) main: Main blip[0m
-[0;32mI (106998) display: Display back to sleep[0m
 [0;32mI (107238) main: Main blip[0m
+[0;32mI (107238) main: Auto restart timer 106564884[0m
 [0;32mI (108238) main: Main blip[0m
 [0;32mI (109238) main: Main blip[0m
 [0;32mI (110238) main: Main blip[0m
+[0;32mI (110238) main: Auto restart timer 109564884[0m
 [0;32mI (111238) main: Main blip[0m
 [0;32mI (112238) main: Main blip[0m
 [0;32mI (113238) main: Main blip[0m
+[0;32mI (113238) main: Auto restart timer 112564884[0m
 [0;32mI (114238) main: Main blip[0m
 [0;32mI (115238) main: Main blip[0m
 [0;32mI (116238) main: Main blip[0m
+[0;32mI (116238) main: Auto restart timer 115564884[0m
 [0;32mI (117238) main: Main blip[0m
 [0;32mI (118238) main: Main blip[0m
 [0;32mI (119238) main: Main blip[0m
+[0;32mI (119238) main: Auto restart timer 118564884[0m
 [0;32mI (120238) main: Main blip[0m
 [0;32mI (121238) main: Main blip[0m
 [0;32mI (122238) main: Main blip[0m
+[0;32mI (122238) main: Auto restart timer 121564884[0m
 [0;32mI (123238) main: Main blip[0m
 [0;32mI (124238) main: Main blip[0m
 [0;32mI (125238) main: Main blip[0m
+[0;32mI (125238) main: Auto restart timer 124564884[0m
 [0;32mI (126238) main: Main blip[0m
 [0;32mI (127238) main: Main blip[0m
 [0;32mI (128238) main: Main blip[0m
+[0;32mI (128238) main: Auto restart timer 127564884[0m
 [0;32mI (129238) main: Main blip[0m
 [0;32mI (130238) main: Main blip[0m
 [0;32mI (131238) main: Main blip[0m
+[0;32mI (131238) main: Auto restart timer 130564884[0m
 [0;32mI (132238) main: Main blip[0m
 [0;32mI (133238) main: Main blip[0m
 [0;32mI (134238) main: Main blip[0m
+[0;32mI (134238) main: Auto restart timer 133564884[0m
 [0;32mI (135238) main: Main blip[0m
 [0;32mI (136238) main: Main blip[0m
 [0;32mI (137238) main: Main blip[0m
+[0;32mI (137238) main: Auto restart timer 136564884[0m
 [0;32mI (138238) main: Main blip[0m
 [0;32mI (139238) main: Main blip[0m
 [0;32mI (140238) main: Main blip[0m
+[0;32mI (140238) main: Auto restart timer 139564884[0m
 [0;32mI (141238) main: Main blip[0m
 [0;32mI (142238) main: Main blip[0m
 [0;32mI (143238) main: Main blip[0m
+[0;32mI (143238) main: Auto restart timer 142564884[0m
+[0;32mI (144238) main: Main blip[0m
+[0;32mI (145238) main: Main blip[0m
+[0;32mI (146238) main: Main blip[0m
+[0;32mI (146238) main: Auto restart timer 145564884[0m
+[0;32mI (147238) main: Main blip[0m
+[0;32mI (148238) main: Main blip[0m
+[0;32mI (149238) main: Main blip[0m
+[0;32mI (149238) main: Auto restart timer 148564884[0m
+[0;32mI (150238) main: Main blip[0m
+[0;32mI (151238) main: Main blip[0m
+[0;32mI (152238) main: Main blip[0m
+[0;32mI (152238) main: Auto restart timer 151564884[0m
+[0;32mI (153238) main: Main blip[0m
+[0;32mI (154238) main: Main blip[0m
+[0;32mI (155238) main: Main blip[0m
+[0;32mI (155238) main: Auto restart timer 154564884[0m
+[0;32mI (156238) main: Main blip[0m
+[0;32mI (157238) main: Main blip[0m
+[0;32mI (158238) main: Main blip[0m
+[0;32mI (158238) main: Auto restart timer 157564884[0m
+[0;32mI (159238) main: Main blip[0m
+[0;32mI (160238) main: Main blip[0m
+[0;32mI (161238) main: Main blip[0m
+[0;32mI (161238) main: Auto restart timer 160564884[0m
+[0;32mI (162238) main: Main blip[0m
+[0;32mI (163238) main: Main blip[0m
+[0;32mI (164238) main: Main blip[0m
+[0;32mI (164238) main: Auto restart timer 163564884[0m
+[0;32mI (165238) main: Main blip[0m
+[0;32mI (166238) main: Main blip[0m
+[0;32mI (167238) main: Main blip[0m
+[0;32mI (167238) main: Auto restart timer 166564884[0m
+[0;32mI (168238) main: Main blip[0m
+[0;32mI (169238) main: Main blip[0m
+[0;32mI (170238) main: Main blip[0m
+[0;32mI (170238) main: Auto restart timer 169564884[0m
+[0;32mI (171238) main: Main blip[0m
+[0;32mI (172238) main: Main blip[0m
+[0;32mI (173238) main: Main blip[0m
+[0;32mI (173238) main: Auto restart timer 172564884[0m
+[0;32mI (174238) main: Main blip[0m
+[0;32mI (175238) main: Main blip[0m
+[0;32mI (176238) main: Main blip[0m
+[0;32mI (176238) main: Auto restart timer 175564884[0m
+[0;32mI (177238) main: Main blip[0m
+[0;32mI (178238) main: Main blip[0m

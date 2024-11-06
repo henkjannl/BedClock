@@ -1,0 +1,842 @@
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7176
+load:0x40078000,len:15564
+ho 0 tail 12 room 4
+load:0x40080400,len:4
+load:0x40080404,len:3904
+entry 0x40080638
+[0;32mI (30) boot: ESP-IDF 5.3.1 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Nov  6 2024 09:19:26[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (34) boot: chip revision: v1.0[0m
+[0;32mI (38) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (43) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (47) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (52) boot: Enabling RNG early entropy source...[0m
+[0;32mI (57) boot: Partition Table:[0m
+[0;32mI (61) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (68) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (75) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (83) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (90) boot: End of partition table[0m
+[0;32mI (95) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=239f4h (145908) map[0m
+[0;32mI (153) esp_image: segment 1: paddr=00033a1c vaddr=3ffb0000 size=04680h ( 18048) load[0m
+[0;32mI (160) esp_image: segment 2: paddr=000380a4 vaddr=40080000 size=07f74h ( 32628) load[0m
+[0;32mI (173) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=8e954h (584020) map[0m
+[0;32mI (373) esp_image: segment 4: paddr=000ce97c vaddr=40087f74 size=116ach ( 71340) load[0m
+[0;32mI (414) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (414) boot: Disabling RNG early entropy source...[0m
+[0;32mI (426) cpu_start: Multicore app[0m
+[0;32mI (435) cpu_start: Pro cpu start user code[0m
+[0;32mI (435) cpu_start: cpu freq: 240000000 Hz[0m
+[0;32mI (435) app_init: Application information:[0m
+[0;32mI (438) app_init: Project name:     Bedclock_IDF_V10[0m
+[0;32mI (444) app_init: App version:      1[0m
+[0;32mI (448) app_init: Compile time:     Nov  6 2024 09:18:35[0m
+[0;32mI (454) app_init: ELF file SHA256:  6cebbfc22...[0m
+[0;32mI (459) app_init: ESP-IDF:          5.3.1[0m
+[0;32mI (464) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (469) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (474) efuse_init: Chip rev:         v1.0[0m
+[0;32mI (479) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (486) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (492) heap_init: At 3FFB9280 len 00026D80 (155 KiB): DRAM[0m
+[0;32mI (498) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (504) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (511) heap_init: At 40099620 len 000069E0 (26 KiB): IRAM[0m
+[0;32mI (518) spi_flash: detected chip: generic[0m
+[0;32mI (522) spi_flash: flash io: dio[0m
+[0;33mW (526) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (537) main_task: Started on CPU0[0m
+[0;32mI (547) main_task: Calling app_main()[0m
+[0;32mI (567) wifi station: ESP_WIFI_MODE_STA[0m
+I (587) wifi:wifi driver task: 3ffc1290, prio:23, stack:6656, core=0
+I (597) wifi:wifi firmware version: ccaebfa
+I (597) wifi:wifi certification version: v7.0
+I (597) wifi:config NVS flash: enabled
+I (597) wifi:config nano formating: disabled
+I (597) wifi:Init data frame dynamic rx buffer num: 32
+I (607) wifi:Init static rx mgmt buffer num: 5
+I (607) wifi:Init management short buffer num: 32
+I (617) wifi:Init dynamic tx buffer num: 32
+I (617) wifi:Init static rx buffer size: 1600
+I (617) wifi:Init static rx buffer num: 10
+I (627) wifi:Init dynamic rx buffer num: 32
+[0;32mI (627) wifi_init: rx ba win: 6[0m
+[0;32mI (637) wifi_init: accept mbox: 6[0m
+[0;32mI (637) wifi_init: tcpip mbox: 32[0m
+[0;32mI (637) wifi_init: udp mbox: 6[0m
+[0;32mI (647) wifi_init: tcp mbox: 6[0m
+[0;32mI (647) wifi_init: tcp tx win: 5760[0m
+[0;32mI (657) wifi_init: tcp rx win: 5760[0m
+[0;32mI (657) wifi_init: tcp mss: 1440[0m
+[0;32mI (657) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (667) wifi_init: WiFi RX IRAM OP enabled[0m
+W (667) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2
+[0;32mI (677) phy_init: phy_version 4830,54550f7,Jun 20 2024,14:22:08[0m
+�ets Jun  8 2016 00:22:57
+
+rst:0x3 (SW_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7176
+load:0x40078000,len:15564
+ho 0 tail 12 room 4
+load:0x40080400,len:4
+load:0x40080404,len:3904
+entry 0x40080638
+[0;32mI (179) boot: ESP-IDF 5.3.1 2nd stage bootloader[0m
+[0;32mI (179) boot: compile time Nov  6 2024 09:19:26[0m
+[0;32mI (179) boot: Multicore bootloader[0m
+[0;32mI (184) boot: chip revision: v1.0[0m
+[0;32mI (188) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (193) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (198) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (202) boot: Enabling RNG early entropy source...[0m
+[0;32mI (208) boot: Partition Table:[0m
+[0;32mI (211) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (219) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (226) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (234) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (242) boot: End of partition table[0m
+[0;32mI (246) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=239f4h (145908) map[0m
+[0;32mI (304) esp_image: segment 1: paddr=00033a1c vaddr=3ffb0000 size=04680h ( 18048) load[0m
+[0;32mI (311) esp_image: segment 2: paddr=000380a4 vaddr=40080000 size=07f74h ( 32628) load[0m
+[0;32mI (324) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=8e954h (584020) map[0m
+[0;32mI (525) esp_image: segment 4: paddr=000ce97c vaddr=40087f74 size=116ach ( 71340) load[0m
+[0;32mI (566) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (566) boot: Disabling RNG early entropy source...[0m
+[0;32mI (578) cpu_start: Multicore app[0m
+[0;32mI (586) cpu_start: Pro cpu start user code[0m
+[0;32mI (586) cpu_start: cpu freq: 240000000 Hz[0m
+[0;32mI (586) app_init: Application information:[0m
+[0;32mI (589) app_init: Project name:     Bedclock_IDF_V10[0m
+[0;32mI (595) app_init: App version:      1[0m
+[0;32mI (599) app_init: Compile time:     Nov  6 2024 09:18:35[0m
+[0;32mI (605) app_init: ELF file SHA256:  6cebbfc22...[0m
+[0;32mI (610) app_init: ESP-IDF:          5.3.1[0m
+[0;32mI (615) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (620) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (625) efuse_init: Chip rev:         v1.0[0m
+[0;32mI (630) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (637) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (643) heap_init: At 3FFB9280 len 00026D80 (155 KiB): DRAM[0m
+[0;32mI (649) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (655) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (662) heap_init: At 40099620 len 000069E0 (26 KiB): IRAM[0m
+[0;32mI (670) spi_flash: detected chip: generic[0m
+[0;32mI (673) spi_flash: flash io: dio[0m
+[0;33mW (677) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (688) main_task: Started on CPU0[0m
+[0;32mI (698) main_task: Calling app_main()[0m
+[0;32mI (718) wifi station: ESP_WIFI_MODE_STA[0m
+I (738) wifi:wifi driver task: 3ffc1290, prio:23, stack:6656, core=0
+I (748) wifi:wifi firmware version: ccaebfa
+I (748) wifi:wifi certification version: v7.0
+I (748) wifi:config NVS flash: enabled
+I (748) wifi:config nano formating: disabled
+I (748) wifi:Init data frame dynamic rx buffer num: 32
+I (758) wifi:Init static rx mgmt buffer num: 5
+I (758) wifi:Init management short buffer num: 32
+I (768) wifi:Init dynamic tx buffer num: 32
+I (768) wifi:Init static rx buffer size: 1600
+I (768) wifi:Init static rx buffer num: 10
+I (778) wifi:Init dynamic rx buffer num: 32
+[0;32mI (778) wifi_init: rx ba win: 6[0m
+[0;32mI (788) wifi_init: accept mbox: 6[0m
+[0;32mI (788) wifi_init: tcpip mbox: 32[0m
+[0;32mI (788) wifi_init: udp mbox: 6[0m
+[0;32mI (798) wifi_init: tcp mbox: 6[0m
+[0;32mI (798) wifi_init: tcp tx win: 5760[0m
+[0;32mI (808) wifi_init: tcp rx win: 5760[0m
+[0;32mI (808) wifi_init: tcp mss: 1440[0m
+[0;32mI (808) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (818) wifi_init: WiFi RX IRAM OP enabled[0m
+W (818) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2
+[0;32mI (828) phy_init: phy_version 4830,54550f7,Jun 20 2024,14:22:08[0m
+I (898) wifi:mode : sta (8c:aa:b5:8c:5a:cc)
+I (908) wifi:enable tsf
+[0;32mI (908) wifi station: wifi_init_sta finished.[0m
+I (918) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:9, snd_ch_cfg:0x0
+I (918) wifi:state: init -> auth (0xb0)
+I (948) wifi:state: auth -> assoc (0x0)
+I (958) wifi:state: assoc -> run (0x10)
+I (988) wifi:connected with Starbux, aid = 2, channel 1, BW20, bssid = dc:15:c8:50:7c:5c
+I (988) wifi:security: WPA2-PSK, phy: bgn, rssi: -64
+I (998) wifi:pm start, type: 1
+
+I (998) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (1008) wifi:<ba-add>idx:0 (ifx:0, dc:15:c8:50:7c:5c), tid:6, ssn:2, winSize:64
+I (1058) wifi:AP's beacon interval = 102400 us, DTIM period = 1
+[0;32mI (2008) esp_netif_handlers: sta ip: 192.168.178.160, mask: 255.255.255.0, gw: 192.168.178.1[0m
+[0;32mI (2008) wifi station: got ip:192.168.178.160[0m
+[0;32mI (2008) wifi station: connected to ap SSID:Starbux password:RodePleinMoskou2019[0m
+[0;32mI (2018) wifi station: Initializing SNTP[0m
+[0;31mE (2018) esp_netif_sntp: sntp_init_api(61): Tried to configure SNTP server from DHCP, while disabled. Please enable CONFIG_LWIP_DHCP_GET_NTP_SRV[0m
+[0;31mE (2038) esp_netif_sntp: esp_netif_sntp_init(119): Failed initialize SNTP service[0m
+[0;32mI (2048) wifi station: Starting SNTP[0m
+Local time in Amsterdam: 01:00:02
+[0;32mI (2048) display: INTERFACE is i2c[0m
+[0;32mI (2058) display: CONFIG_SDA_GPIO=21[0m
+[0;32mI (2058) display: CONFIG_SCL_GPIO=22[0m
+[0;32mI (2068) display: CONFIG_RESET_GPIO=-1[0m
+[0;32mI (2068) SSD1306: Legacy i2c driver is used[0m
+I (2068) wifi:<ba-add>idx:1 (ifx:0, dc:15:c8:50:7c:5c), tid:0, ssn:0, winSize:64
+[0;32mI (2078) SSD1306: HenkJan: .master.clk_speed = 400000[0m
+[0;33mW (2088) display: Flip upside down[0m
+[0;32mI (2088) display: Panel is 128x32[0m
+[0;32mI (2098) SSD1306: OLED configured successfully[0m
+[0;32mI (2178) display: t1=1473190 t2=1515508 dt=42318. [0m
+[0;32mI (2178) keyboard: Starting keyboard task...[0m
+[0;32mI (2178) keyboard: Keyboard task started...[0m
+[0;32mI (2198) light: Starting light task...[0m
+[0;32mI (2198) light: Light task started...[0m
+[0;32mI (2198) light: Create RMT TX channel[0m
+[0;32mI (2198) gpio: GPIO[23]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (2208) light: Install led strip encoder[0m
+[0;32mI (2208) light: Enable RMT TX channel[0m
+[0;32mI (2218) light: Start LED rainbow chase[0m
+[0;32mI (2218) main: Main blip[0m
+[0;32mI (2298) display: Update clock due to minute change[0m
+[0;32mI (2348) display: t1=1630282 t2=1683458 dt=53176. [0m
+[0;32mI (3228) main: Main blip[0m
+[0;32mI (4238) main: Main blip[0m
+[0;32mI (5238) main: Main blip[0m
+[0;32mI (5238) main: Auto restart timer 4558347[0m
+[0;32mI (6238) main: Main blip[0m
+[0;32mI (7238) main: Main blip[0m
+[0;32mI (7238) main: Single shot timer[0m
+[0;32mI (8238) main: Main blip[0m
+[0;32mI (8238) main: Auto restart timer 7558347[0m
+[0;32mI (9238) main: Main blip[0m
+[0;32mI (10238) main: Main blip[0m
+[0;32mI (11238) main: Main blip[0m
+[0;32mI (11238) main: Auto restart timer 10558347[0m
+[0;32mI (12238) main: Main blip[0m
+[0;32mI (13238) main: Main blip[0m
+[0;32mI (14238) main: Main blip[0m
+[0;32mI (14238) main: Auto restart timer 13558347[0m
+[0;32mI (15238) main: Main blip[0m
+[0;32mI (16238) main: Main blip[0m
+[0;32mI (17238) main: Main blip[0m
+[0;32mI (17238) main: Auto restart timer 16558347[0m
+[0;32mI (18238) main: Main blip[0m
+[0;32mI (19238) main: Main blip[0m
+[0;32mI (20238) main: Main blip[0m
+[0;32mI (20238) main: Auto restart timer 19558347[0m
+[0;32mI (21238) main: Main blip[0m
+[0;32mI (22238) main: Main blip[0m
+[0;32mI (22308) display: Display back to sleep[0m
+[0;32mI (23238) main: Main blip[0m
+[0;32mI (23238) main: Auto restart timer 22558347[0m
+[0;32mI (24238) main: Main blip[0m
+[0;32mI (25238) main: Main blip[0m
+[0;32mI (26238) main: Main blip[0m
+[0;32mI (26238) main: Auto restart timer 25558347[0m
+[0;32mI (27238) main: Main blip[0m
+[0;32mI (28238) main: Main blip[0m
+[0;32mI (29238) main: Main blip[0m
+[0;32mI (29238) main: Auto restart timer 28558347[0m
+[0;32mI (30238) main: Main blip[0m
+[0;32mI (31238) main: Main blip[0m
+[0;32mI (32238) main: Main blip[0m
+[0;32mI (32238) main: Auto restart timer 31558347[0m
+[0;32mI (33238) main: Main blip[0m
+[0;32mI (34238) main: Main blip[0m
+[0;32mI (35238) main: Main blip[0m
+[0;32mI (35238) main: Auto restart timer 34558347[0m
+[0;32mI (36238) main: Main blip[0m
+[0;32mI (37238) main: Main blip[0m
+[0;32mI (38238) main: Main blip[0m
+[0;32mI (38238) main: Auto restart timer 37558347[0m
+[0;32mI (39238) main: Main blip[0m
+[0;32mI (40238) main: Main blip[0m
+[0;32mI (41238) main: Main blip[0m
+[0;32mI (41238) main: Auto restart timer 40558347[0m
+[0;32mI (42238) main: Main blip[0m
+[0;32mI (43238) main: Main blip[0m
+[0;32mI (44238) main: Main blip[0m
+[0;32mI (44238) main: Auto restart timer 43558347[0m
+[0;32mI (45238) main: Main blip[0m
+[0;32mI (46238) main: Main blip[0m
+[0;32mI (47238) main: Main blip[0m
+[0;32mI (47238) main: Auto restart timer 46558347[0m
+[0;32mI (48238) main: Main blip[0m
+[0;32mI (49238) main: Main blip[0m
+[0;32mI (50238) main: Main blip[0m
+[0;32mI (50238) main: Auto restart timer 49558347[0m
+[0;32mI (51238) main: Main blip[0m
+[0;32mI (52238) main: Main blip[0m
+[0;32mI (53238) main: Main blip[0m
+[0;32mI (53238) main: Auto restart timer 52558347[0m
+[0;32mI (54238) main: Main blip[0m
+[0;32mI (55238) main: Main blip[0m
+[0;32mI (56238) main: Main blip[0m
+[0;32mI (56238) main: Auto restart timer 55558347[0m
+[0;32mI (57238) main: Main blip[0m
+[0;32mI (58238) main: Main blip[0m
+[0;32mI (59238) main: Main blip[0m
+[0;32mI (59238) main: Auto restart timer 58558347[0m
+[0;32mI (60238) main: Main blip[0m
+[0;32mI (61238) main: Main blip[0m
+[0;32mI (62238) main: Main blip[0m
+[0;32mI (62238) main: Auto restart timer 61558347[0m
+[0;32mI (63238) main: Main blip[0m
+[0;32mI (64238) main: Main blip[0m
+[0;32mI (65238) main: Main blip[0m
+[0;32mI (65238) main: Auto restart timer 64558347[0m
+[0;32mI (66238) main: Main blip[0m
+[0;32mI (67238) main: Main blip[0m
+[0;32mI (68238) main: Main blip[0m
+[0;32mI (68238) main: Auto restart timer 67558347[0m
+[0;32mI (69238) main: Main blip[0m
+[0;32mI (70238) main: Main blip[0m
+[0;32mI (71238) main: Main blip[0m
+[0;32mI (71238) main: Auto restart timer 70558347[0m
+[0;32mI (72238) main: Main blip[0m
+[0;32mI (73238) main: Main blip[0m
+[0;32mI (74238) main: Main blip[0m
+[0;32mI (74238) main: Auto restart timer 73558347[0m
+[0;32mI (75238) main: Main blip[0m
+[0;32mI (76238) main: Main blip[0m
+[0;32mI (77238) main: Main blip[0m
+[0;32mI (77238) main: Auto restart timer 76558347[0m
+[0;32mI (78238) main: Main blip[0m
+[0;32mI (79238) main: Main blip[0m
+[0;32mI (80238) main: Main blip[0m
+[0;32mI (80238) main: Auto restart timer 79558347[0m
+[0;32mI (81238) main: Main blip[0m
+[0;32mI (82238) main: Main blip[0m
+[0;32mI (83238) main: Main blip[0m
+[0;32mI (83238) main: Auto restart timer 82558347[0m
+[0;32mI (84238) main: Main blip[0m
+[0;32mI (85238) main: Main blip[0m
+[0;32mI (86238) main: Main blip[0m
+[0;32mI (86238) main: Auto restart timer 85558347[0m
+[0;32mI (87238) main: Main blip[0m
+[0;32mI (88238) main: Main blip[0m
+[0;32mI (89238) main: Main blip[0m
+[0;32mI (89238) main: Auto restart timer 88558347[0m
+[0;32mI (90238) main: Main blip[0m
+[0;32mI (91238) main: Main blip[0m
+[0;32mI (92238) main: Main blip[0m
+[0;32mI (92238) main: Auto restart timer 91558347[0m
+[0;32mI (93238) main: Main blip[0m
+[0;32mI (94238) main: Main blip[0m
+[0;32mI (95238) main: Main blip[0m
+[0;32mI (95238) main: Auto restart timer 94558347[0m
+[0;32mI (96238) main: Main blip[0m
+[0;32mI (97238) main: Main blip[0m
+[0;32mI (98238) main: Main blip[0m
+[0;32mI (98238) main: Auto restart timer 97558347[0m
+[0;32mI (99238) main: Main blip[0m
+[0;32mI (100238) main: Main blip[0m
+[0;32mI (101238) main: Main blip[0m
+[0;32mI (101238) main: Auto restart timer 100558347[0m
+[0;32mI (102238) main: Main blip[0m
+[0;32mI (103238) main: Main blip[0m
+[0;32mI (104238) main: Main blip[0m
+[0;32mI (104238) main: Auto restart timer 103558347[0m
+[0;32mI (105238) main: Main blip[0m
+[0;32mI (106238) main: Main blip[0m
+[0;32mI (107238) main: Main blip[0m
+[0;32mI (107238) main: Auto restart timer 106558347[0m
+[0;32mI (108238) main: Main blip[0m
+[0;32mI (109238) main: Main blip[0m
+[0;32mI (110238) main: Main blip[0m
+[0;32mI (110238) main: Auto restart timer 109558347[0m
+[0;32mI (111238) main: Main blip[0m
+[0;32mI (112238) main: Main blip[0m
+[0;32mI (113238) main: Main blip[0m
+[0;32mI (113238) main: Auto restart timer 112558347[0m
+[0;32mI (114238) main: Main blip[0m
+[0;32mI (115238) main: Main blip[0m
+[0;32mI (116238) main: Main blip[0m
+[0;32mI (116238) main: Auto restart timer 115558347[0m
+[0;32mI (117238) main: Main blip[0m
+[0;32mI (118238) main: Main blip[0m
+[0;32mI (119238) main: Main blip[0m
+[0;32mI (119238) main: Auto restart timer 118558347[0m
+[0;32mI (120238) main: Main blip[0m
+[0;32mI (121238) main: Main blip[0m
+[0;32mI (122238) main: Main blip[0m
+[0;32mI (122238) main: Auto restart timer 121558347[0m
+[0;32mI (123238) main: Main blip[0m
+[0;32mI (124238) main: Main blip[0m
+[0;32mI (125238) main: Main blip[0m
+[0;32mI (125238) main: Auto restart timer 124558347[0m
+[0;32mI (126238) main: Main blip[0m
+[0;32mI (127238) main: Main blip[0m
+[0;32mI (128238) main: Main blip[0m
+[0;32mI (128238) main: Auto restart timer 127558347[0m
+[0;32mI (129238) main: Main blip[0m
+[0;32mI (130238) main: Main blip[0m
+[0;32mI (131238) main: Main blip[0m
+[0;32mI (131238) main: Auto restart timer 130558347[0m
+[0;32mI (132238) main: Main blip[0m
+[0;32mI (133238) main: Main blip[0m
+[0;32mI (134238) main: Main blip[0m
+[0;32mI (134238) main: Auto restart timer 133558347[0m
+[0;32mI (135238) main: Main blip[0m
+[0;32mI (136238) main: Main blip[0m
+[0;32mI (137238) main: Main blip[0m
+[0;32mI (137238) main: Auto restart timer 136558347[0m
+[0;32mI (138238) main: Main blip[0m
+[0;32mI (139238) main: Main blip[0m
+[0;32mI (140238) main: Main blip[0m
+[0;32mI (140238) main: Auto restart timer 139558347[0m
+[0;32mI (141238) main: Main blip[0m
+[0;32mI (142238) main: Main blip[0m
+[0;32mI (143238) main: Main blip[0m
+[0;32mI (143238) main: Auto restart timer 142558347[0m
+[0;32mI (144238) main: Main blip[0m
+[0;32mI (145238) main: Main blip[0m
+[0;32mI (146238) main: Main blip[0m
+[0;32mI (146238) main: Auto restart timer 145558347[0m
+[0;32mI (147238) main: Main blip[0m
+[0;32mI (148238) main: Main blip[0m
+[0;32mI (149238) main: Main blip[0m
+[0;32mI (149238) main: Auto restart timer 148558347[0m
+[0;32mI (150238) main: Main blip[0m
+[0;32mI (151238) main: Main blip[0m
+[0;32mI (152238) main: Main blip[0m
+[0;32mI (152238) main: Auto restart timer 151558347[0m
+[0;32mI (153238) main: Main blip[0m
+[0;32mI (154238) main: Main blip[0m
+[0;32mI (155238) main: Main blip[0m
+[0;32mI (155238) main: Auto restart timer 154558347[0m
+[0;32mI (156238) main: Main blip[0m
+[0;32mI (157238) main: Main blip[0m
+[0;32mI (158238) main: Main blip[0m
+[0;32mI (158238) main: Auto restart timer 157558347[0m
+[0;32mI (159238) main: Main blip[0m
+[0;32mI (160238) main: Main blip[0m
+[0;32mI (161238) main: Main blip[0m
+[0;32mI (161238) main: Auto restart timer 160558347[0m
+[0;32mI (162238) main: Main blip[0m
+[0;32mI (163238) main: Main blip[0m
+[0;32mI (164238) main: Main blip[0m
+[0;32mI (164238) main: Auto restart timer 163558347[0m
+[0;32mI (165238) main: Main blip[0m
+[0;32mI (166238) main: Main blip[0m
+[0;32mI (167238) main: Main blip[0m
+[0;32mI (167238) main: Auto restart timer 166558347[0m
+[0;32mI (168238) main: Main blip[0m
+[0;32mI (169238) main: Main blip[0m
+[0;32mI (170238) main: Main blip[0m
+[0;32mI (170238) main: Auto restart timer 169558347[0m
+[0;32mI (171238) main: Main blip[0m
+[0;32mI (172238) main: Main blip[0m
+[0;32mI (173238) main: Main blip[0m
+[0;32mI (173238) main: Auto restart timer 172558347[0m
+[0;32mI (174238) main: Main blip[0m
+[0;32mI (175238) main: Main blip[0m
+[0;32mI (176238) main: Main blip[0m
+[0;32mI (176238) main: Auto restart timer 175558347[0m
+[0;32mI (177238) main: Main blip[0m
+[0;32mI (178238) main: Main blip[0m
+[0;32mI (179238) main: Main blip[0m
+[0;32mI (179238) main: Auto restart timer 178558347[0m
+[0;32mI (180238) main: Main blip[0m
+[0;32mI (181238) main: Main blip[0m
+[0;32mI (182238) main: Main blip[0m
+[0;32mI (182238) main: Auto restart timer 181558347[0m
+[0;32mI (183238) main: Main blip[0m
+[0;32mI (184238) main: Main blip[0m
+[0;32mI (185238) main: Main blip[0m
+[0;32mI (185238) main: Auto restart timer 184558347[0m
+[0;32mI (186238) main: Main blip[0m
+[0;32mI (187238) main: Main blip[0m
+[0;32mI (188238) main: Main blip[0m
+[0;32mI (188238) main: Auto restart timer 187558347[0m
+[0;32mI (189238) main: Main blip[0m
+[0;32mI (190238) main: Main blip[0m
+[0;32mI (191238) main: Main blip[0m
+[0;32mI (191238) main: Auto restart timer 190558347[0m
+[0;32mI (192238) main: Main blip[0m
+[0;32mI (193238) main: Main blip[0m
+[0;32mI (194238) main: Main blip[0m
+[0;32mI (194238) main: Auto restart timer 193558347[0m
+[0;32mI (195238) main: Main blip[0m
+[0;32mI (196238) main: Main blip[0m
+[0;32mI (197238) main: Main blip[0m
+[0;32mI (197238) main: Auto restart timer 196558347[0m
+[0;32mI (198238) main: Main blip[0m
+[0;32mI (199238) main: Main blip[0m
+[0;32mI (200238) main: Main blip[0m
+[0;32mI (200238) main: Auto restart timer 199558347[0m
+[0;32mI (201238) main: Main blip[0m
+[0;32mI (202238) main: Main blip[0m
+[0;32mI (203238) main: Main blip[0m
+[0;32mI (203238) main: Auto restart timer 202558347[0m
+[0;32mI (204238) main: Main blip[0m
+[0;32mI (205238) main: Main blip[0m
+[0;32mI (206238) main: Main blip[0m
+[0;32mI (206238) main: Auto restart timer 205558347[0m
+[0;32mI (207238) main: Main blip[0m
+[0;32mI (208238) main: Main blip[0m
+[0;32mI (209238) main: Main blip[0m
+[0;32mI (209238) main: Auto restart timer 208558347[0m
+[0;32mI (210238) main: Main blip[0m
+[0;32mI (211238) main: Main blip[0m
+[0;32mI (212238) main: Main blip[0m
+[0;32mI (212238) main: Auto restart timer 211558347[0m
+[0;32mI (213238) main: Main blip[0m
+[0;32mI (214238) main: Main blip[0m
+[0;32mI (215238) main: Main blip[0m
+[0;32mI (215238) main: Auto restart timer 214558347[0m
+[0;32mI (216238) main: Main blip[0m
+[0;32mI (217238) main: Main blip[0m
+[0;32mI (218238) main: Main blip[0m
+[0;32mI (218238) main: Auto restart timer 217558347[0m
+[0;32mI (219238) main: Main blip[0m
+[0;32mI (220238) main: Main blip[0m
+[0;32mI (221238) main: Main blip[0m
+[0;32mI (221238) main: Auto restart timer 220558347[0m
+[0;32mI (222238) main: Main blip[0m
+[0;32mI (223238) main: Main blip[0m
+[0;32mI (224238) main: Main blip[0m
+[0;32mI (224238) main: Auto restart timer 223558347[0m
+[0;32mI (225238) main: Main blip[0m
+[0;32mI (226238) main: Main blip[0m
+[0;32mI (227238) main: Main blip[0m
+[0;32mI (227238) main: Auto restart timer 226558347[0m
+[0;32mI (228238) main: Main blip[0m
+[0;32mI (229238) main: Main blip[0m
+[0;32mI (230238) main: Main blip[0m
+[0;32mI (230238) main: Auto restart timer 229558347[0m
+[0;32mI (231238) main: Main blip[0m
+[0;32mI (232238) main: Main blip[0m
+[0;32mI (233238) main: Main blip[0m
+[0;32mI (233238) main: Auto restart timer 232558347[0m
+[0;32mI (234238) main: Main blip[0m
+[0;32mI (235238) main: Main blip[0m
+[0;32mI (236238) main: Main blip[0m
+[0;32mI (236238) main: Auto restart timer 235558347[0m
+[0;32mI (237238) main: Main blip[0m
+[0;32mI (238238) main: Main blip[0m
+[0;32mI (239238) main: Main blip[0m
+[0;32mI (239238) main: Auto restart timer 238558347[0m
+[0;32mI (240238) main: Main blip[0m
+[0;32mI (241238) main: Main blip[0m
+[0;32mI (242238) main: Main blip[0m
+[0;32mI (242238) main: Auto restart timer 241558347[0m
+[0;32mI (243238) main: Main blip[0m
+[0;32mI (244238) main: Main blip[0m
+[0;32mI (245238) main: Main blip[0m
+[0;32mI (245238) main: Auto restart timer 244558347[0m
+[0;32mI (246238) main: Main blip[0m
+[0;32mI (247238) main: Main blip[0m
+[0;32mI (248238) main: Main blip[0m
+[0;32mI (248238) main: Auto restart timer 247558347[0m
+[0;32mI (249238) main: Main blip[0m
+[0;32mI (250238) main: Main blip[0m
+[0;32mI (251238) main: Main blip[0m
+[0;32mI (251238) main: Auto restart timer 250558347[0m
+[0;32mI (252238) main: Main blip[0m
+[0;32mI (253238) main: Main blip[0m
+[0;32mI (254238) main: Main blip[0m
+[0;32mI (254238) main: Auto restart timer 253558347[0m
+[0;32mI (255238) main: Main blip[0m
+[0;32mI (256238) main: Main blip[0m
+[0;32mI (257238) main: Main blip[0m
+[0;32mI (257238) main: Auto restart timer 256558347[0m
+[0;32mI (258238) main: Main blip[0m
+[0;32mI (259238) main: Main blip[0m
+[0;32mI (260238) main: Main blip[0m
+[0;32mI (260238) main: Auto restart timer 259558347[0m
+[0;32mI (261238) main: Main blip[0m
+[0;32mI (262238) main: Main blip[0m
+[0;32mI (263238) main: Main blip[0m
+[0;32mI (263238) main: Auto restart timer 262558347[0m
+[0;32mI (264238) main: Main blip[0m
+[0;32mI (265238) main: Main blip[0m
+[0;32mI (266238) main: Main blip[0m
+[0;32mI (266238) main: Auto restart timer 265558347[0m
+[0;32mI (267238) main: Main blip[0m
+[0;32mI (268238) main: Main blip[0m
+[0;32mI (269238) main: Main blip[0m
+[0;32mI (269238) main: Auto restart timer 268558347[0m
+[0;32mI (270238) main: Main blip[0m
+[0;32mI (271238) main: Main blip[0m
+[0;32mI (272238) main: Main blip[0m
+[0;32mI (272238) main: Auto restart timer 271558347[0m
+[0;32mI (273238) main: Main blip[0m
+[0;32mI (274238) main: Main blip[0m
+[0;32mI (275238) main: Main blip[0m
+[0;32mI (275238) main: Auto restart timer 274558347[0m
+[0;32mI (276238) main: Main blip[0m
+[0;32mI (277238) main: Main blip[0m
+[0;32mI (278238) main: Main blip[0m
+[0;32mI (278238) main: Auto restart timer 277558347[0m
+[0;32mI (279238) main: Main blip[0m
+[0;32mI (280238) main: Main blip[0m
+[0;32mI (281238) main: Main blip[0m
+[0;32mI (281238) main: Auto restart timer 280558347[0m
+[0;32mI (282238) main: Main blip[0m
+[0;32mI (283238) main: Main blip[0m
+[0;32mI (284238) main: Main blip[0m
+[0;32mI (284238) main: Auto restart timer 283558347[0m
+[0;32mI (285238) main: Main blip[0m
+[0;32mI (286238) main: Main blip[0m
+[0;32mI (287238) main: Main blip[0m
+[0;32mI (287238) main: Auto restart timer 286558347[0m
+[0;32mI (288238) main: Main blip[0m
+[0;32mI (289238) main: Main blip[0m
+[0;32mI (290238) main: Main blip[0m
+[0;32mI (290238) main: Auto restart timer 289558347[0m
+[0;32mI (291238) main: Main blip[0m
+[0;32mI (292238) main: Main blip[0m
+[0;32mI (293238) main: Main blip[0m
+[0;32mI (293238) main: Auto restart timer 292558347[0m
+[0;32mI (294238) main: Main blip[0m
+[0;32mI (295238) main: Main blip[0m
+[0;32mI (296238) main: Main blip[0m
+[0;32mI (296238) main: Auto restart timer 295558347[0m
+[0;32mI (297238) main: Main blip[0m
+[0;32mI (298238) main: Main blip[0m
+[0;32mI (299238) main: Main blip[0m
+[0;32mI (299238) main: Auto restart timer 298558347[0m
+[0;32mI (300238) main: Main blip[0m
+[0;32mI (301238) main: Main blip[0m
+[0;32mI (302238) main: Main blip[0m
+[0;32mI (302238) main: Auto restart timer 301558347[0m
+[0;32mI (303238) main: Main blip[0m
+[0;32mI (304238) main: Main blip[0m
+[0;32mI (305238) main: Main blip[0m
+[0;32mI (305238) main: Auto restart timer 304558347[0m
+[0;32mI (306238) main: Main blip[0m
+[0;32mI (307238) main: Main blip[0m
+[0;32mI (308238) main: Main blip[0m
+[0;32mI (308238) main: Auto restart timer 307558347[0m
+[0;32mI (309238) main: Main blip[0m
+[0;32mI (310238) main: Main blip[0m
+[0;32mI (311238) main: Main blip[0m
+[0;32mI (311238) main: Auto restart timer 310558347[0m
+[0;32mI (312238) main: Main blip[0m
+[0;32mI (313238) main: Main blip[0m
+[0;32mI (314238) main: Main blip[0m
+[0;32mI (314238) main: Auto restart timer 313558347[0m
+[0;32mI (315238) main: Main blip[0m
+[0;32mI (316238) main: Main blip[0m
+[0;32mI (317238) main: Main blip[0m
+[0;32mI (317238) main: Auto restart timer 316558347[0m
+[0;32mI (318238) main: Main blip[0m
+[0;32mI (319238) main: Main blip[0m
+[0;32mI (320238) main: Main blip[0m
+[0;32mI (320238) main: Auto restart timer 319558347[0m
+[0;32mI (321238) main: Main blip[0m
+[0;32mI (322238) main: Main blip[0m
+[0;32mI (323238) main: Main blip[0m
+[0;32mI (323238) main: Auto restart timer 322558347[0m
+[0;32mI (324238) main: Main blip[0m
+[0;32mI (325238) main: Main blip[0m
+[0;32mI (326238) main: Main blip[0m
+[0;32mI (326238) main: Auto restart timer 325558347[0m
+[0;32mI (327238) main: Main blip[0m
+[0;32mI (328238) main: Main blip[0m
+[0;32mI (329238) main: Main blip[0m
+[0;32mI (329238) main: Auto restart timer 328558347[0m
+[0;32mI (330238) main: Main blip[0m
+[0;32mI (331238) main: Main blip[0m
+[0;32mI (332238) main: Main blip[0m
+[0;32mI (332238) main: Auto restart timer 331558347[0m
+[0;32mI (333238) main: Main blip[0m
+[0;32mI (334238) main: Main blip[0m
+[0;32mI (335238) main: Main blip[0m
+[0;32mI (335238) main: Auto restart timer 334558347[0m
+[0;32mI (336238) main: Main blip[0m
+[0;32mI (337238) main: Main blip[0m
+[0;32mI (338238) main: Main blip[0m
+[0;32mI (338238) main: Auto restart timer 337558347[0m
+[0;32mI (339238) main: Main blip[0m
+[0;32mI (340238) main: Main blip[0m
+[0;32mI (341238) main: Main blip[0m
+[0;32mI (341238) main: Auto restart timer 340558347[0m
+[0;32mI (342238) main: Main blip[0m
+[0;32mI (343238) main: Main blip[0m
+[0;32mI (344238) main: Main blip[0m
+[0;32mI (344238) main: Auto restart timer 343558347[0m
+[0;32mI (345238) main: Main blip[0m
+[0;32mI (346238) main: Main blip[0m
+[0;32mI (347238) main: Main blip[0m
+[0;32mI (347238) main: Auto restart timer 346558347[0m
+[0;32mI (348238) main: Main blip[0m
+[0;32mI (349238) main: Main blip[0m
+[0;32mI (350238) main: Main blip[0m
+[0;32mI (350238) main: Auto restart timer 349558347[0m
+[0;32mI (351238) main: Main blip[0m
+[0;32mI (352238) main: Main blip[0m
+[0;32mI (353238) main: Main blip[0m
+[0;32mI (353238) main: Auto restart timer 352558347[0m
+[0;32mI (354238) main: Main blip[0m
+[0;32mI (355238) main: Main blip[0m
+[0;32mI (356238) main: Main blip[0m
+[0;32mI (356238) main: Auto restart timer 355558347[0m
+[0;32mI (357238) main: Main blip[0m
+[0;32mI (358238) main: Main blip[0m
+[0;32mI (359238) main: Main blip[0m
+[0;32mI (359238) main: Auto restart timer 358558347[0m
+[0;32mI (360238) main: Main blip[0m
+[0;32mI (361238) main: Main blip[0m
+[0;32mI (362238) main: Main blip[0m
+[0;32mI (362238) main: Auto restart timer 361558347[0m
+[0;32mI (363238) main: Main blip[0m
+[0;32mI (364238) main: Main blip[0m
+[0;32mI (365238) main: Main blip[0m
+[0;32mI (365238) main: Auto restart timer 364558347[0m
+[0;32mI (366238) main: Main blip[0m
+[0;32mI (367238) main: Main blip[0m
+[0;32mI (368238) main: Main blip[0m
+[0;32mI (368238) main: Auto restart timer 367558347[0m
+[0;32mI (369238) main: Main blip[0m
+[0;32mI (370238) main: Main blip[0m
+[0;32mI (371238) main: Main blip[0m
+[0;32mI (371238) main: Auto restart timer 370558347[0m
+[0;32mI (372238) main: Main blip[0m
+[0;32mI (373238) main: Main blip[0m
+[0;32mI (374238) main: Main blip[0m
+[0;32mI (374238) main: Auto restart timer 373558347[0m
+[0;32mI (375238) main: Main blip[0m
+[0;32mI (376238) main: Main blip[0m
+[0;32mI (377238) main: Main blip[0m
+[0;32mI (377238) main: Auto restart timer 376558347[0m
+[0;32mI (378238) main: Main blip[0m
+[0;32mI (379238) main: Main blip[0m
+[0;32mI (380238) main: Main blip[0m
+[0;32mI (380238) main: Auto restart timer 379558347[0m
+[0;32mI (381238) main: Main blip[0m
+[0;32mI (382238) main: Main blip[0m
+[0;32mI (383238) main: Main blip[0m
+[0;32mI (383238) main: Auto restart timer 382558347[0m
+[0;32mI (384238) main: Main blip[0m
+[0;32mI (385238) main: Main blip[0m
+[0;32mI (386238) main: Main blip[0m
+[0;32mI (386238) main: Auto restart timer 385558347[0m
+[0;32mI (387238) main: Main blip[0m
+[0;32mI (388238) main: Main blip[0m
+[0;32mI (389238) main: Main blip[0m
+[0;32mI (389238) main: Auto restart timer 388558347[0m
+[0;32mI (390238) main: Main blip[0m
+[0;32mI (391238) main: Main blip[0m
+[0;32mI (392238) main: Main blip[0m
+[0;32mI (392238) main: Auto restart timer 391558347[0m
+[0;32mI (393238) main: Main blip[0m
+[0;32mI (394238) main: Main blip[0m
+[0;32mI (395238) main: Main blip[0m
+[0;32mI (395238) main: Auto restart timer 394558347[0m
+[0;32mI (396238) main: Main blip[0m
+[0;32mI (397238) main: Main blip[0m
+[0;32mI (398238) main: Main blip[0m
+[0;32mI (398238) main: Auto restart timer 397558347[0m
+[0;32mI (399238) main: Main blip[0m
+[0;32mI (400238) main: Main blip[0m
+[0;32mI (401238) main: Main blip[0m
+[0;32mI (401238) main: Auto restart timer 400558347[0m
+[0;32mI (402238) main: Main blip[0m
+[0;32mI (403238) main: Main blip[0m
+[0;32mI (404238) main: Main blip[0m
+[0;32mI (404238) main: Auto restart timer 403558347[0m
+[0;32mI (405238) main: Main blip[0m
+[0;32mI (406238) main: Main blip[0m
+[0;32mI (407238) main: Main blip[0m
+[0;32mI (407238) main: Auto restart timer 406558347[0m
+[0;32mI (408238) main: Main blip[0m
+[0;32mI (409238) main: Main blip[0m
+[0;32mI (410238) main: Main blip[0m
+[0;32mI (410238) main: Auto restart timer 409558347[0m
+[0;32mI (411238) main: Main blip[0m
+[0;32mI (412238) main: Main blip[0m
+[0;32mI (413238) main: Main blip[0m
+[0;32mI (413238) main: Auto restart timer 412558347[0m
+[0;32mI (414238) main: Main blip[0m
+[0;32mI (415238) main: Main blip[0m
+[0;32mI (416238) main: Main blip[0m
+[0;32mI (416238) main: Auto restart timer 415558347[0m
+[0;32mI (417238) main: Main blip[0m
+[0;32mI (418238) main: Main blip[0m
+[0;32mI (419238) main: Main blip[0m
+[0;32mI (419238) main: Auto restart timer 418558347[0m
+[0;32mI (420238) main: Main blip[0m
+[0;32mI (421238) main: Main blip[0m
+[0;32mI (422238) main: Main blip[0m
+[0;32mI (422238) main: Auto restart timer 421558347[0m
+[0;32mI (423238) main: Main blip[0m
+[0;32mI (424238) main: Main blip[0m
+[0;32mI (425238) main: Main blip[0m
+[0;32mI (425238) main: Auto restart timer 424558347[0m
+[0;32mI (426238) main: Main blip[0m
+[0;32mI (427238) main: Main blip[0m
+[0;32mI (428238) main: Main blip[0m
+[0;32mI (428238) main: Auto restart timer 427558347[0m
+[0;32mI (429238) main: Main blip[0m
+[0;32mI (430238) main: Main blip[0m
+[0;32mI (431238) main: Main blip[0m
+[0;32mI (431238) main: Auto restart timer 430558347[0m
+[0;32mI (432238) main: Main blip[0m
+[0;32mI (433238) main: Main blip[0m
+[0;32mI (434238) main: Main blip[0m
+[0;32mI (434238) main: Auto restart timer 433558347[0m
+[0;32mI (435238) main: Main blip[0m
+[0;32mI (436238) main: Main blip[0m
+[0;32mI (437238) main: Main blip[0m
+[0;32mI (437238) main: Auto restart timer 436558347[0m
+[0;32mI (438238) main: Main blip[0m
+[0;32mI (439238) main: Main blip[0m
+[0;32mI (440238) main: Main blip[0m
+[0;32mI (440238) main: Auto restart timer 439558347[0m
+[0;32mI (441238) main: Main blip[0m
+[0;32mI (442238) main: Main blip[0m
+[0;32mI (443238) main: Main blip[0m
+[0;32mI (443238) main: Auto restart timer 442558347[0m
+[0;32mI (444238) main: Main blip[0m
+[0;32mI (445238) main: Main blip[0m
+[0;32mI (446238) main: Main blip[0m
+[0;32mI (446238) main: Auto restart timer 445558347[0m
+[0;32mI (447238) main: Main blip[0m
+[0;32mI (448238) main: Main blip[0m
+[0;32mI (449238) main: Main blip[0m
+[0;32mI (449238) main: Auto restart timer 448558347[0m
+[0;32mI (450238) main: Main blip[0m
+[0;32mI (451238) main: Main blip[0m
+[0;32mI (452238) main: Main blip[0m
+[0;32mI (452238) main: Auto restart timer 451558347[0m
+[0;32mI (453238) main: Main blip[0m
+[0;32mI (454238) main: Main blip[0m
+[0;32mI (455238) main: Main blip[0m
+[0;32mI (455238) main: Auto restart timer 454558347[0m
+[0;32mI (456238) main: Main blip[0m
+[0;32mI (457238) main: Main blip[0m
+[0;32mI (458238) main: Main blip[0m
+[0;32mI (458238) main: Auto restart timer 457558347[0m
+[0;32mI (459238) main: Main blip[0m
+[0;32mI (460238) main: Main blip[0m
+[0;32mI (461238) main: Main blip[0m
+[0;32mI (461238) main: Auto restart timer 460558347[0m
+[0;32mI (462238) main: Main blip[0m
+[0;32mI (463238) main: Main blip[0m
+[0;32mI (464238) main: Main blip[0m
+[0;32mI (464238) main: Auto restart timer 463558347[0m
+[0;32mI (465238) main: Main blip[0m
+[0;32mI (466238) main: Main blip[0m
+[0;32mI (467238) main: Main blip[0m
+[0;32mI (467238) main: Auto restart timer 466558347[0m
+[0;32mI (468238) main: Main blip[0m
+[0;32mI (469238) main: Main blip[0m
+[0;32mI (470238) main: Main blip[0m
+[0;32mI (470238) main: Auto restart timer 469558347[0m
+[0;32mI (471238) main: Main blip[0m
+[0;32mI (472238) main: Main blip[0m
+[0;32mI (473238) main: Main blip[0m
+[0;32mI (473238) main: Auto restart timer 472558347[0m
+[0;32mI (474238) main: Main blip[0m
+[0;32mI (475238) main: Main blip[0m
+[0;32mI (476238) main: Main blip[0m
+[0;32mI (476238) main: Auto restart timer 475558347[0m
+[0;32mI (477238) main: Main blip[0m

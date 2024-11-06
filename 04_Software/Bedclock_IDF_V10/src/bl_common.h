@@ -1,13 +1,13 @@
 #pragma once
 
 #include <stdio.h>
-#include <stdlib.h> 
+#include <stdlib.h>
 
 /* Selected item:
   0: Sleep mode
   1: Display time
   2: Modify LED intensity
-  3: Modify LED color 
+  3: Modify LED color
   4: Modify LED timer
   5: Modify display intensity
 */
@@ -15,7 +15,7 @@
 #define COMMON_MAX_LED_INTENSITY      4
 #define COMMON_MAX_LED_COLOR          3
 #define COMMON_MAX_LED_TIMER          4
-#define COMMON_MAX_DISPLAY_INTENSITY  4
+#define COMMON_MAX_DISPLAY_INTENSITY  2
 #define COMMON_MAX_SELECTED_ITEM      5
 
 // ### TYPE DEFINITIONS ###

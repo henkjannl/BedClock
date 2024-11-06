@@ -27,7 +27,7 @@ Bedclock_IDF_V10 : First working version
 Bedclock_IDF_V11 : Try using ESP-IDF driver for SSD1306
 
 To do:
-Implement display intensity
+Check why display intensity is not working
 Init display first, with splash screen
 Display with graphics instead of text
 Animate graphics on display
@@ -46,11 +46,18 @@ void app_main()
     keyboard_init();
     light_init();
 
+    // hp_timer_t auto_restart_timer;
+    // hp_timer_t single_shot_timer;
+
+    // hp_timer_init_ms(&auto_restart_timer,3000, true);
+    // hp_timer_init_ms(&single_shot_timer,4500, false);
+
     while(true) {
-        // ESP_LOGI(mn_tag, "Keyboard %d Display%d", keyboard_counter, display_counter);
-        // keyboard_counter=0;
-        // display_counter=0;
         ESP_LOGI(mn_tag, "Main blip");
+
+        // Test the timers
+        // if(hp_timer_lapsed(&auto_restart_timer)) ESP_LOGI(mn_tag, "Auto restart timer %" PRId64, auto_restart_timer.last_reset_time);
+        // if(hp_timer_lapsed(&single_shot_timer)) ESP_LOGI(mn_tag, "Single shot timer");
 		vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }

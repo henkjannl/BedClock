@@ -1,0 +1,303 @@
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7176
+load:0x40078000,len:15564
+ho 0 tail 12 room 4
+load:0x40080400,len:4
+load:0x40080404,len:3904
+entry 0x40080638
+[0;32mI (30) boot: ESP-IDF 5.3.1 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Nov  6 2024 09:19:26[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (34) boot: chip revision: v1.0[0m
+[0;32mI (38) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (43) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (47) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (52) boot: Enabling RNG early entropy source...[0m
+[0;32mI (57) boot: Partition Table:[0m
+[0;32mI (61) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (68) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (75) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (83) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (90) boot: End of partition table[0m
+[0;32mI (95) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=23994h (145812) map[0m
+[0;32mI (153) esp_image: segment 1: paddr=000339bc vaddr=3ffb0000 size=04680h ( 18048) load[0m
+[0;32mI (160) esp_image: segment 2: paddr=00038044 vaddr=40080000 size=07fd4h ( 32724) load[0m
+[0;32mI (173) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=8e8fch (583932) map[0m
+[0;32mI (373) esp_image: segment 4: paddr=000ce924 vaddr=40087fd4 size=1164ch ( 71244) load[0m
+[0;32mI (414) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (414) boot: Disabling RNG early entropy source...[0m
+[0;32mI (426) cpu_start: Multicore app[0m
+[0;32mI (435) cpu_start: Pro cpu start user code[0m
+[0;32mI (435) cpu_start: cpu freq: 240000000 Hz[0m
+[0;32mI (435) app_init: Application information:[0m
+[0;32mI (438) app_init: Project name:     Bedclock_IDF_V10[0m
+[0;32mI (443) app_init: App version:      1[0m
+[0;32mI (448) app_init: Compile time:     Nov  6 2024 09:18:35[0m
+[0;32mI (454) app_init: ELF file SHA256:  84ec20c75...[0m
+[0;32mI (459) app_init: ESP-IDF:          5.3.1[0m
+[0;32mI (464) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (468) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (473) efuse_init: Chip rev:         v1.0[0m
+[0;32mI (478) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (486) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (492) heap_init: At 3FFB9288 len 00026D78 (155 KiB): DRAM[0m
+[0;32mI (498) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (504) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (511) heap_init: At 40099620 len 000069E0 (26 KiB): IRAM[0m
+[0;32mI (518) spi_flash: detected chip: generic[0m
+[0;32mI (521) spi_flash: flash io: dio[0m
+[0;33mW (526) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (536) main_task: Started on CPU0[0m
+[0;32mI (546) main_task: Calling app_main()[0m
+[0;32mI (566) wifi station: ESP_WIFI_MODE_STA[0m
+I (586) wifi:wifi driver task: 3ffc1298, prio:23, stack:6656, core=0
+I (596) wifi:wifi firmware version: ccaebfa
+I (596) wifi:wifi certification version: v7.0
+I (596) wifi:config NVS flash: enabled
+I (596) wifi:config nano formating: disabled
+I (596) wifi:Init data frame dynamic rx buffer num: 32
+I (606) wifi:Init static rx mgmt buffer num: 5
+I (606) wifi:Init management short buffer num: 32
+I (616) wifi:Init dynamic tx buffer num: 32
+I (616) wifi:Init static rx buffer size: 1600
+I (616) wifi:Init static rx buffer num: 10
+I (626) wifi:Init dynamic rx buffer num: 32
+[0;32mI (626) wifi_init: rx ba win: 6[0m
+[0;32mI (636) wifi_init: accept mbox: 6[0m
+[0;32mI (636) wifi_init: tcpip mbox: 32[0m
+[0;32mI (636) wifi_init: udp mbox: 6[0m
+[0;32mI (646) wifi_init: tcp mbox: 6[0m
+[0;32mI (646) wifi_init: tcp tx win: 5760[0m
+[0;32mI (656) wifi_init: tcp rx win: 5760[0m
+[0;32mI (656) wifi_init: tcp mss: 1440[0m
+[0;32mI (656) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (666) wifi_init: WiFi RX IRAM OP enabled[0m
+W (666) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2
+[0;32mI (676) phy_init: phy_version 4830,54550f7,Jun 20 2024,14:22:08[0m
+�ets Jun  8 2016 00:22:57
+
+rst:0x3 (SW_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7176
+load:0x40078000,len:15564
+ho 0 tail 12 room 4
+load:0x40080400,len:4
+load:0x40080404,len:3904
+entry 0x40080638
+[0;32mI (179) boot: ESP-IDF 5.3.1 2nd stage bootloader[0m
+[0;32mI (179) boot: compile time Nov  6 2024 09:19:26[0m
+[0;32mI (179) boot: Multicore bootloader[0m
+[0;32mI (184) boot: chip revision: v1.0[0m
+[0;32mI (188) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (193) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (198) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (202) boot: Enabling RNG early entropy source...[0m
+[0;32mI (208) boot: Partition Table:[0m
+[0;32mI (211) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (219) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (226) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (234) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (242) boot: End of partition table[0m
+[0;32mI (246) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=23994h (145812) map[0m
+[0;32mI (304) esp_image: segment 1: paddr=000339bc vaddr=3ffb0000 size=04680h ( 18048) load[0m
+[0;32mI (311) esp_image: segment 2: paddr=00038044 vaddr=40080000 size=07fd4h ( 32724) load[0m
+[0;32mI (324) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=8e8fch (583932) map[0m
+[0;32mI (525) esp_image: segment 4: paddr=000ce924 vaddr=40087fd4 size=1164ch ( 71244) load[0m
+[0;32mI (566) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (566) boot: Disabling RNG early entropy source...[0m
+[0;32mI (578) cpu_start: Multicore app[0m
+[0;32mI (586) cpu_start: Pro cpu start user code[0m
+[0;32mI (586) cpu_start: cpu freq: 240000000 Hz[0m
+[0;32mI (586) app_init: Application information:[0m
+[0;32mI (589) app_init: Project name:     Bedclock_IDF_V10[0m
+[0;32mI (595) app_init: App version:      1[0m
+[0;32mI (599) app_init: Compile time:     Nov  6 2024 09:18:35[0m
+[0;32mI (605) app_init: ELF file SHA256:  84ec20c75...[0m
+[0;32mI (610) app_init: ESP-IDF:          5.3.1[0m
+[0;32mI (615) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (620) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (625) efuse_init: Chip rev:         v1.0[0m
+[0;32mI (630) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (637) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (643) heap_init: At 3FFB9288 len 00026D78 (155 KiB): DRAM[0m
+[0;32mI (649) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (655) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (662) heap_init: At 40099620 len 000069E0 (26 KiB): IRAM[0m
+[0;32mI (670) spi_flash: detected chip: generic[0m
+[0;32mI (673) spi_flash: flash io: dio[0m
+[0;33mW (677) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (688) main_task: Started on CPU0[0m
+[0;32mI (698) main_task: Calling app_main()[0m
+[0;32mI (718) wifi station: ESP_WIFI_MODE_STA[0m
+I (738) wifi:wifi driver task: 3ffc1298, prio:23, stack:6656, core=0
+I (748) wifi:wifi firmware version: ccaebfa
+I (748) wifi:wifi certification version: v7.0
+I (748) wifi:config NVS flash: enabled
+I (748) wifi:config nano formating: disabled
+I (748) wifi:Init data frame dynamic rx buffer num: 32
+I (758) wifi:Init static rx mgmt buffer num: 5
+I (758) wifi:Init management short buffer num: 32
+I (768) wifi:Init dynamic tx buffer num: 32
+I (768) wifi:Init static rx buffer size: 1600
+I (768) wifi:Init static rx buffer num: 10
+I (778) wifi:Init dynamic rx buffer num: 32
+[0;32mI (778) wifi_init: rx ba win: 6[0m
+[0;32mI (788) wifi_init: accept mbox: 6[0m
+[0;32mI (788) wifi_init: tcpip mbox: 32[0m
+[0;32mI (788) wifi_init: udp mbox: 6[0m
+[0;32mI (798) wifi_init: tcp mbox: 6[0m
+[0;32mI (798) wifi_init: tcp tx win: 5760[0m
+[0;32mI (808) wifi_init: tcp rx win: 5760[0m
+[0;32mI (808) wifi_init: tcp mss: 1440[0m
+[0;32mI (808) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (818) wifi_init: WiFi RX IRAM OP enabled[0m
+W (818) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2
+[0;32mI (828) phy_init: phy_version 4830,54550f7,Jun 20 2024,14:22:08[0m
+I (908) wifi:mode : sta (8c:aa:b5:8c:5a:cc)
+I (908) wifi:enable tsf
+[0;32mI (908) wifi station: wifi_init_sta finished.[0m
+I (918) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:9, snd_ch_cfg:0x0
+I (918) wifi:state: init -> auth (0xb0)
+I (948) wifi:state: auth -> assoc (0x0)
+I (958) wifi:state: assoc -> run (0x10)
+I (988) wifi:connected with Starbux, aid = 1, channel 1, BW20, bssid = 2c:3a:fd:bf:5d:7c
+I (988) wifi:security: WPA2-PSK, phy: bgn, rssi: -76
+I (988) wifi:pm start, type: 1
+
+I (988) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (1018) wifi:AP's beacon interval = 102400 us, DTIM period = 1
+I (1018) wifi:<ba-add>idx:0 (ifx:0, 2c:3a:fd:bf:5d:7c), tid:0, ssn:0, winSize:64
+[0;32mI (1998) esp_netif_handlers: sta ip: 192.168.178.160, mask: 255.255.255.0, gw: 192.168.178.1[0m
+[0;32mI (1998) wifi station: got ip:192.168.178.160[0m
+[0;32mI (1998) wifi station: connected to ap SSID:Starbux password:RodePleinMoskou2019[0m
+[0;32mI (2008) wifi station: Initializing SNTP[0m
+[0;31mE (2008) esp_netif_sntp: sntp_init_api(61): Tried to configure SNTP server from DHCP, while disabled. Please enable CONFIG_LWIP_DHCP_GET_NTP_SRV[0m
+[0;31mE (2028) esp_netif_sntp: esp_netif_sntp_init(119): Failed initialize SNTP service[0m
+[0;32mI (2038) wifi station: Starting SNTP[0m
+Local time in Amsterdam: 01:00:02
+[0;32mI (2038) display: INTERFACE is i2c[0m
+[0;32mI (2048) display: CONFIG_SDA_GPIO=21[0m
+[0;32mI (2048) display: CONFIG_SCL_GPIO=22[0m
+[0;32mI (2058) display: CONFIG_RESET_GPIO=-1[0m
+[0;32mI (2058) SSD1306: Legacy i2c driver is used[0m
+[0;32mI (2058) SSD1306: HenkJan: .master.clk_speed = 400000[0m
+[0;33mW (2068) display: Flip upside down[0m
+[0;32mI (2068) display: Panel is 128x32[0m
+[0;32mI (2078) SSD1306: OLED configured successfully[0m
+[0;32mI (2118) display: Contrast 255[0m
+[0;32mI (2168) keyboard: Starting keyboard task...[0m
+[0;32mI (2168) keyboard: Keyboard task started...[0m
+[0;32mI (2178) light: Starting light task...[0m
+[0;32mI (2178) light: Light task started...[0m
+[0;32mI (2178) light: Create RMT TX channel[0m
+[0;32mI (2178) gpio: GPIO[23]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (2188) light: Install led strip encoder[0m
+[0;32mI (2198) light: Enable RMT TX channel[0m
+[0;32mI (2198) light: Start LED rainbow chase[0m
+[0;32mI (2208) main: Main blip[0m
+[0;32mI (2278) display: Update clock due to minute change[0m
+[0;32mI (2278) display: Contrast 255[0m
+[0;32mI (3208) main: Main blip[0m
+[0;32mI (4218) main: Main blip[0m
+[0;32mI (4928) keyboard: Left button filtered value 0[0m
+[0;32mI (4938) display: item received BTN_LEFT[0m
+[0;32mI (4938) display: Contrast 255[0m
+[0;32mI (5218) main: Main blip[0m
+[0;32mI (5468) keyboard: Left button filtered value 0[0m
+[0;32mI (5508) display: item received BTN_LEFT[0m
+[0;32mI (5508) display: Contrast 255[0m
+[0;32mI (6008) keyboard: Left button filtered value 0[0m
+[0;32mI (6018) display: item received BTN_LEFT[0m
+[0;32mI (6018) display: Contrast 255[0m
+[0;32mI (6218) main: Main blip[0m
+[0;32mI (7218) main: Main blip[0m
+[0;32mI (7448) keyboard: Left button filtered value 47[0m
+[0;32mI (7488) display: item received BTN_LEFT[0m
+[0;32mI (7488) display: Contrast 255[0m
+[0;32mI (8218) main: Main blip[0m
+[0;32mI (8778) keyboard: Right button filtered value 133[0m
+[0;32mI (8808) display: item received BTN_RIGHT[0m
+[0;32mI (8808) display: Increase display intensity[0m
+[0;32mI (8808) display: Contrast 5[0m
+[0;32mI (9218) main: Main blip[0m
+[0;32mI (10038) keyboard: Right button filtered value 346[0m
+[0;32mI (10038) display: item received BTN_RIGHT[0m
+[0;32mI (10038) display: Increase display intensity[0m
+[0;32mI (10038) display: Contrast 13[0m
+[0;32mI (10218) main: Main blip[0m
+[0;32mI (10698) keyboard: Right button filtered value 276[0m
+[0;32mI (10698) display: item received BTN_RIGHT[0m
+[0;32mI (10698) display: Increase display intensity[0m
+[0;32mI (10698) display: Contrast 35[0m
+[0;32mI (11218) main: Main blip[0m
+[0;32mI (11238) keyboard: Right button filtered value 281[0m
+[0;32mI (11268) display: item received BTN_RIGHT[0m
+[0;32mI (11268) display: Increase display intensity[0m
+[0;32mI (11268) display: Contrast 95[0m
+[0;32mI (12078) keyboard: Right button filtered value 327[0m
+[0;32mI (12078) display: item received BTN_RIGHT[0m
+[0;32mI (12078) display: Increase display intensity[0m
+[0;32mI (12078) display: Contrast 255[0m
+[0;32mI (12218) main: Main blip[0m
+[0;32mI (12738) keyboard: Right button filtered value 316[0m
+[0;32mI (12738) display: item received BTN_RIGHT[0m
+[0;32mI (12738) display: Increase display intensity[0m
+[0;32mI (12738) display: Contrast 5[0m
+[0;32mI (13218) main: Main blip[0m
+[0;32mI (14218) main: Main blip[0m
+[0;32mI (15218) main: Main blip[0m
+[0;32mI (16218) main: Main blip[0m
+[0;32mI (17218) main: Main blip[0m
+[0;32mI (18218) main: Main blip[0m
+[0;32mI (19218) main: Main blip[0m
+[0;32mI (20218) main: Main blip[0m
+[0;32mI (21218) main: Main blip[0m
+[0;32mI (22218) main: Main blip[0m
+[0;32mI (23218) main: Main blip[0m
+[0;32mI (24218) main: Main blip[0m
+[0;32mI (25218) main: Main blip[0m
+[0;32mI (26218) main: Main blip[0m
+[0;32mI (27218) main: Main blip[0m
+[0;32mI (28218) main: Main blip[0m
+[0;32mI (29218) main: Main blip[0m
+[0;32mI (30218) main: Main blip[0m
+[0;32mI (31218) main: Main blip[0m
+[0;32mI (32218) main: Main blip[0m
+[0;32mI (32758) display: Display back to sleep[0m
+[0;32mI (32758) display: Contrast 5[0m
+[0;32mI (33218) main: Main blip[0m
+[0;32mI (34218) main: Main blip[0m
+[0;32mI (35218) main: Main blip[0m
+[0;32mI (36218) main: Main blip[0m
+[0;32mI (37218) main: Main blip[0m
+[0;32mI (38218) main: Main blip[0m
+[0;32mI (39218) main: Main blip[0m
+[0;32mI (40218) main: Main blip[0m
+[0;32mI (41218) main: Main blip[0m
+[0;32mI (42218) main: Main blip[0m
+[0;32mI (43218) main: Main blip[0m
+[0;32mI (44218) main: Main blip[0m
+[0;32mI (45218) main: Main blip[0m
+[0;32mI (46218) main: Main blip[0m
+[0;32mI (47218) main: Main blip[0m
+[0;32mI (48218) main: Main blip[0m
+[0;32mI (49218) main: Main blip[0m
+[0;32mI (50218) main: Main blip[0m
+[0;32mI (51218) main: Main blip[0m
+[0;32mI (52218) main: Main blip[0m
+[0;32mI (53218) main: Main blip[0m
+[0;32mI (54218) main: Main blip[0m
+[0;32mI (55218) main: Main blip[0m
+[0;32mI (56218) main: Main blip[0m
+[0;32mI (57218) main: Main blip[0m
+[0;32mI (58218) main: Main blip[0m
+[0;32mI (59218) main: Main blip[0m
+[0;32mI (60218) main: Main blip[0m
+[0;32mI (61218) main: Main blip[0m
