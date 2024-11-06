@@ -2,6 +2,9 @@
 MyCredentials.*
 config.*
 
+# Logfiles can also contain sensitive data
+*.log
+
 # Prerequisites
 *.d
 
@@ -35,5 +38,3 @@ config.*
 *.out
 *.app
 
-# Logfiles
-*.log
