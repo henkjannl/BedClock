@@ -27,7 +27,6 @@ Bedclock_IDF_V10 : First working version
 Bedclock_IDF_V11 : Try using ESP-IDF driver for SSD1306
 
 To do:
-Check why display intensity is not working
 Init display first, with splash screen
 Display with graphics instead of text
 Animate graphics on display
