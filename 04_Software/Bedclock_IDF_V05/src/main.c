@@ -25,11 +25,19 @@
 #include "config.h" // Contains access point and password, excluded from github
 
 /*
-Bedclock_IDF_V01 : Test WS2812 led chain
-Bedclock_IDF_V02 : Test SSD1306 OLED screen
-Bedclock_IDF_V03 : Test capacitive touch sensors
-Bedclock_IDF_V04 : Test WiFi
-Bedclock_IDF_V05 : Test time sync with timeserver
+Different sub-projects to port the Arduino application to ESP-IDF:
+    Bedclock_IDF_V01 : Test WS2812 led chain
+    Bedclock_IDF_V02 : Test SSD1306 OLED screen
+    Bedclock_IDF_V03 : Test capacitive touch sensors
+    Bedclock_IDF_V04 : Test WiFi
+    Bedclock_IDF_V05 : Test time sync with timeserver
+    Bedclock_IDF_V06 : Port timer object using esp_timer_get_time() / 1000;
+    Bedclock_IDF_V07 : Test FreeRTOS
+    Bedclock_IDF_V08 : Implement multiple parallel processes
+    Bedclock_IDF_V09 : Internal Espressif SSD1306 driver including LVGL
+    Bedclock_IDF_V10 : First working version
+    Bedclock_IDF_V11 : First working version of pixel buffer
+    Bedclock_IDF_V12 : Scrolling example LVGL
 
 To do
 
@@ -39,7 +47,7 @@ Waiting for time is now blocking, this should be avoided using appropriate callb
 Add coredump to partition table
 */
 
-/* Config.h is in gitignore, to prevent exposing private data on github 
+/* Config.h is in gitignore, to prevent exposing private data on github
 It should contain the following defines
 #define WIFI_SSID      "...."
 #define WIFI_PASS      "...."
@@ -215,7 +223,7 @@ void app_main(void)
     time(&now);
     localtime_r(&now, &timeinfo);
 
-    printf("Local time in Amsterdam: %02d:%02d:%02d\n", timeinfo.tm_hour, timeinfo.tm_min, timeinfo.tm_sec);   
+    printf("Local time in Amsterdam: %02d:%02d:%02d\n", timeinfo.tm_hour, timeinfo.tm_min, timeinfo.tm_sec);
 
     // esp_netif_sntp_deinit();
 }

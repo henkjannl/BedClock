@@ -10,6 +10,23 @@
 #include "ssd1306.h"
 // #include "font8x8_basic.h"
 
+/*
+Different sub-projects to port the Arduino application to ESP-IDF:
+    Bedclock_IDF_V01 : Test WS2812 led chain
+    Bedclock_IDF_V02 : Test SSD1306 OLED screen
+    Bedclock_IDF_V03 : Test capacitive touch sensors
+    Bedclock_IDF_V04 : Test WiFi
+    Bedclock_IDF_V05 : Test time sync with timeserver
+    Bedclock_IDF_V06 : Port timer object using esp_timer_get_time() / 1000;
+    Bedclock_IDF_V07 : Test FreeRTOS
+    Bedclock_IDF_V08 : Implement multiple parallel processes
+    Bedclock_IDF_V09 : Internal Espressif SSD1306 driver including LVGL
+    Bedclock_IDF_V10 : First working version
+    Bedclock_IDF_V11 : First working version of pixel buffer
+    Bedclock_IDF_V12 : Scrolling example LVGL
+*/
+
+
 #define TOUCH_PAD_NO_CHANGE   (-1)
 #define TOUCH_THRESH_NO_USE   (0)
 #define TOUCHPAD_FILTER_TOUCH_PERIOD (10)
@@ -64,7 +81,7 @@ void app_main(void)
 	ssd1306_contrast(&dev, 0xff);
 	// ssd1306_display_text_x3(&dev, 0, "Hello", 5, false);
 	// vTaskDelay(3000 / portTICK_PERIOD_MS);
-	
+
     // Initialize touch pad peripheral.
     // The default fsm mode is software trigger mode.
     ESP_ERROR_CHECK(touch_pad_init());
