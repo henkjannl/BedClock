@@ -60,6 +60,60 @@ void display_time(const char* time, uint8_t x, uint8_t y) {
     }
 }
 
+#include "driver/i2c.h"
+void display_reset(SSD1306_t * dev) {
+	i2c_cmd_handle_t cmd = i2c_cmd_link_create();
+	// i2c_master_start(cmd);
+	// i2c_master_write_byte(cmd, (dev->_address << 1) | I2C_MASTER_WRITE, true);
+	// i2c_master_write_byte(cmd, OLED_CONTROL_BYTE_CMD_STREAM, true);
+	i2c_master_write_byte(cmd, OLED_CMD_DISPLAY_OFF, true);				// AE
+	// i2c_master_write_byte(cmd, OLED_CMD_SET_MUX_RATIO, true);			// A8
+	// if (dev->_height == 64) i2c_master_write_byte(cmd, 0x3F, true);
+	// if (dev->_height == 32) i2c_master_write_byte(cmd, 0x1F, true);
+	// i2c_master_write_byte(cmd, OLED_CMD_SET_DISPLAY_OFFSET, true);		// D3
+	// i2c_master_write_byte(cmd, 0x00, true);
+	// //i2c_master_write_byte(cmd, OLED_CONTROL_BYTE_DATA_STREAM, true);	// 40
+	// i2c_master_write_byte(cmd, OLED_CMD_SET_DISPLAY_START_LINE, true);	// 40
+	// //i2c_master_write_byte(cmd, OLED_CMD_SET_SEGMENT_REMAP, true);		// A1
+	// if (dev->_flip) {
+	// 	i2c_master_write_byte(cmd, OLED_CMD_SET_SEGMENT_REMAP_0, true); // A0
+	// } else {
+	// 	i2c_master_write_byte(cmd, OLED_CMD_SET_SEGMENT_REMAP_1, true);	// A1
+	// }
+	// i2c_master_write_byte(cmd, OLED_CMD_SET_COM_SCAN_MODE, true);		// C8
+	// i2c_master_write_byte(cmd, OLED_CMD_SET_DISPLAY_CLK_DIV, true);		// D5
+	// i2c_master_write_byte(cmd, 0x80, true);
+	// i2c_master_write_byte(cmd, OLED_CMD_SET_COM_PIN_MAP, true);			// DA
+	// if (dev->_height == 64) i2c_master_write_byte(cmd, 0x12, true);
+	// if (dev->_height == 32) i2c_master_write_byte(cmd, 0x02, true);
+	// i2c_master_write_byte(cmd, OLED_CMD_SET_CONTRAST, true);			// 81
+	// i2c_master_write_byte(cmd, 0xFF, true);
+	// i2c_master_write_byte(cmd, OLED_CMD_DISPLAY_RAM, true);				// A4
+	// i2c_master_write_byte(cmd, OLED_CMD_SET_VCOMH_DESELCT, true);		// DB
+	// i2c_master_write_byte(cmd, 0x40, true);
+	// i2c_master_write_byte(cmd, OLED_CMD_SET_MEMORY_ADDR_MODE, true);	// 20
+	// //i2c_master_write_byte(cmd, OLED_CMD_SET_HORI_ADDR_MODE, true);	// 00
+	// i2c_master_write_byte(cmd, OLED_CMD_SET_PAGE_ADDR_MODE, true);		// 02
+	// // Set Lower Column Start Address for Page Addressing Mode
+	// i2c_master_write_byte(cmd, 0x00, true);
+	// // Set Higher Column Start Address for Page Addressing Mode
+	// i2c_master_write_byte(cmd, 0x10, true);
+	// i2c_master_write_byte(cmd, OLED_CMD_SET_CHARGE_PUMP, true);			// 8D
+	// i2c_master_write_byte(cmd, 0x14, true);
+	// i2c_master_write_byte(cmd, OLED_CMD_DEACTIVE_SCROLL, true);			// 2E
+	// i2c_master_write_byte(cmd, OLED_CMD_DISPLAY_NORMAL, true);			// A6
+	i2c_master_write_byte(cmd, OLED_CMD_DISPLAY_ON, true);				// AF
+	i2c_master_stop(cmd);
+
+	// esp_err_t res = i2c_master_cmd_begin(dev->_i2c_num, cmd, I2C_TICKS_TO_WAIT);
+	// if (res == ESP_OK) {
+	// 	ESP_LOGI(TAG, "OLED configured successfully");
+	// } else {
+	// 	ESP_LOGE(TAG, "OLED configuration failed. code: 0x%.2X", res);
+	// }
+	i2c_cmd_link_delete(cmd);
+}
+
 void display_refresh() {
     uint8_t num_chars;
     char buffer [50];
@@ -73,7 +127,7 @@ void display_refresh() {
 
     // Measure how long redrawing takes
     // int64_t t1 = esp_timer_get_time();
-
+    display_reset(&display);
     ssd1306_contrast(&display, DISPLAY_INTENSITY[copy_of_settings.display_intensity]);
     ESP_LOGI(dp_tag, "Contrast %d",  DISPLAY_INTENSITY[copy_of_settings.display_intensity]);
 
@@ -191,7 +245,8 @@ void task_display(void *z)
                             }
 
                             // Report to the light that settings were changed
-                            queue_send_message(light_queue, CMD_SETTINGS_CHANGED);
+                            // queue_send_message(light_queue, CMD_SETTINGS_CHANGED);
+                            queue_send_message(light_queue, CMD_ADJUST_LIGHT);
 
                             refresh_display = true;
                         break;
@@ -205,7 +260,8 @@ void task_display(void *z)
                                 xSemaphoreGive(mutex_change_settings);
                             }
                             // Report to the light that settings were changed
-                            queue_send_message(light_queue, CMD_SETTINGS_CHANGED);
+                            // queue_send_message(light_queue, CMD_SETTINGS_CHANGED);
+                            queue_send_message(light_queue, CMD_ADJUST_LIGHT);
 
                             refresh_display = true;
                         break;
@@ -276,9 +332,9 @@ void task_display(void *z)
             time(&now);
             localtime_r(&now, &timeinfo);
             static int prev_min = -1;
-            if( prev_min != timeinfo.tm_hour ) {
+            if( prev_min != timeinfo.tm_min ) {
                 ESP_LOGI(dp_tag, "Update clock due to minute change");
-                prev_min = timeinfo.tm_hour;
+                prev_min = timeinfo.tm_min;
                 refresh_display=true;
             }
         }
@@ -327,10 +383,8 @@ void display_init() {
 	ssd1306_init(&display, 128, 64);
 #endif // CONFIG_SSD1306_128x64
 
-	ssd1306_clear_screen(&display, false);
-
-	ssd1306_contrast(&display, 0xff);
+	// ssd1306_clear_screen(&display, false);
+	// ssd1306_contrast(&display, 0xff);
     display_refresh();
-
     xTaskCreatePinnedToCore(task_display, "task_display", 4096, NULL, 1, NULL, 0);
 }

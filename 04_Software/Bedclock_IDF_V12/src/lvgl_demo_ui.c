@@ -35,6 +35,21 @@ lv_obj_t * ui_img_display_01;
 lv_obj_t * ui_img_display_02;
 lv_obj_t * ui_img_display_03;
 
+void animation_demo(lv_disp_t *disp) {
+    ui_Screen1 = lv_disp_get_scr_act(disp);
+
+    ui_img_timer_04 = lv_img_create(ui_Screen1);
+    lv_img_set_src(ui_img_timer_04, &ui_img_closed_circle_png);
+    lv_obj_set_width(ui_img_timer_04, 10);
+    lv_obj_set_height(ui_img_timer_04, 16);
+    lv_obj_set_x(ui_img_timer_04, 10);
+    lv_obj_set_y(ui_img_timer_04,  0);
+    lv_obj_add_flag(ui_img_timer_04, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
+    lv_obj_clear_flag(ui_img_timer_04, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+
+    // movedown_Animation(ui_img_timer_04, 0);
+}
+
 void example_lvgl_demo_ui(lv_disp_t *disp)
 {
     ui_Screen1 = lv_disp_get_scr_act(disp);
@@ -337,13 +352,13 @@ void _ui_anim_callback_free_user_data(lv_anim_t * a) {
 void movedown_Animation(lv_obj_t * TargetObject, int delay) {
     ui_anim_user_data_t * PropertyAnimation_0_user_data = lv_mem_alloc(sizeof(ui_anim_user_data_t));
     PropertyAnimation_0_user_data->target = TargetObject;
-    PropertyAnimation_0_user_data->val = -64;
+    PropertyAnimation_0_user_data->val = 10;
     lv_anim_t PropertyAnimation_0;
     lv_anim_init(&PropertyAnimation_0);
     lv_anim_set_time(&PropertyAnimation_0, 1000);
     lv_anim_set_user_data(&PropertyAnimation_0, PropertyAnimation_0_user_data);
     lv_anim_set_custom_exec_cb(&PropertyAnimation_0, _ui_anim_callback_set_y);
-    lv_anim_set_values(&PropertyAnimation_0, -64, -80);
+    lv_anim_set_values(&PropertyAnimation_0, 10, 20);
     lv_anim_set_path_cb(&PropertyAnimation_0, lv_anim_path_ease_out);
     lv_anim_set_delay(&PropertyAnimation_0, delay + 0);
     lv_anim_set_deleted_cb(&PropertyAnimation_0, _ui_anim_callback_free_user_data);

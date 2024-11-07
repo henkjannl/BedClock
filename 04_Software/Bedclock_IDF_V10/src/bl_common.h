@@ -25,7 +25,8 @@ typedef enum {
   CMD_BTN_TOP_PRESSED,
   CMD_BTN_RIGHT_PRESSED,
   CMD_SETTINGS_CHANGED,
-  CMD_LIGHT_SWITCHED_ON
+  CMD_LIGHT_SWITCHED_ON,
+  CMD_ADJUST_LIGHT
 } common_command_t;
 
 typedef struct {
@@ -35,6 +36,8 @@ typedef struct {
     uint8_t display_intensity;
     uint8_t selected_item;
 } common_settings_t;
+
+char debug[128] = "";
 
 // ### GLOBAL TYPES ##
 

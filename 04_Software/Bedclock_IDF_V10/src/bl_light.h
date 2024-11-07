@@ -6,6 +6,10 @@
 #include "driver/rmt_tx.h"
 #include "esp_log.h"
 
+#include "esp_timer.h"
+#include "esp_err.h"
+#include <stdio.h>
+
 #include "led_strip_encoder.h"
 
 #include "bl_common.h"
@@ -14,12 +18,10 @@
 
 #define lt_tag "light"
 
-
 #define RMT_LED_STRIP_RESOLUTION_HZ 10000000 // 10MHz resolution, 1 tick = 0.1us (led strip needs a high resolution)
 #define RMT_LED_STRIP_GPIO_NUM      23
 #define LED_NUM_LEDS                16
 #define LED_MAX_BRIGHTNESS          40
-
 
 const float LED_INTENSITY[] = {
     0.025,  // .led_intensity = 0
@@ -46,7 +48,7 @@ const led_color_t LED_COLORS[] = {
   { .r = 1.000,  .g = 1.000,  .b = 1.000 },    // 0 = White
   { .r = 1.179,  .g = 1.151,  .b = 0.670 },    // 1 = Yellow
   { .r = 1.281,  .g = 0.990,  .b = 0.729 },    // 2 = Orange
-  { .r = 1.800,  .g = 0.600,  .b = 0.600 },    // 3 = Red
+  { .r = 1.500,  .g = 0.750,  .b = 0.750 },    // 3 = Red
 };
 
 /*
@@ -121,7 +123,7 @@ void task_light(void *arg)
     };
 
     common_command_t cmd;
-    bool update_light = false;
+    bool update_light = true;
     bool led_on = false;
 
     hp_stepping_float_t red   = HP_STEPPING_FLOAT_INIT;
@@ -132,6 +134,8 @@ void task_light(void *arg)
 
     hp_timer_t led_off_timer;
     hp_timer_init_ms(&led_off_timer, LED_TIMER_MS[common_settings.led_timer], false);
+
+    // int64_t t1, t2; // Measure time for debug purposes
 
     while(true) {
         if (xQueueReceive(light_queue, &cmd, 0) == true) {
@@ -144,6 +148,13 @@ void task_light(void *arg)
 
                     // Notify the screen so the clock is displayed
                     queue_send_message(display_queue, CMD_LIGHT_SWITCHED_ON);
+                    update_light = true;
+                break;
+
+                case CMD_ADJUST_LIGHT:
+                    ESP_LOGI(lt_tag, "Display is adjusting the light, switch it on to show the effect");
+                    led_on = true;
+                    hp_timer_reset(&led_off_timer);
                     update_light = true;
                 break;
 
@@ -184,9 +195,9 @@ void task_light(void *arg)
                                                 LED_MAX_BRIGHTNESS*
                                                 LED_COLORS[copy_of_settings.led_color].b, 500);
             } else {
-                hp_stepping_float_target(&red,   0, 500);
-                hp_stepping_float_target(&green, 0, 500);
-                hp_stepping_float_target(&blue,  0, 500);
+                hp_stepping_float_target(&red,   0, 1500);
+                hp_stepping_float_target(&green, 0, 1500);
+                hp_stepping_float_target(&blue,  0, 1500);
             }
             // ESP_LOGI(lt_tag, "R: %.3f G: %.3f B: %.3f", red.target, green.target, blue.target);
             // for(int i=0; i<20; i++)
@@ -202,6 +213,8 @@ void task_light(void *arg)
             // ESP_LOGI(lt_tag, "R: %.3f G: %.3f B: %.3f", red.value, green.value, blue.value);
             vTaskDelay(pdMS_TO_TICKS(250));
         } else {
+            // t1 = esp_timer_get_time();
+
             uint16_t mask_bit = 0x01;
             uint8_t led_strip_pixels[LED_NUM_LEDS * 3];
 
@@ -221,7 +234,11 @@ void task_light(void *arg)
             // Flush RGB values to LEDs
             ESP_ERROR_CHECK(rmt_transmit(led_chan, led_encoder, led_strip_pixels, sizeof(led_strip_pixels), &tx_config));
             ESP_ERROR_CHECK(rmt_tx_wait_all_done(led_chan, portMAX_DELAY));
-            vTaskDelay(pdMS_TO_TICKS(15));
+
+            // t2 = esp_timer_get_time();
+            // snprintf(debug, sizeof(debug), "Update light took %d ms", (int) (t2-t1)/1000);
+
+            vTaskDelay(pdMS_TO_TICKS(10)); // Doing 1500 steps @10ms/step = 1.5 s
 
         }  // if( !red.finished ) {
 

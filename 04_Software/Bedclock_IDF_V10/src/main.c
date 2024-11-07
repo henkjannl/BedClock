@@ -27,7 +27,7 @@ Bedclock_IDF_V10 : First working version
 Bedclock_IDF_V11 : Try using ESP-IDF driver for SSD1306
 
 To do:
-Init display first, with splash screen
+Init display first, with splash screen -> perhaps not if we want to implement watchdog
 Display with graphics instead of text
 Animate graphics on display
 Store data in NVS
@@ -52,7 +52,7 @@ void app_main()
     // hp_timer_init_ms(&single_shot_timer,4500, false);
 
     while(true) {
-        ESP_LOGI(mn_tag, "Main blip");
+        ESP_LOGI(mn_tag, "Main blip. %s", debug);
 
         // Test the timers
         // if(hp_timer_lapsed(&auto_restart_timer)) ESP_LOGI(mn_tag, "Auto restart timer %" PRId64, auto_restart_timer.last_reset_time);
