@@ -6,11 +6,7 @@
 
 #include "hp_pixel_buffer.h"
 
-#define tag "hp_pixel_buffer"
-
-// Global pixel buffer
-uint8_t canvas[4][128];
-
+#define tag_buf "hp_pixel_buffer"
 
 uint16_t hp_bitmap_bytes_per_row(const uint16_t width) {
     // Indicates how many bytes are needed for each row of pixels
@@ -99,50 +95,6 @@ void hp_bitmap_print(hp_bitmap_t *bitmap) {
         }
         printf("%s\n", c);
     }
-}
-
-
-void hp_bitmap_clear_canvas() {
-    for(uint8_t page = 0; page<4; page++)
-        for(uint8_t col = 0; col<128; col++)
-            canvas[page][col]=0;
-}
-
-// Draw a bitmap on the canvas
-void hp_bitmap_draw_bitmap(hp_bitmap_t *bitmap, int16_t x, int16_t y) {
-
-    for(uint8_t page = 0; page<4; page++) {
-
-        for(uint8_t col = 0; col<128; col++) {
-
-            int16_t x_im = col-x;
-            int16_t im_bit = hp_bitmap_pos_to_bit(x_im);
-
-            for(uint8_t bit = 0; bit<8; bit++) {
-
-                int16_t y_im = 8*page+bit-y;
-
-                // Check if this pixel is in the image
-                if( (x_im>=0) && (x_im<bitmap->width) &&
-                    (y_im>=0) && (y_im<bitmap->height) ) {
-
-                    uint16_t im_byte = hp_bitmap_pos_to_byte(bitmap, x_im, y_im);
-
-                    if( (bitmap->buffer[im_byte] & (0x01 << im_bit) ) != 0) {
-                        canvas[page][col] |= (0x01 << (bit) );           // Set pixel
-                    } else {
-                        canvas[page][col] &= (0xFF - (0x01 << (bit) ) ); // Clear pixel
-                    }
-
-                } // pixel is in the image
-            } // for bit
-        } // for column
-    }  // for page
-}
-
-void hp_write_canvas(esp_lcd_panel_handle_t panel) {
-    for(uint8_t page = 0; page<4; page++)
-        esp_lcd_panel_draw_bitmap(panel,  0, 8*page, 128, 8*page+8, canvas[page]);
 }
 
 
