@@ -11,17 +11,29 @@ dependencies:
       service_url: https://api.components.espressif.com/
       type: service
     version: 1.4.0
+  espressif/esp_modem:
+    component_hash: e48da33fee082dd9d9a97a354a228057e07a14ac108766b40ad84e018205410a
+    source:
+      service_url: https://api.components.espressif.com/
+      type: service
+    version: 1.1.0
   idf:
     component_hash: null
     source:
       type: idf
     version: 5.3.1
-  lvgl/lvgl:
-    component_hash: 7b7ee85e48c2eb35bb242a8c7e0e4cd702e150541afb3f69089fb7ba81554d14
+  jgromes/radiolib:
+    component_hash: a5250de30ec5cb42954d27b6b7e08e35623f9e094042a0698b61d8c02740f689
     source:
       service_url: https://api.components.espressif.com/
       type: service
-    version: 8.3.0
-manifest_hash: fc8b990b268d70c3c0fa7e71a6297dee1d0d962b235f1e22417f395ec8ad4d75
+    version: 6.6.0
+  lvgl/lvgl:
+    component_hash: 948bff879a345149b83065535bbc4a026ce9f47498a22881e432a264b9098015
+    source:
+      service_url: https://api.components.espressif.com/
+      type: service
+    version: 8.3.11
+manifest_hash: 4ae3804b7a78e483786648142d91b45a758842288ed9e644ec5325f2de6261f6
 target: esp32
 version: 1.0.0

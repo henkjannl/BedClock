@@ -21,6 +21,9 @@ PNG_FILES = r"""c_labels.png
 circle_open.png
 circle_closed.png""".split('\n')
 
+PNG_FILES = r"""indicator_left.png
+indicator_right.png""".split('\n')
+
 # Prepare all the parts of the header file
 single_header_file = """#include <stdio.h>
 #include "hp_pixel_font.h"

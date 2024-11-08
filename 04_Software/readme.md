@@ -13,6 +13,6 @@ Different projects were created to port the Arduino version to ESP-IDF:
   * `Bedclock_IDF_V09` : Internal Espressif SSD1306 driver including LVGL
   * `Bedclock_IDF_V10` : First working version of application
   * `Bedclock_IDF_V11` : First working version of pixel buffer
-  * `Bedclock_IDF_V12` : Scrolling example LVGL
+  * `Bedclock_IDF_V12` : First working version with graphics layout
 
-`Bedclock_IDF_V10` is the version currently working.
+`Bedclock_IDF_V12` is the version currently working.
