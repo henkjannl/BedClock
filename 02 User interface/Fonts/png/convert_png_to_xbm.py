@@ -17,12 +17,12 @@ TEMP_FILE = r"temp_file.xbm"
 # c_colon.png
 # c_space.png""".split('\n')
 
-PNG_FILES = r"""c_labels.png
-circle_open.png
-circle_closed.png""".split('\n')
+PNG_FILES = r"""labels.png""".split('\n')
 
-PNG_FILES = r"""indicator_left.png
-indicator_right.png""".split('\n')
+# PNG_FILES = r"""c_labels.png""".split('\n')
+
+# PNG_FILES = r"""indicator_left.png
+# indicator_right.png""".split('\n')
 
 # Prepare all the parts of the header file
 single_header_file = """#include <stdio.h>
@@ -86,6 +86,6 @@ single_header_file.extend(character_summary)
 single_header_file.append("}; // const hp_bitmap_t glyphs[]\n")
 single_header_file.extend(function_definition)
 
-file_path = os.path.join(INPUT_PATH, "hp_pixel_font.c")
+file_path = os.path.join(INPUT_PATH, "converted_bitmap.c")
 open(file_path, "w").writelines("\n".join(single_header_file))
 print(f"results written to {file_path}")

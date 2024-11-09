@@ -51,6 +51,12 @@ void hp_bitmap_draw_bitmap(const hp_bitmap_t *bitmap, int16_t x, int16_t y) {
     }  // for page
 }
 
+uint16_t hp_bitmap_text_width(char *text, uint8_t num_chars) {
+    uint16_t result = 0;
+    for(uint8_t c=0; c<num_chars; c++ ) result+=hp_pixel_glyph(text[c])->width;
+    return result;
+}
+
 void hp_bitmap_draw_text(int16_t x, int16_t y, const char *text, const uint8_t num_chars) {
     for(uint8_t c=0; c<num_chars; c++ ) {
         hp_bitmap_draw_bitmap(hp_pixel_glyph(text[c]), x, y);

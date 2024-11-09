@@ -6,7 +6,6 @@
 #include <esp_log.h>
 
 #include "bl_common.h"
-#include "bl_queues.h"
 #include "bl_time.h"
 #include "bl_keyboard.h"
 #include "bl_display.h"
@@ -29,12 +28,11 @@ Different sub-projects to port the Arduino project to ESP-IDF
     Bedclock_IDF_V12 : First working version with graphics layout
 
 To do:
-* Remove screen intensity
-* Center time in display
 * Animate screen non-linear
 * Make time font thinner
-* Improve font quality
+* Revise y-coordinates of screen
 * Separate code over .h and .c files
+* Repair center time in display, so idle is not y=2
 * Init display first, with splash screen -> perhaps not if we want to implement watchdog
 * Display with graphics instead of text
 * Animate graphics on display
@@ -47,24 +45,14 @@ To do:
 
 void app_main()
 {
-    time_init();
-    queues_init();
+    common_init();    // initialize queues and read settings from non volatile storage
+    time_init();      // sync clock with timeserver
     display_init();
     keyboard_init();
     light_init();
 
-    // hp_timer_t auto_restart_timer;
-    // hp_timer_t single_shot_timer;
-
-    // hp_timer_init_ms(&auto_restart_timer,3000, true);
-    // hp_timer_init_ms(&single_shot_timer,4500, false);
-
     while(true) {
         ESP_LOGI(mn_tag, "Main blip. %s", debug);
-
-        // Test the timers
-        // if(hp_timer_lapsed(&auto_restart_timer)) ESP_LOGI(mn_tag, "Auto restart timer %" PRId64, auto_restart_timer.last_reset_time);
-        // if(hp_timer_lapsed(&single_shot_timer)) ESP_LOGI(mn_tag, "Single shot timer");
 		vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }

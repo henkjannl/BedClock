@@ -13,7 +13,6 @@
 #include "led_strip_encoder.h"
 
 #include "bl_common.h"
-#include "bl_queues.h"
 #include "hp_stepping_float.h"
 
 #define lt_tag "light"
@@ -48,7 +47,7 @@ const led_color_t LED_COLORS[] = {
   { .r = 1.000,  .g = 1.000,  .b = 1.000 },    // 0 = White
   { .r = 1.179,  .g = 1.151,  .b = 0.670 },    // 1 = Yellow
   { .r = 1.281,  .g = 0.990,  .b = 0.729 },    // 2 = Orange
-  { .r = 1.500,  .g = 0.750,  .b = 0.750 },    // 3 = Red
+  { .r = 1.600,  .g = 0.700,  .b = 0.700 },    // 3 = Red
 };
 
 /*
@@ -75,7 +74,8 @@ To produce non-integer intensities, a fraction of the 16 LEDs switch to the next
 uint8_t led_value(double value, uint16_t mask_bit) {
 
     // Ensure the light goes off when supposed to
-    if(value<0.01) return 0;
+    // to prevent one led remains on
+    if(value<0.07) return 0; // little more than 1/16
 
     // The order in which the LEDs in the 4x4 grid are switched on
     const uint16_t SUB_BRIGHTNESS[] = {0x0000, 0x0008, 0x0208, 0x020A, 0x0A0A, 0x2A0A, 0x2A8A, 0x2AAA, 0xAAAA,
@@ -209,7 +209,7 @@ void task_light(void *arg)
             update_light=false;
         } // if(update_light)
 
-        if( red.finished ) {
+        if( hp_stepping_float_finished(&red)) {
             // ESP_LOGI(lt_tag, "R: %.3f G: %.3f B: %.3f", red.value, green.value, blue.value);
             vTaskDelay(pdMS_TO_TICKS(250));
         } else {
