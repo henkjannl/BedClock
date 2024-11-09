@@ -28,12 +28,8 @@ Different sub-projects to port the Arduino project to ESP-IDF
     Bedclock_IDF_V12 : First working version with graphics layout
 
 To do:
-* Animate screen non-linear
-* Make time font thinner
-* Revise y-coordinates of screen
 * Separate code over .h and .c files
-* Repair center time in display, so idle is not y=2
-* Init display first, with splash screen -> perhaps not if we want to implement watchdog
+* Init display first, with splash screen
 * Display with graphics instead of text
 * Animate graphics on display
 * Store data in NVS
