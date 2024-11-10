@@ -92,12 +92,13 @@ uint8_t led_value(double value, uint16_t mask_bit) {
     return i;
 };
 
-void task_light(void *arg)
-{
+void task_light(void *arg) {
     ESP_LOGI(lt_tag, "Light task started...");
 
     ESP_LOGI(lt_tag, "Create RMT TX channel");
+
     rmt_channel_handle_t led_chan = NULL;
+
     rmt_tx_channel_config_t tx_chan_config = {
         .clk_src = RMT_CLK_SRC_DEFAULT, // select source clock
         .gpio_num = RMT_LED_STRIP_GPIO_NUM,
@@ -105,6 +106,7 @@ void task_light(void *arg)
         .resolution_hz = RMT_LED_STRIP_RESOLUTION_HZ,
         .trans_queue_depth = 4, // set the number of transactions that can be pending in the background
     };
+
     ESP_ERROR_CHECK(rmt_new_tx_channel(&tx_chan_config, &led_chan));
 
     ESP_LOGI(lt_tag, "Install led strip encoder");
@@ -146,8 +148,9 @@ void task_light(void *arg)
                     ESP_LOGI(lt_tag, "Light manually switched %s", led_on ? "on" : "off");
                     hp_timer_reset(&led_off_timer);
 
-                    // Notify the screen so the clock is displayed
-                    queue_send_message(display_queue, CMD_LIGHT_SWITCHED_ON);
+                    // Notify the screen so the clock is displayed as well
+                    // since we are emitting light anyway
+                    if(led_on) queue_send_message(display_queue, CMD_LIGHT_SWITCHED_ON);
                     update_light = true;
                 break;
 
@@ -165,14 +168,14 @@ void task_light(void *arg)
 
                 default:
                     ESP_LOGI(lt_tag, "Command not recognized");
-            }
-        }
+            } // switch(cmd) {
+        } // xQueueReceive(light_queue, &cmd, 0) == true
 
         if(hp_timer_lapsed(&led_off_timer)) {
             ESP_LOGI(lt_tag, "Light switched off by timer");
             led_on = false;
             update_light = true;
-        }
+        } // if(hp_timer_lapsed(&led_off_timer)) {
 
         // Settings have been changed, define a new target for the color channels.
         if(update_light) {
@@ -240,8 +243,7 @@ void task_light(void *arg)
 
             vTaskDelay(pdMS_TO_TICKS(10)); // Doing 1500 steps @10ms/step = 1.5 s
 
-        }  // if( !red.finished ) {
-
+        }  // if( hp_stepping_float_finished(&red)) {
     }  // while true
 }  // task_light(void *arg)
 

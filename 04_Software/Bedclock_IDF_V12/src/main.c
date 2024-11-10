@@ -30,9 +30,6 @@ Different sub-projects to port the Arduino project to ESP-IDF
 To do:
 * Separate code over .h and .c files
 * Init display first, with splash screen
-* Display with graphics instead of text
-* Animate graphics on display
-* Store data in NVS
 * Make capacitive touch interrupt controlled
 * Only display clock when time is synched
 */
