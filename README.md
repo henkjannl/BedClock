@@ -1,23 +1,21 @@
 # BedClock
-This is a small ESP driven bed clock annex reading light. The device can be controlled using three touch buttons. Settings such as the light timer, brightness and color and screen intensity can be controlled via Telegram.
+This is a small ESP driven bed clock annex reading light. The device can be controlled using three touch buttons.
 
 <p align="center">
     <img src="02 User interface/Blender render/User manual.png" alt="drawing" width="800"/>
 </p>
 
-Normally, the time is displayed on the screen, together with an icon representing the weather prediction for the day
+Normally, the display is empty, because even at the least intense setting the OLED display produces too much light to sleep well.
 
-The device has three touch buttons:
-* The top button is used to toggle the bedlight on and off. If the bedlight is switched on, it will automatically switch of after the timer expires. The timer can be set in the Telegram menu.
-* Upon touching the left button, the current outside temperature, the daily maximum temperature and the outside relative humidity are displayed. After 15:00, the daily maximum temperature of the next day is displayed instead.
-* Upon touching the right button, the outside temperature is displayed, together with a graph showin the local precipitation for each minute of the next hour.
+After one press of the left button, the time is displayed.
 
-After some time, the display switches back to the time.
+On subsequent presses of the left button, the user toggles through the following settings:
+* LED intensity
+* LED color
+* Timer that switches off the LED lights
+* Intensity of the OLED display
 
-In Telegram, the light can be switched on or off, and the color, timer and intensity of the bedlight can be set.
-Under settings, the intensity of the OLED screen can be set. The settings are saved if power is lost.
-Also under settings, a logfile with events can be retrieved for debugging purposes, and a logfile with weather data can be retrieved.
-
+With the right button, the selected setting can be changed.
 
 ## Hardware
 
@@ -84,74 +82,11 @@ The light cover 12 is used to cover the onboard LED of the ESP32, since it will 
 
 ## Software
 
-### Arduino
+The original Arduino based software is located in `...\BedClock\04_Software`. This project was used to learn ESP-IDF programming under PlatformIO.
 
-Software is located in `../04 Software/Bedlight` and can be compiled using Arduino IDE.
+The software projects `BedClock_IDF_V01` until `BedClock_IDF_V12` are demonstrator projects to port parts of the functionality to ESP-IDF.
 
-One file, `MyCredentials.h`, was skipped from the repository by `.gitignore`.
-
-It contains the private information and must be created before compiling. This file should have the following content:
-
-```c++
-#pragma once
-
-#include <map>
-
-// Telegram token for the Bedlight bot
-const char* token =  "xxxxxxxxxx:yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy";
-
-// Telegram user ID for the user to be notified on startup
-int64_t userid = 12345678;
-
-// Timezone where the bedlight is located
-// https://github.com/nayarsystems/posix_tz_db/blob/master/zones.csv
-#define localTimezone "CET-1CEST,M3.5.0,M10.5.0/3"
-
-// List of SSID, password combinations for WiFi access points to connect to
-std::map< String , String > ACCESS_POINTS {
-  {"ssid", "password" },
-  {"ssid", "password" },
-  {"ssid", "password" }
-};
-
-const char* openweathermapAPIkey = "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz";
-
-float latitude  = xx.xxxxx;
-float longitude =  x.xxxxx;
-```
-
-Where:
-
-| variable             | description                                                                |
-|:--------------------:|:---------------------------------------------------------------------------|
-| token                | Telegram token of the bot controlling the bed light <sup>1)</sup>          |
-| userid               | Telegram user ID of the user that receives a welcome message after startup |
-| localTimezone        | Timezone where the bedlight is located <sup>2)</sup>                       |
-| ssid                 | SSID's of one or more WiFi access points the bedlight can connect to       |
-| password             | The corresponding passwords of WiFi access points                           |
-| openweathermapAPIkey | an API key to get access to the openweathermap API <sup>3)</sup>           |
-
-<sup>1)</sup> There are many online sources explaining how a new Telegram bot can be created, such as in this [Random Nerd Tutorials Telegram example](https://randomnerdtutorials.com/telegram-control-esp32-esp8266-nodemcu-outputs/).
-
-<sup>2)</sup> The code for the local timezone can be found in https://github.com/nayarsystems/posix_tz_db/blob/master/zones.csv
-
-<sup>3)</sup> The API key for Openweathermap can be retrieved after making an account at https://openweathermap.org/
- The free plan allows for 1000 daily API calls. Currently, the weather is retrieved every 12 minutes, resulting in 120 daily calls.
-
-
-### ESP-IDF
-
-This project was also used to learn ESP-IDF programming under PlatformIO.
-
-The software projects BedClock_IDF_V01 until BedClock_IDF_V12 are demonstrator projects to port parts of the functionality to ESP-IDF. The ESP-IDF has been kept much simpler, eliminating Telegram functionality and connection to the weather app, since this was not used often.
-
-More attention is given to not spreading too much light. By nature, OLED displays cannot be dimmed to a very low degree, so in practice the clock produced a lot of light in a dark sleeping room, even with the display at lowest intensity. Therefore, the clock moves out of the field of view when not used for some time. Pressing the left or the right button brings back the clock.
-
-When pressing the left button again, the display toggles through the next settings: LED intensity, LED color, LED timer and display intensity. At each setting, the right button can be used to choose the next value of the setting. Settings are stored in the non volatile storage of the ESP32 and restored at next power up.
-
-The OLED display sometimes stalled, not showing anything anymore. The clock frequency of I2C communication was reduced from 400kHz to 370kHz, since, according to the Salomon specification of the SSD1306, a frequency of up to 407kHz is tolerated, so there is not much headroom at 400kHz. This seems to work. As a fallback, presing the left and right button also resets the screen. But since a hardware reset pin is not provided, only a software reset can be carried out, and it is uncertain if this works.
-
-#### Different directories and sub-projects
+### Different directories and sub-projects
 
 | Directory | Purpose |
 |---|---|
@@ -168,7 +103,7 @@ The OLED display sometimes stalled, not showing anything anymore. The clock freq
 | `Bedclock_IDF_V11` | First working version of pixel buffer |
 | `Bedclock_IDF_V12` | First working version with graphics layout |
 
-#### Files in the `Bedclock_IDF_V12` main directory
+### Files in the `Bedclock_IDF_V12` main directory
 
 | File | Content |
 |------|---------|
@@ -201,3 +136,7 @@ In `hp_stepping_float.h`, the `hp_stepping_interpolation_t` type is an enumerato
 <p align="center">
     <img src="02 User interface/Move profiles/Move.png" alt="drawing" width="800"/>
 </p>
+
+### Issues
+
+The OLED display sometimes stalled, not showing anything anymore. The clock frequency of I2C communication was reduced from 400kHz to 370kHz, since, according to the Salomon specification of the SSD1306, a frequency of up to 407kHz is tolerated, so there is not much headroom at 400kHz. This seems to work. As a fallback, presing the left and right button also resets the screen. But since a hardware reset pin is not provided, only a software reset can be carried out, and it is uncertain if this works.
