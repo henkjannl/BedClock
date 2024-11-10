@@ -15,7 +15,10 @@ On subsequent presses of the left button, the user toggles through the following
 * Timer that switches off the LED lights
 * Intensity of the OLED display
 
-With the right button, the selected setting can be changed.
+After pressing the left button again, the display switches back to the time. If the buttons are not pressed for some time, the display switches off again.
+
+Settings can be changed with the button on the right. Settings are stored in the non volatile memory of the ESP32.
+
 
 ## Hardware
 
