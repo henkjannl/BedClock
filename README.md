@@ -5,19 +5,19 @@ This is a small ESP driven bed clock annex reading light. The device can be cont
     <img src="02 User interface/Blender render/User manual.png" alt="drawing" width="800"/>
 </p>
 
-Normally, the display is empty, because even at the least intense setting the OLED display produces too much light to sleep well.
+Normally, the display is empty, because even at the least intense setting, the OLED display produces too much light to sleep well.
 
 After one press of the left button, the time is displayed.
 
-On subsequent presses of the left button, the user toggles through the following settings:
+When pressing the left button multiple times, the user toggles through the following settings:
 * LED intensity
 * LED color
 * Timer that switches off the LED lights
 * Intensity of the OLED display
 
-After pressing the left button again, the display switches back to the time. If the buttons are not pressed for some time, the display switches off again.
-
 Settings can be changed with the button on the right. Settings are stored in the non volatile memory of the ESP32.
+
+After pressing the left button again, the display switches back to the time. If the buttons are not pressed for some time, the display switches off again.
 
 
 ## Hardware
@@ -104,7 +104,7 @@ The software projects `BedClock_IDF_V01` until `BedClock_IDF_V12` are demonstrat
 | `Bedclock_IDF_V09` | Internal Espressif SSD1306 driver including LVGL |
 | `Bedclock_IDF_V10` | First working version of application |
 | `Bedclock_IDF_V11` | First working version of pixel buffer |
-| `Bedclock_IDF_V12` | First working version with graphics layout |
+| `Bedclock_IDF_V12` | Latest version of the app with all functionality integrated |
 
 ### Files in the `Bedclock_IDF_V12` main directory
 
@@ -125,14 +125,14 @@ The software projects `BedClock_IDF_V01` until `BedClock_IDF_V12` are demonstrat
 | `hp_stepping_float.h` | Library that plans and executes paths in linear and non-linear ways (see also `hp_stepping_interpolation_t` below). |
 | `hp_timer.h` | Library that defines a repeating or single-shot timer with microsecond resolution. |
 
-The `config.h` file only requires three `#defines`:
+The `config.h` file requires three `#defines`:
 ```c
 #define WIFI_SSID    "xxxxxxxxx"
 #define WIFI_PASS    "yyyyyyyy"
 #define TIME_ZONE    "CET-1CEST,M3.5.0,M10.5.0/3"
 ```
 
-The code for the local timezone can be found in https://github.com/nayarsystems/posix_tz_db/blob/master/zones.csv
+The last code is the timezone definition of Amsterdam. Codes for other locations can be found in https://github.com/nayarsystems/posix_tz_db/blob/master/zones.csv
 
 In `hp_stepping_float.h`, the `hp_stepping_interpolation_t` type is an enumerator that defines the move path between origin and target in the following way:
 
