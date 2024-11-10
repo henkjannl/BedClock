@@ -27,7 +27,7 @@ This is a list of all items:
 |:----:|:-----:|------------------------------------------|------------|-----------------:|
 |   1  |   1   | ESP32 MH-ET Live Minikit                 |            | € 3.63           |
 |   2  |   1   | 4x4 Led grid WS2812B                     |            | € 1.00           |
-|   3  |   1   | 0.91" OLED 128x64 #12832 SSD1306         |            | € 1.53           |
+|   3  |   1   | 0.91" OLED 128x32 SSD1306                |            | € 1.53           |
 |   4  |   1   | Electrical wire AWG 30                   |            | € 1.68           |
 |   5  |   3   | Hexagon head button screw ISO7380-1 M3x8 |            | € 1.45           |
 |   6  |   3   | Hexagon nut ISO4032 M3 h=2.4             |            | € 1.68           |
@@ -76,7 +76,7 @@ Mechanical assembly is as follows:
     <img src="03 Mechanical/Assembly manual/Assembly manual.png" alt="drawing" width="500"/>
 </p>
 
-The 4x4 LED grid is screwed on top of the LED bridge and then placed over the ESP32.
+The 4x4 LED grid is mounted on top of the LED bridge and then placed over the ESP32.
 
 The light cover 12 is used to cover the onboard LED of the ESP32, since it will shine through the top part if it is not covered.
 <br>
@@ -186,6 +186,15 @@ The OLED display sometimes stalled, not showing anything anymore. The clock freq
 | `hp_pixel_canvas.h/c` | Library that allows writing bitmaps to a buffer, and streaming the buffer to the SSD1306 OLED display |
 | `hp_stepping_float.h` | Library that plans and executes paths in linear and non-linear ways (see also `hp_stepping_interpolation_t` below). |
 | `hp_timer.h` | Library that defines a repeating or single-shot timer with microsecond resolution. |
+
+The `config.h` file only requires three `#defines`:
+```c
+#define WIFI_SSID    "xxxxxxxxx"
+#define WIFI_PASS    "yyyyyyyy"
+#define TIME_ZONE    "CET-1CEST,M3.5.0,M10.5.0/3"
+```
+
+The code for the local timezone can be found in https://github.com/nayarsystems/posix_tz_db/blob/master/zones.csv
 
 In `hp_stepping_float.h`, the `hp_stepping_interpolation_t` type is an enumerator that defines the move path between origin and target in the following way:
 
