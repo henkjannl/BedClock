@@ -2,7 +2,7 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="710"
+   width="1070"
    height="203.29376"
    id="svg2"
    version="1.1"
@@ -27,9 +27,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.52206948"
-     inkscape:cx="377.34441"
-     inkscape:cy="67.040885"
+     inkscape:zoom="1.0785047"
+     inkscape:cx="623.08493"
+     inkscape:cy="196.56846"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
      showgrid="false"
@@ -65,7 +65,7 @@
      inkscape:label="Background"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(373.90326,51.161568)"
+     transform="translate(373.90326,51.161573)"
      style="display:inline">
     <g
        transform="matrix(10,0,0,10,-368.90326,111.89719)"
@@ -1845,7 +1845,7 @@
        sodipodi:nodetypes="cccc" />
     <path
        style="fill:none;stroke:#ff1919;stroke-width:10;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 482.41713,38.406356 c 19.4179,0 5.2348,-103.6263 20.2106,-103.6263 14.9758,0 13.5004,3.81318 29.125,3.81318 15.6247,0 20.4979,-3.08665 30.4119,-3.18413 9.914,-0.097 10.484,2.6984 20.2525,2.99725"
+       d="m 482.41713,38.406356 c 19.4179,0 29.99998,-105.017115 39.99998,-105.017115 10,0 10,9.278753 20,9.278753 10,0 9.83352,-7.161408 19.74752,-7.258888 9.914,-0.097 10.25248,2.99725 20.2525,2.99725"
        id="path3806"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="czzzc" />
@@ -1858,7 +1858,7 @@
      transform="translate(482.58289,124.6524)">
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:0%;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;display:inline;fill:#557dff;fill-opacity:1;stroke:none;stroke-width:10"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:0%;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;display:inline;fill:#808080;fill-opacity:1;stroke:none;stroke-width:10"
        x="-428.09647"
        y="-114.36334"
        id="text3833"><tspan
@@ -1866,21 +1866,21 @@
          id="tspan3835"
          x="-428.09647"
          y="-114.36334"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';stroke-width:10;fill:#557dff">ST_LINEAR</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';fill:#808080;stroke-width:10">ST_LINEAR</tspan></text>
     <text
        id="text3837"
        y="-114.36334"
        x="-307.37366"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:0%;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;display:inline;fill:#557dff;fill-opacity:1;stroke:none;stroke-width:10"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:0%;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;display:inline;fill:#808080;fill-opacity:1;stroke:none;stroke-width:10"
        xml:space="preserve"><tspan
          y="-114.36334"
          x="-307.37366"
          id="tspan3839"
          sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';stroke-width:10;fill:#557dff">ST_CYCLOID</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';fill:#808080;stroke-width:10">ST_CYCLOID</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:0%;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;display:inline;fill:#557dff;fill-opacity:1;stroke:none;stroke-width:10"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:0%;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;display:inline;fill:#808080;fill-opacity:1;stroke:none;stroke-width:10"
        x="-187.62856"
        y="-114.36334"
        id="text3841"><tspan
@@ -1888,32 +1888,32 @@
          id="tspan3843"
          x="-187.62856"
          y="-114.36334"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';stroke-width:10;fill:#557dff">ST_SPRING</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';fill:#808080;stroke-width:10">ST_SPRING</tspan></text>
     <text
        id="text3845"
        y="-114.36334"
        x="-67.799759"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:0%;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;display:inline;fill:#557dff;fill-opacity:1;stroke:none;stroke-width:10"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:0%;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;display:inline;fill:#808080;fill-opacity:1;stroke:none;stroke-width:10"
        xml:space="preserve"><tspan
          y="-114.36334"
          x="-67.799759"
          id="tspan3847"
          sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';stroke-width:10;fill:#557dff">ST_CLICK</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';fill:#808080;stroke-width:10">ST_CLICK</tspan></text>
     <text
        id="text3849"
        y="-114.36334"
        x="52.869801"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:0%;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;display:inline;fill:#557dff;fill-opacity:1;stroke:none;stroke-width:10"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:0%;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;display:inline;fill:#808080;fill-opacity:1;stroke:none;stroke-width:10"
        xml:space="preserve"><tspan
          y="-114.36334"
          x="52.869801"
          id="tspan3851"
          sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';stroke-width:10;fill:#557dff">ST_ACCEL</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';fill:#808080;stroke-width:10">ST_ACCEL</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:0%;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;display:inline;fill:#557dff;fill-opacity:1;stroke:none;stroke-width:10"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:0%;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;display:inline;fill:#808080;fill-opacity:1;stroke:none;stroke-width:10"
        x="172.341"
        y="-114.36334"
        id="text3853"><tspan
@@ -1921,21 +1921,21 @@
          id="tspan3855"
          x="172.341"
          y="-114.36334"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';stroke-width:10;fill:#557dff">ST_DAMPED</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';fill:#808080;stroke-width:10">ST_DAMPED</tspan></text>
     <text
        id="text3857"
        y="-114.36334"
        x="292.13937"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:0%;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;display:inline;fill:#557dff;fill-opacity:1;stroke:none;stroke-width:10"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:0%;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;display:inline;fill:#808080;fill-opacity:1;stroke:none;stroke-width:10"
        xml:space="preserve"><tspan
          y="-114.36334"
          x="292.13937"
          id="tspan3859"
          sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';stroke-width:10;fill:#557dff">ST_BOUNCE</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';fill:#808080;stroke-width:10">ST_BOUNCE</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:0%;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#557dff;fill-opacity:1;stroke:none;stroke-width:10"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:0%;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#808080;fill-opacity:1;stroke:none;stroke-width:10"
        x="411.96054"
        y="-114.36334"
        id="text3861"><tspan
@@ -1943,10 +1943,10 @@
          id="tspan5613"
          x="411.96054"
          y="-114.36334"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';stroke-width:10;fill:#557dff">ST_BOW</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';fill:#808080;stroke-width:10">ST_BOW</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:0%;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;display:inline;fill:#557dff;fill-opacity:1;stroke:none;stroke-width:10"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:0%;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;display:inline;fill:#808080;fill-opacity:1;stroke:none;stroke-width:10"
        x="532.50842"
        y="-114.36334"
        id="text3865"><tspan
@@ -1954,7 +1954,7 @@
          id="tspan3867"
          x="532.50842"
          y="-114.36334"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';stroke-width:10;fill:#557dff">ST_STEP</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';fill:#808080;stroke-width:10">ST_STEP</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"

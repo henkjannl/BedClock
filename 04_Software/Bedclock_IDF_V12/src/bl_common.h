@@ -12,7 +12,8 @@
 #include <esp_log.h>
 
 #define cm_tag "common"
-#define nvs_namespace "bl_backlight"
+
+#define nvs_namespace "bl_backlight" // for non volatile storage
 
 /* Selected item:
   0: Sleep mode
@@ -132,7 +133,7 @@ void common_init() {
             ESP_LOGI(cm_tag, "Error (%s) reading!\n", esp_err_to_name(err));
     }
 
-    err = nvs_get_u8(nvs_handle, "display_intensity", &common_settings.display_intensity);
+    err = nvs_get_u8(nvs_handle, "disp_int", &common_settings.display_intensity);
 
     switch (err) {
         case ESP_OK:
@@ -173,10 +174,38 @@ void common_save() {
 
   if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
     // Write
-    nvs_set_u8(nvs_handle, "led_intensity", common_settings.led_intensity);
-    nvs_set_u8(nvs_handle, "led_color",     common_settings.led_color);
-    nvs_set_u8(nvs_handle, "led_timer",     common_settings.led_timer);
-    nvs_set_u8(nvs_handle, "display_intensity", common_settings.display_intensity);
+    nvs_set_u8(nvs_handle, "led_intensity",     common_settings.led_intensity    );
+    nvs_set_u8(nvs_handle, "led_color",         common_settings.led_color        );
+    nvs_set_u8(nvs_handle, "led_timer",         common_settings.led_timer        );
+    err = nvs_set_u8(nvs_handle, "disp_int", common_settings.display_intensity);
+
+    switch (err) {
+        case ESP_OK:
+            ESP_LOGI(cm_tag, "Display intensity written to NVS");
+            break;
+        case ESP_FAIL:
+            ESP_LOGI(cm_tag, "Display intensity error ESP_FAIL");
+            break;
+        case ESP_ERR_NVS_INVALID_HANDLE:
+            ESP_LOGI(cm_tag, "Display intensity error ESP_ERR_NVS_INVALID_HANDLE");
+            break;
+        case ESP_ERR_NVS_READ_ONLY:
+            ESP_LOGI(cm_tag, "Display intensity error ESP_ERR_NVS_READ_ONLY");
+            break;
+        case ESP_ERR_NVS_INVALID_NAME:
+            ESP_LOGI(cm_tag, "Display intensity error ESP_ERR_NVS_INVALID_NAME");
+            break;
+        case ESP_ERR_NVS_NOT_ENOUGH_SPACE:
+            ESP_LOGI(cm_tag, "Display intensity error ESP_ERR_NVS_NOT_ENOUGH_SPACE");
+            break;
+        case ESP_ERR_NVS_REMOVE_FAILED:
+            ESP_LOGI(cm_tag, "Display intensity error ESP_ERR_NVS_REMOVE_FAILED");
+            break;
+        default :
+            ESP_LOGI(cm_tag, "Error (%s) reading!\n", esp_err_to_name(err));
+    }
+
+    nvs_commit(nvs_handle);
     common_settings.settings_changed = false;
 
     xSemaphoreGive(mutex_change_settings);

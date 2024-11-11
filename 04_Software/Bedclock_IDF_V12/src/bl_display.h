@@ -17,10 +17,6 @@
 #define MAX_DISPLAY_ITEM 6
 #define dp_tag "display"
 
-// Global variables that manage screen animation
-hp_stepping_float_t screen_y;
-hp_stepping_float_t indicator_y;
-
 /* ===================================
      Bitmaps to build up the screen
    ===================================*/
@@ -170,20 +166,25 @@ void display_refresh(int16_t y, uint8_t indicator_y) {
     x = 64-(hp_bitmap_text_width(buffer, num_chars)>>1);
     hp_bitmap_draw_text(x, y+7, buffer, num_chars);
     hp_bitmap_draw_bitmap(&labels, 10, y+36);
-    hp_bitmap_draw_bitmap(&indicator, 0, y+indicator_y);
+    // hp_bitmap_draw_bitmap(&indicator, 0, y+indicator_y);
+    hp_bitmap_draw_bitmap(&circle_closed, 0, y+indicator_y);
 
     // Draw circles
     for(uint8_t i=0; i<COMMON_MAX_LED_INTENSITY+1; i++)
-        hp_bitmap_draw_bitmap( (i==settings.led_intensity) ? &circle_closed : &circle_open, 58+10*i, y+36);
+        hp_bitmap_draw_bitmap( (i==settings.led_intensity) ? &circle_closed : &circle_open,
+            58+10*i, y+Y_IND[2]);
 
     for(uint8_t i=0; i<COMMON_MAX_LED_COLOR+1; i++)
-        hp_bitmap_draw_bitmap( (i==settings.led_color) ? &circle_closed : &circle_open, 58+10*i, y+48);
+        hp_bitmap_draw_bitmap( (i==settings.led_color) ? &circle_closed : &circle_open,
+            58+10*i, y+Y_IND[3]);
 
     for(uint8_t i=0; i<COMMON_MAX_LED_TIMER+1; i++)
-        hp_bitmap_draw_bitmap( (i==settings.led_timer) ? &circle_closed : &circle_open, 58+10*i, y+60);
+        hp_bitmap_draw_bitmap( (i==settings.led_timer) ? &circle_closed : &circle_open,
+            58+10*i, y+Y_IND[4]);
 
     for(uint8_t i=0; i<COMMON_MAX_DISPLAY_INTENSITY+1; i++)
-        hp_bitmap_draw_bitmap( (i==settings.display_intensity) ? &circle_closed : &circle_open, 58+10*i, y+72);
+        hp_bitmap_draw_bitmap( (i==settings.display_intensity) ? &circle_closed : &circle_open,
+            58+10*i, y+Y_IND[5]);
 
     // Upload the pixel buffer to the SSD1306
     hp_bitmap_write_canvas(panel_handle);
@@ -191,10 +192,14 @@ void display_refresh(int16_t y, uint8_t indicator_y) {
 
 void task_display(void *z)
 {
-    common_command_t cmd = CMD_NONE;
-    hp_timer_t sleep_timer;
-    hp_timer_init_ms(&sleep_timer, 20000, false);
     bool refresh_display = true;
+    bool animation_still_running = false;
+    common_command_t cmd = CMD_NONE;
+    hp_timer_t sleep_timer;          hp_timer_init_ms(&sleep_timer, 20000, false);
+    hp_stepping_float_t screen_y;    hp_stepping_float_init(&screen_y, 26, 0, 25, ST_CLICK);
+    hp_stepping_float_t indicator_y; hp_stepping_float_init(&indicator_y, 36, 36, 16, ST_SPRING);
+
+    // display_refresh( (int16_t) screen_y.value, (int16_t) indicator_y.value);
 
     while(true) {
 
@@ -211,9 +216,9 @@ void task_display(void *z)
                         // Move the display to a new target
 
                         hp_stepping_float_target(&screen_y, Y_POS[common_settings.selected_item],
-                            common_settings.selected_item==0 ? 20 : 8);
+                            common_settings.selected_item==0 ? 20 : 10);
                         if (common_settings.selected_item>1) hp_stepping_float_target(&indicator_y,
-                            Y_IND[common_settings.selected_item],  8);
+                            Y_IND[common_settings.selected_item],  6);
 
                         xSemaphoreGive(mutex_change_settings);
                     }
@@ -341,7 +346,7 @@ void task_display(void *z)
             refresh_display = true;
         } // if(hp_timer_lapsed(&sleep_timer))
 
-        //Refresh display if minute has changed
+        // Refresh display if minute has changed
         if(common_settings.selected_item>0) {
             time_t now = 0;
             struct tm timeinfo = { 0 };
@@ -355,17 +360,23 @@ void task_display(void *z)
             }
         }
 
-        // Also update display if animation is still going on
+        // Also refresh display if animation is still going on
+        // Not a pretty solution, but before introducing animation_still_running,
+        // the last frame of the animation was not shown
         hp_stepping_float_step(&screen_y);
-        if(!hp_stepping_float_finished(&screen_y)) refresh_display=true;
-
         hp_stepping_float_step(&indicator_y);
-        if(!hp_stepping_float_finished(&indicator_y)) refresh_display=true;
+        if(!hp_stepping_float_finished(&screen_y)) animation_still_running=true;
+        if(!hp_stepping_float_finished(&indicator_y)) animation_still_running=true;
+        if(animation_still_running) refresh_display = true;
 
         if(refresh_display) {
             display_refresh( (int16_t) screen_y.value, (int16_t) indicator_y.value );
             refresh_display = false;
         } // if(refresh_display) {
+
+        // After refreshing display, decide if animation has stopped
+        if(hp_stepping_float_finished(&screen_y)) animation_still_running=false;
+        if(hp_stepping_float_finished(&indicator_y)) animation_still_running=false;
 
         vTaskDelay(pdMS_TO_TICKS(2));
     } // while true
@@ -382,22 +393,6 @@ void display_init() {
     esp_lcd_panel_reset(panel_handle);
     esp_lcd_panel_init(panel_handle);
     esp_lcd_panel_disp_on_off(panel_handle, true);
-
-    screen_y.start  =    26;
-    screen_y.target =     0;
-    screen_y.steps  =    25;
-    screen_y.interpolation = ST_SPRING;
-    screen_y.step   =     0;
-    screen_y.value  =    26;
-
-    indicator_y.start  = 36;
-    indicator_y.target = 36;
-    indicator_y.steps  = 16;
-    indicator_y.interpolation = ST_CLICK;
-    indicator_y.step   = 0;
-    indicator_y.value  = 36;
-
-    display_refresh( (int16_t) screen_y.value, (int16_t) indicator_y.value);
 
     xTaskCreatePinnedToCore(task_display, "task_display", 4096, NULL, 1, NULL, 0);
 }

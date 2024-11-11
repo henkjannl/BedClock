@@ -38,11 +38,46 @@ To do:
 
 void app_main()
 {
+
+/*
+    // Test stepping module
+    hp_stepping_float_t sf_linear;   hp_stepping_float_init(&sf_linear,  0, 1, 100, ST_LINEAR );
+    hp_stepping_float_t sf_cycloid;  hp_stepping_float_init(&sf_cycloid, 0, 1, 100, ST_CYCLOID);
+    hp_stepping_float_t sf_spring;   hp_stepping_float_init(&sf_spring,  0, 1, 100, ST_SPRING );
+    hp_stepping_float_t sf_click;    hp_stepping_float_init(&sf_click,   0, 1, 100, ST_CLICK  );
+    hp_stepping_float_t sf_accel;    hp_stepping_float_init(&sf_accel,   0, 1, 100, ST_ACCEL  );
+    hp_stepping_float_t sf_damped;   hp_stepping_float_init(&sf_damped,  0, 1, 100, ST_DAMPED );
+    hp_stepping_float_t sf_bounce;   hp_stepping_float_init(&sf_bounce,  0, 1, 100, ST_BOUNCE );
+    hp_stepping_float_t sf_bow;      hp_stepping_float_init(&sf_bow,     0, 1, 100, ST_BOW    );
+    hp_stepping_float_t sf_step;     hp_stepping_float_init(&sf_step,    0, 1, 100, ST_STEP   );
+
+    float o[9];
+
+    for(uint8_t i=0; i<101; i++) {
+        o[0] = hp_stepping_float_step(&sf_linear);
+        o[1] = hp_stepping_float_step(&sf_cycloid);
+        o[2] = hp_stepping_float_step(&sf_spring);
+        o[3] = hp_stepping_float_step(&sf_click);
+        o[4] = hp_stepping_float_step(&sf_accel);
+        o[5] = hp_stepping_float_step(&sf_damped);
+        o[6] = hp_stepping_float_step(&sf_bounce);
+        o[7] = hp_stepping_float_step(&sf_bow);
+        o[8] = hp_stepping_float_step(&sf_step);
+
+        printf("%d,%f,%f,%f,%f,%f,%f,%f,%f,%f\n",
+        i, o[0], o[1], o[2], o[3], o[4], o[5], o[6], o[7], o[8]);
+    }
+    printf("\n\n\n");
+
+    while(true) {};
+*/
+
     common_init();    // initialize queues and read settings from non volatile storage
     time_init();      // sync clock with timeserver
     display_init();
     keyboard_init();
     light_init();
+
 
     while(true) {
         ESP_LOGI(mn_tag, "Main blip. %s", debug);
