@@ -126,7 +126,6 @@ void task_light(void *arg) {
 
     common_command_t cmd;
     bool update_light = true;
-    bool led_on = false;
 
     hp_stepping_float_t red   = HP_STEPPING_FLOAT_INIT;
     hp_stepping_float_t green = HP_STEPPING_FLOAT_INIT;
@@ -144,24 +143,29 @@ void task_light(void *arg) {
 
             switch(cmd) {
                 case CMD_BTN_TOP_PRESSED:
-                    led_on = !led_on;
-                    ESP_LOGI(lt_tag, "Light manually switched %s", led_on ? "on" : "off");
-                    hp_timer_reset(&led_off_timer);
+                    // Single bit does not need protection by semaphore
+                    common_settings.led_on = !common_settings.led_on;
 
-                    // Notify the screen so the clock is displayed as well
-                    // since we are emitting light anyway
-                    if(led_on) queue_send_message(display_queue, CMD_LIGHT_SWITCHED_ON);
+                    if(common_settings.led_on) {
+                        ESP_LOGI(lt_tag, "Light manually switched on");
+                        queue_send_message(display_queue, CMD_LIGHT_SWITCHES_ON);
+                        hp_timer_reset(&led_off_timer);
+                    } else {
+                        ESP_LOGI(lt_tag, "Light manually switched off");
+                        queue_send_message(display_queue, CMD_LIGHT_SWITCHES_OFF);
+                    }
                     update_light = true;
                 break;
 
                 case CMD_ADJUST_LIGHT:
                     ESP_LOGI(lt_tag, "Display is adjusting the light, switch it on to show the effect");
-                    led_on = true;
+                    common_settings.led_on = true;
                     hp_timer_reset(&led_off_timer);
                     update_light = true;
                 break;
 
-                case CMD_SETTINGS_CHANGED:
+                case CMD_TIMER_CHANGED:
+                    // Timer is changed, but light settings remain the same
                     hp_timer_reset(&led_off_timer);
                     update_light = true;
                 break;
@@ -173,7 +177,10 @@ void task_light(void *arg) {
 
         if(hp_timer_lapsed(&led_off_timer)) {
             ESP_LOGI(lt_tag, "Light switched off by timer");
-            led_on = false;
+            common_settings.led_on = false;
+
+            // Notify the screen so the clock can switch off too
+            queue_send_message(display_queue, CMD_LIGHT_SWITCHES_OFF);
             update_light = true;
         } // if(hp_timer_lapsed(&led_off_timer)) {
 
@@ -185,7 +192,7 @@ void task_light(void *arg) {
                 xSemaphoreGive(mutex_change_settings);
             }
 
-            if(led_on) {
+            if(common_settings.led_on) {
                 hp_stepping_float_target(&red,   LED_INTENSITY[copy_of_settings.led_intensity]*
                                                 LED_MAX_BRIGHTNESS*
                                                 LED_COLORS[copy_of_settings.led_color].r, 500);
@@ -198,9 +205,9 @@ void task_light(void *arg) {
                                                 LED_MAX_BRIGHTNESS*
                                                 LED_COLORS[copy_of_settings.led_color].b, 500);
             } else {
-                hp_stepping_float_target(&red,   0, 1500);
-                hp_stepping_float_target(&green, 0, 1500);
-                hp_stepping_float_target(&blue,  0, 1500);
+                hp_stepping_float_target(&red,   0, 2000);
+                hp_stepping_float_target(&green, 0, 2000);
+                hp_stepping_float_target(&blue,  0, 2000);
             }
             // ESP_LOGI(lt_tag, "R: %.3f G: %.3f B: %.3f", red.target, green.target, blue.target);
             // for(int i=0; i<20; i++)

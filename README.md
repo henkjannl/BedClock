@@ -137,7 +137,7 @@ The last code is the timezone definition of Amsterdam. Codes for other locations
 In `hp_stepping_float.h`, the `hp_stepping_interpolation_t` type is an enumerator that defines the move path between origin and target in the following way:
 
 <p align="center">
-    <img src="01 System/Move profiles/Move.png" alt="drawing" width="800"/>
+    <img src="01 System/Move profiles/Move.png" alt="drawing" width="950"/>
 </p>
 
 ### Issues

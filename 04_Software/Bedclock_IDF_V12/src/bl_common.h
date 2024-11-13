@@ -35,8 +35,9 @@ typedef enum {
   CMD_BTN_LEFT_PRESSED,
   CMD_BTN_TOP_PRESSED,
   CMD_BTN_RIGHT_PRESSED,
-  CMD_SETTINGS_CHANGED,
-  CMD_LIGHT_SWITCHED_ON,
+  CMD_TIMER_CHANGED,
+  CMD_LIGHT_SWITCHES_ON,
+  CMD_LIGHT_SWITCHES_OFF,
   CMD_ADJUST_LIGHT,
   CMD_RESET_DISPLAY
 } common_command_t;
@@ -46,23 +47,25 @@ typedef struct {
     uint8_t led_color;
     uint8_t led_timer;
     uint8_t display_intensity;
-    uint8_t selected_item;  // not stored in non volatile storage
+
+    // not stored in non volatile storage
+    bool led_on;
+    uint8_t selected_item;
     bool settings_changed;  // determines if we need to save data to non volatile storage
 } common_settings_t;
 
+// Global variables
 char debug[128] = "";
-
-// ### GLOBAL TYPES ##
-
 SemaphoreHandle_t mutex_change_settings;
 
-// Must be protected by a semaphore
-// Default values are defined here
 common_settings_t common_settings = {
     .led_intensity=0,
     .led_color = 0,
     .led_timer = 3,
     .display_intensity = COMMON_MAX_DISPLAY_INTENSITY,
+
+    // Not stored in non volatile storage
+    .led_on = false,
     .selected_item = 1,
     .settings_changed = false
 };
@@ -70,10 +73,100 @@ common_settings_t common_settings = {
 QueueHandle_t display_queue; // Commands for the display
 QueueHandle_t light_queue;   // Commands for the light
 
+// Helper function to send a command from one process to another
 void queue_send_message(QueueHandle_t queue, common_command_t cmd) {
     xQueueSend(queue, &cmd, pdMS_TO_TICKS(0));
 }
 
+// Change individual settings
+bool common_increment_led_intensity() {
+    if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
+        common_settings.led_intensity++;
+        if(common_settings.led_intensity>COMMON_MAX_LED_INTENSITY)
+            common_settings.led_intensity=0;
+        common_settings.settings_changed = true;
+        xSemaphoreGive(mutex_change_settings);
+        return true;
+    }
+    else return false; // No success in changing value
+}
+
+bool common_increment_led_color() {
+    if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
+        common_settings.led_color++;
+        if(common_settings.led_color>COMMON_MAX_LED_COLOR)
+            common_settings.led_color=0;
+        common_settings.settings_changed = true;
+        xSemaphoreGive(mutex_change_settings);
+        return true;
+    }
+    else return false; // No success in changing value
+}
+
+bool common_increment_led_timer() {
+    if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
+        common_settings.led_timer++;
+        if(common_settings.led_timer>COMMON_MAX_LED_TIMER)
+            common_settings.led_timer=0;
+        common_settings.settings_changed = true;
+        xSemaphoreGive(mutex_change_settings);
+        return true;
+    }
+    else return false; // No success in changing value
+}
+
+bool common_increment_display_intensity() {
+    if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
+        common_settings.display_intensity++;
+        if(common_settings.display_intensity>COMMON_MAX_DISPLAY_INTENSITY)
+            common_settings.display_intensity=0;
+        common_settings.settings_changed = true;
+        xSemaphoreGive(mutex_change_settings);
+        return true;
+    }
+    else return false; // No success in changing value
+}
+
+bool common_change_led_on(bool led_on) {
+    if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
+        common_settings.led_on=led_on;
+        xSemaphoreGive(mutex_change_settings);
+        return true;
+    }
+    else return false;
+}
+
+bool common_change_selected_item(uint8_t selected_item) {
+    if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
+        common_settings.selected_item=selected_item;
+        xSemaphoreGive(mutex_change_settings);
+        return true;
+    }
+    else return false;
+}
+
+bool common_increment_selected_item() {
+    if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
+        common_settings.selected_item++;
+        // Do not switch back to 0, but show clock
+        if(common_settings.selected_item>COMMON_MAX_SELECTED_ITEM)
+            common_settings.selected_item=1;
+        xSemaphoreGive(mutex_change_settings);
+        return true;
+    }
+    else return false;
+}
+
+uint8_t common_get_selected_item() {
+    uint8_t result = 0;
+    if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
+        result = common_settings.selected_item;
+        xSemaphoreGive(mutex_change_settings);
+    }
+    return result;
+}
+
+// Loading data from non volatile storage
 void common_init() {
     mutex_change_settings = xSemaphoreCreateMutex();
     display_queue = xQueueCreate(20, sizeof(common_command_t));
@@ -153,6 +246,7 @@ void common_init() {
   nvs_close(nvs_handle);
 }
 
+// Saving data to non volatile storage
 void common_save() {
   // Only save settings if settings were changed
   // single boolean can be read without using semaphore

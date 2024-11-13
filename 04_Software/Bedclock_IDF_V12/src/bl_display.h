@@ -208,20 +208,14 @@ void task_display(void *z)
                 case CMD_BTN_LEFT_PRESSED:
                     ESP_LOGI(dp_tag, "item received BTN_LEFT");
                     hp_timer_reset(&sleep_timer);
-                    if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
-                        common_settings.selected_item++;
-                        if(common_settings.selected_item>COMMON_MAX_SELECTED_ITEM)
-                            common_settings.selected_item=1;
+                    common_increment_selected_item();
 
-                        // Move the display to a new target
+                    // Move the display to a new target
+                    uint8_t selected_item = common_get_selected_item();
 
-                        hp_stepping_float_target(&screen_y, Y_POS[common_settings.selected_item],
-                            common_settings.selected_item==0 ? 20 : 10);
-                        if (common_settings.selected_item>1) hp_stepping_float_target(&indicator_y,
-                            Y_IND[common_settings.selected_item],  6);
+                    hp_stepping_float_target(&screen_y, Y_POS[selected_item], selected_item==0 ? 20 : 10);
+                    if (selected_item>1) hp_stepping_float_target(&indicator_y, Y_IND[selected_item],  6);
 
-                        xSemaphoreGive(mutex_change_settings);
-                    }
                     refresh_display = true;
                 break;
 
@@ -229,77 +223,39 @@ void task_display(void *z)
                     ESP_LOGI(dp_tag, "item received BTN_RIGHT");
                     hp_timer_reset(&sleep_timer);
 
-                    switch(common_settings.selected_item) {
+                    switch(common_get_selected_item()) {
 
                         case 0: // Wake up clock
                             ESP_LOGI(dp_tag, "Wake up clock on right button");
-                            if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
-                                common_settings.selected_item=1;
-                                xSemaphoreGive(mutex_change_settings);
-                            }
+                            common_change_selected_item(1);
                             hp_stepping_float_target(&screen_y, Y_POS[1], 8);
                             refresh_display = true;
                             break;
 
                         case 2: // Modify LED intensity
                             ESP_LOGI(dp_tag, "Increase LED intensity");
-                            if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
-                                common_settings.led_intensity++;
-                                if(common_settings.led_intensity>COMMON_MAX_LED_INTENSITY)
-                                    common_settings.led_intensity=0;
-                                common_settings.settings_changed = true;
-                                xSemaphoreGive(mutex_change_settings);
-                            }
-
-                            // Report to the light that settings were changed
-                            // queue_send_message(light_queue, CMD_SETTINGS_CHANGED);
+                            common_increment_led_intensity();
                             queue_send_message(light_queue, CMD_ADJUST_LIGHT);
-
                             refresh_display = true;
                         break;
 
                         case 3: // Modify LED color
                             ESP_LOGI(dp_tag, "Increase LED color");
-                            if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
-                                common_settings.led_color++;
-                                if(common_settings.led_color>COMMON_MAX_LED_COLOR)
-                                    common_settings.led_color=0;
-                                common_settings.settings_changed = true;
-                                xSemaphoreGive(mutex_change_settings);
-                            }
-                            // Report to the light that settings were changed
-                            // queue_send_message(light_queue, CMD_SETTINGS_CHANGED);
+                            common_increment_led_color();
                             queue_send_message(light_queue, CMD_ADJUST_LIGHT);
-
                             refresh_display = true;
                         break;
 
                         case 4: // Modify LED timer
                             ESP_LOGI(dp_tag, "Increase LED timer");
-                            if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
-                                common_settings.led_timer++;
-                                if(common_settings.led_timer>COMMON_MAX_LED_TIMER)
-                                    common_settings.led_timer=0;
-                                common_settings.settings_changed = true;
-                                xSemaphoreGive(mutex_change_settings);
-                            }
-
-                            // Report to the light that settings were changed
-                            queue_send_message(light_queue, CMD_SETTINGS_CHANGED);
-
+                            common_increment_led_timer();
+                            queue_send_message(light_queue, CMD_TIMER_CHANGED);
                             refresh_display = true;
                         break;
 
                         case 5: // Modify display intensity
                             ESP_LOGI(dp_tag, "Modify display intensity");
-                            if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
-                                common_settings.display_intensity++;
-                                if(common_settings.display_intensity>COMMON_MAX_DISPLAY_INTENSITY)
-                                    common_settings.display_intensity=0;
-                                common_settings.settings_changed = true;
-                                xSemaphoreGive(mutex_change_settings);
-                            }
-
+                            common_increment_led_intensity();
                             refresh_display = true;
                         break;
 
@@ -309,16 +265,22 @@ void task_display(void *z)
                     } // case CMD_BTN_RIGHT_PRESSED -> switch(common_settings.selected_item) {
                 break;
 
-                case CMD_LIGHT_SWITCHED_ON:
-                    // If the user switches the light on, the clock will also be displayed
-                    if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
-                        if(common_settings.selected_item==0) {
-                            common_settings.selected_item=1;
-                            hp_stepping_float_target(&screen_y,  Y_POS[1], 8);
-                            hp_timer_reset(&sleep_timer);
-                            refresh_display = true;
-                        }
-                        xSemaphoreGive(mutex_change_settings);
+                case CMD_LIGHT_SWITCHES_ON:
+                    ESP_LOGI(dp_tag, "Light switches on, show clock");
+                    if( common_get_selected_item()==0 ) {
+                        common_change_selected_item(1);
+                        hp_stepping_float_target(&screen_y, Y_POS[1], 30);
+                        refresh_display = true;
+                    }
+                break;
+
+
+                case CMD_LIGHT_SWITCHES_OFF:
+                    ESP_LOGI(dp_tag, "Light switches off, remove clock too");
+                    if( common_get_selected_item()==1 ) {
+                        common_change_selected_item(0);
+                        hp_stepping_float_target(&screen_y, Y_POS[0], 15);
+                        refresh_display = true;
                     }
                 break;
 
@@ -328,19 +290,16 @@ void task_display(void *z)
                 break;
 
                 default:
-                    ESP_LOGI(dp_tag, "Received unknown button");
+                    ESP_LOGI(dp_tag, "Received handled button");
             } // switch(cmd) {
         } // if (xQueueReceive(display_queue
 
         if(hp_timer_lapsed(&sleep_timer)) {
             ESP_LOGI(dp_tag, "Display back to sleep");
-            if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
-                common_settings.selected_item=0;
-                xSemaphoreGive(mutex_change_settings);
-            }
+            common_change_selected_item(0);
             hp_stepping_float_target(&screen_y, Y_POS[0], 15);
 
-            // Check if settings were changed
+            // Check if we need to save settings
             common_save();
 
             refresh_display = true;
@@ -383,7 +342,6 @@ void task_display(void *z)
 } // void task_display(void *z)
 
 void display_init() {
-
     // Initialize the OLED display
     ESP_ERROR_CHECK(i2c_param_config(MN_I2C_HOST_ID, &conf));
     ESP_ERROR_CHECK(i2c_driver_install(MN_I2C_HOST_ID, I2C_MODE_MASTER, 0, 0, 0));
