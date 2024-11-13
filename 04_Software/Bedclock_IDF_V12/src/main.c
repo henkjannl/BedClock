@@ -12,11 +12,12 @@
 #include "bl_light.h"
 #include "hp_timer.h"
 
-const char *VERSION = "v1.1.0";  // Example version string
+const char *VERSION = "v1.2.0";  // Example version string
 
 /*
 Version history
     v1.1.0 Included version number and splash screen
+    v1.2.0 Pressing left and right buttons resets the device instead of the display
 
 Different sub-projects to port the Arduino project to ESP-IDF
     Bedclock_IDF_V01 : Test WS2812 led chain

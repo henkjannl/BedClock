@@ -87,10 +87,12 @@ void task_keyboard(void *arg)
 
             // Left and right buttons were pressed together
             last_time_right_pressed = esp_timer_get_time();
-            if( (last_time_right_pressed-last_time_left_pressed) < PRESSED_TOGETHER_THRESHOLD)
-                queue_send_message(display_queue, CMD_RESET_DISPLAY);
-            else
+            if( (last_time_right_pressed-last_time_left_pressed) < PRESSED_TOGETHER_THRESHOLD) {
+                // queue_send_message(display_queue, CMD_RESET_DISPLAY);
+                esp_restart();
+            } else {
                 queue_send_message(display_queue, CMD_BTN_RIGHT_PRESSED);
+            }
         }
 
         vTaskDelay(pdMS_TO_TICKS(50));
