@@ -5,16 +5,25 @@
 #include <stdio.h>
 #include <math.h>
 
+/**
+ * @file hp_stepping_float.h
+ * @brief generates smoothly transitioning values for animations
+ *
+ * Can be used for single shot timers or for looping (auto reset) timers
+ * Beware that an auto reset timer will only be reset if and when
+ * hp_timer_has_lapsed() or hp_timer_lapsed() are called.
+*/
+
 typedef enum {
-    ST_LINEAR,
-    ST_CYCLOID,
-    ST_SPRING,
-    ST_CLICK,
-    ST_ACCEL,
-    ST_DAMPED,
-    ST_BOUNCE,
-    ST_BOW,
-    ST_STEP
+    ST_LINEAR,  // Moves from start to target linearly
+    ST_CYCLOID, // Smooth transition without overshoot
+    ST_SPRING,  // Fast begin and some overshoot before target
+    ST_CLICK,   // Overshoot at start and end
+    ST_ACCEL,   // Move to target with increasing speed
+    ST_DAMPED,  // Move to target with decreasing speed
+    ST_BOUNCE,  // Move to target and then bounce back twice
+    ST_BOW,     // Overshoot at beginning and then accelerate to target
+    ST_STEP     // Quick movement to target with overshoot twice
  } hp_stepping_interpolation_t;
 
 typedef struct {
@@ -37,6 +46,15 @@ const hp_stepping_float_t HP_STEPPING_FLOAT_INIT = {
     .value  = 0
 };
 
+/**
+ * @brief Initializes the stepper with an interval in microseconds
+ *
+ * @param hp_stepping_float stepper handle
+ * @param start returned value at the beginning of the interval
+ * @param target returned value at the end of the interval
+ * @param steps number of discrete steps that the interval takes
+ * @param interpolation type of trajectory
+ */
 void hp_stepping_float_init(hp_stepping_float_t * hp_stepping_float,
                             float start,
                             float target,
@@ -50,6 +68,13 @@ void hp_stepping_float_init(hp_stepping_float_t * hp_stepping_float,
     hp_stepping_float->step = 0;
 };
 
+/**
+ * @brief Change the target value of the stepper
+ *
+ * @param hp_stepping_float stepper handle
+ * @param target returned value at the end of the interval
+ * @param steps number of discrete steps that the interval takes
+ */
 void hp_stepping_float_target(hp_stepping_float_t * hp_stepping_float, float target, int steps) {
     hp_stepping_float->start = hp_stepping_float->value;
     hp_stepping_float->target = target;
@@ -57,6 +82,13 @@ void hp_stepping_float_target(hp_stepping_float_t * hp_stepping_float, float tar
     hp_stepping_float->step = 0;
 };
 
+/**
+ * @brief Internal function that returns a value in a 0<=x<=1 0<=y<=1 domain
+ *
+ * @param x input value
+ * @param interpolation type of trajectory
+ * @return output value
+ */
 float hp_stepping_float_interpolation(float x, hp_stepping_interpolation_t interpolation) {
 
     // Translates (0..1) input to (0..1) output according to selected interpolation method
@@ -126,6 +158,12 @@ float hp_stepping_float_interpolation(float x, hp_stepping_interpolation_t inter
     }
 }
 
+/**
+ * @brief Calculates and returns the new return value
+ *
+ * @param hp_stepping_float stepper handle
+ * @return output value
+ */
 float hp_stepping_value(hp_stepping_float_t * hp_stepping_float) {
     hp_stepping_float->value = hp_stepping_float->start +
         (hp_stepping_float->target - hp_stepping_float->start) *
@@ -134,11 +172,23 @@ float hp_stepping_value(hp_stepping_float_t * hp_stepping_float) {
     return hp_stepping_float->value;
 }
 
+/**
+ * @brief Increases the step and calculates and returns the new return value
+ *
+ * @param hp_stepping_float stepper handle
+ * @return output value
+ */
 float hp_stepping_float_step(hp_stepping_float_t * hp_stepping_float) {
     if(hp_stepping_float->step<hp_stepping_float->steps) hp_stepping_float->step++;
     return hp_stepping_value(hp_stepping_float);
 }
 
+/**
+ * @brief Indicates if the end of the trajectory is reached
+ *
+ * @param hp_stepping_float stepper handle
+ * @return end of trajectory is reached
+ */
 bool hp_stepping_float_finished(hp_stepping_float_t * hp_stepping_float) {
     return (hp_stepping_float->step >= hp_stepping_float->steps);
 }

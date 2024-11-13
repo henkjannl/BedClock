@@ -12,7 +12,12 @@
 #include "bl_light.h"
 #include "hp_timer.h"
 
+const char *VERSION = "v1.1.0";  // Example version string
+
 /*
+Version history
+    v1.1.0 Included version number and splash screen
+
 Different sub-projects to port the Arduino project to ESP-IDF
     Bedclock_IDF_V01 : Test WS2812 led chain
     Bedclock_IDF_V02 : Test SSD1306 OLED screen
@@ -28,6 +33,7 @@ Different sub-projects to port the Arduino project to ESP-IDF
     Bedclock_IDF_V12 : First working version with graphics layout
 
 To do:
+* Include version number
 * Separate code over .h and .c files
 * Init display first, with splash screen
 * Make capacitive touch interrupt controlled
@@ -74,7 +80,7 @@ void app_main()
 
     common_init();    // initialize queues and read settings from non volatile storage
     time_init();      // sync clock with timeserver
-    display_init();
+    display_init(VERSION);
     keyboard_init();
     light_init();
 

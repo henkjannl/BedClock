@@ -94,6 +94,16 @@ void hp_set_interval_ms(hp_timer_t * timer, int64_t interval_ms) {
 }
 
 /**
+ * @brief Set the timer to lapsed without giving a response
+ *
+ * @param timer timer handle
+ */
+void hp_timer_set_lapsed(hp_timer_t * timer) {
+    timer->last_reset_time = esp_timer_get_time() - timer->interval;
+    timer->response_given = true;
+}
+
+/**
  * @brief Returns true if the interval has passed
  *        the same value will be returned if this is called multiple times.
  *        a call to this function will also reset the timer interval if

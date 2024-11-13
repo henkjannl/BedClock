@@ -55,10 +55,19 @@ uint8_t indicator_bytes[] = {
     0x00,0x00,0x1e,0x00,0x3e,0x00,0xfe,0x00,0xfe,0x01,0xfe,0x01,0xfe,0x00,0x3e,
     0x00,0x0e,0x00,0x00,0x00 };
 
+uint8_t bedClock_bytes[] = {
+    0x7e,0x00,0x40,0x3c,0x02,0x00,0x10,0x00,0x82,0x00,0x40,0x42,0x02,0x00,0x10,
+    0x00,0x82,0x00,0x40,0x42,0x02,0x00,0x10,0x00,0x82,0x78,0x7c,0x02,0xc2,0xc3,
+    0x13,0x09,0x7e,0x84,0x42,0x02,0x22,0x24,0x90,0x00,0x82,0x84,0x42,0x02,0x22,
+    0x24,0x50,0x00,0x82,0xfc,0x42,0x02,0x22,0x24,0x70,0x00,0x82,0x04,0x42,0x42,
+    0x22,0x24,0x90,0x00,0x82,0x04,0x42,0x42,0x26,0x24,0x10,0x01,0x7e,0x78,0x7c,
+    0x3c,0xcc,0xc3,0x13,0x09 };
+
 const hp_bitmap_t labels          = { .width = 48, .height = 48, .buffer = labels_bytes };
 const hp_bitmap_t circle_open     = { .width = 10, .height = 10, .buffer = circle_open_bytes };
 const hp_bitmap_t circle_closed   = { .width = 10, .height = 10, .buffer = circle_closed_bytes };
 const hp_bitmap_t indicator       = { .width = 10, .height = 10, .buffer = indicator_bytes };
+const hp_bitmap_t bedclock        = { .width = 60, .height = 10, .buffer = bedClock_bytes };
 
 const uint8_t DISPLAY_INTENSITY[] = {
     0x01,    // .display_intensity = 0
@@ -163,8 +172,8 @@ void display_refresh(int16_t y, uint8_t indicator_y) {
     display_contrast(DISPLAY_INTENSITY[settings.display_intensity]);
 
     hp_bitmap_clear_canvas();
-    x = 64-(hp_bitmap_text_width(buffer, num_chars)>>1);
-    hp_bitmap_draw_text(x, y+7, buffer, num_chars);
+    x = 64-(hp_bitmap_text_width(hp_time_font, buffer, num_chars)>>1);
+    hp_bitmap_draw_text(hp_time_font, x, y+7, buffer, num_chars);
     hp_bitmap_draw_bitmap(&labels, 10, y+36);
     // hp_bitmap_draw_bitmap(&indicator, 0, y+indicator_y);
     hp_bitmap_draw_bitmap(&circle_closed, 0, y+indicator_y);
@@ -198,8 +207,6 @@ void task_display(void *z)
     hp_timer_t sleep_timer;          hp_timer_init_ms(&sleep_timer, 20000, false);
     hp_stepping_float_t screen_y;    hp_stepping_float_init(&screen_y, 26, 0, 25, ST_CLICK);
     hp_stepping_float_t indicator_y; hp_stepping_float_init(&indicator_y, 36, 36, 16, ST_SPRING);
-
-    // display_refresh( (int16_t) screen_y.value, (int16_t) indicator_y.value);
 
     while(true) {
 
@@ -272,14 +279,19 @@ void task_display(void *z)
                         hp_stepping_float_target(&screen_y, Y_POS[1], 30);
                         refresh_display = true;
                     }
-                break;
 
+                    if( common_get_selected_item()==1 ) {
+                        // Kill the sleep timer, so clock only removed when LED switches off
+                        hp_timer_set_lapsed(&sleep_timer);
+                        ESP_LOGI(dp_tag, "hp_timer_lapsed = %s ", hp_timer_lapsed(&sleep_timer) ? "yes" : "no");
+                    }
+                break;
 
                 case CMD_LIGHT_SWITCHES_OFF:
                     ESP_LOGI(dp_tag, "Light switches off, remove clock too");
                     if( common_get_selected_item()==1 ) {
                         common_change_selected_item(0);
-                        hp_stepping_float_target(&screen_y, Y_POS[0], 15);
+                        hp_stepping_float_target(&screen_y, Y_POS[0], 30);
                         refresh_display = true;
                     }
                 break;
@@ -341,7 +353,7 @@ void task_display(void *z)
     } // while true
 } // void task_display(void *z)
 
-void display_init() {
+void display_init(const char* version) {
     // Initialize the OLED display
     ESP_ERROR_CHECK(i2c_param_config(MN_I2C_HOST_ID, &conf));
     ESP_ERROR_CHECK(i2c_driver_install(MN_I2C_HOST_ID, I2C_MODE_MASTER, 0, 0, 0));
@@ -351,6 +363,13 @@ void display_init() {
     esp_lcd_panel_reset(panel_handle);
     esp_lcd_panel_init(panel_handle);
     esp_lcd_panel_disp_on_off(panel_handle, true);
+
+    // Start with the splash screen showing the software version
+    hp_bitmap_clear_canvas();
+    hp_bitmap_draw_bitmap(&bedclock, 33, 5);
+    hp_bitmap_draw_text(hp_version_font, 33, 17, version, strlen(version));
+    hp_bitmap_write_canvas(panel_handle);
+    vTaskDelay(pdMS_TO_TICKS(3000));
 
     xTaskCreatePinnedToCore(task_display, "task_display", 4096, NULL, 1, NULL, 0);
 }

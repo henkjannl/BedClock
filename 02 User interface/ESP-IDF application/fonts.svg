@@ -23,9 +23,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="px"
-     inkscape:zoom="3.5398773"
-     inkscape:cx="57.205372"
-     inkscape:cy="69.493934"
+     inkscape:zoom="4.6923075"
+     inkscape:cx="33.459018"
+     inkscape:cy="137.03279"
      inkscape:window-width="1440"
      inkscape:window-height="830"
      inkscape:window-x="-6"
@@ -56,6 +56,13 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
+    <rect
+       style="fill:#555555;stroke-width:0.396872;-inkscape-stroke:none"
+       id="rect17"
+       width="33.866665"
+       height="8.4666662"
+       x="0"
+       y="29.368748" />
     <g
        id="g24"
        inkscape:label="c_0"
@@ -426,6 +433,340 @@
          d="m 1.8520834,11.906249 c 0,0.32079 -1.70656262,1.306075 -1.98437513,1.14568 -0.27781252,-0.160396 -0.27781252,-2.130964 0,-2.291359 0.27781251,-0.160396 1.98437513,0.824889 1.98437513,1.145679 z"
          inkscape:transform-center-x="-0.33072915"
          transform="translate(0.56720001)" />
+    </g>
+    <g
+       id="g1"
+       inkscape:label="c_0"
+       transform="matrix(0.62415888,0,0,0.62415888,8.7312498,33.870226)">
+      <rect
+         style="fill:#000000;stroke-width:0.670819;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         id="rect1"
+         width="2.6458333"
+         height="4.2333331"
+         x="0"
+         y="0" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:5.83829px;line-height:1.1;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';text-decoration-color:#000000;fill:#ffffff;stroke-width:0.689561;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         x="-0.42760915"
+         y="4.1905694"
+         id="text1"><tspan
+           sodipodi:role="line"
+           id="tspan1"
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';fill:#ffffff;stroke-width:0.689563"
+           x="-0.42760915"
+           y="4.1905694">0</tspan></text>
+    </g>
+    <g
+       id="g2"
+       inkscape:label="c_1"
+       transform="matrix(0.62415888,0,0,0.62415888,8.8963918,33.870226)">
+      <rect
+         style="fill:#000000;stroke-width:0.499999;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         id="rect2"
+         width="1.8520832"
+         height="4.2333331"
+         x="2.6458333"
+         y="1.323489e-23" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:5.96277px;line-height:1.1;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';text-decoration-color:#000000;fill:#ffffff;stroke-width:0.719692;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         x="2.4574339"
+         y="4.2333364"
+         id="text2"><tspan
+           sodipodi:role="line"
+           id="tspan2"
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:5.96277px;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';fill:#ffffff;stroke-width:0.719694"
+           x="2.4574339"
+           y="4.2333364">1</tspan></text>
+    </g>
+    <g
+       id="g3"
+       inkscape:label="c_2"
+       transform="matrix(0.62415888,0,0,0.62415888,9.2266759,33.870226)">
+      <rect
+         style="fill:#000000;stroke-width:0.670819;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         id="rect3"
+         width="2.6458333"
+         height="4.2333331"
+         x="4.2333331"
+         y="0" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:5.83829px;line-height:1.1;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';text-decoration-color:#000000;fill:#ffffff;stroke-width:0.689561;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         x="3.9026487"
+         y="4.1905694"
+         id="text3"><tspan
+           sodipodi:role="line"
+           id="tspan3"
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';fill:#ffffff;stroke-width:0.689563"
+           x="3.9026487"
+           y="4.1905694">2</tspan></text>
+    </g>
+    <g
+       id="g4"
+       inkscape:label="c_3"
+       transform="matrix(0.62415888,0,0,0.62415888,9.3918181,33.870226)">
+      <rect
+         style="fill:#000000;stroke-width:0.670819;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         id="rect4"
+         width="2.6458333"
+         height="4.2333331"
+         x="6.8791661"
+         y="0" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:5.83829px;line-height:1.1;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';text-decoration-color:#000000;fill:#ffffff;stroke-width:0.689561;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         x="6.5484819"
+         y="4.1905694"
+         id="text4"><tspan
+           sodipodi:role="line"
+           id="tspan4"
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';fill:#ffffff;stroke-width:0.689563"
+           x="6.5484819"
+           y="4.1905694">3</tspan></text>
+    </g>
+    <g
+       id="g5"
+       inkscape:label="c_4"
+       transform="matrix(0.62415888,0,0,0.62415888,9.5569599,33.870226)">
+      <rect
+         style="fill:#000000;stroke-width:0.670819;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         id="rect5"
+         width="2.9104164"
+         height="4.2333331"
+         x="9.5249996"
+         y="0" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:5.83829px;line-height:1.1;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';text-decoration-color:#000000;fill:#ffffff;stroke-width:0.689561;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         x="9.194315"
+         y="4.1905694"
+         id="text5"><tspan
+           sodipodi:role="line"
+           id="tspan5"
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';fill:#ffffff;stroke-width:0.689563"
+           x="9.194315"
+           y="4.1905694">4</tspan></text>
+    </g>
+    <g
+       id="g6"
+       inkscape:label="c_5"
+       transform="matrix(0.62415888,0,0,0.62415888,9.887244,33.870226)">
+      <rect
+         style="fill:#000000;stroke-width:0.670819;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         id="rect6"
+         width="2.6458333"
+         height="4.2333331"
+         x="12.170833"
+         y="0" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:5.83829px;line-height:1.1;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';text-decoration-color:#000000;fill:#ffffff;stroke-width:0.689561;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         x="11.743223"
+         y="4.1905694"
+         id="text6"><tspan
+           sodipodi:role="line"
+           id="tspan6"
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';fill:#ffffff;stroke-width:0.689563"
+           x="11.743223"
+           y="4.1905694">5</tspan></text>
+    </g>
+    <g
+       id="g7"
+       inkscape:label="c_6"
+       transform="matrix(0.62415888,0,0,0.62415888,10.052386,33.870226)">
+      <rect
+         style="fill:#000000;stroke-width:0.670819;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         id="rect7"
+         width="2.6458333"
+         height="4.2333331"
+         x="14.816666"
+         y="0" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:5.83829px;line-height:1.1;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';text-decoration-color:#000000;fill:#ffffff;stroke-width:0.689561;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         x="14.485981"
+         y="4.1905694"
+         id="text7"><tspan
+           sodipodi:role="line"
+           id="tspan7"
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';fill:#ffffff;stroke-width:0.689563"
+           x="14.485981"
+           y="4.1905694">6</tspan></text>
+    </g>
+    <g
+       id="g8"
+       inkscape:label="c_7"
+       transform="matrix(0.62415888,0,0,0.62415888,10.217528,33.870226)">
+      <rect
+         style="fill:#000000;stroke-width:0.670819;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         id="rect8"
+         width="2.6458333"
+         height="4.2333331"
+         x="17.4625"
+         y="0" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:5.83829px;line-height:1.1;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';text-decoration-color:#000000;fill:#ffffff;stroke-width:0.689561;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         x="17.131815"
+         y="4.1905694"
+         id="text8"><tspan
+           sodipodi:role="line"
+           id="tspan8"
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';fill:#ffffff;stroke-width:0.689563"
+           x="17.131815"
+           y="4.1905694">7</tspan></text>
+    </g>
+    <g
+       id="g9"
+       inkscape:label="c_8"
+       transform="matrix(0.62415888,0,0,0.62415888,10.382671,33.870226)">
+      <rect
+         style="fill:#000000;stroke-width:0.670819;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         id="rect9"
+         width="2.9104166"
+         height="4.2333331"
+         x="20.108332"
+         y="0" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:5.83829px;line-height:1.1;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';text-decoration-color:#000000;fill:#ffffff;stroke-width:0.689561;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         x="19.777647"
+         y="4.1905694"
+         id="text9"><tspan
+           sodipodi:role="line"
+           id="tspan9"
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';fill:#ffffff;stroke-width:0.689563"
+           x="19.777647"
+           y="4.1905694">8</tspan></text>
+    </g>
+    <g
+       id="g10"
+       inkscape:label="c_9"
+       transform="matrix(0.62415888,0,0,0.62415888,10.712954,33.870226)">
+      <rect
+         style="fill:#000000;stroke-width:0.670819;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         id="rect10"
+         width="2.6458333"
+         height="4.2333331"
+         x="22.754166"
+         y="0" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:5.83829px;line-height:1.1;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';text-decoration-color:#000000;fill:#ffffff;stroke-width:0.689561;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         x="22.423481"
+         y="4.1905694"
+         id="text10"><tspan
+           sodipodi:role="line"
+           id="tspan10"
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';fill:#ffffff;stroke-width:0.689563"
+           x="22.423481"
+           y="4.1905694">9</tspan></text>
+    </g>
+    <g
+       id="g11"
+       inkscape:label="c_colon"
+       transform="matrix(0.62415888,0,0,0.62415888,10.878096,33.870226)">
+      <rect
+         style="fill:#000000;stroke-width:0.387297;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         id="rect11"
+         width="0.79374993"
+         height="4.2333331"
+         x="25.4"
+         y="0" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:5.83829px;line-height:1.1;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';text-decoration-color:#000000;fill:#ffffff;stroke-width:0.689561;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         x="24.972391"
+         y="4.1905694"
+         id="text11"><tspan
+           sodipodi:role="line"
+           id="tspan11"
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';fill:#ffffff;stroke-width:0.689563"
+           x="24.972391"
+           y="4.1905694">:</tspan></text>
+    </g>
+    <g
+       id="g13"
+       inkscape:label="c_space"
+       transform="matrix(0.62415888,0,0,0.62415888,11.538664,33.870226)">
+      <rect
+         style="fill:#000000;stroke-width:0.387297;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         id="rect13"
+         width="1.0583322"
+         height="4.2333331"
+         x="25.4"
+         y="0" />
+    </g>
+    <g
+       id="g14"
+       inkscape:label="BedClock"
+       transform="matrix(0.62415888,0,0,0.62415888,8.7312498,30.695227)">
+      <rect
+         style="fill:#000000;stroke-width:2.07985;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         id="rect14"
+         width="25.434227"
+         height="4.2333331"
+         x="0"
+         y="0" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:5.83829px;line-height:1.1;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';text-decoration-color:#000000;fill:#ffffff;stroke-width:0.689561;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         x="0.016038921"
+         y="4.1905694"
+         id="text14"><tspan
+           sodipodi:role="line"
+           id="tspan14"
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';fill:#ffffff;stroke-width:0.689563"
+           x="0.016038921"
+           y="4.1905694">BedClock:</tspan></text>
+    </g>
+    <g
+       id="g15"
+       inkscape:label="c_dot"
+       transform="matrix(0.62415888,0,0,0.62415888,12.465596,33.870226)">
+      <rect
+         style="fill:#000000;stroke-width:0.387297;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         id="rect15"
+         width="0.79374993"
+         height="4.2333331"
+         x="25.4"
+         y="0" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:5.83829px;line-height:1.1;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';text-decoration-color:#000000;fill:#ffffff;stroke-width:0.689561;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         x="24.972391"
+         y="4.1905694"
+         id="text15"><tspan
+           sodipodi:role="line"
+           id="tspan15"
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';fill:#ffffff;stroke-width:0.689563"
+           x="24.972391"
+           y="4.1905694">.</tspan></text>
+    </g>
+    <g
+       id="g16"
+       inkscape:label="c_v"
+       transform="matrix(0.62415888,0,0,0.62415888,13.523929,33.870226)">
+      <rect
+         style="fill:#000000;stroke-width:0.748834;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         id="rect16"
+         width="3.3912303"
+         height="4.2333322"
+         x="25.385876"
+         y="0" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:5.83829px;line-height:1.1;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';text-decoration-color:#000000;fill:#ffffff;stroke-width:0.689561;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none"
+         x="25.271769"
+         y="4.1905694"
+         id="text16"><tspan
+           sodipodi:role="line"
+           id="tspan16"
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift Light';fill:#ffffff;stroke-width:0.689563"
+           x="25.271769"
+           y="4.1905694">V</tspan></text>
     </g>
   </g>
 </svg>
