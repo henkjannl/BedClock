@@ -143,10 +143,13 @@ In `hp_stepping_float.h`, the `hp_stepping_interpolation_t` type is an enumerato
 ### Issues
 
 #### SSD1306
-The OLED display sometimes stalls, not showing anything anymore. The clock frequency of I2C communication was reduced from 400kHz to 370kHz, since, according to the Salomon specification of the SSD1306, a frequency of up to 407kHz is tolerated, so there is not much headroom at 400kHz. I'm not sure if 370kHz is actually working on the ESP32, or if it is rounded up to 400kHz as well.
-As a fallback, presing the left and right button also resets the screen. But since a hardware reset pin is not provided, only a software reset can be carried out, and it is uncertain if this works.
+The OLED display sometimes freezes due to some unknown error. Since the hardware reset pin is not provided as GPIO for this display, only software reset is left as an option.
 
-See:
+The clock frequency of I2C communication was reduced from 400kHz to 370kHz, since, according to the Salomon specification of the SSD1306, a frequency of up to 407kHz is tolerated, so there is not much headroom at 400kHz. This has not been an adequate solution. I'm not sure if 370kHz is actually working on the ESP32, or if it is rounded up to 400kHz as well.
+
+As a fallback, pressing the left and right button at the same time resets the device. This is currently being tested.
+
+See also:
 https://iotexpert.com/debugging-ssd1306-display-problems/
 
 Then the charge pump may be off
