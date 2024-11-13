@@ -7,17 +7,17 @@ This is a small ESP driven bed clock annex reading light. The device can be cont
 
 Normally, the display is empty, because even at the least intense setting, the OLED display produces too much light to sleep well.
 
-After one press of the left button, the time is displayed.
+Touching the top button switches on and off the LEDs on the top of the device. While the LEDs are on, the clock is also shown (since darkness is polluted anyway).
 
-When pressing the left button multiple times, the user toggles through the following settings:
+After one touching of the left or right button, the time is displayed. When touching the left button multiple times, the user toggles through the following settings:
 * LED intensity
 * LED color
 * Timer that switches off the LED lights
 * Intensity of the OLED display
 
-Settings can be changed with the button on the right. Settings are stored in the non volatile memory of the ESP32.
-
-After pressing the left button again, the display switches back to the time. If the buttons are not pressed for some time, the display switches off again.
+Settings can be changed with the button on the right. While changing settings, the LEDs switch on to immediately show the result. Settings are stored in the non volatile storage (NVS) of the ESP32.
+After pressing the left button again, the display switches back to the time.
+If the buttons are not pressed for some time, the display switches off again.
 
 
 ## Hardware
