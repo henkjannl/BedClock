@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "hp_version_font.h"
+#include "hp_version_font_8px.h"
 #include "hp_pixel_buffer.h"
 
 static uint8_t m0_bytes[] = {
@@ -139,7 +139,7 @@ static const hp_bitmap_t glyphs[] = {
 };
 
 // Function that returns a bitmap given a character
-const hp_bitmap_t *hp_version_font(const unsigned char c) {
+const hp_bitmap_t *hp_version_font_8px(const unsigned char c) {
 
     if(c=='0') return &glyphs[0];
     if(c=='1') return &glyphs[1];

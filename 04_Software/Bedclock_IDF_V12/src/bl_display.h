@@ -15,7 +15,8 @@
 #include "hp_pixel_canvas.h"
 
 #include "fonts\hp_time_font.h"
-#include "fonts\hp_version_font.h"
+#include "fonts\hp_version_font_8px.h"
+#include "fonts\hp_version_font_10px.h"
 
 #define MAX_DISPLAY_ITEM 6
 #define dp_tag "display"
@@ -44,10 +45,6 @@ static uint8_t labels_bytes[] = {
     0x78,0x09,0x00,0x42,0x82,0xa2,0x44,0x0a,0x00,0x22,0x82,0xa2,0x44,0x04,0x00,
     0x1e,0x7a,0x1e,0x79,0x04,0x00,0x00,0x00,0x02,0x00,0x04,0x00,0x00,0x00,0x02,
     0x00,0x02,0x00 };
-
-static uint8_t circle_open_bytes[] = {
-    0x00,0x00,0x38,0x00,0x44,0x00,0x82,0x00,0x82,0x00,0x82,0x00,0x44,0x00,0x38,
-    0x00,0x00,0x00,0x00,0x00 };
 
 static uint8_t circle_closed_bytes[] = {
     0x00,0x00,0x38,0x00,0x7c,0x00,0xfe,0x00,0xfe,0x00,0xfe,0x00,0x7c,0x00,0x38,
@@ -82,7 +79,6 @@ static uint8_t splash_screen_bytes[] = {
     0xff,0xff,0xff,0xff,0x3f };
 
 const hp_bitmap_t labels          = { .width = 48, .height = 48, .bitmap = labels_bytes,        .mask = NULL };
-const hp_bitmap_t circle_open     = { .width = 10, .height = 10, .bitmap = circle_open_bytes,   .mask = NULL };
 const hp_bitmap_t circle_closed   = { .width = 10, .height = 10, .bitmap = circle_closed_bytes, .mask = NULL };
 const hp_bitmap_t indicator       = { .width = 10, .height = 10, .bitmap = indicator_bytes,     .mask = NULL };
 const hp_bitmap_t splash_screen   = { .width = 80, .height = 32, .bitmap = splash_screen_bytes, .mask = NULL };
@@ -117,7 +113,7 @@ const int16_t Y_IND[] = {
 const char* LED_INTENSITY_CH[] = { "2.5%", "6%", "16%", "40%", "100%" };
 const char* LED_COLOR_CH[] =      {"6500K", "5000K", "4000K", "3000K" };
 const char* LED_TIME_CH[] =      {"5min", "7min", "10min", "14min", "20min" };
-const char* DISPLAY_CH[] =      {"0.4%", "6.3%", "100%" };
+const char* DISPLAY_CH[] =      {"Low", "Med", "High" };
 
 /* ===================================
      Configuration data of the display
@@ -165,14 +161,6 @@ void display_contrast(uint8_t contrast) {
     esp_lcd_panel_io_tx_param(io_handle, 0x81, &contrast, 1);
 }
 
-void display_reset() {
-    // // Proposed by ChatGPT, highly experimental
-    esp_lcd_panel_io_tx_param(io_handle, 0xAE, NULL, 0); // Switch display off
-    vTaskDelay(pdMS_TO_TICKS(100)); // Wait 100 ms
-    esp_lcd_panel_io_tx_param(io_handle, 0xAF, NULL, 0); // Switch display on
-    // esp_lcd_panel_reset(panel_handle); // not helpful: assumes reset gpio connected
-}
-
 void display_refresh(int16_t y, uint8_t indicator_y) {
     uint8_t num_chars;
     char buffer [50];
@@ -190,7 +178,10 @@ void display_refresh(int16_t y, uint8_t indicator_y) {
     struct tm timeinfo = { 0 };
     time(&now);
     localtime_r(&now, &timeinfo);
-    num_chars = sprintf(buffer, "%02d:%02d", timeinfo.tm_hour, timeinfo.tm_min);
+    if(timeinfo.tm_year+1900 < 2020)
+        num_chars = sprintf(buffer, "--:--");
+    else
+        num_chars = sprintf(buffer, "%02d:%02d", timeinfo.tm_hour, timeinfo.tm_min);
 
     display_contrast(DISPLAY_INTENSITY[settings.display_intensity]);
 
@@ -198,23 +189,22 @@ void display_refresh(int16_t y, uint8_t indicator_y) {
     x = 64-(hp_bitmap_text_width(hp_time_font, (unsigned char*) buffer, num_chars)>>1);
     hp_bitmap_draw_text(hp_time_font, x, y+7, (unsigned char*) buffer, num_chars);
     hp_bitmap_draw_bitmap(&labels, 10, y+36);
-    // hp_bitmap_draw_bitmap(&indicator, 0, y+indicator_y);
     hp_bitmap_draw_bitmap(&circle_closed, 0, y+indicator_y);
 
-    // Display intensity
-    hp_bitmap_draw_text(hp_version_font, 58, y+Y_IND[2]+1,
+    // Display current settings
+    hp_bitmap_draw_text(hp_version_font_10px, 58, y+Y_IND[2],
         (unsigned char*) LED_INTENSITY_CH[settings.led_intensity],
         strlen(LED_INTENSITY_CH[settings.led_intensity]) );
 
-    hp_bitmap_draw_text(hp_version_font, 58, y+Y_IND[3]+1,
+    hp_bitmap_draw_text(hp_version_font_10px, 58, y+Y_IND[3],
         (unsigned char*) LED_COLOR_CH[settings.led_color],
         strlen(LED_COLOR_CH[settings.led_color]) );
 
-    hp_bitmap_draw_text(hp_version_font, 58, y+Y_IND[4]+1,
+    hp_bitmap_draw_text(hp_version_font_10px, 58, y+Y_IND[4],
         (unsigned char*) LED_TIME_CH[settings.led_timer],
         strlen(LED_TIME_CH[settings.led_timer]) );
 
-    hp_bitmap_draw_text(hp_version_font, 58, y+Y_IND[5]+1,
+    hp_bitmap_draw_text(hp_version_font_10px, 58, y+Y_IND[5],
         (unsigned char*) DISPLAY_CH[settings.display_intensity],
         strlen(DISPLAY_CH[settings.display_intensity]) );
 
@@ -319,11 +309,6 @@ void task_display(void *z)
                     }
                 break;
 
-                case CMD_RESET_DISPLAY:
-                    ESP_LOGI(dp_tag, "Reset display");
-                    display_reset();
-                break;
-
                 default:
                     ESP_LOGI(dp_tag, "Received handled button");
             } // switch(cmd) {
@@ -392,8 +377,8 @@ void display_init(const char* version) {
     // Start with the splash screen showing the software version
     hp_bitmap_clear_canvas();
     hp_bitmap_draw_bitmap(&splash_screen, 24, 0);
-    int16_t x  = (128-hp_bitmap_text_width(hp_version_font, (const unsigned char*) version, strlen(version))) >> 1;
-    hp_bitmap_draw_text(hp_version_font, x, 9, (const unsigned char*) version, strlen(version));
+    int16_t x  = (128-hp_bitmap_text_width(hp_version_font_8px, (const unsigned char*) version, strlen(version))) >> 1;
+    hp_bitmap_draw_text(hp_version_font_8px, x, 9, (const unsigned char*) version, strlen(version));
     hp_bitmap_write_canvas(panel_handle);
 
     vTaskDelay(pdMS_TO_TICKS(2000));

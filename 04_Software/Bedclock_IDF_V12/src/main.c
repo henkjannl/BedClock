@@ -12,7 +12,7 @@
 #include "bl_light.h"
 #include "hp_timer.h"
 
-const char *VERSION = "V1.3.0";
+const char *VERSION = "V1.4.0";
 
 /*
 Version history
@@ -22,6 +22,13 @@ Version history
            Fonts in separate directory
            hp_version_font has masks
            Included splash screen on startup
+    v1.4.0 Settings displayed as text instead of circles
+           hp_version_font_10px font created
+           display "--:--" if clock is not synchronized
+
+To do:
+* Consider renaming interpolation library
+* Make capacitive touch interrupt controlled
 
 Different sub-projects to port the Arduino project to ESP-IDF
     Bedclock_IDF_V01 : Test WS2812 led chain
@@ -36,11 +43,6 @@ Different sub-projects to port the Arduino project to ESP-IDF
     Bedclock_IDF_V10 : First working version of application
     Bedclock_IDF_V11 : First working version of pixel buffer
     Bedclock_IDF_V12 : First working version with graphics layout
-
-To do:
-* Consider renaming interpolation library
-* Make capacitive touch interrupt controlled
-* Only display clock when time is synched
 */
 
 #define mn_tag "main"

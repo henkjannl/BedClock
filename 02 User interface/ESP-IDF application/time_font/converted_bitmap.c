@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "hp_pixel_buffer.h"
-#include "hp_time_font.h"
 
 static uint8_t c_0_bytes[] = {
     0x7c,0x00,0xfe,0x00,0x83,0x01,0x83,0x01,0x83,0x01,0x83,0x01,0x83,0x01,0x83,
@@ -56,6 +55,10 @@ static uint8_t c_colon_bytes[] = {
     0x03 };
 
 static uint8_t c_dash_bytes[] = {
+    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x7e,0x7e,0x00,0x00,0x00,
+    0x00 };
+
+static uint8_t c_dash_copy_1_bytes[] = {
     0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x7e,0x7e,0x00,0x00,0x00,0x00,
     0x00 };
 
@@ -76,10 +79,11 @@ static const hp_bitmap_t glyphs[] = {
     { .width = 10, .height = 16, .bitmap = c_9_bytes, .mask = NULL },  // 9: '9'
     { .width = 3, .height = 16, .bitmap = c_colon_bytes, .mask = NULL },  // 10: ':'
     { .width = 8, .height = 16, .bitmap = c_dash_bytes, .mask = NULL },  // 11: '-'
-    { .width = 4, .height = 16, .bitmap = c_space_bytes, .mask = NULL },  // 12: ' '
+    { .width = 8, .height = 16, .bitmap = c_dash_copy_1_bytes, .mask = NULL },  // 12: '-_copy_1'
+    { .width = 4, .height = 16, .bitmap = c_space_bytes, .mask = NULL },  // 13: ' '
 }; // const hp_bitmap_t glyphs[]
 
-const hp_bitmap_t *hp_time_font(const unsigned char c) {
+const hp_bitmap_t *hp_pixel_glyph(const unsigned char c) {
     if(c=='0') return &glyphs[0];
     if(c=='1') return &glyphs[1];
     if(c=='2') return &glyphs[2];
@@ -92,6 +96,7 @@ const hp_bitmap_t *hp_time_font(const unsigned char c) {
     if(c=='9') return &glyphs[9];
     if(c==':') return &glyphs[10];
     if(c=='-') return &glyphs[11];
-    if(c==' ') return &glyphs[12];
+    if(c=='-_copy_1') return &glyphs[12];
+    if(c==' ') return &glyphs[13];
   return NULL;
 }

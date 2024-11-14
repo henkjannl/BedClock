@@ -39,7 +39,6 @@ typedef enum {
   CMD_LIGHT_SWITCHES_ON,
   CMD_LIGHT_SWITCHES_OFF,
   CMD_ADJUST_LIGHT,
-  CMD_RESET_DISPLAY
 } common_command_t;
 
 typedef struct {

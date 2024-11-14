@@ -1,39 +1,18 @@
 from PIL import Image
 import os
+import glob
 
-INPUT_PATH = r"C:\Users\henkj\Documents\GitHub\BedClock\02 User interface\Fonts\png"
+INPUT_PATH = r"C:\Users\henkj\Documents\GitHub\BedClock\02 User interface\ESP-IDF application\time_font"
 TEMP_FILE = r"temp_file.xbm"
-
-# PNG_FILES = r"""c_0.png
-# c_1.png
-# c_2.png
-# c_3.png
-# c_4.png
-# c_5.png
-# c_6.png
-# c_7.png
-# c_8.png
-# c_9.png
-# c_colon.png
-# c_space.png""".split('\n')
-
-PNG_FILES = r"""labels.png""".split('\n')
-
-# PNG_FILES = r"""c_labels.png""".split('\n')
-
-# PNG_FILES = r"""indicator_left.png
-# indicator_right.png""".split('\n')
 
 # Prepare all the parts of the header file
 single_header_file = """#include <stdio.h>
-#include "hp_pixel_font.h"
 #include "hp_pixel_buffer.h"
-
 """.split('\n')
 
-character_summary = ['const hp_bitmap_t glyphs[] = {']
+character_summary = ['static const hp_bitmap_t glyphs[] = {']
 
-function_definition = [ 'const hp_bitmap_t *hp_pixel_glyph(char c) {' ]
+function_definition = [ 'const hp_bitmap_t *hp_pixel_glyph(const unsigned char c) {' ]
 
 def convert_png_to_xbm(index, file_name):
     # Open the PNG image
@@ -42,8 +21,14 @@ def convert_png_to_xbm(index, file_name):
         charname = file_name.replace(".png","")
         bytes_name = charname+"_bytes"
         charname=charname.replace("c_", "")
+        charname=charname.replace("v_", "")
+        if(charname[0]=='v'): charname=charname[1:]
+        charname=charname.replace("perc", "%")
         charname=charname.replace("hyphen", "-")
         charname=charname.replace("colon", ":")
+        charname=charname.replace("dot", ".")
+        charname=charname.replace("space", " ")
+        charname=charname.replace("dash", "-")
 
         img = img.convert('1')
 
@@ -54,7 +39,7 @@ def convert_png_to_xbm(index, file_name):
         xbm_file[-2] = xbm_file[-2] + " };"
 
         # Create a constant containing the bytes of the character
-        single_header_file.append(f"uint8_t {bytes_name}[] = " + "{")
+        single_header_file.append(f"static uint8_t {bytes_name}[] = " + "{")
         single_header_file.extend([f"    {code}" for code in xbm_file[3:-1]])
         single_header_file.append("")
 
@@ -62,23 +47,24 @@ def convert_png_to_xbm(index, file_name):
         summary = "    { "
         summary += f".width = {img.size[0]}, "
         summary += f".height = {img.size[1]}, "
-        summary += f".buffer = {bytes_name} "
+        summary += f".bitmap = {bytes_name}, "
+        summary += f".mask = NULL "
         summary += "}, "
-        summary += f" // [{index}] = {charname}"
+        summary += f" // {index}: '{charname}'"
 
         character_summary.append(summary)
 
         # Prepare the function that returns the character struct
-        charname=charname.replace("space", " ")
         function_definition.append(f"    if(c=='{charname}') return &glyphs[{index}];")
 
         print(f"appended {charname}")
 
 # Run through all files and prepare the lists that will make up the header file
+PNG_FILES = glob.glob('*.png', root_dir=INPUT_PATH)
 for index, file_name in enumerate(PNG_FILES):
     convert_png_to_xbm(index, file_name)
 
-function_definition.append("  //replace last item by return of value")
+function_definition.append("  return NULL;")
 function_definition.append("}")
 
 # Compile the header file
