@@ -10,7 +10,7 @@ The top button switches on and off the light on the top of the device. While the
 By default the display is empty, because even at the dimmest intensity, the OLED display produces too much light to sleep well.
 
 <p align="center">
-    <img src="02 User interface//ESP-IDF application//buttons.png" alt="drawing" width="500"/>
+    <img src="02 User interface//ESP-IDF application//buttons.png" alt="drawing" width="600"/>
 </p>
 
 The left button is used to wake up the display and browse through the settings. Each setting can be changed with the right button. While changing light settings, the light switches on to immediately show the result.
