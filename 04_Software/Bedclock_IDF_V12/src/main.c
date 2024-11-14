@@ -12,12 +12,16 @@
 #include "bl_light.h"
 #include "hp_timer.h"
 
-const char *VERSION = "v1.2.0";  // Example version string
+const char *VERSION = "V1.3.0";
 
 /*
 Version history
     v1.1.0 Included version number and splash screen
     v1.2.0 Pressing left and right buttons resets the device instead of the display
+    v1.3.0 hp_bitmap_t extended with mask
+           Fonts in separate directory
+           hp_version_font has masks
+           Included splash screen on startup
 
 Different sub-projects to port the Arduino project to ESP-IDF
     Bedclock_IDF_V01 : Test WS2812 led chain
@@ -34,9 +38,7 @@ Different sub-projects to port the Arduino project to ESP-IDF
     Bedclock_IDF_V12 : First working version with graphics layout
 
 To do:
-* Include version number
-* Separate code over .h and .c files
-* Init display first, with splash screen
+* Consider renaming interpolation library
 * Make capacitive touch interrupt controlled
 * Only display clock when time is synched
 */
@@ -80,8 +82,8 @@ void app_main()
 */
 
     common_init();    // initialize queues and read settings from non volatile storage
-    time_init();      // sync clock with timeserver
     display_init(VERSION);
+    time_init();      // sync clock with timeserver
     keyboard_init();
     light_init();
 

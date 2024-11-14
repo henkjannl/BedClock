@@ -7,12 +7,10 @@ TEMP_FILE = r"temp_file.xbm"
 
 # Prepare all the parts of the header file
 single_header_file = """#include <stdio.h>
-#include "hp_pixel_font.h"
-#include "hp_pixel_buffer.h"
-
+#include "hp_pixel_buffer.h
 """.split('\n')
 
-character_summary = ['const hp_bitmap_t glyphs[] = {']
+character_summary = ['static const hp_bitmap_t glyphs[] = {']
 
 function_definition = [ 'const hp_bitmap_t *hp_pixel_glyph(char c) {' ]
 
@@ -36,7 +34,7 @@ def convert_png_to_xbm(index, file_name):
         xbm_file[-2] = xbm_file[-2] + " };"
 
         # Create a constant containing the bytes of the character
-        single_header_file.append(f"uint8_t {bytes_name}[] = " + "{")
+        single_header_file.append(f"static uint8_t {bytes_name}[] = " + "{")
         single_header_file.extend([f"    {code}" for code in xbm_file[3:-1]])
         single_header_file.append("")
 
@@ -44,7 +42,8 @@ def convert_png_to_xbm(index, file_name):
         summary = "    { "
         summary += f".width = {img.size[0]}, "
         summary += f".height = {img.size[1]}, "
-        summary += f".buffer = {bytes_name} "
+        summary += f".bitmap = {bytes_name}, "
+        summary += f".mask = {bytes_name.replace('v','m')} "
         summary += "}, "
         summary += f" // [{index}] = {charname}"
 

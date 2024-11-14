@@ -7,12 +7,16 @@
 typedef struct {
     uint16_t width;
     uint16_t height;
-    uint8_t *buffer;
+    uint8_t *bitmap;
+    uint8_t *mask;
 } hp_bitmap_t;
+
+// struct to be used to initialize hp_bitmap_t variables, to ensure that the pointers are NULL
+extern const hp_bitmap_t HP_BITMAP_INIT;
 
 // Define the hp_font_t type that is a
 // function which takes a character and returns a pointer to a hp_bitmap_t
-typedef const hp_bitmap_t* (*hp_font_t)(char c);
+typedef const hp_bitmap_t* (*hp_font_t)(const unsigned char c);
 
 uint16_t hp_bitmap_bytes_per_row(const uint16_t width);
 uint16_t hp_bitmap_buffersize(const hp_bitmap_t *bitmap);
@@ -26,5 +30,5 @@ void hp_bitmap_delete(hp_bitmap_t *bitmap);
 void hp_bitmap_copy(const hp_bitmap_t *input, hp_bitmap_t *output);
 void hp_bitmap_transpose(const hp_bitmap_t *input, hp_bitmap_t *output);
 void hp_bitmap_invert(hp_bitmap_t *bitmap);
-void hp_bitmap_copy_from_array(hp_bitmap_t *bitmap, const uint8_t array[], const uint16_t width, const uint16_t height);
+void hp_bitmap_copy_from_array(hp_bitmap_t *bitmap, const uint8_t array[], const size_t array_size, const uint16_t width, const uint16_t height);
 void hp_bitmap_print(hp_bitmap_t *bitmap);

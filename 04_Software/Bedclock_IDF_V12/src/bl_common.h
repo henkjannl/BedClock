@@ -166,6 +166,15 @@ uint8_t common_get_selected_item() {
     return result;
 }
 
+uint8_t common_get_display_intensity() {
+    uint8_t result = 0;
+    if (xSemaphoreTake(mutex_change_settings, portMAX_DELAY) == pdTRUE) {
+        result = common_settings.display_intensity;
+        xSemaphoreGive(mutex_change_settings);
+    }
+    return result;
+}
+
 // Loading data from non volatile storage
 void common_init() {
     mutex_change_settings = xSemaphoreCreateMutex();

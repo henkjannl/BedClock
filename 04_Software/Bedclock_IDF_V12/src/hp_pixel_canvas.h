@@ -14,11 +14,10 @@ send the canvas to the SSD1306
 #include "esp_log.h"
 
 #include "hp_pixel_buffer.h"
-#include "hp_time_font.h"
-#include "hp_version_font.h"
 
 void hp_bitmap_clear_canvas();
 void hp_bitmap_draw_bitmap(const hp_bitmap_t *bitmap, int16_t x, int16_t y);
-void hp_bitmap_draw_text(hp_font_t font, int16_t x, int16_t y, const char *text, uint8_t num_chars);
-uint16_t hp_bitmap_text_width(hp_font_t font, const char *text, uint8_t num_chars);
+void hp_bitmap_draw_text(hp_font_t font, int16_t x, int16_t y, const unsigned char *text, uint8_t num_chars);
+int16_t hp_bitmap_text_width(hp_font_t font, const unsigned char *text, uint8_t num_chars);
+bool hp_bitmap_check_font(char *fontname, hp_font_t font);
 void hp_bitmap_write_canvas(esp_lcd_panel_handle_t panel);

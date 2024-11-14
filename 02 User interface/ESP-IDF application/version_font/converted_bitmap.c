@@ -1,91 +1,149 @@
 #include <stdio.h>
-#include "hp_pixel_font.h"
-#include "hp_pixel_buffer.h"
+#include "hp_pixel_buffer.h
 
+static uint8_t m0_bytes[] = {
+    0x0c,0x1e,0x3f,0x3f,0x3f,0x3f,0x1e,0x0c };
 
-uint8_t BedClock_bytes[] = {
-    0x7e,0x00,0x40,0x3c,0x02,0x00,0x10,0x00,0x82,0x00,0x40,0x42,0x02,0x00,0x10,
-    0x00,0x82,0x00,0x40,0x42,0x02,0x00,0x10,0x00,0x82,0x78,0x7c,0x02,0xc2,0xc3,
-    0x13,0x09,0x7e,0x84,0x42,0x02,0x22,0x24,0x90,0x00,0x82,0x84,0x42,0x02,0x22,
-    0x24,0x50,0x00,0x82,0xfc,0x42,0x02,0x22,0x24,0x70,0x00,0x82,0x04,0x42,0x42,
-    0x22,0x24,0x90,0x00,0x82,0x04,0x42,0x42,0x26,0x24,0x10,0x01,0x7e,0x78,0x7c,
-    0x3c,0xcc,0xc3,0x13,0x09 };
+static uint8_t m1_bytes[] = {
+    0x04,0x0f,0x0f,0x0e,0x0e,0x0e,0x0e,0x04 };
 
-uint8_t c_0_bytes[] = {
-    0x0e,0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x0e };
+static uint8_t m2_bytes[] = {
+    0x1e,0x3f,0x3f,0x3c,0x1e,0x1f,0x3f,0x1e };
 
-uint8_t c_1_bytes[] = {
-    0x06,0x05,0x04,0x04,0x04,0x04,0x04,0x04,0x04,0x04 };
+static uint8_t m3_bytes[] = {
+    0x0c,0x1e,0x3f,0x3e,0x3c,0x3f,0x1e,0x0c };
 
-uint8_t c_2_bytes[] = {
-    0x0e,0x11,0x11,0x10,0x08,0x08,0x04,0x02,0x01,0x1f };
+static uint8_t m4_bytes[] = {
+    0x08,0x1c,0x1e,0x1f,0x1f,0x3f,0x1e,0x08 };
 
-uint8_t c_3_bytes[] = {
-    0x0e,0x11,0x10,0x10,0x0c,0x10,0x10,0x11,0x11,0x0e };
+static uint8_t m5_bytes[] = {
+    0x1e,0x3f,0x1f,0x3f,0x3e,0x3e,0x1f,0x0e };
 
-uint8_t c_4_bytes[] = {
-    0x08,0x08,0x04,0x04,0x22,0x22,0x21,0x3f,0x20,0x20 };
+static uint8_t m6_bytes[] = {
+    0x1c,0x3e,0x0f,0x1f,0x3f,0x3f,0x3e,0x1c };
 
-uint8_t c_5_bytes[] = {
-    0x1f,0x01,0x01,0x0d,0x13,0x10,0x10,0x10,0x11,0x0e };
+static uint8_t m7_bytes[] = {
+    0x1e,0x3f,0x3e,0x1c,0x1c,0x0e,0x0e,0x04 };
 
-uint8_t c_6_bytes[] = {
-    0x0c,0x02,0x02,0x01,0x0f,0x11,0x11,0x11,0x11,0x0e };
+static uint8_t m8_bytes[] = {
+    0x0c,0x1e,0x3f,0x1e,0x3f,0x3f,0x1e,0x0c };
 
-uint8_t c_7_bytes[] = {
-    0x1f,0x11,0x11,0x08,0x08,0x08,0x08,0x04,0x04,0x04 };
+static uint8_t m9_bytes[] = {
+    0x0c,0x1e,0x3f,0x3f,0x3e,0x3c,0x1e,0x0c };
 
-uint8_t c_8_bytes[] = {
-    0x1e,0x21,0x21,0x21,0x1e,0x21,0x21,0x21,0x21,0x1e };
+static uint8_t m_colon_bytes[] = {
+    0x00,0x06,0x0f,0x0f,0x06,0x0f,0x0f,0x06 };
 
-uint8_t c_9_bytes[] = {
-    0x0e,0x11,0x11,0x11,0x11,0x1e,0x08,0x08,0x04,0x04 };
+static uint8_t m_dot_bytes[] = {
+    0x00,0x00,0x00,0x00,0x00,0x06,0x0f,0x06 };
 
-uint8_t c_colon_bytes[] = {
-    0x00,0x00,0x00,0x01,0x00,0x00,0x00,0x00,0x00,0x01 };
+static uint8_t m_space_bytes[] = {
+    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00 };
 
-uint8_t c_dot_bytes[] = {
-    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01 };
+static uint8_t m_V_bytes[] = {
+    0x42,0xe7,0xe7,0x7e,0x7e,0x3c,0x3c,0x18 };
 
-uint8_t c_space_bytes[] = {
-    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00 };
+static uint8_t v0_bytes[] = {
+    0x00,0x0c,0x12,0x12,0x12,0x12,0x0c,0x00 };
 
-uint8_t c_v_bytes[] = {
-    0x41,0x41,0x22,0x22,0x22,0x14,0x14,0x14,0x08,0x08 };
+static uint8_t v1_bytes[] = {
+    0x00,0x04,0x06,0x04,0x04,0x04,0x04,0x00 };
 
-const hp_bitmap_t glyphs[] = {
-    { .width = 60, .height = 10, .buffer = BedClock_bytes },  // [0] = BedClock
-    { .width = 6, .height = 10, .buffer = c_0_bytes },  // [1] = 0
-    { .width = 4, .height = 10, .buffer = c_1_bytes },  // [2] = 1
-    { .width = 6, .height = 10, .buffer = c_2_bytes },  // [3] = 2
-    { .width = 6, .height = 10, .buffer = c_3_bytes },  // [4] = 3
-    { .width = 7, .height = 10, .buffer = c_4_bytes },  // [5] = 4
-    { .width = 6, .height = 10, .buffer = c_5_bytes },  // [6] = 5
-    { .width = 6, .height = 10, .buffer = c_6_bytes },  // [7] = 6
-    { .width = 6, .height = 10, .buffer = c_7_bytes },  // [8] = 7
-    { .width = 7, .height = 10, .buffer = c_8_bytes },  // [9] = 8
-    { .width = 6, .height = 10, .buffer = c_9_bytes },  // [10] = 9
-    { .width = 2, .height = 10, .buffer = c_colon_bytes },  // [11] = :
-    { .width = 2, .height = 10, .buffer = c_dot_bytes },  // [12] = .
-    { .width = 2, .height = 10, .buffer = c_space_bytes },  // [13] = space
-    { .width = 8, .height = 10, .buffer = c_v_bytes },  // [14] = v
+static uint8_t v2_bytes[] = {
+    0x00,0x0c,0x12,0x10,0x0c,0x02,0x1e,0x00 };
+
+static uint8_t v3_bytes[] = {
+    0x00,0x0c,0x12,0x18,0x10,0x12,0x0c,0x00 };
+
+static uint8_t v4_bytes[] = {
+    0x00,0x08,0x0c,0x0a,0x0a,0x1e,0x08,0x00 };
+
+static uint8_t v5_bytes[] = {
+    0x00,0x1e,0x02,0x1e,0x10,0x10,0x0e,0x00 };
+
+static uint8_t v6_bytes[] = {
+    0x00,0x1c,0x02,0x0e,0x12,0x12,0x1c,0x00 };
+
+static uint8_t v7_bytes[] = {
+    0x00,0x1e,0x10,0x08,0x08,0x04,0x04,0x00 };
+
+static uint8_t v8_bytes[] = {
+    0x00,0x0c,0x12,0x0c,0x12,0x12,0x0c,0x00 };
+
+static uint8_t v9_bytes[] = {
+    0x00,0x0c,0x12,0x12,0x1c,0x10,0x0c,0x00 };
+
+static uint8_t v_colon_bytes[] = {
+    0x00,0x00,0x06,0x06,0x00,0x06,0x06,0x00 };
+
+static uint8_t v_dot_bytes[] = {
+    0x00,0x00,0x00,0x00,0x00,0x00,0x06,0x00 };
+
+static uint8_t v_space_bytes[] = {
+    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00 };
+
+static uint8_t v_V_bytes[] = {
+    0x00,0x42,0x42,0x24,0x24,0x18,0x18,0x00 };
+
+static const hp_bitmap_t glyphs[] = {
+    { .width = 6, .height = 8, .bitmap = m0_bytes, .mask = m0_bytes },  // [0] = m0
+    { .width = 4, .height = 8, .bitmap = m1_bytes, .mask = m1_bytes },  // [1] = m1
+    { .width = 6, .height = 8, .bitmap = m2_bytes, .mask = m2_bytes },  // [2] = m2
+    { .width = 6, .height = 8, .bitmap = m3_bytes, .mask = m3_bytes },  // [3] = m3
+    { .width = 6, .height = 8, .bitmap = m4_bytes, .mask = m4_bytes },  // [4] = m4
+    { .width = 6, .height = 8, .bitmap = m5_bytes, .mask = m5_bytes },  // [5] = m5
+    { .width = 6, .height = 8, .bitmap = m6_bytes, .mask = m6_bytes },  // [6] = m6
+    { .width = 6, .height = 8, .bitmap = m7_bytes, .mask = m7_bytes },  // [7] = m7
+    { .width = 6, .height = 8, .bitmap = m8_bytes, .mask = m8_bytes },  // [8] = m8
+    { .width = 6, .height = 8, .bitmap = m9_bytes, .mask = m9_bytes },  // [9] = m9
+    { .width = 4, .height = 8, .bitmap = m_colon_bytes, .mask = m_colon_bytes },  // [10] = m_:
+    { .width = 4, .height = 8, .bitmap = m_dot_bytes, .mask = m_dot_bytes },  // [11] = m_.
+    { .width = 4, .height = 8, .bitmap = m_space_bytes, .mask = m_space_bytes },  // [12] = m_space
+    { .width = 8, .height = 8, .bitmap = m_V_bytes, .mask = m_V_bytes },  // [13] = m_V
+    { .width = 6, .height = 8, .bitmap = v0_bytes, .mask = m0_bytes },  // [14] = v0
+    { .width = 4, .height = 8, .bitmap = v1_bytes, .mask = m1_bytes },  // [15] = v1
+    { .width = 6, .height = 8, .bitmap = v2_bytes, .mask = m2_bytes },  // [16] = v2
+    { .width = 6, .height = 8, .bitmap = v3_bytes, .mask = m3_bytes },  // [17] = v3
+    { .width = 6, .height = 8, .bitmap = v4_bytes, .mask = m4_bytes },  // [18] = v4
+    { .width = 6, .height = 8, .bitmap = v5_bytes, .mask = m5_bytes },  // [19] = v5
+    { .width = 6, .height = 8, .bitmap = v6_bytes, .mask = m6_bytes },  // [20] = v6
+    { .width = 6, .height = 8, .bitmap = v7_bytes, .mask = m7_bytes },  // [21] = v7
+    { .width = 6, .height = 8, .bitmap = v8_bytes, .mask = m8_bytes },  // [22] = v8
+    { .width = 6, .height = 8, .bitmap = v9_bytes, .mask = m9_bytes },  // [23] = v9
+    { .width = 4, .height = 8, .bitmap = v_colon_bytes, .mask = m_colon_bytes },  // [24] = v_:
+    { .width = 4, .height = 8, .bitmap = v_dot_bytes, .mask = m_dot_bytes },  // [25] = v_.
+    { .width = 4, .height = 8, .bitmap = v_space_bytes, .mask = m_space_bytes },  // [26] = v_space
+    { .width = 8, .height = 8, .bitmap = v_V_bytes, .mask = m_V_bytes },  // [27] = v_V
 }; // const hp_bitmap_t glyphs[]
 
 const hp_bitmap_t *hp_pixel_glyph(char c) {
-    if(c=='BedClock') return &glyphs[0];
-    if(c=='0') return &glyphs[1];
-    if(c=='1') return &glyphs[2];
-    if(c=='2') return &glyphs[3];
-    if(c=='3') return &glyphs[4];
-    if(c=='4') return &glyphs[5];
-    if(c=='5') return &glyphs[6];
-    if(c=='6') return &glyphs[7];
-    if(c=='7') return &glyphs[8];
-    if(c=='8') return &glyphs[9];
-    if(c=='9') return &glyphs[10];
-    if(c==':') return &glyphs[11];
-    if(c=='.') return &glyphs[12];
-    if(c==' ') return &glyphs[13];
-    if(c=='v') return &glyphs[14];
+    if(c=='m0') return &glyphs[0];
+    if(c=='m1') return &glyphs[1];
+    if(c=='m2') return &glyphs[2];
+    if(c=='m3') return &glyphs[3];
+    if(c=='m4') return &glyphs[4];
+    if(c=='m5') return &glyphs[5];
+    if(c=='m6') return &glyphs[6];
+    if(c=='m7') return &glyphs[7];
+    if(c=='m8') return &glyphs[8];
+    if(c=='m9') return &glyphs[9];
+    if(c=='m_:') return &glyphs[10];
+    if(c=='m_.') return &glyphs[11];
+    if(c=='m_ ') return &glyphs[12];
+    if(c=='m_V') return &glyphs[13];
+    if(c=='v0') return &glyphs[14];
+    if(c=='v1') return &glyphs[15];
+    if(c=='v2') return &glyphs[16];
+    if(c=='v3') return &glyphs[17];
+    if(c=='v4') return &glyphs[18];
+    if(c=='v5') return &glyphs[19];
+    if(c=='v6') return &glyphs[20];
+    if(c=='v7') return &glyphs[21];
+    if(c=='v8') return &glyphs[22];
+    if(c=='v9') return &glyphs[23];
+    if(c=='v_:') return &glyphs[24];
+    if(c=='v_.') return &glyphs[25];
+    if(c=='v_ ') return &glyphs[26];
+    if(c=='v_V') return &glyphs[27];
   //replace last item by return of value
 }
