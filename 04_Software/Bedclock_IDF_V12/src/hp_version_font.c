@@ -45,36 +45,33 @@ uint8_t version_font_v_bytes[] = {
     0x41,0x41,0x22,0x22,0x22,0x14,0x14,0x14,0x08,0x08 };
 
 const hp_bitmap_t version_font_glyphs[] = {
-    { .width = 6, .height = 10, .buffer = version_font_0_bytes },  // [0] = 0
-    { .width = 4, .height = 10, .buffer = version_font_1_bytes },  // [1] = 1
-    { .width = 6, .height = 10, .buffer = version_font_2_bytes },  // [2] = 2
-    { .width = 6, .height = 10, .buffer = version_font_3_bytes },  // [3] = 3
-    { .width = 7, .height = 10, .buffer = version_font_4_bytes },  // [4] = 4
-    { .width = 6, .height = 10, .buffer = version_font_5_bytes },  // [5] = 5
-    { .width = 6, .height = 10, .buffer = version_font_6_bytes },  // [6] = 6
-    { .width = 6, .height = 10, .buffer = version_font_7_bytes },  // [7] = 7
-    { .width = 7, .height = 10, .buffer = version_font_8_bytes },  // [8] = 8
-    { .width = 6, .height = 10, .buffer = version_font_9_bytes },  // [9] = 9
-    { .width = 2, .height = 10, .buffer = version_font_colon_bytes },  // [10] = :
-    { .width = 2, .height = 10, .buffer = version_font_dot_bytes },  // [11] = dot
-    { .width = 2, .height = 10, .buffer = version_font_space_bytes },  // [12] = space
-    { .width = 8, .height = 10, .buffer = version_font_v_bytes },  // [13] = v
-}; // const hp_bitmap_t version_font_glyphs[]
+    { .width = 6, .height = 10, .buffer = version_font_0_bytes },      //  0 = '0'
+    { .width = 4, .height = 10, .buffer = version_font_1_bytes },      //  1 = '1'
+    { .width = 6, .height = 10, .buffer = version_font_2_bytes },      //  2 = '2'
+    { .width = 6, .height = 10, .buffer = version_font_3_bytes },      //  3 = '3'
+    { .width = 7, .height = 10, .buffer = version_font_4_bytes },      //  4 = '4'
+    { .width = 6, .height = 10, .buffer = version_font_5_bytes },      //  5 = '5'
+    { .width = 6, .height = 10, .buffer = version_font_6_bytes },      //  6 = '6'
+    { .width = 6, .height = 10, .buffer = version_font_7_bytes },      //  7 = '7'
+    { .width = 7, .height = 10, .buffer = version_font_8_bytes },      //  8 = '8'
+    { .width = 6, .height = 10, .buffer = version_font_9_bytes },      //  9 = '9'
+    { .width = 2, .height = 10, .buffer = version_font_colon_bytes },  // 10 = ':'
+    { .width = 2, .height = 10, .buffer = version_font_dot_bytes },    // 11 = '.'
+    { .width = 2, .height = 10, .buffer = version_font_space_bytes },  // 12 = ' '
+    { .width = 8, .height = 10, .buffer = version_font_v_bytes },      // 13 = 'v'
+};
 
-const hp_bitmap_t *hp_version_font(char c) {
-    if(c=='0') return &version_font_glyphs[0];
-    if(c=='1') return &version_font_glyphs[1];
-    if(c=='2') return &version_font_glyphs[2];
-    if(c=='3') return &version_font_glyphs[3];
-    if(c=='4') return &version_font_glyphs[4];
-    if(c=='5') return &version_font_glyphs[5];
-    if(c=='6') return &version_font_glyphs[6];
-    if(c=='7') return &version_font_glyphs[7];
-    if(c=='8') return &version_font_glyphs[8];
-    if(c=='9') return &version_font_glyphs[9];
-    if(c==':') return &version_font_glyphs[10];
-    if(c=='.') return &version_font_glyphs[11];
-    if(c==' ') return &version_font_glyphs[12];
-    return &version_font_glyphs[13]; // v
+ const char char_map[] = {
+    ['0'] = 0, ['1'] = 1, ['2'] = 2, ['3'] = 3, ['4'] = 4,
+    ['5'] = 5, ['6'] = 6, ['7'] = 7, ['8'] = 8, ['9'] = 9,
+    [':'] = 10, ['.'] = 11, [' '] = 12, ['v'] = 13
+};
+
+// Function that returns a bitmap given a character
+const hp_bitmap_t *hp_time_font(char c) {
+    if (char_map[c]) {
+        return &version_font_glyphs[char_map[c]];
+    } else {
+        return &version_font_glyphs[char_map[' ']];
+    }
 }
-

@@ -76,8 +76,9 @@ const uint8_t DISPLAY_INTENSITY[] = {
 };
 
 // Position of screen
+// see https://github.com/henkjannl/BedClock/blob/master/02%20User%20interface/ESP-IDF%20application/128x32%20GUI%20V5.png
 const int16_t Y_POS[] = {
-    28, // 0 = Display sleeping
+    27, // 0 = Display sleeping
      0, // 1 = Showing time
    -26, // 2 = LED Intensity
    -38, // 3 = LED Color

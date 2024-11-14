@@ -7,11 +7,14 @@
 
 /**
  * @file hp_stepping_float.h
- * @brief generates smoothly transitioning values for animations
+ * @brief generates smoothly transitioning values for animations and transitions
  *
  * Can be used for single shot timers or for looping (auto reset) timers
  * Beware that an auto reset timer will only be reset if and when
  * hp_timer_has_lapsed() or hp_timer_lapsed() are called.
+ *
+ * For details on the interpolation profiles see:
+ * https://github.com/henkjannl/BedClock/blob/master/01%20System/Move%20profiles/Move.png
 */
 
 typedef enum {

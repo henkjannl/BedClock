@@ -60,31 +60,31 @@ uint8_t time_font_space_bytes[] = {
     0x00 };
 
 const hp_bitmap_t time_font_glyphs[] = {
-    { .width = 10, .height = 16, .buffer = time_font_0_bytes },  // [0] = 0
-    { .width = 7, .height = 16, .buffer = time_font_1_bytes },  // [1] = 1
-    { .width = 10, .height = 16, .buffer = time_font_2_bytes },  // [2] = 2
-    { .width = 10, .height = 16, .buffer = time_font_3_bytes },  // [3] = 3
-    { .width = 11, .height = 16, .buffer = time_font_4_bytes },  // [4] = 4
-    { .width = 10, .height = 16, .buffer = time_font_5_bytes },  // [5] = 5
-    { .width = 10, .height = 16, .buffer = time_font_6_bytes },  // [6] = 6
-    { .width = 10, .height = 16, .buffer = time_font_7_bytes },  // [7] = 7
-    { .width = 11, .height = 16, .buffer = time_font_8_bytes },  // [8] = 8
-    { .width = 10, .height = 16, .buffer = time_font_9_bytes },  // [9] = 9
-    { .width = 3, .height = 16, .buffer = time_font_colon_bytes },  // [10] = :
-    { .width = 4, .height = 16, .buffer = time_font_space_bytes },  // [11] = space
-}; // const hp_bitmap_t time_font_glyphs[]
+    { .width = 10, .height = 16, .buffer = time_font_0_bytes },      //  0 = '0'
+    { .width =  7, .height = 16, .buffer = time_font_1_bytes },      //  1 = '1'
+    { .width = 10, .height = 16, .buffer = time_font_2_bytes },      //  2 = '2'
+    { .width = 10, .height = 16, .buffer = time_font_3_bytes },      //  3 = '3'
+    { .width = 11, .height = 16, .buffer = time_font_4_bytes },      //  4 = '4'
+    { .width = 10, .height = 16, .buffer = time_font_5_bytes },      //  5 = '5'
+    { .width = 10, .height = 16, .buffer = time_font_6_bytes },      //  6 = '6'
+    { .width = 10, .height = 16, .buffer = time_font_7_bytes },      //  7 = '7'
+    { .width = 11, .height = 16, .buffer = time_font_8_bytes },      //  8 = '8'
+    { .width = 10, .height = 16, .buffer = time_font_9_bytes },      //  9 = '9'
+    { .width =  3, .height = 16, .buffer = time_font_colon_bytes },  // 10 = ':'
+    { .width =  4, .height = 16, .buffer = time_font_space_bytes },  // 11 = ' '
+};
 
+ const char char_map[] = {
+    ['0'] = 0, ['1'] = 1, ['2'] = 2, ['3'] = 3, ['4'] = 4,
+    ['5'] = 5, ['6'] = 6, ['7'] = 7, ['8'] = 8, ['9'] = 9,
+    [':'] = 10, [' '] = 11
+};
+
+// Function that returns a bitmap given a character
 const hp_bitmap_t *hp_time_font(char c) {
-    if(c=='0') return &time_font_glyphs[0];
-    if(c=='1') return &time_font_glyphs[1];
-    if(c=='2') return &time_font_glyphs[2];
-    if(c=='3') return &time_font_glyphs[3];
-    if(c=='4') return &time_font_glyphs[4];
-    if(c=='5') return &time_font_glyphs[5];
-    if(c=='6') return &time_font_glyphs[6];
-    if(c=='7') return &time_font_glyphs[7];
-    if(c=='8') return &time_font_glyphs[8];
-    if(c=='9') return &time_font_glyphs[9];
-    if(c==':') return &time_font_glyphs[10];
-    return &time_font_glyphs[11]; // default value, return space
+    if (char_map[c]) {
+        return &time_font_glyphs[char_map[c]];
+    } else {
+        return &time_font_glyphs[char_map[' ']];
+    }
 }
