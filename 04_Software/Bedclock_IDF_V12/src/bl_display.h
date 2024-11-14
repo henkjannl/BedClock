@@ -114,6 +114,10 @@ const int16_t Y_IND[] = {
     72  // 5 = Display timer
 };
 
+const char* LED_INTENSITY_CH[] = { "2.5%", "6%", "16%", "40%", "100%" };
+const char* LED_COLOR_CH[] =      {"6500K", "5000K", "4000K", "3000K" };
+const char* LED_TIME_CH[] =      {"5min", "7min", "10min", "14min", "20min" };
+const char* DISPLAY_CH[] =      {"0.4%", "6.3%", "100%" };
 
 /* ===================================
      Configuration data of the display
@@ -197,22 +201,22 @@ void display_refresh(int16_t y, uint8_t indicator_y) {
     // hp_bitmap_draw_bitmap(&indicator, 0, y+indicator_y);
     hp_bitmap_draw_bitmap(&circle_closed, 0, y+indicator_y);
 
-    // Draw circles
-    for(uint8_t i=0; i<COMMON_MAX_LED_INTENSITY+1; i++)
-        hp_bitmap_draw_bitmap( (i==settings.led_intensity) ? &circle_closed : &circle_open,
-            58+10*i, y+Y_IND[2]);
+    // Display intensity
+    hp_bitmap_draw_text(hp_version_font, 58, y+Y_IND[2]+1,
+        (unsigned char*) LED_INTENSITY_CH[settings.led_intensity],
+        strlen(LED_INTENSITY_CH[settings.led_intensity]) );
 
-    for(uint8_t i=0; i<COMMON_MAX_LED_COLOR+1; i++)
-        hp_bitmap_draw_bitmap( (i==settings.led_color) ? &circle_closed : &circle_open,
-            58+10*i, y+Y_IND[3]);
+    hp_bitmap_draw_text(hp_version_font, 58, y+Y_IND[3]+1,
+        (unsigned char*) LED_COLOR_CH[settings.led_color],
+        strlen(LED_COLOR_CH[settings.led_color]) );
 
-    for(uint8_t i=0; i<COMMON_MAX_LED_TIMER+1; i++)
-        hp_bitmap_draw_bitmap( (i==settings.led_timer) ? &circle_closed : &circle_open,
-            58+10*i, y+Y_IND[4]);
+    hp_bitmap_draw_text(hp_version_font, 58, y+Y_IND[4]+1,
+        (unsigned char*) LED_TIME_CH[settings.led_timer],
+        strlen(LED_TIME_CH[settings.led_timer]) );
 
-    for(uint8_t i=0; i<COMMON_MAX_DISPLAY_INTENSITY+1; i++)
-        hp_bitmap_draw_bitmap( (i==settings.display_intensity) ? &circle_closed : &circle_open,
-            58+10*i, y+Y_IND[5]);
+    hp_bitmap_draw_text(hp_version_font, 58, y+Y_IND[5]+1,
+        (unsigned char*) DISPLAY_CH[settings.display_intensity],
+        strlen(DISPLAY_CH[settings.display_intensity]) );
 
     // Upload the pixel buffer to the SSD1306
     hp_bitmap_write_canvas(panel_handle);
@@ -280,8 +284,8 @@ void task_display(void *z)
                         break;
 
                         case 5: // Modify display intensity
-                            ESP_LOGI(dp_tag, "Modify display intensity");
-                            common_increment_led_intensity();
+                            common_increment_display_intensity();
+                            ESP_LOGI(dp_tag, "Modify display intensity %d", common_get_display_intensity());
                             refresh_display = true;
                         break;
 

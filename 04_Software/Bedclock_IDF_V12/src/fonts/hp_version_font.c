@@ -38,6 +38,21 @@ static uint8_t m_colon_bytes[] = {
 static uint8_t m_dot_bytes[] = {
     0x00,0x00,0x00,0x00,0x00,0x06,0x0f,0x06 };
 
+static uint8_t m_K_bytes[] = {
+    0x6f,0xff,0xff,0x3f,0x7f,0xff,0xef,0xef };
+
+static uint8_t m_m_bytes[] = {
+    0x00,0x17,0x3f,0x7f,0x7f,0x7f,0x7f,0x7f };
+
+static uint8_t m_i_bytes[] = {
+    0x02,0x07,0x07,0x07,0x07,0x07,0x07,0x07 };
+
+static uint8_t m_n_bytes[] = {
+    0x00,0x0f,0x3f,0x3f,0x3b,0x3b,0x3b,0x3f };
+
+static uint8_t m_perc_bytes[] = {
+    0xde,0xff,0x7f,0xff,0xfc,0xfe,0xff,0x7b };
+
 static uint8_t m_space_bytes[] = {
     0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00 };
 
@@ -83,6 +98,21 @@ static uint8_t v_dot_bytes[] = {
 static uint8_t v_space_bytes[] = {
     0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00 };
 
+static uint8_t v_i_bytes[] = {
+    0x00,0x02,0x00,0x02,0x02,0x02,0x02,0x00 };
+
+static uint8_t v_K_bytes[] = {
+    0x00,0x66,0x36,0x1e,0x3e,0x66,0x46,0x00 };
+
+static uint8_t v_m_bytes[] = {
+    0x00,0x00,0x16,0x2a,0x2a,0x2a,0x2a,0x00 };
+
+static uint8_t v_n_bytes[] = {
+    0x00,0x00,0x0e,0x12,0x12,0x12,0x12,0x00 };
+
+static uint8_t v_perc_bytes[] = {
+    0x00,0x4e,0x2a,0x1e,0x78,0x54,0x72,0x00 };
+
 static uint8_t v_V_bytes[] = {
     0x00,0x42,0x42,0x24,0x24,0x18,0x18,0x00 };
 
@@ -100,14 +130,13 @@ static const hp_bitmap_t glyphs[] = {
     { .width = 4, .height = 8, .bitmap = v_colon_bytes, .mask = m_colon_bytes },  // 10 = ':'
     { .width = 4, .height = 8, .bitmap = v_dot_bytes, .mask = m_dot_bytes },      // 11 = '.'
     { .width = 4, .height = 8, .bitmap = v_space_bytes, .mask = m_space_bytes },  // 12 = ' '
-    { .width = 8, .height = 8, .bitmap = v_V_bytes, .mask = m_V_bytes },          // 13 = 'V'
+    { .width = 7, .height = 8, .bitmap = v_m_bytes, .mask = m_m_bytes },          // 13 = 'm'
+    { .width = 3, .height = 8, .bitmap = v_i_bytes, .mask = m_i_bytes },          // 14 = 'i'
+    { .width = 6, .height = 8, .bitmap = v_n_bytes, .mask = m_n_bytes },          // 15 = 'n'
+    { .width = 8, .height = 8, .bitmap = v_K_bytes, .mask = m_K_bytes },          // 16 = 'K'
+    { .width = 8, .height = 8, .bitmap = v_V_bytes, .mask = m_V_bytes },          // 17 = 'V'
+    { .width = 8, .height = 8, .bitmap = v_perc_bytes, .mask = m_perc_bytes },    // 18 = '%'
 };
-
-// static const unsigned char char_map[] = {
-//     ['0'] = 0, ['1'] = 1, ['2'] = 2, ['3'] = 3, ['4'] = 4,
-//     ['5'] = 5, ['6'] = 6, ['7'] = 7, ['8'] = 8, ['9'] = 9,
-//     [':'] = 10, ['.'] = 11, [' '] = 12, ['V'] = 13
-// };
 
 // Function that returns a bitmap given a character
 const hp_bitmap_t *hp_version_font(const unsigned char c) {
@@ -125,13 +154,11 @@ const hp_bitmap_t *hp_version_font(const unsigned char c) {
     if(c==':') return &glyphs[10];
     if(c=='.') return &glyphs[11];
     if(c==' ') return &glyphs[12];
-    if(c=='V') return &glyphs[13];
+    if(c=='m') return &glyphs[13];
+    if(c=='i') return &glyphs[14];
+    if(c=='n') return &glyphs[15];
+    if(c=='K') return &glyphs[16];
+    if(c=='V') return &glyphs[17];
+    if(c=='%') return &glyphs[18];
     return NULL;
-    // if (c=='0') return &glyphs[0]; // To prevent ' ' is returned since char_map['0']==0
-
-    // if (char_map[c]) {
-    //     return &glyphs[char_map[c]];
-    // } else {
-    //     return NULL;
-    // }
 }
