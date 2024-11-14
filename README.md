@@ -5,23 +5,20 @@ This is a small ESP driven bed clock annex reading light. The device can be cont
     <img src="02 User interface/Blender render/User manual.png" alt="drawing" width="800"/>
 </p>
 
-Normally, the display is empty, because even at the least intense setting, the OLED display produces too much light to sleep well.
+The top button switches on and off the light on the top of the device. While the light is on, the clock is also shown (since darkness is polluted anyway).
+
+By default the display is empty, because even at the dimmest intensity, the OLED display produces too much light to sleep well.
 
 <p align="center">
-    <img src="02 User interface//ESP-IDF application//buttons.png" alt="drawing" width="800"/>
+    <img src="02 User interface//ESP-IDF application//buttons.png" alt="drawing" width="500"/>
 </p>
 
-Touching the top button switches on and off the LEDs on the top of the device. While the LEDs are on, the clock is also shown (since darkness is polluted anyway).
+The left button is used to wake up the display and browse through the settings. Each setting can be changed with the right button. While changing light settings, the light switches on to immediately show the result.
 
-After one touching of the left or right button, the time is displayed. When touching the left button multiple times, the user toggles through the following settings:
-* LED intensity (2.5%, 6%, 16%, 40%, 100%)
-* Color temperature of the LEDs (6500 K, 5000 K, 4000 K, 3000 K)
-* Timer that switches off the LED lights (5 min, 7 min, 10 min, 14 min, 20 min)
-* Intensity of the OLED display (0.4%, 6.3%, 100%)
+If the buttons are not touched  for some time, the display switches off again.
 
-Settings can be changed with the button on the right. While changing settings, the LEDs switch on to immediately show the result. Settings are stored in the non volatile storage (NVS) of the ESP32.
-After pressing the left button again, the display switches back to the time.
-If the buttons are not pressed for some time, the display switches off again.
+
+Settings are stored in the non volatile storage (NVS) of the ESP32.
 
 
 ## Hardware
@@ -69,7 +66,7 @@ All devices are connected to the ESP32 by thin wires according to the schematic 
 <br>
 
 <p align="center">
-    <img src="05 Electrical/Electrical.png" alt="drawing" width="500"/>
+    <img src="05 Electrical/Electrical.png" alt="drawing" width="700"/>
 </p>
 
 <br>
@@ -89,9 +86,9 @@ The light cover 12 is used to cover the onboard LED of the ESP32, since it will 
 
 ## Software
 
-The original Arduino based software is located in `...\BedClock\04_Software`. This project was used to learn ESP-IDF programming under PlatformIO.
+The original Arduino based software is located in `...\BedClock\04_Software\Bedclock`.
 
-The software projects `BedClock_IDF_V01` until `BedClock_IDF_V12` are demonstrator projects to port parts of the functionality to ESP-IDF.
+This project was used to learn ESP-IDF programming under PlatformIO. The software projects `BedClock_IDF_V01` until `BedClock_IDF_V12` are demonstrator projects to port parts of the functionality to ESP-IDF.
 
 ### Different directories and sub-projects
 
@@ -115,28 +112,28 @@ The software projects `BedClock_IDF_V01` until `BedClock_IDF_V12` are demonstrat
 | File | Content |
 |------|---------|
 | `main.c` | Main file, includes other files and calls initializers |
-| `bl_keyboard.h` | Checks capacitive touch buttons and communicates with display and light |
-| `bl_display.h` | Receives signals from keyboard, changes settings and writes current menu state to SSD1306 OLED display |
-| `bl_characters.h` | Character definition to display time on OLED display |
-| `bl_light.h` | Writes LED info for the LED grid to the rmt encoder |
-| `led_strip_encoder.h/c` | Interface to the rmt encoder |
+| `bl_common.h` |    |
+| `bl_keyboard.h` | Checks capacitive touch buttons and communicates with display and light   |
+| `bl_display.h` | Receives signals from keyboard, changes settings and writes current menu state to SSD1306 OLED display  |
+| `bl_light.h` | Writes LED info for the LED grid to the rmt encoder   |
+| `led_strip_encoder.h+c` | Interface to the rmt encoder for the WS2812 LEDs   |
 | `bl_time.h` | Connection with WiFi, syncing of clock with timeserver |
-| `config.h` | Not submitted to Github - private user data such as router name and password and timezone |
-| `bl_common.h` | Global type and veriable declarations, initalisation of message queues, and storage of parameters in the non volatile storage |
-| `hp_pixel_font.h/c` | Library that defines a font by creating a number of constant glyps, and that allows writing text to the canvas |
-| `hp_pixel_buffer.h/c` | Library that defines a bitmap for display on the OLED display |
-| `hp_pixel_canvas.h/c` | Library that allows writing bitmaps to a buffer, and streaming the buffer to the SSD1306 OLED display |
+| `config.h` | Private user data such as router name and password and timezone (not submitted to Github) |
+| `hp_pixel_buffer.h+c` | Library that defines a bitmap for display on the OLED display |
+| `hp_pixel_canvas.h+c` | Library that allows writing bitmaps to a buffer, and streaming the buffer to the SSD1306 OLED display |
+| `fonts\...` | Font definitions   |
 | `hp_stepping_float.h` | Library that plans and executes paths in linear and non-linear ways (see also `hp_stepping_interpolation_t` below). |
 | `hp_timer.h` | Library that defines a repeating or single-shot timer with microsecond resolution. |
 
 The `config.h` file requires three `#defines`:
 ```c
-#define WIFI_SSID    "xxxxxxxxx"
-#define WIFI_PASS    "yyyyyyyy"
-#define TIME_ZONE    "CET-1CEST,M3.5.0,M10.5.0/3"
+#define WIFI_SSID    "xxxxxxxxx"                     // Name of the WiFi router
+#define WIFI_PASS    "yyyyyyyy"                      // Password for the WiFi router
+#define TIME_ZONE    "CET-1CEST,M3.5.0,M10.5.0/3"    // Timezone code
 ```
 
 The last code is the timezone definition of Amsterdam. Codes for other locations can be found in https://github.com/nayarsystems/posix_tz_db/blob/master/zones.csv
+
 
 In `hp_stepping_float.h`, the `hp_stepping_interpolation_t` type is an enumerator that defines the move path between origin and target in the following way:
 
