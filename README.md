@@ -10,10 +10,10 @@ Normally, the display is empty, because even at the least intense setting, the O
 Touching the top button switches on and off the LEDs on the top of the device. While the LEDs are on, the clock is also shown (since darkness is polluted anyway).
 
 After one touching of the left or right button, the time is displayed. When touching the left button multiple times, the user toggles through the following settings:
-* LED intensity
-* LED color
-* Timer that switches off the LED lights
-* Intensity of the OLED display
+* LED intensity (2.5%, 6%, 16%, 40%, 100%)
+* Color temperature of the LEDs (6500 K, 5000 K, 4000 K, 3000 K)
+* Timer that switches off the LED lights (5 min, 7 min, 10 min, 14 min, 20 min)
+* Intensity of the OLED display (0.4%, 6.3%, 100%)
 
 Settings can be changed with the button on the right. While changing settings, the LEDs switch on to immediately show the result. Settings are stored in the non volatile storage (NVS) of the ESP32.
 After pressing the left button again, the display switches back to the time.

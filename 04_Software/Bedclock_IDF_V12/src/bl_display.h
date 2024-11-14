@@ -89,7 +89,7 @@ const hp_bitmap_t splash_screen   = { .width = 80, .height = 32, .bitmap = splas
 
 const uint8_t DISPLAY_INTENSITY[] = {
     0x01,    // .display_intensity = 0
-    0x0F,    // .display_intensity = 1
+    0x10,    // .display_intensity = 1
     0xFF,    // .display_intensity = 2
 };
 

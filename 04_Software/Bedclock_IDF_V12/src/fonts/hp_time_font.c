@@ -74,19 +74,19 @@ static const hp_bitmap_t glyphs[] = {
     { .width =  4, .height = 16, .bitmap = space_bytes, .mask = NULL },  // 11 = ' '
 };
 
-static const unsigned char char_map[] = {
-    ['0'] = 0, ['1'] = 1, ['2'] = 2, ['3'] = 3, ['4'] = 4,
-    ['5'] = 5, ['6'] = 6, ['7'] = 7, ['8'] = 8, ['9'] = 9,
-    [':'] = 10, [' '] = 11
-};
-
 // Function that returns a bitmap given a character
 const hp_bitmap_t *hp_time_font(const unsigned char c) {
-    if( c=='0') return &glyphs[0];
-
-    if (char_map[c]) {
-        return &glyphs[char_map[c]];
-    } else {
-        return &glyphs[char_map[' ']];
-    }
+    if( c=='0') return &glyphs[ 0];
+    if( c=='1') return &glyphs[ 1];
+    if( c=='2') return &glyphs[ 2];
+    if( c=='3') return &glyphs[ 3];
+    if( c=='4') return &glyphs[ 4];
+    if( c=='5') return &glyphs[ 5];
+    if( c=='6') return &glyphs[ 6];
+    if( c=='7') return &glyphs[ 7];
+    if( c=='8') return &glyphs[ 8];
+    if( c=='9') return &glyphs[ 9];
+    if( c==':') return &glyphs[10];
+    if( c==' ') return &glyphs[11];
+    return NULL;
 }
