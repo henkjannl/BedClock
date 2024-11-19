@@ -16,6 +16,7 @@ const char *VERSION = "V1.4.0";
 
 /*
 Version history
+    v1.0.0 First working version
     v1.1.0 Included version number and splash screen
     v1.2.0 Pressing left and right buttons resets the device instead of the display
     v1.3.0 hp_bitmap_t extended with mask
@@ -28,6 +29,9 @@ Version history
 
 To do:
 * Consider renaming interpolation library
+* Turn hp_... files into a component
+* Switch to new I2C driver, see:
+    https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-reference/peripherals/lcd.html#i2c-lcd-panel
 * Make capacitive touch interrupt controlled
 
 Different sub-projects to port the Arduino project to ESP-IDF
